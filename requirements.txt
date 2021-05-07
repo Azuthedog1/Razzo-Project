@@ -19,3 +19,6 @@ Tempita
 Werkzeug
 wheel
 WTForms
+Flask-PyMongo
+pymongo
+dnspython
