@@ -4,8 +4,8 @@ from flask import Flask, url_for, render_template, request
 app = Flask(__name__)
 
 @app.route('/')
-def render_home():
-    return render_template('home.html')
+def render_information():
+    return render_template('information.html')
 
 @app.route('/englishlearnerforum')
 def render_english_learner_forum():
