@@ -11,6 +11,6 @@ def render_home():
 def render_english_learner_forum():
     return render_template('englishlearnerforum.html')
 
-@app.route('/graph')
+@app.route('/specialeducationforum')
 def render_special_education_forum():
     return render_template('specialeducationforum.html')
