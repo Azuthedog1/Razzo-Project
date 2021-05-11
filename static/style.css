@@ -3,8 +3,7 @@
 }
 
 #google_translate_element {
-  position: absolute;
-  right: 5px;
+  margin-auto;
 }
 #pageHeading {
   width: 100%;
