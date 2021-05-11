@@ -4,8 +4,22 @@
 
 #pageHeading {
   width: 100%;
-  border-bottom: 1px solid LightGray;
-  margin-bottom: 10px;
+  border-bottom: 2px solid Black;
+  padding-bottom: 15px;
+}
+
+.back {
+  width: 90%;
+  padding: 0;
+  margin: 0;
+}
+
+.adminPostsBox {
+  width: 100%;
+  padding: 0;
+  margin 0;
+  border: 2px solid Black;
+  border-radius: 10px;
 }
 
 body {
