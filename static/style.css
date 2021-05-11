@@ -48,3 +48,9 @@
 .search {
   text-align: right;
 }
+
+tr {
+  padding: 5px;
+  margin 0;
+  border-bottom: 1px solid Black;
+}
