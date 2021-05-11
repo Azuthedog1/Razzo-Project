@@ -2,6 +2,10 @@
   display:inline-block; 
 }
 
+#google_translate_element {
+  position: absolute;
+  right: 5px;
+}
 #pageHeading {
   width: 100%;
   border-bottom: 2px solid Black;
