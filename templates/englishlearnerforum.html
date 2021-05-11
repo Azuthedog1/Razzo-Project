@@ -7,5 +7,26 @@
 {% block heading %}English Language Learner Forum{% endblock %}
 
 {% block content %}
-
+<div class="back">
+  <div class="adminPostsBox">
+    <table class="adminPosts">
+      <tr>
+        <th>Announcements</th>
+      </tr>
+      <tr>
+        <td>Hello Everyone (example post) </td>              <! –– Posts are table rows in this table. Use python to pull posts from MongoDB and use functions to format them into table code. Then pass it here as a single jinja variable ––>
+      </tr>
+    </table>
+  </div>
+  <div class="userPostsBox">
+    <table class="userPosts">
+      <tr>
+        <th>Create Appointments and Questions</th>
+      </tr>
+      <tr>
+        <td>Hello Everyone (example post, not done formatting is hard)</td>              <! –– Posts are table rows in this table. Use python to pull posts from MongoDB and use functions to format them and turn into table code. Then pass it here as a single jinja variable ––>
+      </tr>
+    </table>
+  </div>
+</div>
 {% endblock %}
