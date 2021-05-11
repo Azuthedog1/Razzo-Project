@@ -1,6 +1,5 @@
 .heading {
   display:inline-block;
-  font-size: 5rem;
 }
 
 #google_translate_element {
@@ -10,7 +9,6 @@
   width: 100%;
   border-bottom: 1px solid Black;
   padding-bottom: 13px;
-  font-size: 0.5rem;
 }
 
 .back {
