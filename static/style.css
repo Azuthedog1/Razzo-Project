@@ -46,12 +46,27 @@
   margin: 0;
 }
 
-.search {
-  text-align: right;
-}
-
 tr {
   padding: 5px;
   margin: 0;
   border-bottom: 1px solid Black;
+}
+
+.th td {
+  margin: 10px;
+}
+.col1 {
+  width: 20%;
+}
+
+.col2 {
+  width: 30%;
+}
+
+.col3 {
+  width: 20%;
+}
+
+.col4 {
+  text-align: right;
 }
