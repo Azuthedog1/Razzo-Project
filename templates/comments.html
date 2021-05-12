@@ -6,4 +6,23 @@
 
 
 {% block content %}
+<div class="back">
+  <div class="discussionBox">
+    <table class="commentsPosts">
+      <tr>
+        <th class="col1" colspan="2">Comments</th>
+        <th class="col2"></th>
+        <th class="col3"></th>
+        <th class="col4">Post</th>
+      </tr>
+      <tr>
+        <td class="col1">Image(maybe)</td> <! -- Need make it so click on post opens up a page but there are several methods -->
+        <td class="col2">Hello Everyone</td> <! –– Posts are table rows in this table. Use python to pull posts from MongoDB and use functions to format them into table code. Then pass it here as a single jinja variable ––>
+        <td class="col3">by Ramon</td>
+        <td class="col4">Time</td>
+      </tr>
+      {{ comments }}
+    </table>
+  </div>
+</div>
 {% endblock %}
