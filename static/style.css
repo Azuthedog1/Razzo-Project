@@ -73,72 +73,41 @@ tr {
   padding: 10px;
 }
 
-.navbar-default {
-  background-color: #ffd700;
-  border-color: #9ab973;
+#custom-bootstrap-menu.navbar-default .navbar-brand {
+    color: rgba(0, 0, 0, 1);
 }
-.navbar-default .navbar-brand {
-  color: #000000;
+#custom-bootstrap-menu.navbar-default {
+    font-size: 17px;
+    background-color: rgba(255, 255, 255, 1);
+    border-width: 0px;
+    border-radius: 0px;
 }
-.navbar-default .navbar-brand:hover,
-.navbar-default .navbar-brand:focus {
-  color: #ffffff;
+#custom-bootstrap-menu.navbar-default .navbar-nav>li>a {
+    color: rgba(0, 0, 0, 1);
+    background-color: rgba(255, 255, 255, 1);
 }
-.navbar-default .navbar-text {
-  color: #000000;
+#custom-bootstrap-menu.navbar-default .navbar-nav>li>a:hover,
+#custom-bootstrap-menu.navbar-default .navbar-nav>li>a:focus {
+    color: rgba(168, 148, 0, 1);
+    background-color: rgba(255, 255, 255, 1);
 }
-.navbar-default .navbar-nav > li > a {
-  color: #000000;
+#custom-bootstrap-menu.navbar-default .navbar-nav>.active>a,
+#custom-bootstrap-menu.navbar-default .navbar-nav>.active>a:hover,
+#custom-bootstrap-menu.navbar-default .navbar-nav>.active>a:focus {
+    color: rgba(168, 148, 0, 1);
+    background-color: rgba(255, 255, 255, 1);
 }
-.navbar-default .navbar-nav > li > a:hover,
-.navbar-default .navbar-nav > li > a:focus {
-  color: #ffffff;
+#custom-bootstrap-menu.navbar-default .navbar-toggle {
+    border-color: #ffffff;
 }
-.navbar-default .navbar-nav > .active > a,
-.navbar-default .navbar-nav > .active > a:hover,
-.navbar-default .navbar-nav > .active > a:focus {
-  color: #ffffff;
-  background-color: #9ab973;
+#custom-bootstrap-menu.navbar-default .navbar-toggle:hover,
+#custom-bootstrap-menu.navbar-default .navbar-toggle:focus {
+    background-color: #ffffff;
 }
-.navbar-default .navbar-nav > .open > a,
-.navbar-default .navbar-nav > .open > a:hover,
-.navbar-default .navbar-nav > .open > a:focus {
-  color: #ffffff;
-  background-color: #9ab973;
+#custom-bootstrap-menu.navbar-default .navbar-toggle .icon-bar {
+    background-color: #ffffff;
 }
-.navbar-default .navbar-toggle {
-  border-color: #9ab973;
-}
-.navbar-default .navbar-toggle:hover,
-.navbar-default .navbar-toggle:focus {
-  background-color: #9ab973;
-}
-.navbar-default .navbar-toggle .icon-bar {
-  background-color: #000000;
-}
-.navbar-default .navbar-collapse,
-.navbar-default .navbar-form {
-  border-color: #000000;
-}
-.navbar-default .navbar-link {
-  color: #000000;
-}
-.navbar-default .navbar-link:hover {
-  color: #ffffff;
-}
-
-@media (max-width: 767px) {
-  .navbar-default .navbar-nav .open .dropdown-menu > li > a {
-    color: #000000;
-  }
-  .navbar-default .navbar-nav .open .dropdown-menu > li > a:hover,
-  .navbar-default .navbar-nav .open .dropdown-menu > li > a:focus {
-    color: #ffffff;
-  }
-  .navbar-default .navbar-nav .open .dropdown-menu > .active > a,
-  .navbar-default .navbar-nav .open .dropdown-menu > .active > a:hover,
-  .navbar-default .navbar-nav .open .dropdown-menu > .active > a:focus {
-    color: #ffffff;
-    background-color: #9ab973;
-  }
+#custom-bootstrap-menu.navbar-default .navbar-toggle:hover .icon-bar,
+#custom-bootstrap-menu.navbar-default .navbar-toggle:focus .icon-bar {
+    background-color: #ffffff;
 }
