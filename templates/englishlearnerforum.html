@@ -73,7 +73,19 @@
         <h4 class="modal-title">User Post:</h4>
       </div>
       <div class="modal-body">
-        <p>This will be a form for user posts, including their name, student name and grade, etc. Will use cookies to autofill out those inputs if they posted before.</p>
+        <div class="form-group">
+          <label for="user">Full Name:</label>
+          <input type="text" class="form-control" id="user" required>
+          <label for="student">Student Name and Grade:</label>
+          <input type="text" class="form-control" id="student" required>
+          <label for="title">Title:</label>
+          <textarea class="form-control" rows="1" id="title" required></textarea>
+          <label for="comment">Message:</label>
+          <textarea class="form-control" rows="5" id="comment" required></textarea>
+          <label class="checkbox-inline"><input type="checkbox" value="anon">Make Anonymous to other Users</label>
+          <label for="myfile">File Upload:</label>
+          <input type="file" id="myfile" name="myfile">
+        </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
