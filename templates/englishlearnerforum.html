@@ -9,13 +9,16 @@
 {% block content %}
 <div class="back">
   <div class="adminPostsBox">
-    <table class="adminPosts">
-      <tr>
-        <th class="col1">Resources and Announcements</th>
-        <th class="col2"></th>
-        <th class="col3"></th>
-        <th class="col4"><button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#adminModal">Post (Visible only to Admin, replace this with jinja variable)</button></th>
+    <div class="boxHeading">
+      <table>
+        <tr>
+          <th class="col1" colspan="2">Resources and Announcements</th>
+          <th class="col2"></th>
+          <th class="col3"></th>
+          <th class="col4"><button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#adminModal">Post (Visible only to Admin, replace this with jinja variable)</button></th>
       </tr>
+    </div>
+    <table class="adminPosts">
       <tr>
         <td class="col1">Image and tags(maybe)</td> <! -- Need make it so click on post opens up a page but there are several methods -->
         <td class="col2">Hello Everyone</td> <! –– Posts are table rows in this table. Use python to pull posts from MongoDB and use functions to format them into table code. Then pass it here as a single jinja variable ––>
