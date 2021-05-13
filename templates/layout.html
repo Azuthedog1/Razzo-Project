@@ -12,6 +12,11 @@
       new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
   }
   </script>
+  <style>
+    div#google_translate_element div.goog-te-gadget-simple{background-color:white;}
+    div#google_translate_element div.goog-te-gadget-simple a.goog-te-menu-value span{color:grey}
+    div#google_translate_element div.goog-te-gadget-simple a.goog-te-menu-value span:hover{color:#fff}
+  </style>
   <title>{% block title %}{% endblock %} - Santa Barbara High School</title>
 </head>
 
