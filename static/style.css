@@ -1,18 +1,24 @@
 .top {
-  background-color: #009e42;
+  background-color: #0a5c0d;
   margin: 0px;
   padding: 10px;
 }
 
 .heading {
   display: inline-block;
-  color: white;
+  color: #e6da05;
+  font-family: Georgia, serif;
 }
 
 #google_translate_element {
   position: relative;
   float: right;
   top: 50%;
+}
+#pageHeading {
+  width: 100%;
+  border-bottom: 1px solid Black;
+  padding-bottom: 13px;
 }
 
 .back {
@@ -28,6 +34,7 @@
   margin: 0;
   margin-bottom: 20px;
   border: 2px solid Black;
+  background-color: #e0e0e0
 }
 
 .boxHeading {
@@ -38,6 +45,7 @@
   width: 100%;
   padding: 0;
   margin: 0;
+  background-color: #e0e0e0;
 }
 
 .userPostsBox {
@@ -51,12 +59,17 @@
   width: 100%;
   padding: 0;
   margin: 0;
+  background-color: #e0e0e0;
 }
 
 tr {
   padding: 20px;
   margin: 0;
   border-bottom: 1px solid Black;
+}
+
+.toprow {
+  background-color: #bfbfbf;
 }
 
 .col1 {
@@ -86,7 +99,7 @@ tr {
 #custom-bootstrap-menu.navbar-default {
     font-size: 17px;
     background-color: rgba(255, 255, 255, 1);
-    border-width: 2px;
+    border-width: 0px;
 }
 #custom-bootstrap-menu.navbar-default .navbar-nav>li>a {
     color: rgba(0, 0, 0, 1);
