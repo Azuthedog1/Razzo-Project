@@ -24,20 +24,21 @@
     <div id="google_translate_element" class="heading"></div>
     <br>
   </span>
-
-  <div id="navbar">
-    <nav class="navbar navbar-default">
-      <div class="container-fluid">
-        <ul class="nav navbar-nav">
+  <div id="custom-bootstrap-menu" class="navbar navbar-default " role="navigation">
+    <div class="container-fluid">
+      <div class="collapse navbar-collapse navbar-menubuilder">
+        <ul class="nav navbar-nav navbar-left">
           <li {% if page == "information" %} class="active" {% endif %}><a href=".">Information</a></li>
           <li {% if page == "englishlearnerforum" %} class="active" {% endif %}><a href="englishlearnerforum">English Language Learner Forum</a></li>
           <li {% if page == "specialeducationforum" %} class="active" {% endif %}><a href="specialeducationforum">Special Education Forum</a></li>
         </ul>
+      </div>
+      <div class="collapse navbar-collapse navbar-menubuilder">
         <ul class="nav navbar-nav navbar-right">
           <li {% if page == "login" %} class="active" {% endif %}><a href="login">Admin Login</a></li>
         </ul>
       </div>
-    </nav>
+    </div>
   </div>
   <div id="pageHeading">
     <h2>{% block heading %}{% endblock %}</h2>
