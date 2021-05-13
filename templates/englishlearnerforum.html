@@ -15,22 +15,6 @@
         <th class="col2"></th>
         <th class="col3"></th>
         <th class="col4"><button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#adminModal">Post (Visible only to Admin, replace this with jinja variable)</button></th>
-        <div id="adminModal" class="modal fade" role="dialog">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Admin Post:</h4>
-              </div>
-              <div class="modal-body">
-                <p>This will be a form for admin posts (no asking for name, student name, posted inside admin box, etc.)</p>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-              </div>
-            </div>
-          </div>
-        </div> 
       </tr>
       <tr>
         <td class="col1">Image(maybe)</td> <! -- Need make it so click on post opens up a page but there are several methods -->
@@ -47,22 +31,6 @@
         <th class="col2"></th>
         <th class="col3">Search Bar</th>
         <th class="col4"><button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#userModal">Post</button></th>
-        <div id="userModal" class="modal fade" role="dialog">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">User Post:</h4>
-              </div>
-              <div class="modal-body">
-                <p>This will be a form for user posts, including their name, student name and grade, etc. Will use cookies to autofill out those inputs if they posted before.</p>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-              </div>
-            </div>
-          </div>
-        </div> 
       </tr>
       <tr>
         <td class="col1">Post Img(?)</td>
@@ -73,4 +41,36 @@
     </table>
   </div>
 </div>
+<div id="adminModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Admin Post:</h4>
+      </div>
+      <div class="modal-body">
+        <p>This will be a form for admin posts (no asking for name, student name, posted inside admin box, etc.)</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div> 
+<div id="userModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">User Post:</h4>
+      </div>
+      <div class="modal-body">
+        <p>This will be a form for user posts, including their name, student name and grade, etc. Will use cookies to autofill out those inputs if they posted before.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div> 
 {% endblock %}
