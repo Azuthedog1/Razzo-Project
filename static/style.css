@@ -14,9 +14,10 @@
   float: right;
   top: 50%;
 }
-#pageHeading {
+.pageHeading {
   width: 100%;
-  border-bottom: 1px solid Black;
+  text-align: center;
+  background-color: #009e42;
   padding-bottom: 13px;
 }
 
