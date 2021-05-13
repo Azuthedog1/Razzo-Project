@@ -74,6 +74,11 @@ def render_english_learner_forum():
 def render_special_education_forum():
     return render_template('specialeducationforum.html')
 
+@app.route('/userSumbitPostELL', methods=['GET','POST'])
+def renderUserPostSubmissionELL():
+    session["name of the ids"]=request.form['name of the ids'] #make sure you get the current time of posting using import time.
+    return render_template('englishlearnerforum.html') #set the same jinja variables here as in @app.route('englishlearnerforum') above
+
 @github.tokengetter
 def get_github_oauth_token():
     return session['github_token']
