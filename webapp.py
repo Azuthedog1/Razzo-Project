@@ -59,7 +59,7 @@ def authorized():
                 message='You were successfully logged in as ' + session['user_data']['login'] + '.'
             else:
                 session.clear()
-                message='Unable to login, please try again.  '
+                message='Please sign in with a valid admin account.  '
         except Exception as inst:
             session.clear()
             print(inst)
