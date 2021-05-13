@@ -6,8 +6,6 @@
   position: relative;
   float: right;
   top: 50%;
-  -ms-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
 }
 #pageHeading {
   width: 100%;
