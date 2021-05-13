@@ -63,22 +63,26 @@ tr {
 .col1 {
   width: 15%;
   padding: 10px;
+  background-color: red;
 }
 
 .col2 {
   width: 20%;
   padding: 10px;
+  background-color: blue;
 }
 
 .col3 {
   width: 20%;
   padding: 10px;
+  background-color: green;
 }
 
 .col4 {
   text-align: right;
   width: 45%;
   padding: 10px;
+  background-color: purple;
 }
 
 #custom-bootstrap-menu.navbar-default .navbar-brand {
