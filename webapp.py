@@ -70,3 +70,7 @@ def render_english_learner_forum():
 def render_special_education_forum():
     return render_template('specialeducationforum.html')
 
+@github.tokengetter
+def get_github_oauth_token():
+    return session['github_token']
+
