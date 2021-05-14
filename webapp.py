@@ -6,7 +6,7 @@ import pprint
 import os
 import sys
 import pymongo
-import time
+from datetime import datetime
 
 app = Flask(__name__)
 
@@ -77,6 +77,7 @@ def render_special_education_forum():
 
 @app.route('/userSumbitPostELL', methods=['GET','POST'])
 def renderUserPostSubmissionELL():
+    today = datetime.today()
     session["user"]=request.form['user']
     session["name of the ids"]=request.form['name of the ids'] #make sure you get the current time of posting too using import time. Also, if we have time (not mandatory), store their personal information in cookies and auto fill out that part of the form using jinja each time they go to create a post)
     return render_template('englishlearnerforum.html') #set the same jinja variables here as in @app.route('englishlearnerforum') above (there are none right now)
