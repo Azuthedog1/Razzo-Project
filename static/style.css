@@ -24,7 +24,7 @@
 }
 
 .adminPostsBox {
-  width: 100%;
+  width: 50%;
   padding: 0;
   margin: 0;
   margin-bottom: 20px;
@@ -46,7 +46,7 @@
 }
 
 .userPostsBox {
-  width: 100%;
+  width: 50%;
   padding: 0;
   margin: 0;
   border: 0px solid Black;
@@ -71,23 +71,23 @@ tr {
 }
 
 .col1 {
-  width: 15%;
+  width: 7.5%;
   padding: 10px;
 }
 
 .col2 {
-  width: 20%;
+  width: 10%;
   padding: 10px;
 }
 
 .col3 {
-  width: 20%;
+  width: 10%;
   padding: 10px;
 }
 
 .col4 {
   text-align: right;
-  width: 45%;
+  width: 22.5%;
   padding: 10px;
 }
 
