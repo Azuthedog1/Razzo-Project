@@ -41,8 +41,8 @@
   margin: 0;
   background-color: #e0e0e0;
   overflow-y: scroll;
-  height: 100px;
-  display: inline-block;
+  height: 25%;
+  display: block;
 }
 
 .userPostsBox {
@@ -61,7 +61,6 @@
 
 tr {
   border-bottom: 1px solid Black;
-  width: 100%;
 }
 
 .toprow {
