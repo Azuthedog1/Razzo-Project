@@ -90,6 +90,7 @@ tr {
 
 #custom-bootstrap-menu {
   height: 75px;
+  background-color: #000000;
 }
 
 #custom-bootstrap-menu.navbar-default .navbar-brand {
