@@ -88,9 +88,12 @@ tr {
   padding: 10px;
 }
 
+#custom-bootstrap-menu {
+  height: 75px;
+}
+
 #custom-bootstrap-menu.navbar-default .navbar-brand {
     color: rgba(0, 0, 0, 1);
-    width: 50px;
 }
 #custom-bootstrap-menu.navbar-default {
     font-size: 17px;
