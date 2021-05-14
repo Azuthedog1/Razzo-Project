@@ -76,7 +76,7 @@ def render_special_education_forum():
 
 @app.route('/userSumbitPostELL', methods=['GET','POST'])
 def renderUserPostSubmissionELL():
-    session["name of the ids"]=request.form['name of the ids'] #make sure you get the current time of posting using import time.
+    session["name of the ids"]=request.form['name of the ids'] #make sure you get the current time of posting too using import time. Also, if we have time (not mandatory), store their personal information in cookies and auto fill out that part of the form using jinja each time they go to create a post)
     return render_template('englishlearnerforum.html') #set the same jinja variables here as in @app.route('englishlearnerforum') above
 
 @github.tokengetter
