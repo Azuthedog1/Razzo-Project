@@ -34,7 +34,7 @@
             <li {% if page == "specialeducationforum" %} class="active" {% endif %}><a href="/specialeducationforum">Special Education Forum</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
-            <li {% if page == "login" %} class="active" {% endif %}>  {% if logged_in or message=='Please sign in with a valid admin account.  ' %}<a href="/logout">Logout</a>{% else %}<a href="/login">Admin Login</a>{% endif %}</li>
+            <li {% if page == "login" %} class="active" {% endif %}>  {% if logged_in %}<a href="/logout">Logout</a>{% else %}<a href="/login">Admin Login</a>{% endif %}</li>
            <!-- <li {% if page == "login" %} class="active" {% endif %}><a href="/login">Admin Login</a></li>-->
           </ul>
         </div>
