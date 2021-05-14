@@ -55,7 +55,7 @@ def authorized():
             session['user_data']=github.get('user').data
             #pprint.pprint(vars(github['/email']))
             #pprint.pprint(vars(github['api/2/accounts/profile/']))
-            if session['user_data']['login'] == "DanaLearnsToCode" or session['user_data']['login'] == "MyDSWAccount":
+            if session['user_data']['login'] == "DanaLearnsToCode" or session['user_data']['login'] == "MyDSWAccount" or session['user_data']['login'] == "Azuthedog1":
                 message='You were successfully logged in as ' + session['user_data']['login'] + '.'
             else:
                 session.clear()
