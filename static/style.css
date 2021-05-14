@@ -39,7 +39,7 @@
   width: 100%;
   padding: 0;
   margin: 0;
-  background-color: #e0e0e0;
+  background-color: #f0f0f0;
   overflow-y: scroll;
   height: 25%;
   display: block;
@@ -56,7 +56,7 @@
   width: 100%;
   padding: 0;
   margin: 0;
-  background-color: #e0e0e0;
+  background-color: #f0f0f0;
 }
 
 tr {
@@ -67,7 +67,7 @@ tr {
   width: 100%;
   padding: 0;
   margin: 0;
-  background-color: #bfbfbf;
+  background-color: #e0e0e0;
 }
 
 .col1 {
