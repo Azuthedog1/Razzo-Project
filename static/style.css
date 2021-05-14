@@ -1,6 +1,7 @@
 .top {
   background-color: #0a5c0d;
   margin: 0px;
+  height: 75px;
   padding: 10px;
 }
 
@@ -89,7 +90,7 @@ tr {
 }
 
 #custom-bootstrap-menu {
-  height: 75px;
+  height: 10000px;
   background-color: #000000;
 }
 
