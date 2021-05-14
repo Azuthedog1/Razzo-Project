@@ -88,6 +88,7 @@ tr {
 .col4 {
   text-align: right;
   width: 45%;
+  padding: 10px;
 }
 
 #custom-bootstrap-menu.navbar-default .navbar-brand {
