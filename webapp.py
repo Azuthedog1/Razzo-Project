@@ -10,8 +10,6 @@ import time
 
 app = Flask(__name__)
 
-admins = ["MyDSWAccount", "Azuthedog1", "DanaLearnsToCode"]
-
 app.secret_key = os.environ['SECRET_KEY'] #used to sign session cookies
 oauth = OAuth(app)
 oauth.init_app(app) #initialize the app to be able to make requests for user information
@@ -58,12 +56,11 @@ def authorized():
             session['user_data']=github.get('user').data
             #pprint.pprint(vars(github['/email']))
             #pprint.pprint(vars(github['api/2/accounts/profile/']))
-            global admins
-            for admin in admins:
-                if session['user_data']['login'] == admin:
-                    message='You were successfully logged in as ' + session['user_data']['login'] + '.'
-            session.clear()
-            message='Please sign in with a valid admin account.  '
+            if session['user_data']['login'] == "MyDSWAccount" or session['user_data']['login'] == "Azuthedog1" or session['user_data']['login'] == "DanaLearnsToCode":
+                message='You were successfully logged in as ' + session['user_data']['login'] + '.'
+            else:
+                session.clear()
+                message='Please sign in with a valid admin account.  '
         except Exception as inst:
             session.clear()
             print(inst)
