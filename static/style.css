@@ -18,15 +18,12 @@
 
 .back {
   width: 90%;
-  padding: 0;
   margin: auto;
   margin-top: 20px;
 }
 
 .adminPostsBox {
   width: 50%;
-  padding: 0;
-  margin: 0;
   margin-bottom: 20px;
   border: 0px solid Black;
 }
@@ -37,8 +34,6 @@
 
 .adminPosts {
   width: 100%;
-  padding: 0;
-  margin: 0;
   background-color: #f0f0f0;
   overflow-y: scroll;
   height: 200px;
@@ -47,15 +42,11 @@
 
 .userPostsBox {
   width: 50%;
-  padding: 0;
-  margin: 0;
   border: 0px solid Black;
 }
 
 .userPosts {
   width: 100%;
-  padding: 0;
-  margin: 0;
   background-color: #f0f0f0;
 }
 
@@ -65,8 +56,6 @@ tr {
 
 .toprow {
   width: 100%;
-  padding: 0;
-  margin: 0;
   background-color: #e0e0e0;
 }
 
