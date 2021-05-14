@@ -25,19 +25,16 @@
       <h1 class="heading">SBHS Parent Board</h1>
       <div id="google_translate_element" class="heading"></div>
     </div>
-    <div id="custom-bootstrap-menu" class="navbar navbar-default" role="navigation">
+    <div class="navbar navbar-default">
       <div class="container-fluid">
-        <div class="collapse navbar-collapse navbar-menubuilder">
-          <ul class="nav navbar-nav navbar-left">
-            <li {% if page == "information" %} class="active" {% endif %}><a href="/.">Information</a></li>
-            <li {% if page == "englishlearnerforum" %} class="active" {% endif %}><a href="/englishlearnerforum">English Language Learner Forum</a></li>
-            <li {% if page == "specialeducationforum" %} class="active" {% endif %}><a href="/specialeducationforum">Special Education Forum</a></li>
-          </ul>
-          <ul class="nav navbar-nav navbar-right">
-            <li {% if page == "login" %} class="active" {% endif %}>  {% if logged_in %}<a href="/logout">Logout</a>{% else %}<a href="/login">Admin Login</a>{% endif %}</li>
-           <!-- <li {% if page == "login" %} class="active" {% endif %}><a href="/login">Admin Login</a></li>-->
-          </ul>
-        </div>
+        <ul class="nav navbar-nav navbar-left">
+          <li {% if page == "information" %} class="active" {% endif %}><a href="/.">Information</a></li>
+          <li {% if page == "englishlearnerforum" %} class="active" {% endif %}><a href="/englishlearnerforum">English Language Learner Forum</a></li>
+          <li {% if page == "specialeducationforum" %} class="active" {% endif %}><a href="/specialeducationforum">Special Education Forum</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li {% if page == "login" %} class="active" {% endif %}>  {% if logged_in %}<a href="/logout">Logout</a>{% else %}<a href="/login">Admin Login</a>{% endif %}</li>
+        </ul>
       </div>
     </div>
     <div class="content">{% block content %}{% endblock %}</div>
