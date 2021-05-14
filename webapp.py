@@ -26,11 +26,6 @@ github = oauth.remote_app(
     access_token_url='https://github.com/login/oauth/access_token',  
     authorize_url='https://github.com/login/oauth/authorize' 
 )
-def main():
-    connection_string = os.environ["MONGO_CONNECTION_STRING"]
-    db_name = os.environ["MONGO_DBNAME"]
-    client = pymongo.MongoClient(connection_string)
-    db = client[db_name]
     
    
 @app.context_processor
