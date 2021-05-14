@@ -17,13 +17,13 @@
 }
 
 .back {
-  width: 90%;
+  width: 50%;
   margin: auto;
   margin-top: 20px;
 }
 
 .adminPostsBox {
-  width: 50%;
+  width: 100%;
   margin-bottom: 20px;
   border: 0px solid Black;
 }
@@ -41,7 +41,7 @@
 }
 
 .userPostsBox {
-  width: 50%;
+  width: 100%;
   border: 0px solid Black;
 }
 
@@ -60,12 +60,12 @@ tr {
 }
 
 .col1 {
-  width: 7.5%;
+  width: 15%;
   padding: 10px;
 }
 
 .col2 {
-  width: 10%;
+  width: 20%;
   padding: 10px;
 }
 
@@ -76,7 +76,7 @@ tr {
 
 .col4 {
   text-align: right;
-  width: 22.5%;
+  width: 45%;
   padding: 10px;
 }
 
