@@ -31,12 +31,6 @@
   border: 2px solid Black;
 }
 
-.scroll {
-  overflow: hidden;
-  overflow-y: scroll;
-  height: 200px;
-}
-
 .boxHeading {
   border-bottom: 2px solid Black;
 }
