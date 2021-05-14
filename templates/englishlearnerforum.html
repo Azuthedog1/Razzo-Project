@@ -105,9 +105,9 @@
           <label for="user">Display Name:</label>
           <input type="text" class="form-control" id="adminName" required>
           <label for="title">Title:</label>
-          <textarea class="form-control" rows="1" id="title" required></textarea>
+          <textarea class="form-control" rows="1" id="adminTitle" required></textarea>
           <label for="comment">Message:</label>
-          <textarea class="form-control" rows="5" id="comment" required></textarea>
+          <textarea class="form-control" rows="5" id="adminComment" required></textarea>
           <label for="myfile">File Upload:</label>
           <input type="file" id="myfile" name="myfile">
           <input type="submit" value="Submit">
@@ -131,30 +131,30 @@
         <form action="/userSubmitPostELL" method="POST">
           <div class="form-group">
             <label for="title">Title:</label>
-            <textarea class="form-control" rows="1" id="title" required></textarea>
+            <textarea class="form-control" rows="1" id="userTitle" required></textarea>
           </div
           <div class="form-group">
             <label for="comment">Message:</label>
-            <textarea class="form-control" rows="5" id="comment" required></textarea>
+            <textarea class="form-control" rows="5" id="userComment" required></textarea>
           </div>
           <label for="myfile">File Upload:</label>
-          <input type="file" id="myfile" name="myfile">
+          <input type="file" id="userFile" name="myfile">
           <br><br>
           <div class="form-group">
             <label for="user">Full Name:</label>
-            <input type="text" class="form-control" id="user" required>
+            <input type="text" class="form-control" id="userName" required>
           </div>
           <div class="form-group">
             <label for="student">Student Name and Grade:</label>
-            <input type="text" class="form-control" id="student" required>
+            <input type="text" class="form-control" id="userStudent" required>
           </div
           <div class="form-group">
             <label for="email">Email Address (optional):</label>
-            <input type="email" class="form-control" id="email">
+            <input type="email" class="form-control" id="userEmail">
           </div>
           <br>
           <div class="checkbox">
-            <label class="checkbox-inline"><input type="checkbox" value="anon">Make Anonymous to Other Parents</label>
+            <label class="checkbox-inline"><input type="checkbox" value="userAnon">Make Anonymous to Other Parents</label>
           </div>
           <br>
           <input type="submit" value="Submit">
