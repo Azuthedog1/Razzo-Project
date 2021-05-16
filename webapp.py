@@ -65,8 +65,7 @@ def authorized():
                 message='You were successfully logged in as ' + session['user_data']['login'] + '.'
             else:
                 session.clear()
-                message='Please sign in with a valid admin account. You attempted to log in as ' + session['user_data']['login'] + '. This is not an admin account, ' +
-                         'to log in as an admin you may need to log out of Github before attempting to log in again.'
+                message='Please sign in with a valid admin account. You attempted to log in as ' + session['user_data']['login'] + '. This is not an admin account. To log in as an admin you may need to log out of Github before attempting to log in again.'
         except Exception as inst:
             session.clear()
             print(inst)
