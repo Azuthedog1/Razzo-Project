@@ -29,7 +29,7 @@
 .adminPostsBox {
   width: 100%;
   margin-bottom: 20px;
-  border: 0px solid Black;
+  border: 2px solid Black;
 }
 
 .boxHeading {
@@ -43,7 +43,7 @@
 
 .userPostsBox {
   width: 100%;
-  border: 0px solid Black;
+  border: 2px solid Black;
 }
 
 .userPosts {
@@ -53,10 +53,6 @@
 
 tr {
   border-bottom: 1px solid #999999;
-}
-
-tbody {
-  width: 100%;
 }
 
 .toprow {
