@@ -89,7 +89,7 @@
         <h4 class="modal-title">Admin Post:</h4>
       </div>
       <div class="modal-body">
-        <form action="/adminSubmitPostELL" method="POST">
+        <form action="/adminSubmitPostSE" method="POST">
           <div class="form-group">
             <label for="user">Display Name:</label>
             <input type="text" class="form-control" id="adminName" required>
@@ -101,6 +101,10 @@
           <div class="form-group">
             <label for="comment">Message:</label>
             <textarea class="form-control" rows="5" id="adminComment" required></textarea>
+          </div>
+          <div class="form-group">
+            <label for="email">Email Address:</label>
+            <input type="email" class="form-control" id="userEmail">
           </div>
           <button type="submit" class="btn btn-primary">Submit</button>
         </form>
@@ -120,7 +124,7 @@
         <h4 class="modal-title">Create Post</h4>
       </div>
       <div class="modal-body">
-        <form action="/userSubmitPostELL" method="POST">
+        <form action="/userSubmitPostSE" method="POST">
           <div class="form-group">
             <label for="title">Title:</label>
             <textarea class="form-control" rows="1" id="userTitle" required></textarea>
