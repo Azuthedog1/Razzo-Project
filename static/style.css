@@ -93,6 +93,10 @@ tr {
 .navbar-default .navbar-brand {
   color: #000000;
 }
+.navbar .navbar-brand:hover,
+.navbar .navbar-brand:focus {
+  color: #000000;
+}
 .navbar-default .navbar-text {
   color: #000000;
 }
