@@ -83,7 +83,9 @@ tr {
 
 .navbar-default {
   background-color: #ffffff;
-  border-color: #ffffff;
+  border: none;
+  border-bottom: 2px solid Black;
+  border-color: #000000;
   font-size: 17px;
 }
 .navbar-default .navbar-brand {
@@ -116,7 +118,9 @@ tr {
   background-color: #ffffff;
 }
 .navbar-default .navbar-toggle {
-  border-color: #ffffff;
+  border: none;
+  border-bottom: 2px solid Black;
+  border-color: #000000;
 }
 .navbar-default .navbar-toggle:hover,
 .navbar-default .navbar-toggle:focus {
