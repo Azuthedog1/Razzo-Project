@@ -85,7 +85,19 @@ def renderUserPostSubmissionELL():
     today = datetime.today()
     session["user"]=request.form['user']
     session["name of the ids"]=request.form['name of the ids'] #make sure you get the current time of posting too using import time. Also, if we have time (not mandatory), store their personal information in cookies and auto fill out that part of the form using jinja each time they go to create a post)
-    return render_template('englishlearnerforum.html') #set the same jinja variables here as in @app.route('englishlearnerforum') above (there are none right now)
+    return render_template('englishlearnerforum.html') #this will also copy the code from def render_english_learner_forum from above.
+
+@app.route('/adminSubmitPostELL', methods=['GET', 'POST']) #Same as above, except no name, student name and grade, no anonymous, etc.
+def renderAdminPostSubmissionELL():
+    return render_template('englishlearnerforum.html') #this will also copy the code from def render_english_learner_forum from above.
+
+@app.route('/userSubmitPostSE', methods=['GET', 'POST']) #for the other forum
+def renderUserPostSubmissionSE():
+    return render_template('specialeducationforum.html') #this will also copy the code from def special_education_forum from above.
+
+@app.route('/adminSubmitPostELL', methods=['GET', 'POST'])
+def renderUserPostSubmissionSE():
+    return render_template('specialeducationforum.html') #this will also copy the code from def special_education_forum from above.
 
 #Once Henry adds a more complex text form, make sure the jinja variables use Markup 
 @github.tokengetter
