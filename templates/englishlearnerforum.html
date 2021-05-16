@@ -102,7 +102,6 @@
             <label for="comment">Message:</label>
             <textarea class="form-control" rows="5" id="adminComment" required></textarea>
           </div>
-          
           <button type="submit" class="btn btn-primary">Submit</button>
           <small id="generalVet" class="form-text text-muted">
             Your post will not show until you vet it.
@@ -124,7 +123,7 @@
         <h4 class="modal-title">Create Post</h4>
       </div>
       <div class="modal-body">
-        <form action="/userSubmitPostELL" method="POST">
+        <form action="/userSubmitPostELL" method="POST"> <!-- Replace most of this form with a jinja variable. An admin posting a comment or post on the user forum should not have to answer certain questions. -->
           <div class="form-group">
             <label for="title">Title:</label>
             <textarea class="form-control" rows="1" id="userTitle" required></textarea>
@@ -156,7 +155,7 @@
           <br>
           <button type="submit" class="btn btn-primary">Submit</button>
           <small id="generalVet" class="form-text text-muted">
-            Your post will not show on the forum until an admin vets it.
+            Your post will not show on the forum until an admin approves it.
           </small>
         </form>
       </div>
