@@ -10,6 +10,11 @@
   font-family: Georgia, serif;
 }
 
+.scroll {
+  overflow-y: scroll;
+  height: 200px;
+  display: block;
+}
 #google_translate_element {
   position: relative;
   float: right;
@@ -35,9 +40,6 @@
 .adminPosts {
   width: 100%;
   background-color: #f0f0f0;
-  overflow-y: scroll;
-  height: 200px;
-  display: block;
 }
 
 .userPostsBox {
