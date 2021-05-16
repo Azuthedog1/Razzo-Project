@@ -17,7 +17,7 @@
 }
 
 .back {
-  width: 75%;
+  width: 90%;
   margin: auto;
   margin-top: 20px;
 }
@@ -52,6 +52,10 @@
 
 tr {
   border-bottom: 1px solid #999999;
+}
+
+tbody {
+  width 100%;
 }
 
 .toprow {
