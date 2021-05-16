@@ -35,14 +35,16 @@
             <span class="icon-bar"></span>
           </button>
         </div>
-        <ul class="nav navbar-nav navbar-left">
-          <li {% if page == "information" %} class="active" {% endif %}><a href="/.">Information</a></li>
-          <li {% if page == "englishlearnerforum" %} class="active" {% endif %}><a href="/englishlearnerforum">English Language Learner Forum</a></li>
-          <li {% if page == "specialeducationforum" %} class="active" {% endif %}><a href="/specialeducationforum">Special Education Forum</a></li>
-        </ul>
-        <ul class="nav navbar-nav navbar-right">
-          <li {% if page == "login" %} class="active" {% endif %}>  {% if logged_in or message == 'Please sign in with a valid admin account.  ' %}<a href="/logout">Logout</a>{% else %}<a href="/login">Admin Login</a>{% endif %}</li>
-        </ul>
+        <div id="navbarCollapse" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav navbar-left">
+            <li {% if page == "information" %} class="active" {% endif %}><a href="/.">Information</a></li>
+            <li {% if page == "englishlearnerforum" %} class="active" {% endif %}><a href="/englishlearnerforum">English Language Learner Forum</a></li>
+            <li {% if page == "specialeducationforum" %} class="active" {% endif %}><a href="/specialeducationforum">Special Education Forum</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li {% if page == "login" %} class="active" {% endif %}>  {% if logged_in or message == 'Please sign in with a valid admin account.  ' %}<a href="/logout">Logout</a>{% else %}<a href="/login">Admin Login</a>{% endif %}</li>
+          </ul>
+        </div>
       </div>
     </div>
     <div class="content">{% block content %}{% endblock %}</div>
