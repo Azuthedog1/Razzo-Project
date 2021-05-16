@@ -102,7 +102,11 @@
             <label for="comment">Message:</label>
             <textarea class="form-control" rows="5" id="adminComment" required></textarea>
           </div>
+          
           <button type="submit" class="btn btn-primary">Submit</button>
+          <small id="generalVet" class="form-text text-muted">
+            Your post will not show until you vet it.
+          </small>
         </form>
       </div>
       <div class="modal-footer">
@@ -142,12 +146,18 @@
             <label for="email">Email Address (optional):</label>
             <input type="email" class="form-control" id="userEmail">
           </div>
+          <small id="emailHelpBlock" class="form-text text-muted">
+            An email will be sent to you when someone replies to your post.
+          </small>
           <br>
           <div class="checkbox">
             <label class="checkbox-inline"><input type="checkbox" value="userAnon">Make Anonymous to Other Parents</label>
           </div>
           <br>
           <button type="submit" class="btn btn-primary">Submit</button>
+          <small id="generalVet" class="form-text text-muted">
+            Your post will not show on the forum until an admin vets it.
+          </small>
         </form>
       </div>
       <div class="modal-footer">
