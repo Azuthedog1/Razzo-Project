@@ -15,10 +15,9 @@
   height: 200px;
   display: block;
 }
+
 #google_translate_element {
-  position: relative;
   float: right;
-  top: 50%;
 }
 
 .back {
