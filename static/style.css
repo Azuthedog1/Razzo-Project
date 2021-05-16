@@ -136,7 +136,7 @@ tr {
   color: #9c9000;
 }
 
-@media (max-width: 767px) {
+/*@media (max-width: 767px) {
   .navbar-default .navbar-nav .open .dropdown-menu > li > a {
     color: #000000;
   }
@@ -150,4 +150,4 @@ tr {
     color: #9c9000;
     background-color: #ffffff;
   }
-}
+}*/
