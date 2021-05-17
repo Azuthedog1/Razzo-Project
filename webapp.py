@@ -84,7 +84,7 @@ def render_special_education_forum():
 def renderUserPostSubmissionELL():
     today = datetime.today()
     session["user"]=request.form['user']
-    session["name of the ids"]=request.form['name of the ids'] #make sure you get the current time of posting too using import time. Also, if we have time (not mandatory), store their personal information in cookies and auto fill out that part of the form using jinja each time they go to create a post)
+    session["name of the ids"]=request.form['name of the ids'] #make sure you get the current time of posting too using import time.
     return render_template('englishlearnerforum.html') #this will also copy the code from def render_english_learner_forum from above.
 
 @app.route('/adminSubmitPostELL', methods=['GET', 'POST']) #Same as above, except no name, student name and grade, no anonymous, etc.
