@@ -61,7 +61,7 @@ def authorized():
             session['user_data']=github.get('user').data
             #pprint.pprint(vars(github['/email']))
             #pprint.pprint(vars(github['api/2/accounts/profile/']))
-            if session['user_data']['login'] == admin1 or session['user_data']['login'] == admin2 session['user_data']['login'] == admin3:
+            if session['user_data']['login'] == admin1 or session['user_data']['login'] == admin2 or session['user_data']['login'] == admin3:
                 message='You were successfully logged in as ' + session['user_data']['login'] + '.'
             else:
                 session.clear()
