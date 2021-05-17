@@ -80,7 +80,7 @@ def render_english_learner_forum():
 def render_special_education_forum():
     return render_template('specialeducationforum.html')
 
-@app.route('/userSumbitPostELL', methods=['GET','POST'])
+@app.route('/userSubmitPostELL', methods=['GET','POST'])
 def renderUserPostSubmissionELL():
     today = datetime.today()
     session["user"]=request.form['user']
