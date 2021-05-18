@@ -112,6 +112,29 @@ def renderAdminPostSubmissionELL():
 
 @app.route('/userSubmitPostSE', methods=['GET', 'POST']) #for the other forum
 def renderUserPostSubmissionSE():
+    connection_string = os.environ["MONGO_CONNECTION_STRING"]
+    db_name = os.environ["MONGO_DBNAME"]
+    client = pymongo.MongoClient(connection_string)
+    db = client[db_name]
+    today = datetime.today()
+    session['userTitle']=request.form['userTitle']
+    session['userComment']=request.form['userComment']
+    session['userName']=request.form['userName']
+    session['userStudent']=request.form['userStudent']
+    session['userEmail']=request.form['userEmail']
+    anonymous = True
+    if request.form.getlist('anonymous'):
+        anonymous = True
+    else:
+        anonymous = False
+    title = session['userTitle']
+    message = session['userComment']
+    name = session['userName']
+    student = session['userStudent']
+    email = session['userEmail']
+    collection = db['SEU']
+    posts = {"comments": {"comment4":"comment 4", "comment5": "comment 5"},"postTitle":title,"postContent":message, "parentName": name, "studentName+grade": student, "parentEmail": email, "anonymous": anonymous,"dateTime": today, "approved":"false"}
+    collection.insert_one(posts)
     return render_template('specialeducationforum.html') #this will also copy the code from def special_education_forum from above.
 
 @app.route('/adminSubmitPostELL', methods=['GET', 'POST'])
