@@ -75,6 +75,10 @@ def authorized():
 def render_english_learner_forum():
     return render_template('englishlearnerforum.html')
 
+@app.route('/pendingQuestions')
+def render_pending_Questions):
+    return render_template('pendingQuestions.html')
+
 @app.route('/specialeducationforum')
 def render_special_education_forum():
     return render_template('specialeducationforum.html')
