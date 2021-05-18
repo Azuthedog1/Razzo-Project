@@ -171,9 +171,6 @@ def renderAdminPostSubmissionSE():
 
 @app.route('/comments')
 def loadTheComments():
-    objectID = location.search;
-    objectID = theURL[1:len(theURL)]
-    
     return render_template('comments.html')
 
 #Once Henry adds a more complex text form, make sure the jinja variables use Markup 
