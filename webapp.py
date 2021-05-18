@@ -99,6 +99,13 @@ def renderUserPostSubmissionSE():
 def renderAdminPostSubmissionSE():
     return render_template('specialeducationforum.html') #this will also copy the code from def special_education_forum from above.
 
+@app.route('/loadComments')
+def loadTheComments():
+    objectID = location.search;
+    objectID = theURL[1:len(theURL)]
+    
+    return render_template('comments.html')
+
 #Once Henry adds a more complex text form, make sure the jinja variables use Markup 
 @github.tokengetter
 def get_github_oauth_token():
