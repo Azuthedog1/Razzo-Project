@@ -18,17 +18,13 @@
       </table>
     </div>
     <div class="scroll">
-      <table class="adminPosts">
-        <form action="/comments">
-          <button name="goToComments" id="objectID" type="submit" class="customButton">  <!-- the id input should be a jinja variable for the object ID of this post-->
-            <tr>
-              <td class="col1">Image and tags(maybe)</td> 
-              <td class="col2">Hello Everyone</td>
-              <td class="col3">by Ramon</td>
-              <td class="col4">Time</td>
-            </tr>
-          </button>
-        </form>
+      <table class="adminPosts"><!-- the id input should be a jinja variable for the object ID of this post-->
+        <tr>
+          <td class="col1">Image and tags(maybe)</td> 
+          <td class="col2"><form action="/comments"><button name="goToComments" id="objectID" type="submit" class="customButton">Hello Everyone</button></form></td>
+          <td class="col3">by Ramon</td>
+          <td class="col4">Time</td>
+        </tr>
         <tr>
           <td class="col1">Image and tags(maybe)</td> 
           <td class="col2">Hello Everyone</td>
