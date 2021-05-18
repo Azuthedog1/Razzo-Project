@@ -76,7 +76,7 @@ def render_english_learner_forum():
     return render_template('englishlearnerforum.html')
 
 @app.route('/pendingQuestions')
-def render_pending_Questions):
+def render_pending_Questions():
     return render_template('pendingQuestions.html')
 
 @app.route('/specialeducationforum')
