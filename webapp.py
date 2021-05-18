@@ -108,6 +108,20 @@ def renderUserPostSubmissionELL():
 
 @app.route('/adminSubmitPostELL', methods=['GET', 'POST']) #Same as above, except no name, student name and grade, no anonymous, etc.
 def renderAdminPostSubmissionELL():
+    connection_string = os.environ["MONGO_CONNECTION_STRING"]
+    db_name = os.environ["MONGO_DBNAME"]
+    client = pymongo.MongoClient(connection_string)
+    db = client[db_name]
+    today = datetime.today()
+    session['adminTitle']=request.form['adminTitle']
+    session['adminComment']=request.form['adminComment']
+    session['adminName']=request.form['adminName']
+    title = session["adminTitle"]
+    message = session['adminComment']
+    name = session['adminName']
+    collection = db['ELLA']
+    posts = {"comments": {"comment4":"comment 4", "comment5": "comment 5"},"postTitle":title,"postContent":message,"displayName": name, "date+time": today}#put all info here using variables
+    collection.insert_one(posts)
     return render_template('englishlearnerforum.html') #this will also copy the code from def render_english_learner_forum from above.
 
 @app.route('/userSubmitPostSE', methods=['GET', 'POST']) #for the other forum
@@ -137,8 +151,22 @@ def renderUserPostSubmissionSE():
     collection.insert_one(posts)
     return render_template('specialeducationforum.html') #this will also copy the code from def special_education_forum from above.
 
-@app.route('/adminSubmitPostELL', methods=['GET', 'POST'])
+@app.route('/adminSubmitPostSE', methods=['GET', 'POST'])
 def renderAdminPostSubmissionSE():
+    connection_string = os.environ["MONGO_CONNECTION_STRING"]
+    db_name = os.environ["MONGO_DBNAME"]
+    client = pymongo.MongoClient(connection_string)
+    db = client[db_name]
+    today = datetime.today()
+    session['adminTitle']=request.form['adminTitle']
+    session['adminComment']=request.form['adminComment']
+    session['adminName']=request.form['adminName']
+    title = session["adminTitle"]
+    message = session['adminComment']
+    name = session['adminName']
+    collection = db['SEA']
+    posts = {"comments": {"comment4":"comment 4", "comment5": "comment 5"},"postTitle":title,"postContent":message,"displayName": name, "date+time": today}#put all info here using variables
+    collection.insert_one(posts)
     return render_template('specialeducationforum.html') #this will also copy the code from def special_education_forum from above.
 
 @app.route('/comments')
