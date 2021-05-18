@@ -17,6 +17,7 @@ oauth.init_app(app) #initialize the app to be able to make requests for user inf
 admin1="Azuthedog1"
 admin2="DanaLearnsToCode"
 admin3="MyDSWAccount"
+admin4="Korkz"
 
 #Set up GitHub as OAuth provider
 github = oauth.remote_app(
@@ -61,7 +62,7 @@ def authorized():
             session['user_data']=github.get('user').data
             #pprint.pprint(vars(github['/email']))
             #pprint.pprint(vars(github['api/2/accounts/profile/']))
-            if session['user_data']['login'] == admin1 or session['user_data']['login'] == admin2 or session['user_data']['login'] == admin3:
+            if session['user_data']['login'] == admin1 or session['user_data']['login'] == admin2 or session['user_data']['login'] == admin3 or session['user_data']['login'] == admin4:
                 message='You were successfully logged in as ' + session['user_data']['login'] + '. Don\'t forget to log out before exiting this wbesite.'
             else:
                 session.clear()
