@@ -99,7 +99,7 @@ def renderUserPostSubmissionSE():
 def renderAdminPostSubmissionSE():
     return render_template('specialeducationforum.html') #this will also copy the code from def special_education_forum from above.
 
-@app.route('/loadComments')
+@app.route('/comments')
 def loadTheComments():
     objectID = location.search;
     objectID = theURL[1:len(theURL)]
