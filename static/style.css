@@ -28,14 +28,12 @@
 
 .postBox {
   width: 49%;
-  height:700px;
   margin-bottom: 20px;
   border: 2px solid Black;
 }
 
 .postBox2 {
   width: 49%;
-  height: 700px;
   margin-bottom: 20px;
   border: 2px solid Black;
   position: relative;
