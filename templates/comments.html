@@ -5,20 +5,18 @@
 {% block content %}
 <div class="back">
   <div class="discussionBox">
-    <table class="commentsPosts">
+    <table class="toprow">
       <tr>
         <th class="col1">Comments</th>
         <th class="col2"></th>
         <th class="col3"></th>
-        <th class="col4">Post</th> <!-- This should also be a jinja variable because users should not be able to post on admin posts -->
+        <th class="col4">Post</th>
+      </tr> <!-- Get this by assigning the object ID of each post document, using a submit button, and processing it in python --> <!-- we will also need to put the parent's full name, student name and grade here for only admins to see -->
+    </table>
+    <table class="commentPosts">
+      <tr class="commentBox">
+        <td class="comments"><b>Title</b><br>Name, Student Name and Grade<br>Time<br>Post Text<td> <!-- student name and grade only see by admin -->
       </tr>
-      <tr>
-        <td class="col1">Post Clicked</td> <!-- Get this by assigning the object ID of each post document, using a submit button, and processing it in python -->
-        <td class="col2">Post Clicked</td> <!-- we will also need to put the parent's full name, student name and grade here for only admins to see -->
-        <td class="col3">Post Clicked</td>
-        <td class="col4">Post Clicked</td>
-      </tr>
-      {{ comments }}
     </table>
   </div>
 </div>
