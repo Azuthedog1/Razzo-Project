@@ -27,20 +27,20 @@
 }
 
 .postBox {
-  width: 50%;
+  width: 47.5%;
   height:700px;
   margin-bottom: 20px;
   border: 2px solid Black;
 }
 
 .postBox2 {
-  width: 50%;
+  width: 47.25%;
   height: 700px;
   margin-bottom: 20px;
   border: 2px solid Black;
   position: relative;
-  left:50%;
-  top: -700px;
+  left:52.5%;
+  top: -710px;
 }
 
 .discussionBox {
