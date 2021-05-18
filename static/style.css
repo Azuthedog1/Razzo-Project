@@ -32,6 +32,25 @@
   border: 2px solid Black;
 }
 
+.discussionBox {
+  width: 100%;
+  border: 2px solid Black;
+}
+
+.commentPosts {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.commentBox {
+  width: 100%;
+}
+
+comments {
+  border: 1px solid Black;
+  padding: 10px;
+}
+
 .boxHeading {
   border-bottom: 0px solid Black;
 }
