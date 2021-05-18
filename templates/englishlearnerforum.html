@@ -19,12 +19,16 @@
     </div>
     <div class="scroll">
       <table class="adminPosts">
-          <tr>
-            <td class="col1">Image and tags(maybe)</td> 
-            <td class="col2">Hello Everyone</td>
-            <td class="col3">by Ramon</td>
-            <td class="col4">Time</td>
-          </tr>
+        <form action="/comments">
+          <button type="submit" value="woefoj" name="goToComments"> <!-- the value input should be a jinja variable for the object ID of this post-->
+            <tr>
+              <td class="col1">Image and tags(maybe)</td> 
+              <td class="col2">Hello Everyone</td>
+              <td class="col3">by Ramon</td>
+              <td class="col4">Time</td>
+            </tr>
+          </button>
+        </form>
         <tr>
           <td class="col1">Image and tags(maybe)</td> 
           <td class="col2">Hello Everyone</td>
