@@ -27,9 +27,17 @@
 }
 
 .postBox {
-  width: 100%;
+  width: 50%;
   margin-bottom: 20px;
   border: 2px solid Black;
+}
+
+.postBox2 {
+  width: 50%;
+  margin-bottom: 20px;
+  border: 2px solid Black;
+  left:50%;
+  top: -100;
 }
 
 .discussionBox {
@@ -75,23 +83,23 @@ tr {
 }
 
 .col1 {
-  width: 15%;
+  width: 7.5%;
   padding: 10px;
 }
 
 .col2 {
-  width: 20%;
+  width: 10%;
   padding: 10px;
 }
 
 .col3 {
-  width: 20%;
+  width: 10%;
   padding: 10px;
 }
 
 .col4 {
   text-align: right;
-  width: 45%;
+  width: 22.5%;
   padding: 10px;
 }
 
