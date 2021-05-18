@@ -81,9 +81,29 @@ def render_special_education_forum():
 
 @app.route('/userSubmitPostELL', methods=['GET','POST'])
 def renderUserPostSubmissionELL():
+    connection_string = os.environ["MONGO_CONNECTION_STRING"]
+    db_name = os.environ["MONGO_DBNAME"]
+    client = pymongo.MongoClient(connection_string)
+    db = client[db_name]
     today = datetime.today()
-    session["user"]=request.form['user']
-    session["name of the ids"]=request.form['name of the ids'] #make sure you get the current time of posting too using import time.
+    session['userTitle']=request.form['userTitle']
+    session['userComment']=request.form['userComment']
+    session['userName']=request.form['userName']
+    session['userStudent']=request.form['userStudent']
+    session['userEmail']=request.form['userEmail']
+    anonymous = True
+    if request.form.getlist('anonymous'):
+        anonymous = True
+    else:
+        anonymous = False
+    title = session['userTitle']
+    message = session['userComment']
+    name = session['userName']
+    student = session['userStudent']
+    email = session['userEmail']
+    collection = db['ELLU']
+    posts = {"comments": {"comment4":"comment 4", "comment5": "comment 5"},"postTitle":title,"postContent":message, "parentName": name, "studentName+grade": student, "parentEmail": email, "anonymous": anonymous,"dateTime": today, "approved":"false"}
+    collection.insert_one(posts)
     return render_template('englishlearnerforum.html') #this will also copy the code from def render_english_learner_forum from above.
 
 @app.route('/adminSubmitPostELL', methods=['GET', 'POST']) #Same as above, except no name, student name and grade, no anonymous, etc.
