@@ -76,6 +76,14 @@
   background-color: #f0f0f0;
 }
 
+.adminPosts tr:hover {
+  background-color: #e0e0e0;
+}
+
+.userPosts tr:hover {
+  background-color: #e0e0e0;
+}
+
 tr {
   border-bottom: 1px solid #999999;
 }
