@@ -122,7 +122,8 @@ tr {
 }
 
 .commentButton:hover {
-  color: Blue;
+  color: #0645AD;
+  text-decoration: underline;
 }
 
 .navbar-default {
