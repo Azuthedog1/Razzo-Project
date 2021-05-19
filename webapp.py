@@ -177,7 +177,7 @@ def renderAdminPostSubmissionSE():
 def loadTheComments():
     return render_template('comments.html')
 
-#Once Henry adds a more complex text form, make sure the jinja variables use Markup 
+#make sure the jinja variables use Markup 
 @github.tokengetter
 def get_github_oauth_token():
     return session['github_token']
