@@ -23,7 +23,7 @@
           <td class="col1">Image and tags(maybe)</td> 
           <td class="col2"><form action="/comments"><select class="selection" name="thread"><option value="u28d892qh1dj98d"></option></select><button type="submit" class="customButton commentButton">Hello Everyone</button></form></td>
           <td class="col3">by Ramon</td>
-          <td class="col4">{% if logged_in %}<form action="/delete" method="post"><button type="submit" name="delete" value="docid">Delete</button></form><form action="/vet"><button type="submit" name="vet" value="docid">Vet/Unvet</button></form>{% endif %}Time</td>
+          <td class="col4">{% if logged_in %}<button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#deleteModal">Delete</button><form action="/vet"><button type="submit" name="vet" value="docid">Vet/Unvet</button></form>{% endif %}Time</td>
         </tr>
         <tr>
           <td class="col1">Image and tags(maybe)</td> 
@@ -165,4 +165,24 @@
     </div>
   </div>
 </div> 
+
+<div id="deleteModal" class="modal fade" role="dialog">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Delete Post</h4>
+      </div>
+      <div class="modal-body">
+        <form action="/delete" method="post">
+          <label for="areYouSure">Are You Sure?:</label>
+          <button type="submit" name="delete" value="docid">Delete</button>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
 {% endblock %}
