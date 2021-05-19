@@ -175,7 +175,8 @@ def renderAdminPostSubmissionSE():
 
 @app.route('/comments')
 def loadTheComments():
-    return render_template('comments.html')
+    objectIDPost = request.args['post']
+    return render_template('comments.html') #This gets the object ID of the post the user clicked on. Use this function to return the post and its comments using that object ID.
 
 #make sure the jinja variables use Markup 
 @github.tokengetter
