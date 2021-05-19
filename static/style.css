@@ -126,6 +126,10 @@ tr {
   text-decoration: underline;
 }
 
+.selection {
+  display: none;
+}
+
 .navbar-default {
   background-color: #ffffff;
   border: none;
