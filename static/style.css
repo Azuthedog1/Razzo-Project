@@ -11,7 +11,7 @@
 
 .scroll {
   overflow-y: scroll;
-  height: 680px;
+  height: 670px;
   display: block;
 }
 
@@ -117,6 +117,7 @@ tr {
   margin: 0px;
   padding: 0px;
   border: 0px;
+  text-align: left;
   background-color: transparent;
 }
 
