@@ -1,6 +1,7 @@
 from flask import Flask, redirect, url_for, session, request, jsonify
 from flask_oauthlib.client import OAuth
 from flask import render_template
+from bson.objectid import ObjectId
 
 import pprint
 import os
@@ -90,21 +91,21 @@ def renderUserPostSubmissionELL():
     client = pymongo.MongoClient(connection_string)
     db = client[db_name]
     today = datetime.today()
-    session['userTitle']=request.form['userTitle']
-    session['userComment']=request.form['userComment']
-    session['userName']=request.form['userName']
-    session['userStudent']=request.form['userStudent']
-    session['userEmail']=request.form['userEmail']
+    #session['userTitle']=request.form['userTitle']
+    #session['userComment']=request.form['userComment']
+    #session['userName']=request.form['userName']
+    #session['userStudent']=request.form['userStudent']
+    #session['userEmail']=request.form['userEmail']
     anonymous = True
     if request.form.getlist('anonymous'):
         anonymous = True
     else:
         anonymous = False
-    title = session['userTitle']
-    message = session['userComment']
+    title = request.form['userTitle']
+    message = request.form['userComment']
     name = session['userName']
-    student = session['userStudent']
-    email = session['userEmail']
+    student = request.form['userStudent']
+    email = request.form['userEmail']
     collection = db['ELLU']
     posts = {"comments": {"comment4":"comment 4", "comment5": "comment 5"},"postTitle":title,"postContent":message, "parentName": name, "studentName+grade": student, "parentEmail": email, "anonymous": anonymous,"dateTime": today, "approved":"false"}
     collection.insert_one(posts)
@@ -117,12 +118,12 @@ def renderAdminPostSubmissionELL():
     client = pymongo.MongoClient(connection_string)
     db = client[db_name]
     today = datetime.today()
-    session['adminTitle']=request.form['adminTitle']
-    session['adminComment']=request.form['adminComment']
-    session['adminName']=request.form['adminName']
-    title = session["adminTitle"]
-    message = session['adminComment']
-    name = session['adminName']
+    #session['adminTitle']=request.form['adminTitle']
+    #session['adminComment']=request.form['adminComment']
+    #session['adminName']=request.form['adminName']
+    title = request.form['adminTitle']
+    message = request.form['adminComment']
+    name = request.form['adminName']
     collection = db['ELLA']
     posts = {"comments": {"comment4":"comment 4", "comment5": "comment 5"},"postTitle":title,"postContent":message,"displayName": name, "date+time": today}#put all info here using variables
     collection.insert_one(posts)
@@ -135,21 +136,21 @@ def renderUserPostSubmissionSE():
     client = pymongo.MongoClient(connection_string)
     db = client[db_name]
     today = datetime.today()
-    session['userTitle']=request.form['userTitle']
-    session['userComment']=request.form['userComment']
-    session['userName']=request.form['userName']
-    session['userStudent']=request.form['userStudent']
-    session['userEmail']=request.form['userEmail']
+    #session['userTitle']=request.form['userTitle']
+    #session['userComment']=request.form['userComment']
+    #session['userName']=request.form['userName']
+    #session['userStudent']=request.form['userStudent']
+    #session['userEmail']=request.form['userEmail']
     anonymous = True
     if request.form.getlist('anonymous'):
         anonymous = True
     else:
         anonymous = False
-    title = session['userTitle']
-    message = session['userComment']
+    title = request.form['userTitle']
+    message = request.form['userComment']
     name = session['userName']
-    student = session['userStudent']
-    email = session['userEmail']
+    student = request.form['userStudent']
+    email = request.form['userEmail']
     collection = db['SEU']
     posts = {"comments": {"comment4":"comment 4", "comment5": "comment 5"},"postTitle":title,"postContent":message, "parentName": name, "studentName+grade": student, "parentEmail": email, "anonymous": anonymous,"dateTime": today, "approved":"false"}
     collection.insert_one(posts)
@@ -162,12 +163,12 @@ def renderAdminPostSubmissionSE():
     client = pymongo.MongoClient(connection_string)
     db = client[db_name]
     today = datetime.today()
-    session['adminTitle']=request.form['adminTitle']
-    session['adminComment']=request.form['adminComment']
-    session['adminName']=request.form['adminName']
-    title = session["adminTitle"]
-    message = session['adminComment']
-    name = session['adminName']
+    #session['adminTitle']=request.form['adminTitle']
+    #session['adminComment']=request.form['adminComment']
+    #session['adminName']=request.form['adminName']
+    title = request.form['adminTitle']
+    message = request.form['adminComment']
+    name = request.form['adminName']
     collection = db['SEA']
     posts = {"comments": {"comment4":"comment 4", "comment5": "comment 5"},"postTitle":title,"postContent":message,"displayName": name, "date+time": today}#put all info here using variables
     collection.insert_one(posts)
@@ -177,6 +178,15 @@ def renderAdminPostSubmissionSE():
 def loadTheComments():
     objectIDPost = request.args['thread']
     return render_template('comments.html') #This gets the object ID of the post the user clicked on. Use this function to return the post and its comments using that object ID.
+
+@app.route('/delete', methods=['GET', 'POST'])
+def delete():
+    objectIDPost = request.form['delete']
+    #delete post
+
+@app.route('/vet', methods=['GET', 'POST'])
+    objectIDPost = request.form['vet']
+    #vet and unvet posts
 
 #make sure the jinja variables use Markup 
 @github.tokengetter
