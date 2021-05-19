@@ -181,10 +181,11 @@ def loadTheComments():
 
 @app.route('/delete', methods=['GET', 'POST'])
 def delete():
-    objectIDPost = request.form['delete']#delete post
+    objectIDPost = request.form['delete'] #delete post
 
 @app.route('/vet', methods=['GET', 'POST'])
-    objectIDPost = request.form['vet']#vet and unvet posts
+def vet():
+    objectIDPost = request.form['vet'] #vet and unvet posts
 
 #make sure the jinja variables use Markup 
 @github.tokengetter
