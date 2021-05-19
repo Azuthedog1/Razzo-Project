@@ -10,7 +10,7 @@
         <th class="col1">Comments</th>
         <th class="col2"></th>
         <th class="col3"></th>
-        <th class="col4">Post</th>
+        <th class="col4">{% if logged_in %}<button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#adminModal">Comment</button>{% endif %}</th>
       </tr> <!-- Get this by assigning the object ID of each post document, using a submit button, and processing it in python --> <!-- we will also need to put the parent's full name, student name and grade here for only admins to see -->
     </table>
     <table class="commentPosts">
