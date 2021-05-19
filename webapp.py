@@ -95,8 +95,21 @@ def render_special_education_forum():
     client = pymongo.MongoClient(connection_string)
     db = client[db_name]
     collection = db['SEU']
-    for post in collection.find():
-        pprint.pprint(post)#change to display instead of printing
+    #for post in collection.find(): #This Should Loop Through All User Posts in English Learner Forum 
+    #    if(&&IfVettedOptionForPostIsFalse&&):
+    #        bigString1 = bigString1 + Markup('{% if logged_in %}')
+    #    bigString1 = bigString1 + Markup ('<tr><td class="col1">NoIcons</td>')  
+    #    bigString1 = bigString1 + Markup('<td class="col2"><form action="/comments"><select class="selection" name="thread"><option value="' + &&JuliaInsertPostObectIDHere&& + '"></option></select><button type="submit" class="customButton commentButton">' + &&InsertPostTitleNameHere&& + '</button></form></td>')
+    #    if(&&IfAnonymousOptionIsTrue&&):
+    #        bigString1 = bigString1 + Markup('<td class="col3"> {% if logged_in %}' + &&InsertUserName&& + '{% endif %}</td>')
+    #    else:
+    #        bigString1 = bigString1 + Markup(
+    #      <tr>
+    #      <td class="col1">Image and tags(maybe)</td> 
+    #      <td class="col2"><form action="/comments"><select class="selection" name="thread"><option value="u28d892qh1dj98d"></option></select><button type="submit" class="customButton commentButton">Hello Everyone</button></form></td>
+    #      <td class="col3">by Ramon</td>
+    #      <td class="col4">{% if logged_in %}<span><button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteModal">Delete</button><form action="/vet" method="post"><button type="submit" class="btn btn-warning btn-sm" name="vet" value="docid">Vet/Unvet</button></form>Time</span>{% endif %}</td>
+    #    </tr>
     return render_template('specialeducationforum.html')
 
 @app.route('/userSubmitPostELL', methods=['GET','POST'])
