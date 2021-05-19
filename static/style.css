@@ -130,6 +130,10 @@ tr {
   display: none;
 }
 
+span {
+  display: inline;
+}
+
 .navbar-default {
   background-color: #ffffff;
   border: none;
