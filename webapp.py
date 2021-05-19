@@ -74,6 +74,13 @@ def authorized():
 
 @app.route('/englishlearnerforum')
 def render_english_learner_forum():
+    connection_string = os.environ["MONGO_CONNECTION_STRING"]
+    db_name = os.environ["MONGO_DBNAME"]
+    client = pymongo.MongoClient(connection_string)
+    db = client[db_name]
+    collection = db['ELLU']
+    for post in collection.find():
+        pprint.pprint(post)#change to display instead of printing
     return render_template('englishlearnerforum.html')
 
 @app.route('/pendingQuestions')
@@ -82,6 +89,13 @@ def render_pending_Questions():
 
 @app.route('/specialeducationforum')
 def render_special_education_forum():
+    connection_string = os.environ["MONGO_CONNECTION_STRING"]
+    db_name = os.environ["MONGO_DBNAME"]
+    client = pymongo.MongoClient(connection_string)
+    db = client[db_name]
+    collection = db['SEU']
+    for post in collection.find():
+        pprint.pprint(post)#change to display instead of printing
     return render_template('specialeducationforum.html')
 
 @app.route('/userSubmitPostELL', methods=['GET','POST'])
