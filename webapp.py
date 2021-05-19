@@ -19,6 +19,7 @@ admin1="Azuthedog1"
 admin2="DanaLearnsToCode"
 admin3="MyDSWAccount"
 admin4="Korkz"
+admin5="Ponmo"
 
 #Set up GitHub as OAuth provider
 github = oauth.remote_app(
@@ -61,7 +62,7 @@ def authorized():
         try:
             session['github_token'] = (resp['access_token'], '') #save the token to prove that the user logged in
             session['user_data']=github.get('user').data
-            if session['user_data']['login'] == admin1 or session['user_data']['login'] == admin2 or session['user_data']['login'] == admin3 or session['user_data']['login'] == admin4:
+            if session['user_data']['login'] == admin1 or session['user_data']['login'] == admin2 or session['user_data']['login'] == admin3 or session['user_data']['login'] == admin4 or session['user_data']['login'] == admin5:
                 message='You were successfully logged in as ' + session['user_data']['login'] + '. Don\'t forget to log out before exiting this wbesite.'
             else:
                 session.clear()
