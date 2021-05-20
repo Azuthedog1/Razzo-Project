@@ -83,23 +83,24 @@ def render_english_learner_forum():
     collection = db['ELLU']
     postList1 = []
     bigString1 = ""
-    if(request.session.get('user_data', 'default') != 'default'):
-        for post in collection.find():
-            bigString1 = bigString1 + Markup ('<tr><td class="col1">IconWIP</td>')  
-            bigString1 = bigString1 + Markup('<td class="col2"><form action="/comments"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton">' + post.get('postTitle') + '</button></form></td>')
-            bigString1 = bigString1 + Markup('<td class="col3">' + post.get('parentName') + ' | ' + post.get('studentName+grade') + ' | ' + post.get('parentEmail') + ' | (Anonymous)</td>')
-            if(post.get('anonymous') == "true"):
-                bigString1 = bigString1 + Markup(' | Anonymous')
-            bigString1 = bigString1 + Markup('</td>')
-            bigString1 = bigString1 + Markup('<td class="col4"><span><form action="/delete" method="post"><button type="submit" class="btn btn-danger btn-sm" name="delete" value="' + str(post.get('_id')) + '">Confirm Delete</button></form><form action="/vet" method="post"><button type="submit" class="btn btn-warning btn-sm" name="vet" value="' + str(post.get('_id')) + '">')
-            if(post.get('approved') == "false"):
-                bigString1 = bigString1 + Markup('Vet')
-            else:
-                bigString1 = bigString1 + Markup('Unvet')
-            bigString1 = bigString1 + Markup('</button></form>' + str(post.get('date+time')) + '</span></td></tr>')
-            postList1.insert(0, bigString1)
-            bigString1 = ""
-    else: 
+    try:
+        if session['user_data']['login'] == admin1 or session['user_data']['login'] == admin2 or session['user_data']['login'] == admin3 or session['user_data']['login'] == admin4 or session['user_data']['login'] == admin5 or session['user_data']['login'] == admin6:
+            for post in collection.find():
+                bigString1 = bigString1 + Markup ('<tr><td class="col1">IconWIP</td>')  
+                bigString1 = bigString1 + Markup('<td class="col2"><form action="/comments"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton">' + post.get('postTitle') + '</button></form></td>')
+                bigString1 = bigString1 + Markup('<td class="col3">' + post.get('parentName') + ' | ' + post.get('studentName+grade') + ' | ' + post.get('parentEmail') + ' | (Anonymous)</td>')
+                if(post.get('anonymous') == "true"):
+                    bigString1 = bigString1 + Markup(' | Anonymous')
+                bigString1 = bigString1 + Markup('</td>')
+                bigString1 = bigString1 + Markup('<td class="col4"><span><form action="/delete" method="post"><button type="submit" class="btn btn-danger btn-sm" name="delete" value="' + str(post.get('_id')) + '">Confirm Delete</button></form><form action="/vet" method="post"><button type="submit" class="btn btn-warning btn-sm" name="vet" value="' + str(post.get('_id')) + '">')
+                if(post.get('approved') == "false"):
+                    bigString1 = bigString1 + Markup('Vet')
+                else:
+                    bigString1 = bigString1 + Markup('Unvet')
+                bigString1 = bigString1 + Markup('</button></form>' + str(post.get('date+time')) + '</span></td></tr>')
+                postList1.insert(0, bigString1)
+                bigString1 = ""
+    except:
         for post in collection.find():
             bigString1 = bigString1 + Markup ('<tr><td class="col1">IconWIP</td>')  
             bigString1 = bigString1 + Markup('<td class="col2"><form action="/comments"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton">' + post.get('postTitle') + '</button></form></td>')
