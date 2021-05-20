@@ -90,12 +90,12 @@ def render_english_learner_forum():
             bigString1 = bigString1 + Markup('<td class="col3"> {% if logged_in %}' + post.get('parentName') + ', ' + post.get('studentName+grade') + '{% endif %} (Anonymous)</td>')
         else:
             bigString1 = bigString1 + Markup('<td class="col3">' + post.get('parentName') + '{% if logged_in %}, ' + post.get('studentName+grade') + '{% endif %}</td>')
-        bigString1 = bigString1 + Markup('<td class="col4">{% if logged_in %}<span><form action="/delete" method="post"><button type="submit" class="btn btn-danger btn-sm" name="delete" value="' + str(post.get('_id')) + '">Confirm Delete</button></form><form action="/vet" method="post"><button type="submit" class="btn btn-warning btn-sm" name="vet" value="' + str(post.get('_id')) + '">')
+        bigString1 = bigString1 + Markup('<td class="col4"><span>{% if logged_in %}<form action="/delete" method="post"><button type="submit" class="btn btn-danger btn-sm" name="delete" value="' + str(post.get('_id')) + '">Confirm Delete</button></form><form action="/vet" method="post"><button type="submit" class="btn btn-warning btn-sm" name="vet" value="' + str(post.get('_id')) + '">')
         if(post.get('approved') == "false"):
             bigString1 = bigString1 + Markup('Vet')
         else:
             bigString1 = bigString1 + Markup('Unvet')
-        bigString1 = bigString1 + Markup('</button></form>' + str(post.get('date+time')) + '</span>{% endif %}</td></tr>')
+        bigString1 = bigString1 + Markup('</button></form>' + '{% endif %}' + str(post.get('date+time')) + '</span></td></tr>')
         if(post.get('approved') == "false"):
             bigString1 = bigString1 + Markup('{% endif %}')
     return render_template('englishlearnerforum.html', ELLUPosts = bigString1)
