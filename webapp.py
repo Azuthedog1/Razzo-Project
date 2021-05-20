@@ -80,6 +80,7 @@ def render_english_learner_forum():
     client = pymongo.MongoClient(connection_string)
     db = client[db_name]
     collection = db['ELLU']
+    postList1 = []
     bigString1 = ""
     for post in collection.find():
         if(post.get('approved') == "false"):
@@ -98,6 +99,10 @@ def render_english_learner_forum():
         bigString1 = bigString1 + Markup('</button></form>' + '{% endif %}' + str(post.get('date+time')) + '</span></td></tr>')
         if(post.get('approved') == "false"):
             bigString1 = bigString1 + Markup('{% endif %}')
+        postList1.insert(0, bigString1)
+        bigString1 = ""
+    for(item in postList1):
+        bigString1 = bigString1 + postList1[item]
     return render_template('englishlearnerforum.html', ELLUPosts = bigString1)
 
 @app.route('/pendingQuestions')
