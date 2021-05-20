@@ -80,6 +80,7 @@ def render_english_learner_forum():
     client = pymongo.MongoClient(connection_string)
     db = client[db_name]
     collection = db['ELLU']
+    bigString1 = ""
     for post in collection.find():
         if(post.get('approved') == "false"):
             bigString1 = bigString1 + Markup('{% if logged_in %}')
