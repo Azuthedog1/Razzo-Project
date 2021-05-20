@@ -147,7 +147,7 @@ def renderUserPostSubmissionELL():
         anonymous = False
     title = request.form['userTitle']
     message = request.form['userComment']
-    name = session['userName']
+    name = request.form['userName']
     student = request.form['userStudent']
     email = request.form['userEmail']
     collection = db['ELLU']
