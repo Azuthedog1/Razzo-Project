@@ -17,6 +17,7 @@ SQLAlchemy
 sqlalchemy-migrate
 sqlparse
 Tempita
+bson
 Werkzeug
 wheel
 WTForms
