@@ -83,7 +83,7 @@ def render_english_learner_forum():
     collection = db['ELLU']
     postList1 = []
     bigString1 = ""
-    if(request.COOKIES.get('user_data', 'default') != 'default'):
+    if(request.session.get('user_data', 'default') != 'default'):
         for post in collection.find():
             bigString1 = bigString1 + Markup ('<tr><td class="col1">IconWIP</td>')  
             bigString1 = bigString1 + Markup('<td class="col2"><form action="/comments"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton">' + post.get('postTitle') + '</button></form></td>')
