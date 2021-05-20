@@ -115,7 +115,7 @@ def render_english_learner_forum():
                 postList1.insert(0, bigString1)
                 bigString1 = ""
     for item in postList1:
-    bigString1 = bigString1 + item
+        bigString1 = bigString1 + item
     return render_template('englishlearnerforum.html', ELLUPosts = bigString1)
 
 @app.route('/pendingQuestions')
