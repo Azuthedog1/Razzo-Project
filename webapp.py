@@ -224,6 +224,10 @@ def renderAdminPostSubmissionSE():
     collection.insert_one(posts)
     return render_template('specialeducationforum.html') #this will also copy the code from def special_education_forum from above.
 
+@app.route('postComment')
+def newComment():
+    return render_template('comments.html')
+
 @app.route('/comments')
 def loadTheComments():
     objectIDPost = request.args['thread']
