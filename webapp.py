@@ -103,7 +103,7 @@ def render_english_learner_forum():
         bigString1 = ""
     for item in postList1:
         bigString1 = bigString1 + item
-    return render_template(ELLUPosts = bigString1, 'englishlearnerforum.html')
+    return render_template('englishlearnerforum.html', ELLUPosts = bigString1)
 
 @app.route('/pendingQuestions')
 def render_pending_Questions():
