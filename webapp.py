@@ -81,8 +81,23 @@ def render_english_learner_forum():
     db = client[db_name]
     collection = db['ELLU']
     for post in collection.find():
-        pprint.pprint(post)#change to display instead of printing
-    return render_template('englishlearnerforum.html')
+        if(post.get('approved') == "false"):
+            bigString1 = bigString1 + Markup('{% if logged_in %}')
+        bigString1 = bigString1 + Markup ('<tr><td class="col1">NoIcons</td>')  
+        bigString1 = bigString1 + Markup('<td class="col2"><form action="/comments"><select class="selection" name="thread"><option value="' + post.get('_id') + '"></option></select><button type="submit" class="customButton commentButton">' + post.get('postTitle') + '</button></form></td>')
+        if(post.get('anonymous') == "true"):
+            bigString1 = bigString1 + Markup('<td class="col3"> {% if logged_in %}' + post.get('parentName') + ', ' + post.get('studentName+grade') + '{% endif %} (Anonymous)</td>')
+        else:
+            bigString1 = bigString1 + Markup('<td class="col3">' + post.get('parentName') + '{% if logged_in %}, ' + post.get('studentName+grade') + '{% endif %}</td>')
+        bigString1 = bigString1 + Markup('<td class="col4">{% if logged_in %}<span><form action="/delete" method="post"><button type="submit" class="btn btn-danger btn-sm" name="delete" value="' + post.get('_id') + '">Confirm Delete</button></form><form action="/vet" method="post"><button type="submit" class="btn btn-warning btn-sm" name="vet" value="' + post.get('_id') + '">')
+        if(post.get('approved') == "false"):
+            bigString1 = bigString1 + Markup('Vet')
+        else:
+            bigString1 = bigString1 + Markup('Unvet')
+        bigString1 = bigString1 + Markup('</button></form>' + post.get('date+time') + '</span>{% endif %}</td></tr>')
+        if(post.get('approved') == "false"):
+            bigString1 = bigString1 + Markup('{% endif %}')
+    return render_template('englishlearnerforum.html', ELLUPosts = bigString1)
 
 @app.route('/pendingQuestions')
 def render_pending_Questions():
@@ -95,7 +110,7 @@ def render_special_education_forum():
     client = pymongo.MongoClient(connection_string)
     db = client[db_name]
     collection = db['SEU']
-    #for post in collection.find(): #This Should Loop Through All User Posts in English Learner Forum 
+    #for post in collection.find():
     #    if(&&IfVettedOptionForPostIsFalse&&):
     #        bigString1 = bigString1 + Markup('{% if logged_in %}')
     #    bigString1 = bigString1 + Markup ('<tr><td class="col1">NoIcons</td>')  
