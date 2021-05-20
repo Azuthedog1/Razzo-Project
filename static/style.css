@@ -1,12 +1,13 @@
 .top {
   background-color: #0a5c0d;
+  padding: 10px;
 }
 
 .heading {
   display: inline-block;
   color: #e6da05;
   font-family: Georgia, serif;
-  padding: 5px;
+  padding-right: 5px;
 }
 
 .scroll {
