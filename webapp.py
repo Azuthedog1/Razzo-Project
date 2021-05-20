@@ -232,7 +232,7 @@ def renderAdminPostSubmissionSE():
     collection.insert_one(posts)
     return render_template('specialeducationforum.html') #this will also copy the code from def special_education_forum from above.
 
-@app.route('submitComment')
+@app.route('/submitComment')
 def newComment():
     return render_template('comments.html')
 
