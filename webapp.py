@@ -99,7 +99,7 @@ def render_english_learner_forum():
                     bigString1 = bigString1 + Markup('Vet')
                 else:
                     bigString1 = bigString1 + Markup('Unvet')
-                bigString1 = bigString1 + Markup('</button></form>' + str(post.get('date+time')) + '</span></td></tr>')
+                bigString1 = bigString1 + Markup('</button></form>' + str(post.get('dateTime')) + '</span></td></tr>')
                 postList1.insert(0, bigString1)
                 bigString1 = ""
     except:
@@ -110,7 +110,7 @@ def render_english_learner_forum():
                 bigString1 = bigString1 + Markup('<td class="col3">(Anonymous)</td>')
             else:
                 bigString1 = bigString1 + Markup('<td class="col3">' + post.get('parentName') + '</td>')
-            bigString1 = bigString1 + Markup('<td class="col4"><span>' + str(post.get('date+time')) + '</span></td></tr>')
+            bigString1 = bigString1 + Markup('<td class="col4"><span>' + str(post.get('dateTime')) + '</span></td></tr>')
             postList1.insert(0, bigString1)
             bigString1 = ""
     for item in postList1:
