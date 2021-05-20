@@ -104,9 +104,10 @@ def render_english_learner_forum():
             bigString1 = bigString1 + Markup ('<tr><td class="col1">IconWIP</td>')  
             bigString1 = bigString1 + Markup('<td class="col2"><form action="/comments"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton">' + post.get('postTitle') + '</button></form></td>')
             if(post.get('anonymous') == "true"):
-                bigString1 = bigString1 + Markup('<td class="col3">(Anonymous)</td><td class="col4"><span>' + str(post.get('date+time')) + '</span></td></tr>')
+                bigString1 = bigString1 + Markup('<td class="col3">(Anonymous)</td>')
             else:
-                bigString1 = bigString1 + Markup('<td class="col3">' + post.get('parentName') + '</td><td class="col4"><span>' + str(post.get('date+time')) + '</span></td></tr>'
+                bigString1 = bigString1 + Markup('<td class="col3">' + post.get('parentName') + '</td>')
+            bigString1 = bigString1 + Markup('<td class="col4"><span>' + str(post.get('date+time')) + '</span></td></tr>')
             postList1.insert(0, bigString1)
             bigString1 = ""
     for item in postList1:
