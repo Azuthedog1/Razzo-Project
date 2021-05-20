@@ -83,6 +83,8 @@ def render_english_learner_forum():
     collection = db['ELLU']
     postList1 = []
     bigString1 = ""
+    if session[]
+    if session['user_data']['login']
     for post in collection.find():
         if(post.get('approved') == "false"):
             bigString1 = bigString1 + Markup('{% if logged_in %}')
@@ -224,7 +226,7 @@ def renderAdminPostSubmissionSE():
     collection.insert_one(posts)
     return render_template('specialeducationforum.html') #this will also copy the code from def special_education_forum from above.
 
-@app.route('postComment')
+@app.route('submitComment')
 def newComment():
     return render_template('comments.html')
 
