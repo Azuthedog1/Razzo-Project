@@ -82,7 +82,9 @@ def render_english_learner_forum():
     db = client[db_name]
     collection = db['ELLU']
     postList1 = []
+    postList2 = []
     bigString1 = ""
+    bigString2 = ""
     try:
         if session['user_data']['login'] == admin1 or session['user_data']['login'] == admin2 or session['user_data']['login'] == admin3 or session['user_data']['login'] == admin4 or session['user_data']['login'] == admin5 or session['user_data']['login'] == admin6:
             for post in collection.find():
@@ -168,7 +170,7 @@ def renderUserPostSubmissionELL():
     collection = db['ELLU']
     posts = {"comments": {"comment4":"comment 4", "comment5": "comment 5"},"postTitle":title,"postContent":message, "parentName": name, "studentName+grade": student, "parentEmail": email, "anonymous": anonymous,"dateTime": today, "approved":"false"}
     collection.insert_one(posts)
-    return render_template('englishlearnerforum.html') #this will also copy the code from def render_english_learner_forum from above.
+    render_english_learner_forum()
 
 @app.route('/adminSubmitPostELL', methods=['GET', 'POST']) #Same as above, except no name, student name and grade, no anonymous, etc.
 def renderAdminPostSubmissionELL():
