@@ -164,7 +164,7 @@ def renderUserPostSubmissionELL():
     else:
         anonymous = False
     title = request.form['userTitle']
-    message = request.form['userComment']
+    message = Markup(request.form['userComment'])
     name = request.form['userName']
     student = request.form['userStudent']
     email = request.form['userEmail']
@@ -184,7 +184,7 @@ def renderAdminPostSubmissionELL():
     #session['adminComment']=request.form['adminComment']
     #session['adminName']=request.form['adminName']
     title = request.form['adminTitle']
-    message = request.form['adminComment']
+    message = Markup(request.form['adminComment'])
     name = request.form['adminName']
     collection = db['ELLA']
     posts = {"comments": {"comment4":"comment 4", "comment5": "comment 5"},"postTitle":title,"postContent":message,"displayName": name, "date+time": today}#put all info here using variables
@@ -209,7 +209,7 @@ def renderUserPostSubmissionSE():
     else:
         anonymous = False
     title = request.form['userTitle']
-    message = request.form['userComment']
+    message = Markup(request.form['userComment'])
     name = session['userName']
     student = request.form['userStudent']
     email = request.form['userEmail']
@@ -229,7 +229,7 @@ def renderAdminPostSubmissionSE():
     #session['adminComment']=request.form['adminComment']
     #session['adminName']=request.form['adminName']
     title = request.form['adminTitle']
-    message = request.form['adminComment']
+    message = Markup(request.form['adminComment'])
     name = request.form['adminName']
     collection = db['SEA']
     posts = {"comments": {"comment4":"comment 4", "comment5": "comment 5"},"postTitle":title,"postContent":message,"displayName": name, "date+time": today}#put all info here using variables
