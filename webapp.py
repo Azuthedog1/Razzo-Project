@@ -103,7 +103,7 @@ def render_english_learner_forum():
         bigString1 = ""
     for item in postList1:
         bigString1 = bigString1 + item
-    if logged_in:
+    if logged_in in session:
         bigString1 = bigString1 + "YOYOYOYOYOYOOYOYOOYOYOYOYOYOYOYOYOYOOYOYOOYOYOOYOYOYOOYOYOOYOYOYOYOOYO"
     return render_template('englishlearnerforum.html', ELLUPosts = bigString1)
 
