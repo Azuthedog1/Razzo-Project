@@ -5,6 +5,8 @@
 {% block title %}English Language Learner Forum{% endblock %}
 
 {% block content %}
+<link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+<script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
 <div class="back">
   <div class="postBox">
     <div class="boxHeading">
@@ -95,7 +97,16 @@
           </div>
           <div class="form-group">
             <label for="comment">Message:</label>
-            <textarea class="form-control" rows="5" name="adminComment" required></textarea>
+            <!--<textarea class="form-control" rows="5" name="adminComment" required></textarea>-->
+            <div id="editor">
+              <p>Hello World!</p>
+              <p><br></p>
+            </div>
+            <script>
+              var quill = new Quill('#editor', {
+                theme: 'snow'
+              });
+            </script>
           </div>
           <button type="submit" class="btn btn-primary">Submit</button>
           <small id="generalVet" class="form-text text-muted">
@@ -125,7 +136,16 @@
           </div>
           <div class="form-group">
             <label for="comment">Message:</label>
-            <textarea class="form-control" rows="5" name="userComment" required></textarea>
+            <!--<textarea class="form-control" rows="5" name="userComment" required></textarea>-->
+            <div id="editor2">
+              <p>Hello World!</p>
+              <p><br></p>
+            </div>
+            <script>
+              var quill = new Quill('#editor2', {
+                theme: 'snow'
+              });
+            </script>
           </div>
           <br><br>
           <div class="form-group">
