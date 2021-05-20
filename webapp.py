@@ -95,7 +95,7 @@ def render_english_learner_forum():
             bigString1 = bigString1 + Markup('Vet')
         else:
             bigString1 = bigString1 + Markup('Unvet')
-        bigString1 = bigString1 + Markup('</button></form>' + post.get('date+time') + '</span>{% endif %}</td></tr>')
+        bigString1 = bigString1 + Markup('</button></form>' + str(post.get('date+time')) + '</span>{% endif %}</td></tr>')
         if(post.get('approved') == "false"):
             bigString1 = bigString1 + Markup('{% endif %}')
     return render_template('englishlearnerforum.html', ELLUPosts = bigString1)
