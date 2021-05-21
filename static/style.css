@@ -132,7 +132,7 @@ tr {
 }
 
 span {
-  display: inline;
+  display: inline-block;
 }
 
 .navbar-default {
