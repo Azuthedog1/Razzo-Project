@@ -225,7 +225,7 @@ def renderUserPostSubmissionELL():
     #session['userName']=request.form['userName']
     #session['userStudent']=request.form['userStudent']
     #session['userEmail']=request.form['userEmail']
-    anonymous = request.form('anon')
+    anonymous = request.form['anon']
     #if request.form('anon'): #getList
     #    anonymous = "true"
     #else:
@@ -282,7 +282,7 @@ def renderUserPostSubmissionSE():
     #session['userName']=request.form['userName']
     #session['userStudent']=request.form['userStudent']
     #session['userEmail']=request.form['userEmail']
-    anonymous = request.form('anon')
+    anonymous = request.form['anon']
     #if request.form('anon'): #getList
     #    anonymous = "true"
     #else:
