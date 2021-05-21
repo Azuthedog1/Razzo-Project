@@ -302,34 +302,36 @@ def renderUserPostSubmissionSE():
 
 @app.route('/adminSubmitPostSE', methods=['GET', 'POST'])
 def renderAdminPostSubmissionSE():
-    connection_string = os.environ["MONGO_CONNECTION_STRING"]
-    db_name = os.environ["MONGO_DBNAME"]
-    client = pymongo.MongoClient(connection_string)
-    db = client[db_name]
-    today = datetime.now()
-    today = datetime.now()
-    #if(int(today.strftime("%H")) + 5 > 12):
-    #    hour = str(int(today.strftime("%H")) + 5 - 12)
-    #    today = today.strftime("%m/%d/%Y, " + hour + ":%M AM PT")
-    #else:
-    #    hour = str(int(today.strftime("%H")) + 5)
-    #    today = today.strftime("%m/%d/%Y, " + hour + ":%M PM PT")
-    today = today.strftime("%m/%d/%Y, %H:%M GMT")
-    #session['adminTitle']=request.form['adminTitle']
-    #session['adminComment']=request.form['adminComment']
-    #session['adminName']=request.form['adminName']
-    title = request.form['adminTitle']
-    message = Markup(request.form['adminComment'])
-    name = request.form['adminName']
-    collection = db['SEA']
-    posts = {"comments": {"comment4":"comment 4", "comment5": "comment 5"},"postTitle":title,"postContent":message,"displayName": name, "dateTime": today}#put all info here using variables
-    collection.insert_one(posts)
-    return render_special_education_forum()
+    if request.method == 'POST':
+        connection_string = os.environ["MONGO_CONNECTION_STRING"]
+        db_name = os.environ["MONGO_DBNAME"]
+        client = pymongo.MongoClient(connection_string)
+        db = client[db_name]
+        today = datetime.now()
+        #if(int(today.strftime("%H")) + 5 > 12):
+        #    hour = str(int(today.strftime("%H")) + 5 - 12)
+        #    today = today.strftime("%m/%d/%Y, " + hour + ":%M AM PT")
+        #else:
+        #    hour = str(int(today.strftime("%H")) + 5)
+        #    today = today.strftime("%m/%d/%Y, " + hour + ":%M PM PT")
+        today = today.strftime("%m/%d/%Y, %H:%M GMT")
+        #session['adminTitle']=request.form['adminTitle']
+        #session['adminComment']=request.form['adminComment']
+        #session['adminName']=request.form['adminName']
+        title = request.form['adminTitle']
+        message = Markup(request.form['adminComment'])
+        name = request.form['adminName']
+        collection = db['SEA']
+        posts = {"comments": {"comment4":"comment 4", "comment5": "comment 5"},"postTitle":title,"postContent":message,"displayName": name, "dateTime": today}#put all info here using variables
+        collection.insert_one(posts)
+        return render_special_education_forum()
+    else:
+        return render_special_education_forum()
 
 @app.route('/submitComment', methods=['GET', 'POST'])
 def newComment():
-    objectIDPost = request.args['thread']
-    
+    if request.method == 'POST':
+        objectIDPost = request.args['thread']
     return render_template('information.html')
 
 @app.route('/viewSEA')
@@ -422,78 +424,96 @@ def viewELLU():
 
 @app.route('/deleteSE', methods=['GET', 'POST'])
 def deleteSE():
-    objectIDPost = request.form['delete'] #delete post
-    connection_string = os.environ["MONGO_CONNECTION_STRING"]
-    db_name = os.environ["MONGO_DBNAME"]
-    client = pymongo.MongoClient(connection_string)
-    db = client[db_name]
-    collection = db['SEA']
-    collection.delete_one({'_id': ObjectId(objectIDPost)})
-    collection = db['SEU']
-    collection.delete_one({'_id': ObjectId(objectIDPost)})
-    return render_special_education_forum()
+    if request.method == 'POST':
+        objectIDPost = request.form['delete'] #delete post
+        connection_string = os.environ["MONGO_CONNECTION_STRING"]
+        db_name = os.environ["MONGO_DBNAME"]
+        client = pymongo.MongoClient(connection_string)
+        db = client[db_name]
+        collection = db['SEA']
+        collection.delete_one({'_id': ObjectId(objectIDPost)})
+        collection = db['SEU']
+        collection.delete_one({'_id': ObjectId(objectIDPost)})
+        return render_special_education_forum()
+    else:
+        return render_special_education_forum()
 
 @app.route('/deleteELL', methods=['GET', 'POST'])
 def deleteELL():
-    objectIDPost = request.form['delete'] #delete post
-    connection_string = os.environ["MONGO_CONNECTION_STRING"]
-    db_name = os.environ["MONGO_DBNAME"]
-    client = pymongo.MongoClient(connection_string)
-    db = client[db_name]
-    collection = db['ELLA']
-    collection.delete_one({'_id': ObjectId(objectIDPost)})
-    collection = db['ELLU']
-    collection.delete_one({'_id': ObjectId(objectIDPost)})
-    return render_english_learner_forum()
+    if request.method == 'POST':
+        objectIDPost = request.form['delete'] #delete post
+        connection_string = os.environ["MONGO_CONNECTION_STRING"]
+        db_name = os.environ["MONGO_DBNAME"]
+        client = pymongo.MongoClient(connection_string)
+        db = client[db_name]
+        collection = db['ELLA']
+        collection.delete_one({'_id': ObjectId(objectIDPost)})
+        collection = db['ELLU']
+        collection.delete_one({'_id': ObjectId(objectIDPost)})
+        return render_english_learner_forum()
+    else:
+        return render_english_learner_forum()
 
 @app.route('/vetELL', methods=['GET', 'POST'])
 def vetELL():
-    objectIDPost = request.form['vet'] #vet and unvet posts
-    connection_string = os.environ["MONGO_CONNECTION_STRING"]
-    db_name = os.environ["MONGO_DBNAME"]
-    client = pymongo.MongoClient(connection_string)
-    db = client[db_name]
-    collection = db['ELLU']
-    collection.find_one_and_update({"_id": ObjectId(objectIDPost)},
-                                   {"$set": {"approved": "true"}})
-    return render_english_learner_forum()
+    if request.method == 'POST':
+        objectIDPost = request.form['vet'] #vet and unvet posts
+        connection_string = os.environ["MONGO_CONNECTION_STRING"]
+        db_name = os.environ["MONGO_DBNAME"]
+        client = pymongo.MongoClient(connection_string)
+        db = client[db_name]
+        collection = db['ELLU']
+        collection.find_one_and_update({"_id": ObjectId(objectIDPost)},
+                                       {"$set": {"approved": "true"}})
+        return render_english_learner_forum()
+    else:
+        return render_english_learner_forum()
                                              
 @app.route('/unvetELL', methods=['GET', 'POST'])
 def unvetELL():
-    objectIDPost = request.form['vet'] #vet and unvet posts
-    connection_string = os.environ["MONGO_CONNECTION_STRING"]
-    db_name = os.environ["MONGO_DBNAME"]
-    client = pymongo.MongoClient(connection_string)
-    db = client[db_name]
-    collection = db['ELLU']
-    collection.find_one_and_update({"_id": ObjectId(objectIDPost)},
-                                   {"$set": {"approved": "false"}})
-    return render_english_learner_forum()
+    if request.method == 'POST':
+        objectIDPost = request.form['vet'] #vet and unvet posts
+        connection_string = os.environ["MONGO_CONNECTION_STRING"]
+        db_name = os.environ["MONGO_DBNAME"]
+        client = pymongo.MongoClient(connection_string)
+        db = client[db_name]
+        collection = db['ELLU']
+        collection.find_one_and_update({"_id": ObjectId(objectIDPost)},
+                                       {"$set": {"approved": "false"}})
+        return render_english_learner_forum()
+    else:
+        return render_english_learner_forum()
 
                                              
 @app.route('/vetSE', methods=['GET', 'POST'])
 def vetSE():
-    objectIDPost = request.form['vet'] #vet and unvet posts
-    connection_string = os.environ["MONGO_CONNECTION_STRING"]
-    db_name = os.environ["MONGO_DBNAME"]
-    client = pymongo.MongoClient(connection_string)
-    db = client[db_name]       
-    collection = db['SEU']
-    collection.find_one_and_update({"_id": ObjectId(objectIDPost)},
-                                   {"$set": {"approved": "true"}})
-    return render_special_education_forum()
+    if request.method == 'POST':
+        objectIDPost = request.form['vet'] #vet and unvet posts
+        connection_string = os.environ["MONGO_CONNECTION_STRING"]
+        db_name = os.environ["MONGO_DBNAME"]
+        client = pymongo.MongoClient(connection_string)
+        db = client[db_name]       
+        collection = db['SEU']
+        collection.find_one_and_update({"_id": ObjectId(objectIDPost)},
+                                       {"$set": {"approved": "true"}})
+        return render_special_education_forum()
+    else:
+        return render_special_education_forum()
                                              
 @app.route('/unvetSE', methods=['GET', 'POST'])
 def unvetSE():
-    objectIDPost = request.form['vet'] #vet and unvet posts
-    connection_string = os.environ["MONGO_CONNECTION_STRING"]
-    db_name = os.environ["MONGO_DBNAME"]
-    client = pymongo.MongoClient(connection_string)
-    db = client[db_name]
-    collection = db['SEU']
-    collection.find_one_and_update({"_id": ObjectId(objectIDPost)},
-                                   {"$set": {"approved": "false"}})
-    return render_special_education_forum()
+    if request.method == 'POST':
+        objectIDPost = request.form['vet'] #vet and unvet posts
+        connection_string = os.environ["MONGO_CONNECTION_STRING"]
+        db_name = os.environ["MONGO_DBNAME"]
+        client = pymongo.MongoClient(connection_string)
+        db = client[db_name]
+        collection = db['SEU']
+        collection.find_one_and_update({"_id": ObjectId(objectIDPost)},
+                                       {"$set": {"approved": "false"}})
+        return render_special_education_forum()
+    else:
+        return render_special_education_forum()
 
 #make sure the jinja variables use Markup 
 @github.tokengetter
