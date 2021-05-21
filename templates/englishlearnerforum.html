@@ -13,7 +13,7 @@
           <td class="col1"><b>Resources and Announcements</b></td>
           <td class="col2"></td>
           <td class="col3"></td>
-          <td class="col4">{% if logged_in %}<button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#adminModal">Post</button>{% endif %}</td>
+          <td class="col4"><input type="text" id="myInputAdmin" onkeyup="myFunction2()" placeholder="Search">{% if logged_in %}<button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#adminModal">Post</button>{% endif %}</td>
         </tr>
       </table>
     </div>
@@ -47,6 +47,24 @@ function myFunction() {
   input = document.getElementById("myInputUser");
   filter = input.value.toUpperCase();
   table = document.getElementById("targetSearchUser");
+  tr = table.getElementsByTagName("tr");
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[1];
+    if (td) {
+      txtValue = td.textContent || td.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }
+  }
+}
+function myFunction2() {
+  var input, filter, table, tr, td, i, txtValue;
+  input = document.getElementById("myInputAdmin");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("targetSearchAdmin");
   tr = table.getElementsByTagName("tr");
   for (i = 0; i < tr.length; i++) {
     td = tr[i].getElementsByTagName("td")[1];
