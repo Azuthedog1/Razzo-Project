@@ -86,7 +86,6 @@ def render_english_learner_forum():
     bigString1 = ""
     bigString2 = ""
     try:
-        session['user_data']=github.get('user').data
         if session['user_data']['login'] == admin1 or session['user_data']['login'] == admin2 or session['user_data']['login'] == admin3 or session['user_data']['login'] == admin4 or session['user_data']['login'] == admin5 or session['user_data']['login'] == admin6 or session['user_data']['login'] == admin7:
             for post in collection.find():
                 bigString1 = bigString1 + Markup ('<tr><td class="col1">IconWIP</td>')  
@@ -187,7 +186,7 @@ def render_special_education_forum():
     for item in postList:
         bigString1 = bigString1 + item
     postList.clear()
-    collection = db['ELLA']
+    collection = db['SEA']
     try:
         if session['user_data']['login'] == admin1 or session['user_data']['login'] == admin2 or session['user_data']['login'] == admin3 or session['user_data']['login'] == admin4 or session['user_data']['login'] == admin5 or session['user_data']['login'] == admin6 or session['user_data']['login'] == admin7:
             for post in collection.find():
