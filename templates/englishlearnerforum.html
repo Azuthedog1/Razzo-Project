@@ -25,7 +25,7 @@
   </div>
   <div class="postBox2">
     <div class="boxHeading">
-      <table class="toprow">
+      <table class="toprow" id="targetSearch">
         <tr>
           <td class="col1"><b>User Forum</b></td>
           <td class="col2"></td>
@@ -41,6 +41,27 @@
     <div>
   </div>
 </div>
+<script>
+function myFunction() {
+  var input, filter, table, tr, td, i, txtValue;
+  input = document.getElementById("myInput");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("targetSearch");
+  tr = table.getElementsByTagName("tr");
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[1];
+    if (td) {
+      txtValue = td.textContent || td.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }
+  }
+}
+</script>
+    
 <div id="adminModal" class="modal fade" role="dialog">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
