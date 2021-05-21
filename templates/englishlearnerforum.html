@@ -18,7 +18,7 @@
       </table>
     </div>
     <div class="scroll">
-      <table class="adminPosts" id="targetSearchAdmin"><!-- the id input should be a jinja variable for the object ID of this post-->
+      <table class="adminPosts" id="targetSearchAdmin">
         {{ ELLAPosts }}
       </table>
     </div>
@@ -30,12 +30,12 @@
           <td class="col1"><b>User Forum</b></td>
           <td class="col2"></td>
           <td class="col3"></td>
-          <td class="col4"><input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search"><button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#userModal">Post</button></td>
+          <td class="col4"><input type="text" id="myInputUser" onkeyup="myFunction()" placeholder="Search"><button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#userModal">Post</button></td>
         </tr>
       </table>
     </div>
     <div class="scroll">
-      <table class="userPosts" id="targetSearch">
+      <table class="userPosts" id="targetSearchUser">
         {{ ELLUPosts }}
       </table>
     <div>
@@ -43,28 +43,10 @@
 </div>
 <script>
 function myFunction() {
-  var inputA, filterA, tableA, trA, tdA, iA, txtValueA;
-  inputA = document.getElementById("myInput");
-  filterA = input.value.toUpperCase();
-  tableA = document.getElementById("targetSearch");
-  trA = table.getElementsByTagName("tr");
-  for (iA = 0; iA < trA.length; iA++) {
-    tdA = trA[i].getElementsByTagName("td")[1];
-    if (tdA) {
-      txtValueA = td.textContent || td.innerText;
-      if (txtValueA.toUpperCase().indexOf(filterA) > -1) {
-        trA[i].style.display = "";
-      } else {
-        trA[i].style.display = "none";
-      }
-    }
-  }
-}
-function myFunction() {
   var input, filter, table, tr, td, i, txtValue;
-  input = document.getElementById("myInputAdmin");
+  input = document.getElementById("myInputUser");
   filter = input.value.toUpperCase();
-  table = document.getElementById("targetSearchAdmin");
+  table = document.getElementById("targetSearchUser");
   tr = table.getElementsByTagName("tr");
   for (i = 0; i < tr.length; i++) {
     td = tr[i].getElementsByTagName("td")[1];
