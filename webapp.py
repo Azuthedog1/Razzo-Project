@@ -149,8 +149,7 @@ def render_special_education_forum():
     client = pymongo.MongoClient(connection_string)
     db = client[db_name]
     collection = db['SEU']
-    postList1 = []
-    postList2 = []
+    postList = []
     bigString1 = ""
     bigString2 = ""
     try:
@@ -182,8 +181,29 @@ def render_special_education_forum():
                 bigString1 = bigString1 + Markup('<td class="col4"><span>' + str(post.get('dateTime')) + '</span></td></tr>')
                 postList1.insert(0, bigString1)
                 bigString1 = ""
-    for item in postList1:
+    for item in postList:
         bigString1 = bigString1 + item
+    postList.clear()
+    collection = db['ELLA']
+    try:
+        if session['user_data']['login'] == admin1 or session['user_data']['login'] == admin2 or session['user_data']['login'] == admin3 or session['user_data']['login'] == admin4 or session['user_data']['login'] == admin5 or session['user_data']['login'] == admin6:
+            for post in collection.find():
+                bigString2 = bigString2 + Markup('<tr><td class="col1">IconWIP</td>' +
+                                                 '<td class="col2"><form action="/comments"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton">' + post.get('postTitle') + '</button></form></td>' +
+                                                 '<td class="col3">' + post.get('displayName') + '</td>' +
+                                                 '<td class="col4"><span><form action="/delete" method="post"><button type="submit" class="btn btn-danger btn-sm" name="delete" value="' + str(post.get('_id')) + '">Confirm Delete</button></form>' + str(post.get('dateTime')) + '</span></td></tr>')
+                postList1.insert(0, bigString2)
+                bigString1 = ""
+    except:
+        for post in collection.find():
+            bigString2 = bigString2 + Markup('<tr><td class="col1">IconWIP</td>' +
+                                             '<td class="col2"><form action="/comments"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton">' + post.get('postTitle') + '</button></form></td>' +
+                                             '<td class="col3">' + post.get('displayName') + '</td>' +
+                                             '<td class="col4"><span>' + str(post.get('dateTime')) + '</span></td></tr>')
+            postList.insert(0, bigString2)
+            bigString2 = ""
+    for item in postList:
+        bigString2 = bigString2 + item
     return render_template('specialeducationforum.html', SEUPosts = bigString1)
 
 @app.route('/userSubmitPostELL', methods=['GET','POST'])
