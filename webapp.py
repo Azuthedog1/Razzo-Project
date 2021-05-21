@@ -179,7 +179,7 @@ def render_special_education_forum():
                 else:
                     bigString1 = bigString1 + Markup('<td class="col3">' + post.get('parentName') + '</td>')
                 bigString1 = bigString1 + Markup('<td class="col4"><span>' + str(post.get('dateTime')) + '</span></td></tr>')
-                postList1.insert(0, bigString1)
+                postList.insert(0, bigString1)
                 bigString1 = ""
     for item in postList:
         bigString1 = bigString1 + item
