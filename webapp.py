@@ -300,7 +300,7 @@ def renderAdminPostSubmissionSE():
 
 @app.route('/submitComment')
 def newComment():
-    request.args['language']
+    objectIDPost = request.args['thread']
     return render_template('comments.html')
 
 @app.route('/comments')
