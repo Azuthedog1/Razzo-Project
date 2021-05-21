@@ -99,7 +99,7 @@ def render_english_learner_forum():
                 else:
                     bigString1 = bigString1 + Markup('Unvet')
                 bigString1 = bigString1 + Markup('</button></form>' + str(post.get('dateTime')) + '</span></td></tr>')
-                postList1.insert(0, bigString1)
+                postList.insert(0, bigString1)
                 bigString1 = ""
     except:
         for post in collection.find():
@@ -124,7 +124,7 @@ def render_english_learner_forum():
                                                  '<td class="col2"><form action="/comments"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton">' + post.get('postTitle') + '</button></form></td>' +
                                                  '<td class="col3">' + post.get('displayName') + '</td>' +
                                                  '<td class="col4"><span><form action="/delete" method="post"><button type="submit" class="btn btn-danger btn-sm" name="delete" value="' + str(post.get('_id')) + '">Confirm Delete</button></form>' + str(post.get('dateTime')) + '</span></td></tr>')
-                postList1.insert(0, bigString2)
+                postList.insert(0, bigString2)
                 bigString1 = ""
     except:
         for post in collection.find():
@@ -167,7 +167,7 @@ def render_special_education_forum():
                 else:
                     bigString1 = bigString1 + Markup('Unvet')
                 bigString1 = bigString1 + Markup('</button></form>' + str(post.get('dateTime')) + '</span></td></tr>')
-                postList1.insert(0, bigString1)
+                postList.insert(0, bigString1)
                 bigString1 = ""
     except:
         for post in collection.find():
@@ -192,7 +192,7 @@ def render_special_education_forum():
                                                  '<td class="col2"><form action="/comments"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton">' + post.get('postTitle') + '</button></form></td>' +
                                                  '<td class="col3">' + post.get('displayName') + '</td>' +
                                                  '<td class="col4"><span><form action="/delete" method="post"><button type="submit" class="btn btn-danger btn-sm" name="delete" value="' + str(post.get('_id')) + '">Confirm Delete</button></form>' + str(post.get('dateTime')) + '</span></td></tr>')
-                postList1.insert(0, bigString2)
+                postList.insert(0, bigString2)
                 bigString1 = ""
     except:
         for post in collection.find():
