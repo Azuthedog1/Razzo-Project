@@ -63,7 +63,6 @@
             <!--<textarea class="form-control" rows="5" name="adminComment" required></textarea>-->
             <div id="editor">
               <p></p>
-              <p><br></p>
             </div>
             <script>
               var quill = new Quill('#editor', {
@@ -97,10 +96,14 @@
           <div class="form-group">
             <label for="comment">Message:</label>
             <!--<textarea class="form-control" rows="5" name="userComment" required></textarea>-->
-            <input name="about" type="hidden">
-            <div id="editor-container">
+            <div id="editor">
               <p></p>
             </div>
+            <script>
+              var quill = new Quill('#editor', {
+                theme: 'snow'
+              });
+            </script>
           </div>
           <br><br>
           <div class="form-group">
