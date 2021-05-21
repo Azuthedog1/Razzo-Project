@@ -95,12 +95,12 @@ def render_english_learner_forum():
                 if(post.get('anonymous') == "true"):
                     bigString1 = bigString1 + Markup(' | Anonymous')
                 bigString1 = bigString1 + Markup('</td>')
-                bigString1 = bigString1 + Markup('<td class="col4"><span><form action="/delete" method="post"><button type="submit" class="btn btn-danger btn-sm" name="delete" value="' + str(post.get('_id')) + '">Confirm Delete</button></form><form action="/vet" method="post"><button type="submit" class="btn btn-warning btn-sm" name="vet" value="' + str(post.get('_id')) + '">')
+                bigString1 = bigString1 + Markup('<td class="col4"><form action="/delete" method="post"><button type="submit" class="btn btn-danger btn-sm lineUp" name="delete" value="' + str(post.get('_id')) + '">Confirm Delete</button></form><form action="/vet" method="post"><button type="submit" class="btn btn-warning btn-sm lineUp" name="vet" value="' + str(post.get('_id')) + '">')
                 if(post.get('approved') == "false"):
                     bigString1 = bigString1 + Markup('Vet')
                 else:
                     bigString1 = bigString1 + Markup('Unvet')
-                bigString1 = bigString1 + Markup('</button></form>' + str(post.get('dateTime')) + '</span></td></tr>')
+                bigString1 = bigString1 + Markup('</button></form>' + str(post.get('dateTime')) + '</td></tr>')
                 postList.insert(0, bigString1)
                 bigString1 = ""
     except:
@@ -112,7 +112,7 @@ def render_english_learner_forum():
                     bigString1 = bigString1 + Markup('<td class="col3">(Anonymous)</td>')
                 else:
                     bigString1 = bigString1 + Markup('<td class="col3">' + post.get('parentName') + '</td>')
-                bigString1 = bigString1 + Markup('<td class="col4"><span>' + str(post.get('dateTime')) + '</span></td></tr>')
+                bigString1 = bigString1 + Markup('<td class="col4">' + str(post.get('dateTime')) + '</td></tr>')
                 postList.insert(0, bigString1)
                 bigString1 = ""
     for item in postList:
@@ -125,7 +125,7 @@ def render_english_learner_forum():
                 bigString2 = bigString2 + Markup('<tr><td class="col1">IconWIP</td>' +
                                                  '<td class="col2"><form action="/comments"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton">' + post.get('postTitle') + '</button></form></td>' +
                                                  '<td class="col3">' + post.get('displayName') + '</td>' +
-                                                 '<td class="col4"><span><form action="/delete" method="post"><button type="submit" class="btn btn-danger btn-sm" name="delete" value="' + str(post.get('_id')) + '">Confirm Delete</button></form>' + str(post.get('dateTime')) + '</span></td></tr>')
+                                                 '<td class="col4"><form action="/delete" method="post"><button type="submit" class="btn btn-danger btn-sm lineUp" name="delete" value="' + str(post.get('_id')) + '">Confirm Delete</button></form>' + str(post.get('dateTime')) + '</td></tr>')
                 postList.insert(0, bigString2)
                 bigString2 = ""
     except:
@@ -133,7 +133,7 @@ def render_english_learner_forum():
             bigString2 = bigString2 + Markup('<tr><td class="col1">IconWIP</td>' +
                                              '<td class="col2"><form action="/comments"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton">' + post.get('postTitle') + '</button></form></td>' +
                                              '<td class="col3">' + post.get('displayName') + '</td>' +
-                                             '<td class="col4"><span>' + str(post.get('dateTime')) + '</span></td></tr>')
+                                             '<td class="col4">' + str(post.get('dateTime')) + '</td></tr>')
             postList.insert(0, bigString2)
             bigString2 = ""
     for item in postList:
@@ -163,12 +163,12 @@ def render_special_education_forum():
                 if(post.get('anonymous') == "true"):
                     bigString1 = bigString1 + Markup(' | Anonymous')
                 bigString1 = bigString1 + Markup('</td>')
-                bigString1 = bigString1 + Markup('<td class="col4"><span><form action="/delete" method="post"><button type="submit" class="btn btn-danger btn-sm" name="delete" value="' + str(post.get('_id')) + '">Confirm Delete</button></form><form action="/vet" method="post"><button type="submit" class="btn btn-warning btn-sm" name="vet" value="' + str(post.get('_id')) + '">')
+                bigString1 = bigString1 + Markup('<td class="col4"><form action="/delete" method="post"><button type="submit" class="btn btn-danger btn-sm lineUp" name="delete" value="' + str(post.get('_id')) + '">Confirm Delete</button></form><form action="/vet" method="post"><button type="submit" class="btn btn-warning btn-sm lineUp" name="vet" value="' + str(post.get('_id')) + '">')
                 if(post.get('approved') == "false"):
                     bigString1 = bigString1 + Markup('Vet')
                 else:
                     bigString1 = bigString1 + Markup('Unvet')
-                bigString1 = bigString1 + Markup('</button></form>' + str(post.get('dateTime')) + '</span></td></tr>')
+                bigString1 = bigString1 + Markup('</button></form>' + str(post.get('dateTime')) + '</td></tr>')
                 postList.insert(0, bigString1)
                 bigString1 = ""
     except:
@@ -180,7 +180,7 @@ def render_special_education_forum():
                     bigString1 = bigString1 + Markup('<td class="col3">(Anonymous)</td>')
                 else:
                     bigString1 = bigString1 + Markup('<td class="col3">' + post.get('parentName') + '</td>')
-                bigString1 = bigString1 + Markup('<td class="col4"><span>' + str(post.get('dateTime')) + '</span></td></tr>')
+                bigString1 = bigString1 + Markup('<td class="col4">' + str(post.get('dateTime')) + '</td></tr>')
                 postList.insert(0, bigString1)
                 bigString1 = ""
     for item in postList:
@@ -193,7 +193,7 @@ def render_special_education_forum():
                 bigString2 = bigString2 + Markup('<tr><td class="col1">IconWIP</td>' +
                                                  '<td class="col2"><form action="/comments"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton">' + post.get('postTitle') + '</button></form></td>' +
                                                  '<td class="col3">' + post.get('displayName') + '</td>' +
-                                                 '<td class="col4"><span><form action="/delete" method="post"><button type="submit" class="btn btn-danger btn-sm" name="delete" value="' + str(post.get('_id')) + '">Confirm Delete</button></form>' + str(post.get('dateTime')) + '</span></td></tr>')
+                                                 '<td class="col4"><form action="/delete" method="post"><button type="submit" class="btn btn-danger btn-sm lineUp" name="delete" value="' + str(post.get('_id')) + '">Confirm Delete</button></form>' + str(post.get('dateTime')) + '</td></tr>')
                 postList.insert(0, bigString2)
                 bigString2 = ""
     except:
@@ -201,7 +201,7 @@ def render_special_education_forum():
             bigString2 = bigString2 + Markup('<tr><td class="col1">IconWIP</td>' +
                                              '<td class="col2"><form action="/comments"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton">' + post.get('postTitle') + '</button></form></td>' +
                                              '<td class="col3">' + post.get('displayName') + '</td>' +
-                                             '<td class="col4"><span>' + str(post.get('dateTime')) + '</span></td></tr>')
+                                             '<td class="col4">' + str(post.get('dateTime')) + '</td></tr>')
             postList.insert(0, bigString2)
             bigString2 = ""
     for item in postList:
