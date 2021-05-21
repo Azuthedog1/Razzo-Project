@@ -379,7 +379,7 @@ def viewELLU():
             parentName = "Anonymous Post"
         studentNameGrade = ""
         parentEmail = ""
-    return render_template('comments.html', title = postTitle, name = parentName, student = studentNameGrade,  content = postContent, )
+    return render_template('comments.html', title = postTitle, name = parentName, student = studentNameGrade, email = parentEmail, time = dateTime, content = postContent)
 
 @app.route('/deleteSE', methods=['GET', 'POST'])
 def deleteSE():
