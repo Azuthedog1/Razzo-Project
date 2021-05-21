@@ -216,11 +216,11 @@ def renderUserPostSubmissionELL():
     db = client[db_name]
     tz_LA = pytz.timezone('America/Los_Angeles')
     today = datetime.now(tz_LA)
-    if((int(today.strftime("%H")) > 12):
-        hour = str(int(today.strftime("%H") - 12)
+    if int(today.strftime("%H")) > 12:
+        hour = str(int(today.strftime("%H")) - 12)
         today = today.strftime("%m/%d/%Y, " + hour + ":%M AM PT")
     else:
-        hour = str(int(today.strftime("%H")) + 5)
+        hour = str(int(today.strftime("%H")))
         today = today.strftime("%m/%d/%Y, " + hour + ":%M PM PT")
     #session['userTitle']=request.form['userTitle']
     #session['userComment']=request.form['userComment']
@@ -248,12 +248,13 @@ def renderAdminPostSubmissionELL():
     db_name = os.environ["MONGO_DBNAME"]
     client = pymongo.MongoClient(connection_string)
     db = client[db_name]
-    today = datetime.now()
-    if(int(today.strftime("%H")) + 5 > 12):
-        hour = str(int(today.strftime("%H")) + 5 - 12)
+    tz_LA = pytz.timezone('America/Los_Angeles')
+    today = datetime.now(tz_LA)
+    if int(today.strftime("%H")) > 12:
+        hour = str(int(today.strftime("%H")) - 12)
         today = today.strftime("%m/%d/%Y, " + hour + ":%M AM PT")
     else:
-        hour = str(int(today.strftime("%H")) + 5)
+        hour = str(int(today.strftime("%H")))
         today = today.strftime("%m/%d/%Y, " + hour + ":%M PM PT")
     #session['adminTitle']=request.form['adminTitle']
     #session['adminComment']=request.form['adminComment']
@@ -272,14 +273,13 @@ def renderUserPostSubmissionSE():
     db_name = os.environ["MONGO_DBNAME"]
     client = pymongo.MongoClient(connection_string)
     db = client[db_name]
-    today = datetime.now()
     tz_LA = pytz.timezone('America/Los_Angeles')
     today = datetime.now(tz_LA)
-    if((int(today.strftime("%H")) > 12):
-        hour = str(int(today.strftime("%H") - 12)
+    if int(today.strftime("%H")) > 12:
+        hour = str(int(today.strftime("%H")) - 12)
         today = today.strftime("%m/%d/%Y, " + hour + ":%M AM PT")
     else:
-        hour = str(int(today.strftime("%H")) + 5)
+        hour = str(int(today.strftime("%H")))
         today = today.strftime("%m/%d/%Y, " + hour + ":%M PM PT")
     #session['userTitle']=request.form['userTitle']
     #session['userComment']=request.form['userComment']
@@ -307,12 +307,13 @@ def renderAdminPostSubmissionSE():
     db_name = os.environ["MONGO_DBNAME"]
     client = pymongo.MongoClient(connection_string)
     db = client[db_name]
-    today = datetime.now()
-    if(int(today.strftime("%H")) + 5 > 12):
-        hour = str(int(today.strftime("%H")) + 5 - 12)
+    tz_LA = pytz.timezone('America/Los_Angeles')
+    today = datetime.now(tz_LA)
+    if int(today.strftime("%H")) > 12:
+        hour = str(int(today.strftime("%H")) - 12)
         today = today.strftime("%m/%d/%Y, " + hour + ":%M AM PT")
     else:
-        hour = str(int(today.strftime("%H")) + 5)
+        hour = str(int(today.strftime("%H")))
         today = today.strftime("%m/%d/%Y, " + hour + ":%M PM PT")
     #session['adminTitle']=request.form['adminTitle']
     #session['adminComment']=request.form['adminComment']
