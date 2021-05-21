@@ -7,9 +7,8 @@ import pprint
 import os
 import sys
 import pymongo
-from datetime import datetime, timedelta
+from datetime import datetime
 import pytz
-from pytz import timezone
 
 app = Flask(__name__)
 
@@ -217,12 +216,12 @@ def renderUserPostSubmissionELL():
     db = client[db_name]
     tz_LA = pytz.timezone('America/Los_Angeles')
     today = datetime.now(tz_LA)
-    if int(today.strftime("%H")) > 12:
-        hour = str(int(today.strftime("%H")) - 12)
-        today = today.strftime("%m/%d/%Y, " + hour + ":%M AM PT")
-    else:
-        hour = str(int(today.strftime("%H")))
-        today = today.strftime("%m/%d/%Y, " + hour + ":%M PM PT")
+    #if int(today.strftime("%H")) > 12:
+    #    hour = str(int(today.strftime("%H")) - 12)
+    #    today = today.strftime("%m/%d/%Y, " + hour + ":%M AM PT")
+    #else:
+    #    hour = str(int(today.strftime("%H")))
+    #    today = today.strftime("%m/%d/%Y, " + hour + ":%M PM PT")
     #session['userTitle']=request.form['userTitle']
     #session['userComment']=request.form['userComment']
     #session['userName']=request.form['userName']
@@ -251,12 +250,12 @@ def renderAdminPostSubmissionELL():
     db = client[db_name]
     tz_LA = pytz.timezone('America/Los_Angeles')
     today = datetime.now(tz_LA)
-    if int(today.strftime("%H")) > 12:
-        hour = str(int(today.strftime("%H")) - 12)
-        today = today.strftime("%m/%d/%Y, " + hour + ":%M AM PT")
-    else:
-        hour = str(int(today.strftime("%H")))
-        today = today.strftime("%m/%d/%Y, " + hour + ":%M PM PT")
+    #if int(today.strftime("%H")) > 12:
+    #    hour = str(int(today.strftime("%H")) - 12)
+    #    today = today.strftime("%m/%d/%Y, " + hour + ":%M AM PT")
+    #else:
+    #    hour = str(int(today.strftime("%H")))
+    #    today = today.strftime("%m/%d/%Y, " + hour + ":%M PM PT")
     #session['adminTitle']=request.form['adminTitle']
     #session['adminComment']=request.form['adminComment']
     #session['adminName']=request.form['adminName']
@@ -276,12 +275,12 @@ def renderUserPostSubmissionSE():
     db = client[db_name]
     tz_LA = pytz.timezone('America/Los_Angeles')
     today = datetime.now(tz_LA)
-    if int(today.strftime("%H")) > 12:
-        hour = str(int(today.strftime("%H")) - 12)
-        today = today.strftime("%m/%d/%Y, " + hour + ":%M AM PT")
-    else:
-        hour = str(int(today.strftime("%H")))
-        today = today.strftime("%m/%d/%Y, " + hour + ":%M PM PT")
+    #if int(today.strftime("%H")) > 12:
+    #    hour = str(int(today.strftime("%H")) - 12)
+    #    today = today.strftime("%m/%d/%Y, " + hour + ":%M AM PT")
+    #else:
+    #    hour = str(int(today.strftime("%H")))
+    #    today = today.strftime("%m/%d/%Y, " + hour + ":%M PM PT")
     #session['userTitle']=request.form['userTitle']
     #session['userComment']=request.form['userComment']
     #session['userName']=request.form['userName']
@@ -310,12 +309,12 @@ def renderAdminPostSubmissionSE():
     db = client[db_name]
     tz_LA = pytz.timezone('America/Los_Angeles')
     today = datetime.now(tz_LA)
-    if int(today.strftime("%H")) > 12:
-        hour = str(int(today.strftime("%H")) - 12)
-        today = today.strftime("%m/%d/%Y, " + hour + ":%M AM PT")
-    else:
-        hour = str(int(today.strftime("%H")))
-        today = today.strftime("%m/%d/%Y, " + hour + ":%M PM PT")
+    #if int(today.strftime("%H")) > 12:
+    #    hour = str(int(today.strftime("%H")) - 12)
+    #    today = today.strftime("%m/%d/%Y, " + hour + ":%M AM PT")
+    #else:
+    #    hour = str(int(today.strftime("%H")))
+    #    today = today.strftime("%m/%d/%Y, " + hour + ":%M PM PT")
     #session['adminTitle']=request.form['adminTitle']
     #session['adminComment']=request.form['adminComment']
     #session['adminName']=request.form['adminName']
