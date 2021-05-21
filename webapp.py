@@ -209,96 +209,105 @@ def render_special_education_forum():
 
 @app.route('/userSubmitPostELL', methods=['GET','POST'])
 def renderUserPostSubmissionELL():
-    connection_string = os.environ["MONGO_CONNECTION_STRING"]
-    db_name = os.environ["MONGO_DBNAME"]
-    client = pymongo.MongoClient(connection_string)
-    db = client[db_name]
-    today = datetime.now()
-    #if(int(today.strftime("%H")) + 5 > 12):
-    #    hour = str(int(today.strftime("%H")) + 5 - 12)
-    #    today = today.strftime("%m/%d/%Y, " + hour + ":%M AM PT")
-    #else:
-    #    hour = str(int(today.strftime("%H")) + 5)
-    #    today = today.strftime("%m/%d/%Y, " + hour + ":%M PM PT")
-    today = today.strftime("%m/%d/%Y, %H:%M GMT")
-    #session['userTitle']=request.form['userTitle']
-    #session['userComment']=request.form['userComment']
-    #session['userName']=request.form['userName']
-    #session['userStudent']=request.form['userStudent']
-    #session['userEmail']=request.form['userEmail']
-    anonymous = request.form['anon']
-    #if request.form('anon'): #getList
-    #    anonymous = "true"
-    #else:
-    #    anonymous = "false"
-    title = request.form['userTitle']
-    message = Markup(request.form['userComment'])
-    name = request.form['userName']
-    student = request.form['userStudent']
-    email = request.form['userEmail']
-    collection = db['ELLU']
-    posts = {"comments": {"comment4":"comment 4", "comment5": "comment 5"},"postTitle":title,"postContent":message, "parentName": name, "studentName+grade": student, "parentEmail": email, "anonymous": anonymous,"dateTime": today, "approved":"false"}
-    collection.insert_one(posts)
-    return render_english_learner_forum() #render_template('englishlearnerforum.html')
+    if request.method == 'POST':
+        connection_string = os.environ["MONGO_CONNECTION_STRING"]
+        db_name = os.environ["MONGO_DBNAME"]
+        client = pymongo.MongoClient(connection_string)
+        db = client[db_name]
+        today = datetime.now()
+        #if(int(today.strftime("%H")) + 5 > 12):
+        #    hour = str(int(today.strftime("%H")) + 5 - 12)
+        #    today = today.strftime("%m/%d/%Y, " + hour + ":%M AM PT")
+        #else:
+        #    hour = str(int(today.strftime("%H")) + 5)
+        #    today = today.strftime("%m/%d/%Y, " + hour + ":%M PM PT")
+        today = today.strftime("%m/%d/%Y, %H:%M GMT")
+        #session['userTitle']=request.form['userTitle']
+        #session['userComment']=request.form['userComment']
+        #session['userName']=request.form['userName']
+        #session['userStudent']=request.form['userStudent']
+        #session['userEmail']=request.form['userEmail']
+        anonymous = request.form['anon']
+        #if request.form('anon'): #getList
+        #    anonymous = "true"
+        #else:
+        #    anonymous = "false"
+        title = request.form['userTitle']
+        message = Markup(request.form['userComment'])
+        name = request.form['userName']
+        student = request.form['userStudent']
+        email = request.form['userEmail']
+        collection = db['ELLU']
+        posts = {"comments": {"comment4":"comment 4", "comment5": "comment 5"},"postTitle":title,"postContent":message, "parentName": name, "studentName+grade": student, "parentEmail": email, "anonymous": anonymous,"dateTime": today, "approved":"false"}
+        collection.insert_one(posts)
+        return render_english_learner_forum() #render_template('englishlearnerforum.html')
+    else:
+        return render_english_learner_forum()
 
 @app.route('/adminSubmitPostELL', methods=['GET', 'POST']) #Same as above, except no name, student name and grade, no anonymous, etc.
 def renderAdminPostSubmissionELL():
-    connection_string = os.environ["MONGO_CONNECTION_STRING"]
-    db_name = os.environ["MONGO_DBNAME"]
-    client = pymongo.MongoClient(connection_string)
-    db = client[db_name]
-    today = datetime.now()
-    #if(int(today.strftime("%H")) + 5 > 12):
-    #    hour = str(int(today.strftime("%H")) + 5 - 12)
-    #    today = today.strftime("%m/%d/%Y, " + hour + ":%M AM PT")
-    #else:
-    #    hour = str(int(today.strftime("%H")) + 5)
-    #    today = today.strftime("%m/%d/%Y, " + hour + ":%M PM PT")
-    today = today.strftime("%m/%d/%Y, %H:%M GMT")
-    #session['adminTitle']=request.form['adminTitle']
-    #session['adminComment']=request.form['adminComment']
-    #session['adminName']=request.form['adminName']
-    title = request.form['adminTitle']
-    message = Markup(request.form['adminComment'])
-    name = request.form['adminName']
-    collection = db['ELLA']
-    posts = {"comments": {"comment4":"comment 4", "comment5": "comment 5"},"postTitle":title,"postContent":message,"displayName": name, "dateTime": today}#put all info here using variables
-    collection.insert_one(posts)
-    return render_english_learner_forum() #render_template('englishlearnerforum.html') #this will also copy the code from def render_english_learner_forum from above.
-
+    if request.method == 'POST':
+        connection_string = os.environ["MONGO_CONNECTION_STRING"]
+        db_name = os.environ["MONGO_DBNAME"]
+        client = pymongo.MongoClient(connection_string)
+        db = client[db_name]
+        today = datetime.now()
+        #if(int(today.strftime("%H")) + 5 > 12):
+        #    hour = str(int(today.strftime("%H")) + 5 - 12)
+        #    today = today.strftime("%m/%d/%Y, " + hour + ":%M AM PT")
+        #else:
+        #    hour = str(int(today.strftime("%H")) + 5)
+        #    today = today.strftime("%m/%d/%Y, " + hour + ":%M PM PT")
+        today = today.strftime("%m/%d/%Y, %H:%M GMT")
+        #session['adminTitle']=request.form['adminTitle']
+        #session['adminComment']=request.form['adminComment']
+        #session['adminName']=request.form['adminName']
+        title = request.form['adminTitle']
+        message = Markup(request.form['adminComment'])
+        name = request.form['adminName']
+        collection = db['ELLA']
+        posts = {"comments": {"comment4":"comment 4", "comment5": "comment 5"},"postTitle":title,"postContent":message,"displayName": name, "dateTime": today}#put all info here using variables
+        collection.insert_one(posts)
+        return render_english_learner_forum() #render_template('englishlearnerforum.html') #this will also copy the code from def render_english_learner_forum from above.
+    else:
+        return render_english_learner_forum()
+    
 @app.route('/userSubmitPostSE', methods=['GET', 'POST']) #for the other forum
 def renderUserPostSubmissionSE():
-    connection_string = os.environ["MONGO_CONNECTION_STRING"]
-    db_name = os.environ["MONGO_DBNAME"]
-    client = pymongo.MongoClient(connection_string)
-    db = client[db_name]
-    today = datetime.now()
-    #if(int(today.strftime("%H")) + 5 > 12):
-    #    hour = str(int(today.strftime("%H")) + 5 - 12)
-    #    today = today.strftime("%m/%d/%Y, " + hour + ":%M AM PT")
-    #else:
-    #    hour = str(int(today.strftime("%H")) + 5)
-    #    today = today.strftime("%m/%d/%Y, " + hour + ":%M PM PT")
-    today = today.strftime("%m/%d/%Y, %H:%M GMT")
-    #session['userTitle']=request.form['userTitle']
-    #session['userComment']=request.form['userComment']
-    #session['userName']=request.form['userName']
-    #session['userStudent']=request.form['userStudent']
-    #session['userEmail']=request.form['userEmail']
-    anonymous = request.form['anon']
-    #if request.form('anon'): #getList
-    #    anonymous = "true"
-    #else:
-    #    anonymous = "false"
-    title = request.form['userTitle']
-    message = Markup(request.form['userComment'])
-    name = request.form['userName']
-    student = request.form['userStudent']
-    email = request.form['userEmail']
-    collection = db['SEU']
-    posts = {"comments": {"comment4":"comment 4", "comment5": "comment 5"},"postTitle":title,"postContent":message, "parentName": name, "studentName+grade": student, "parentEmail": email, "anonymous": anonymous,"dateTime": today, "approved":"false"}
-    collection.insert_one(posts)
-    return render_special_education_forum() #render_template('specialeducationforum.html') #this will also copy the code from def special_education_forum from above.
+    if request.method == 'POST':
+        connection_string = os.environ["MONGO_CONNECTION_STRING"]
+        db_name = os.environ["MONGO_DBNAME"]
+        client = pymongo.MongoClient(connection_string)
+        db = client[db_name]
+        today = datetime.now()
+        #if(int(today.strftime("%H")) + 5 > 12):
+        #    hour = str(int(today.strftime("%H")) + 5 - 12)
+        #    today = today.strftime("%m/%d/%Y, " + hour + ":%M AM PT")
+        #else:
+        #    hour = str(int(today.strftime("%H")) + 5)
+        #    today = today.strftime("%m/%d/%Y, " + hour + ":%M PM PT")
+        today = today.strftime("%m/%d/%Y, %H:%M GMT")
+        #session['userTitle']=request.form['userTitle']
+        #session['userComment']=request.form['userComment']
+        #session['userName']=request.form['userName']
+        #session['userStudent']=request.form['userStudent']
+        #session['userEmail']=request.form['userEmail']
+        anonymous = request.form['anon']
+        #if request.form('anon'): #getList
+        #    anonymous = "true"
+        #else:
+        #    anonymous = "false"
+        title = request.form['userTitle']
+        message = Markup(request.form['userComment'])
+        name = request.form['userName']
+        student = request.form['userStudent']
+        email = request.form['userEmail']
+        collection = db['SEU']
+        posts = {"comments": {"comment4":"comment 4", "comment5": "comment 5"},"postTitle":title,"postContent":message, "parentName": name, "studentName+grade": student, "parentEmail": email, "anonymous": anonymous,"dateTime": today, "approved":"false"}
+        collection.insert_one(posts)
+        return render_special_education_forum() #render_template('specialeducationforum.html') #this will also copy the code from def special_education_forum from above.
+    else:
+        return render_special_education_forum()
 
 @app.route('/adminSubmitPostSE', methods=['GET', 'POST'])
 def renderAdminPostSubmissionSE():
