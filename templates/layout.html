@@ -44,7 +44,7 @@
             <li {% if page == "information" %} class="active" {% endif %}><a href="/.">Information</a></li>
             <li {% if page == "englishlearnerforum" %} class="active" {% endif %}><a href="/englishlearnerforum">English Language Learner Forum</a></li>
             <li {% if page == "specialeducationforum" %} class="active" {% endif %}><a href="/specialeducationforum">Special Education Forum</a></li>
-            {% if logged_in %}<li {% if page == "pendingQuestions" %} class="active" {% endif %}><a href="/pendingQuestions">Pending Questions</a></li>{% endif %}
+            {% if logged_in %}<li {% if page == "adminLog" %} class="active" {% endif %}><a href="/adminLog">Administrator Logs</a></li>{% endif %}
           </ul>
           <ul class="nav navbar-nav navbar-right">
             <li {% if page == "login" %} class="active" {% endif %}>  {% if logged_in or message == 'Please sign in with a valid admin account.  ' %}<a href="/logout">Logout</a>{% else %}<a href="/login">Admin Login</a>{% endif %}</li>
