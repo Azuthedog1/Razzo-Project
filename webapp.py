@@ -372,6 +372,8 @@ def viewELLU():
         parentName = x.get('parentName')
         studentNameGrade = x.get('studentName+grade')
         parentEmail = x.get('parentEmail')
+        if parentEmail == "":
+            parentEmail = "Email not provided"
     else:
         if x.get('anonymous') == "false":
             parentName = x.get('parentName')
