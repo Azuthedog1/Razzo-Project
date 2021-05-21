@@ -21,42 +21,7 @@
     </div>
     <div class="scroll">
       <table class="adminPosts"><!-- the id input should be a jinja variable for the object ID of this post-->
-        <tr>
-          <td class="col1">Image and tags(maybe)</td> 
-          <td class="col2"><form action="/comments"><select class="selection" name="thread"><option value="u28d892qh1dj98d"></option></select><button type="submit" class="customButton commentButton">Hello Everyone</button></form></td>
-          <td class="col3">by Ramon</td>
-          <td class="col4">{% if logged_in %}<span><form action="/delete" method="post"><button type="submit" class="btn btn-danger btn-sm" name="delete" value="docid">Confirm Delete</button></form><form action="/vet" method="post"><button type="submit" class="btn btn-warning btn-sm" name="vet" value="docid">Vet/Unvet</button></form>Time</span>{% endif %}</td>
-        </tr>
-        <tr>
-          <td class="col1">Image and tags(maybe)</td> 
-          <td class="col2">Hello Everyone</td>
-          <td class="col3">by Ramon</td>
-          <td class="col4">Time</td>
-        </tr>
-      <tr>
-          <td class="col1">Image and tags(maybe)</td> 
-          <td class="col2">Hello Everyone</td>
-          <td class="col3">by Ramon</td>
-          <td class="col4">Time</td>
-        </tr>
-        <tr>
-          <td class="col1">Image and tags(maybe)</td> 
-          <td class="col2">Hello Everyone</td>
-          <td class="col3">by Ramon</td>
-          <td class="col4">Time</td>
-        </tr>
-        <tr>
-          <td class="col1">Image and tags(maybe)</td> 
-          <td class="col2">Hello Everyone</td>
-          <td class="col3">by Ramon</td>
-          <td class="col4">Time</td>
-        </tr>
-        <tr>
-          <td class="col1">Image and tags(maybe)</td> 
-          <td class="col2">Hello Everyone</td>
-          <td class="col3">by Ramon</td>
-          <td class="col4">Time</td>
-        </tr>
+        {{ ELLAPosts }}
       </table>
     </div>
   </div>
