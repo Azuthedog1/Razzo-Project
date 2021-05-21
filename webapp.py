@@ -344,20 +344,9 @@ def viewSEA():
     postTitle = x.get('postTitle')
     postContent = x.get('postContent')
     dateTime = x.get('dateTime')
-    if 'github_token' in session:
-        parentName = x.get('parentName')
-        studentNameGrade = x.get('studentName+grade')
-        parentEmail = x.get('parentEmail')
-        if parentEmail == "":
-            parentEmail = "Email not provided"
-    else:
-        if x.get('anonymous') == "false":
-            parentName = x.get('parentName')
-        else:
-            parentName = "Anonymous Post"
-        studentNameGrade = ""
-        parentEmail = ""
-    return render_template('comments.html', title = postTitle, name = parentName, student = studentNameGrade, email = parentEmail, time = dateTime, content = postContent)
+    displayName = x.get('displayName')
+    info = ""
+    return render_template('comments.html', title = postTitle, name = displayName, information = info, time = dateTime, content = postContent)
 
 @app.route('/viewSEU')
 def viewSEU():
@@ -384,7 +373,8 @@ def viewSEU():
             parentName = "Anonymous Post"
         studentNameGrade = ""
         parentEmail = ""
-    return render_template('comments.html', title = postTitle, name = parentName, student = studentNameGrade, email = parentEmail, time = dateTime, content = postContent)
+    info = " / " + studentNameGrade + " / " + parentEmail
+    return render_template('comments.html', title = postTitle, name = parentName, information = info, time = dateTime, content = postContent)
 
 @app.route('/viewELLA')
 def viewELLA():
@@ -398,20 +388,9 @@ def viewELLA():
     postTitle = x.get('postTitle')
     postContent = x.get('postContent')
     dateTime = x.get('dateTime')
-    if 'github_token' in session:
-        parentName = x.get('parentName')
-        studentNameGrade = x.get('studentName+grade')
-        parentEmail = x.get('parentEmail')
-        if parentEmail == "":
-            parentEmail = "Email not provided"
-    else:
-        if x.get('anonymous') == "false":
-            parentName = x.get('parentName')
-        else:
-            parentName = "Anonymous Post"
-        studentNameGrade = ""
-        parentEmail = ""
-    return render_template('comments.html', title = postTitle, name = parentName, student = studentNameGrade, email = parentEmail, time = dateTime, content = postContent)
+    displayName = x.get('displayName')
+    info = ""
+    return render_template('comments.html', title = postTitle, name = displayName, information = info, time = dateTime, content = postContent)
 
 @app.route('/viewELLU')
 def viewELLU():
@@ -438,7 +417,8 @@ def viewELLU():
             parentName = "Anonymous Post"
         studentNameGrade = ""
         parentEmail = ""
-    return render_template('comments.html', title = postTitle, name = parentName, student = studentNameGrade, email = parentEmail, time = dateTime, content = postContent)
+    info = " / " + studentNameGrade + " / " + parentEmail
+    return render_template('comments.html', title = postTitle, name = parentName, information = info, time = dateTime, content = postContent)
 
 @app.route('/deleteSE', methods=['GET', 'POST'])
 def deleteSE():
