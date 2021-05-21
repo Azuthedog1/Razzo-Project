@@ -280,7 +280,7 @@ def renderUserPostSubmissionSE():
     if request.form.getlist('anonymous'):
         anonymous = "true"
     else:
-        anonymous = "false'
+        anonymous = "false"
     title = request.form['userTitle']
     message = Markup(request.form['userComment'])
     name = request.form['userName']
