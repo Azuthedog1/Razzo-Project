@@ -94,11 +94,11 @@ def render_english_learner_forum():
             if(post.get('anonymous') == "true"):
                 bigString1 = bigString1 + Markup(' | Anonymous Post')
             bigString1 = bigString1 + Markup('</td>')
-            bigString1 = bigString1 + Markup('<td class="col4"><form action="/deleteELL" method="post"><button type="submit" class="btn btn-outline-danger btn-sm" name="delete" value="' + str(post.get('_id')) + '">Confirm Delete</button></form>')
+            bigString1 = bigString1 + Markup('<td class="col4"><form action="/deleteELL" method="post"><button type="submit" class="btn btn-danger btn-sm" name="delete" value="' + str(post.get('_id')) + '"><span class="glyphicon glyphicon-trash"></span>Confirm Delete</button></form>')
             if(post.get('approved') == "false"):
-                bigString1 = bigString1 + Markup('<form action="/vetELL" method="post"><button type="submit" class="btn btn-outline-warning btn-sm" name="vet" value="' + str(post.get('_id'))+ '">' + 'Vet')
+                bigString1 = bigString1 + Markup('<form action="/vetELL" method="post"><button type="submit" class="btn btn-warning btn-sm" name="vet" value="' + str(post.get('_id'))+ '">' + '<span class="glyphicon glyphicon-plus"></span>Vet')
             else:
-                bigString1 = bigString1 + Markup('<form action="/unvetELL" method="post"><button type="submit" class="btn btn-outline-warning btn-sm" name="vet" value="' + str(post.get('_id'))+ '">' + 'Unvet')
+                bigString1 = bigString1 + Markup('<form action="/unvetELL" method="post"><button type="submit" class="btn btn-warning btn-sm" name="vet" value="' + str(post.get('_id'))+ '">' + '<span class="glyphicon glyphicon-minus">Unvet')
             bigString1 = bigString1 + Markup('</button></form>' + str(post.get('dateTime')) + '</td></tr>')
             postList.insert(0, bigString1)
             bigString1 = ""
@@ -124,7 +124,7 @@ def render_english_learner_forum():
             bigString2 = bigString2 + Markup('<tr><td class="col1">IconWIP</td>' +
                                              '<td class="col2"><form action="/comments"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton">' + post.get('postTitle') + '</button></form></td>' +
                                              '<td class="col3">' + post.get('displayName') + '</td>' +
-                                             '<td class="col4"><form action="/deleteELL" method="post"><button type="submit" class="btn btn-outline-danger btn-sm lineUp" name="delete" value="' + str(post.get('_id')) + '">Confirm Delete</button></form>' + str(post.get('dateTime')) + '</td></tr>')
+                                             '<td class="col4"><form action="/deleteELL" method="post"><button type="submit" class="btn btn-danger btn-sm lineUp" name="delete" value="' + str(post.get('_id')) + '"><span class="glyphicon glyphicon-trash"></span>Confirm Delete</button></form>' + str(post.get('dateTime')) + '</td></tr>')
             postList.insert(0, bigString2)
             bigString2 = ""
     else:
@@ -162,11 +162,11 @@ def render_special_education_forum():
             if(post.get('anonymous') == "true"):
                 bigString1 = bigString1 + Markup(' | Anonymous Post')
             bigString1 = bigString1 + Markup('</td>')
-            bigString1 = bigString1 + Markup('<td class="col4"><form action="/deleteSE" method="post"><button type="submit" class="btn btn-outline-danger btn-sm lineUp" name="delete" value="' + str(post.get('_id')) + '">Confirm Delete</button></form>')
+            bigString1 = bigString1 + Markup('<td class="col4"><form action="/deleteSE" method="post"><button type="submit" class="btn btn-danger btn-sm lineUp" name="delete" value="' + str(post.get('_id')) + '"><span class="glyphicon glyphicon-trash"></span>Confirm Delete</button></form>')
             if(post.get('approved') == "false"):
-                bigString1 = bigString1 + Markup('<form action="/vetSE" method="post"><button type="submit" class="btn btn-outline-warning btn-sm" name="vet" value="' + str(post.get('_id'))+ '">' + 'Vet')
+                bigString1 = bigString1 + Markup('<form action="/vetSE" method="post"><button type="submit" class="btn btn-warning btn-sm" name="vet" value="' + str(post.get('_id'))+ '">' + '<span class="glyphicon glyphicon-plus"></span>Vet')
             else:
-                bigString1 = bigString1 + Markup('<form action="/unvetSE" method="post"><button type="submit" class="btn btn-outline-warning btn-sm" name="vet" value="' + str(post.get('_id'))+ '">' + 'Unvet')
+                bigString1 = bigString1 + Markup('<form action="/unvetSE" method="post"><button type="submit" class="btn btn-warning btn-sm" name="vet" value="' + str(post.get('_id'))+ '">' + '<span class="glyphicon glyphicon-minus">Unvet')
             bigString1 = bigString1 + Markup('</button></form>' + str(post.get('dateTime')) + '</td></tr>')
             postList.insert(0, bigString1)
             bigString1 = ""
@@ -192,7 +192,7 @@ def render_special_education_forum():
             bigString2 = bigString2 + Markup('<tr><td class="col1">IconWIP</td>' +
                                              '<td class="col2"><form action="/comments"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton">' + post.get('postTitle') + '</button></form></td>' +
                                              '<td class="col3">' + post.get('displayName') + '</td>' +
-                                             '<td class="col4"><form action="/deleteSE" method="post"><button type="submit" class="btn btn-outline-danger btn-sm lineUp" name="delete" value="' + str(post.get('_id')) + '">Confirm Delete</button></form>' + str(post.get('dateTime')) + '</td></tr>')
+                                             '<td class="col4"><form action="/deleteSE" method="post"><button type="submit" class="btn btn-danger btn-sm lineUp" name="delete" value="' + str(post.get('_id')) + '"><span class="glyphicon glyphicon-trash"></span>Confirm Delete</button></form>' + str(post.get('dateTime')) + '</td></tr>')
             postList.insert(0, bigString2)
             bigString2 = ""
     else:
