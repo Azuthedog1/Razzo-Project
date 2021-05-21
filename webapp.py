@@ -90,7 +90,10 @@ def render_english_learner_forum():
         for post in collection.find():
             bigString1 = bigString1 + Markup ('<tr><td class="col1">IconWIP</td>')  
             bigString1 = bigString1 + Markup('<td class="col2"><form action="/viewELLU"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton">' + post.get('postTitle') + '</button></form></td>')
-            bigString1 = bigString1 + Markup('<td class="col3"><i>' + post.get('parentName') + ' | ' + post.get('studentName+grade') + ' | ' + post.get('parentEmail') + '</i></td>')
+            if post.get('parentEmail') == "":
+                bigString1 = bigString1 + Markup('<td class="col3"><i>' + post.get('parentName') + ' | ' + post.get('studentName+grade') + ' | No email provided</i></td>')
+            else:
+                bigString1 = bigString1 + Markup('<td class="col3"><i>' + post.get('parentName') + ' | ' + post.get('studentName+grade') + ' | ' + post.get('parentEmail') + '</i></td>')
             bigString1 = bigString1 + Markup('<td class="col4"><form action="/deleteELL" method="post"><button type="submit" class="btn btn-danger btn-sm" name="delete" value="' + str(post.get('_id')) + '"><span class="glyphicon glyphicon-trash"></span>Confirm Delete</button></form>')
             if(post.get('approved') == "false"):
                 bigString1 = bigString1 + Markup('<form action="/vetELL" method="post"><button type="submit" class="btn btn-warning btn-sm" name="vet" value="' + str(post.get('_id'))+ '">' + '<span class="glyphicon glyphicon-plus"></span>Vet')
@@ -155,7 +158,10 @@ def render_special_education_forum():
         for post in collection.find():
             bigString1 = bigString1 + Markup ('<tr><td class="col1">IconWIP</span></td>')  
             bigString1 = bigString1 + Markup('<td class="col2"><form action="/viewSEU"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton">' + post.get('postTitle') + '</button></form></td>')
-            bigString1 = bigString1 + Markup('<td class="col3"><i>' + post.get('parentName') + ' | ' + post.get('studentName+grade') + ' | ' + post.get('parentEmail') + '</i></td>')
+            if post.get('parentEmail') == "":
+                bigString1 = bigString1 + Markup('<td class="col3"><i>' + post.get('parentName') + ' | ' + post.get('studentName+grade') + ' | No email provided</i></td>')
+            else:
+                bigString1 = bigString1 + Markup('<td class="col3"><i>' + post.get('parentName') + ' | ' + post.get('studentName+grade') + ' | ' + post.get('parentEmail') + '</i></td>')
             bigString1 = bigString1 + Markup('<td class="col4"><form action="/deleteSE" method="post"><button type="submit" class="btn btn-danger btn-sm lineUp" name="delete" value="' + str(post.get('_id')) + '"><span class="glyphicon glyphicon-trash"></span>Confirm Delete</button></form>')
             if(post.get('approved') == "false"):
                 bigString1 = bigString1 + Markup('<form action="/vetSE" method="post"><button type="submit" class="btn btn-warning btn-sm" name="vet" value="' + str(post.get('_id'))+ '">' + '<span class="glyphicon glyphicon-plus"></span>Vet')
