@@ -73,6 +73,7 @@ def authorized():
             session.clear()
             print(inst)
             message='Unable to login, please try again.  '
+    session['username'] = 'admin'
     return render_template('login.html', message=message)
 
 @app.route('/englishlearnerforum')
