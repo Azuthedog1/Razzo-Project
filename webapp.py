@@ -139,9 +139,9 @@ def render_english_learner_forum():
         bigString2 = bigString2 + item
     return render_template('englishlearnerforum.html', ELLUPosts = bigString1, ELLAPosts = bigString2)
 
-@app.route('/pendingQuestions')
-def render_pending_Questions():
-    return render_template('pendingQuestions.html')
+@app.route('/adminLog')
+def render_admin_log():
+    return render_template('adminlog.html')
 
 @app.route('/specialeducationforum')
 def render_special_education_forum():
