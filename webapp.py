@@ -8,7 +8,6 @@ import os
 import sys
 import pymongo
 from datetime import datetime
-import pytz
 
 app = Flask(__name__)
 
