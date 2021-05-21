@@ -21,6 +21,7 @@ admin3="MyDSWAccount"
 admin4="Korkz"
 admin5="Ponmo"
 admin6="piemusician"
+admin7="Ramon-W"
 
 #Set up GitHub as OAuth provider
 github = oauth.remote_app(
@@ -85,7 +86,7 @@ def render_english_learner_forum():
     bigString1 = ""
     bigString2 = ""
     try:
-        if session['user_data']['login'] == admin1 or session['user_data']['login'] == admin2 or session['user_data']['login'] == admin3 or session['user_data']['login'] == admin4 or session['user_data']['login'] == admin5 or session['user_data']['login'] == admin6:
+        if session['user_data']['login'] == admin1 or session['user_data']['login'] == admin2 or session['user_data']['login'] == admin3 or session['user_data']['login'] == admin4 or session['user_data']['login'] == admin5 or session['user_data']['login'] == admin6 or session['user_data']['login'] == admin7:
             for post in collection.find():
                 bigString1 = bigString1 + Markup ('<tr><td class="col1">IconWIP</td>')  
                 bigString1 = bigString1 + Markup('<td class="col2"><form action="/comments"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton">' + post.get('postTitle') + '</button></form></td>')
@@ -118,7 +119,7 @@ def render_english_learner_forum():
     postList.clear()
     collection = db['ELLA']
     try:
-        if session['user_data']['login'] == admin1 or session['user_data']['login'] == admin2 or session['user_data']['login'] == admin3 or session['user_data']['login'] == admin4 or session['user_data']['login'] == admin5 or session['user_data']['login'] == admin6:
+        if session['user_data']['login'] == admin1 or session['user_data']['login'] == admin2 or session['user_data']['login'] == admin3 or session['user_data']['login'] == admin4 or session['user_data']['login'] == admin5 or session['user_data']['login'] == admin6 or session['user_data']['login'] == admin7:
             for post in collection.find():
                 bigString2 = bigString2 + Markup('<tr><td class="col1">IconWIP</td>' +
                                                  '<td class="col2"><form action="/comments"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton">' + post.get('postTitle') + '</button></form></td>' +
@@ -153,7 +154,7 @@ def render_special_education_forum():
     bigString1 = ""
     bigString2 = ""
     try:
-        if session['user_data']['login'] == admin1 or session['user_data']['login'] == admin2 or session['user_data']['login'] == admin3 or session['user_data']['login'] == admin4 or session['user_data']['login'] == admin5 or session['user_data']['login'] == admin6:
+        if session['user_data']['login'] == admin1 or session['user_data']['login'] == admin2 or session['user_data']['login'] == admin3 or session['user_data']['login'] == admin4 or session['user_data']['login'] == admin5 or session['user_data']['login'] == admin6 or session['user_data']['login'] == admin7:
             for post in collection.find():
                 bigString1 = bigString1 + Markup ('<tr><td class="col1">IconWIP</td>')  
                 bigString1 = bigString1 + Markup('<td class="col2"><form action="/comments"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton">' + post.get('postTitle') + '</button></form></td>')
@@ -186,7 +187,7 @@ def render_special_education_forum():
     postList.clear()
     collection = db['ELLA']
     try:
-        if session['user_data']['login'] == admin1 or session['user_data']['login'] == admin2 or session['user_data']['login'] == admin3 or session['user_data']['login'] == admin4 or session['user_data']['login'] == admin5 or session['user_data']['login'] == admin6:
+        if session['user_data']['login'] == admin1 or session['user_data']['login'] == admin2 or session['user_data']['login'] == admin3 or session['user_data']['login'] == admin4 or session['user_data']['login'] == admin5 or session['user_data']['login'] == admin6 or session['user_data']['login'] == admin7:
             for post in collection.find():
                 bigString2 = bigString2 + Markup('<tr><td class="col1">IconWIP</td>' +
                                                  '<td class="col2"><form action="/comments"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton">' + post.get('postTitle') + '</button></form></td>' +
