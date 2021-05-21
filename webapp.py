@@ -94,7 +94,7 @@ def render_english_learner_forum():
             if(post.get('anonymous') == "true"):
                 bigString1 = bigString1 + Markup(' | Anonymous Post')
             bigString1 = bigString1 + Markup('</td>')
-            bigString1 = bigString1 + Markup('<td class="col4"><form action="/delete" method="post"><button type="submit" class="btn btn-danger btn-sm" name="delete" value="' + str(post.get('_id')) + '">Confirm Delete</button></form>')
+            bigString1 = bigString1 + Markup('<td class="col4"><form action="/deleteELL" method="post"><button type="submit" class="btn btn-danger btn-sm" name="delete" value="' + str(post.get('_id')) + '">Confirm Delete</button></form>')
             if(post.get('approved') == "false"):
                 bigString1 = bigString1 + Markup('<form action="/vetELL" method="post"><button type="submit" class="btn btn-warning btn-sm" name="vet" value="' + str(post.get('_id'))+ '">' + 'Vet')
             else:
@@ -124,7 +124,7 @@ def render_english_learner_forum():
             bigString2 = bigString2 + Markup('<tr><td class="col1">IconWIP</td>' +
                                              '<td class="col2"><form action="/comments"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton">' + post.get('postTitle') + '</button></form></td>' +
                                              '<td class="col3">' + post.get('displayName') + '</td>' +
-                                             '<td class="col4"><form action="/delete" method="post"><button type="submit" class="btn btn-danger btn-sm lineUp" name="delete" value="' + str(post.get('_id')) + '">Confirm Delete</button></form>' + str(post.get('dateTime')) + '</td></tr>')
+                                             '<td class="col4"><form action="/deleteELL" method="post"><button type="submit" class="btn btn-danger btn-sm lineUp" name="delete" value="' + str(post.get('_id')) + '">Confirm Delete</button></form>' + str(post.get('dateTime')) + '</td></tr>')
             postList.insert(0, bigString2)
             bigString2 = ""
     else:
@@ -162,7 +162,7 @@ def render_special_education_forum():
             if(post.get('anonymous') == "true"):
                 bigString1 = bigString1 + Markup(' | Anonymous Post')
             bigString1 = bigString1 + Markup('</td>')
-            bigString1 = bigString1 + Markup('<td class="col4"><form action="/delete" method="post"><button type="submit" class="btn btn-danger btn-sm lineUp" name="delete" value="' + str(post.get('_id')) + '">Confirm Delete</button></form>')
+            bigString1 = bigString1 + Markup('<td class="col4"><form action="/deleteSE" method="post"><button type="submit" class="btn btn-danger btn-sm lineUp" name="delete" value="' + str(post.get('_id')) + '">Confirm Delete</button></form>')
             if(post.get('approved') == "false"):
                 bigString1 = bigString1 + Markup('<form action="/vetSE" method="post"><button type="submit" class="btn btn-warning btn-sm" name="vet" value="' + str(post.get('_id'))+ '">' + 'Vet')
             else:
@@ -192,7 +192,7 @@ def render_special_education_forum():
             bigString2 = bigString2 + Markup('<tr><td class="col1">IconWIP</td>' +
                                              '<td class="col2"><form action="/comments"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton">' + post.get('postTitle') + '</button></form></td>' +
                                              '<td class="col3">' + post.get('displayName') + '</td>' +
-                                             '<td class="col4"><form action="/delete" method="post"><button type="submit" class="btn btn-danger btn-sm lineUp" name="delete" value="' + str(post.get('_id')) + '">Confirm Delete</button></form>' + str(post.get('dateTime')) + '</td></tr>')
+                                             '<td class="col4"><form action="/deleteSE" method="post"><button type="submit" class="btn btn-danger btn-sm lineUp" name="delete" value="' + str(post.get('_id')) + '">Confirm Delete</button></form>' + str(post.get('dateTime')) + '</td></tr>')
             postList.insert(0, bigString2)
             bigString2 = ""
     else:
@@ -331,7 +331,20 @@ def loadTheComments():
     objectIDPost = request.args['thread']
     return render_template('comments.html') #This gets the object ID of the post the user clicked on. Use this function to return the post and its comments using that object ID.
 
-@app.route('/delete', methods=['GET', 'POST'])
+@app.route('/deleteSE', methods=['GET', 'POST'])
+def delete():
+    objectIDPost = request.form['delete'] #delete post
+    connection_string = os.environ["MONGO_CONNECTION_STRING"]
+    db_name = os.environ["MONGO_DBNAME"]
+    client = pymongo.MongoClient(connection_string)
+    db = client[db_name]
+    collection = db['SEA']
+    collection.delete_one({'_id': ObjectId(objectIDPost)})
+    collection = db['SEU']
+    collection.delete_one({'_id': ObjectId(objectIDPost)})
+    return render_special_education_forum()
+
+@app.route('/deleteELL', methods=['GET', 'POST'])
 def delete():
     objectIDPost = request.form['delete'] #delete post
     connection_string = os.environ["MONGO_CONNECTION_STRING"]
@@ -342,11 +355,7 @@ def delete():
     collection.delete_one({'_id': ObjectId(objectIDPost)})
     collection = db['ELLU']
     collection.delete_one({'_id': ObjectId(objectIDPost)})
-    collection = db['SEA']
-    collection.delete_one({'_id': ObjectId(objectIDPost)})
-    collection = db['SEU']
-    collection.delete_one({'_id': ObjectId(objectIDPost)})
-    return render_information()
+    return render_english_learner_forum()
 
 @app.route('/vetELL', methods=['GET', 'POST'])
 def vetELL():
