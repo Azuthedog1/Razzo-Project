@@ -89,7 +89,7 @@ def render_english_learner_forum():
     if 'github_token' in session: #session['user_data']['login'] == admin1 or session['user_data']['login'] == admin2 or session['user_data']['login'] == admin3 or session['user_data']['login'] == admin4 or session['user_data']['login'] == admin5 or session['user_data']['login'] == admin6 or session['user_data']['login'] == admin7:
         for post in collection.find():
             bigString1 = bigString1 + Markup ('<tr><td class="col1">IconWIP</td>')  
-            bigString1 = bigString1 + Markup('<td class="col2"><form action="/comments"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton">' + post.get('postTitle') + '</button></form></td>')
+            bigString1 = bigString1 + Markup('<td class="col2"><form action="/viewELLU"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton">' + post.get('postTitle') + '</button></form></td>')
             bigString1 = bigString1 + Markup('<td class="col3">' + post.get('parentName') + ' | ' + post.get('studentName+grade') + ' | ' + post.get('parentEmail'))
             if(post.get('anonymous') == "true"):
                 bigString1 = bigString1 + Markup(' | Anonymous Post')
@@ -106,7 +106,7 @@ def render_english_learner_forum():
         for post in collection.find():
             if(post.get('approved') == "true"):
                 bigString1 = bigString1 + Markup ('<tr><td class="col1">IconWIP</span></td>')  
-                bigString1 = bigString1 + Markup('<td class="col2"><form action="/comments"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton">' + post.get('postTitle') + '</button></form></td>')
+                bigString1 = bigString1 + Markup('<td class="col2"><form action="/viewELLU"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton">' + post.get('postTitle') + '</button></form></td>')
                 if(post.get('anonymous') == "true"):
                     bigString1 = bigString1 + Markup('<td class="col3">Anonymous Post</td>')
                 else:
@@ -122,7 +122,7 @@ def render_english_learner_forum():
     if 'github_token' in session: #if session['user_data']['login'] == admin1 or session['user_data']['login'] == admin2 or session['user_data']['login'] == admin3 or session['user_data']['login'] == admin4 or session['user_data']['login'] == admin5 or session['user_data']['login'] == admin6 or session['user_data']['login'] == admin7:
         for post in collection.find():
             bigString2 = bigString2 + Markup('<tr><td class="col1">IconWIP</td>' +
-                                             '<td class="col2"><form action="/comments"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton">' + post.get('postTitle') + '</button></form></td>' +
+                                             '<td class="col2"><form action="/viewELLA"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton">' + post.get('postTitle') + '</button></form></td>' +
                                              '<td class="col3">' + post.get('displayName') + '</td>' +
                                              '<td class="col4"><form action="/deleteELL" method="post"><button type="submit" class="btn btn-danger btn-sm lineUp" name="delete" value="' + str(post.get('_id')) + '"><span class="glyphicon glyphicon-trash"></span>Confirm Delete</button></form>' + str(post.get('dateTime')) + '</td></tr>')
             postList.insert(0, bigString2)
@@ -130,7 +130,7 @@ def render_english_learner_forum():
     else:
         for post in collection.find():
             bigString2 = bigString2 + Markup('<tr><td class="col1">IconWIP</span></td>' +
-                                             '<td class="col2"><form action="/comments"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton">' + post.get('postTitle') + '</button></form></td>' +
+                                             '<td class="col2"><form action="/viewELLA"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton">' + post.get('postTitle') + '</button></form></td>' +
                                              '<td class="col3">' + post.get('displayName') + '</td>' +
                                              '<td class="col4">' + str(post.get('dateTime')) + '</td></tr>')
             postList.insert(0, bigString2)
@@ -157,7 +157,7 @@ def render_special_education_forum():
     if 'github_token' in session: #if session['user_data']['login'] == admin1 or session['user_data']['login'] == admin2 or session['user_data']['login'] == admin3 or session['user_data']['login'] == admin4 or session['user_data']['login'] == admin5 or session['user_data']['login'] == admin6 or session['user_data']['login'] == admin7:
         for post in collection.find():
             bigString1 = bigString1 + Markup ('<tr><td class="col1">IconWIP</span></td>')  
-            bigString1 = bigString1 + Markup('<td class="col2"><form action="/comments"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton">' + post.get('postTitle') + '</button></form></td>')
+            bigString1 = bigString1 + Markup('<td class="col2"><form action="/viewSEU"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton">' + post.get('postTitle') + '</button></form></td>')
             bigString1 = bigString1 + Markup('<td class="col3">' + post.get('parentName') + ' | ' + post.get('studentName+grade') + ' | ' + post.get('parentEmail'))
             if(post.get('anonymous') == "true"):
                 bigString1 = bigString1 + Markup(' | Anonymous Post')
@@ -174,7 +174,7 @@ def render_special_education_forum():
         for post in collection.find():
             if(post.get('approved') == "true"):
                 bigString1 = bigString1 + Markup ('<tr><td class="col1">IconWIP</td>')  
-                bigString1 = bigString1 + Markup('<td class="col2"><form action="/comments"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton">' + post.get('postTitle') + '</button></form></td>')
+                bigString1 = bigString1 + Markup('<td class="col2"><form action="/viewSEU"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton">' + post.get('postTitle') + '</button></form></td>')
                 if(post.get('anonymous') == "true"):
                     bigString1 = bigString1 + Markup('<td class="col3">Anonymous Post</td>')
                 else:
@@ -190,7 +190,7 @@ def render_special_education_forum():
     if 'github_token' in session: #if session['user_data']['login'] == admin1 or session['user_data']['login'] == admin2 or session['user_data']['login'] == admin3 or session['user_data']['login'] == admin4 or session['user_data']['login'] == admin5 or session['user_data']['login'] == admin6 or session['user_data']['login'] == admin7:
         for post in collection.find():
             bigString2 = bigString2 + Markup('<tr><td class="col1">IconWIP</td>' +
-                                             '<td class="col2"><form action="/comments"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton">' + post.get('postTitle') + '</button></form></td>' +
+                                             '<td class="col2"><form action="/viewSEA"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton">' + post.get('postTitle') + '</button></form></td>' +
                                              '<td class="col3">' + post.get('displayName') + '</td>' +
                                              '<td class="col4"><form action="/deleteSE" method="post"><button type="submit" class="btn btn-danger btn-sm lineUp" name="delete" value="' + str(post.get('_id')) + '"><span class="glyphicon glyphicon-trash"></span>Confirm Delete</button></form>' + str(post.get('dateTime')) + '</td></tr>')
             postList.insert(0, bigString2)
@@ -198,7 +198,7 @@ def render_special_education_forum():
     else:
         for post in collection.find():
             bigString2 = bigString2 + Markup('<tr><td class="col1">IconWIP</td>' +
-                                             '<td class="col2"><form action="/comments"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton">' + post.get('postTitle') + '</button></form></td>' +
+                                             '<td class="col2"><form action="/viewSEA"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton">' + post.get('postTitle') + '</button></form></td>' +
                                              '<td class="col3">' + post.get('displayName') + '</td>' +
                                              '<td class="col4">' + str(post.get('dateTime')) + '</td></tr>')
             postList.insert(0, bigString2)
@@ -321,15 +321,30 @@ def renderAdminPostSubmissionSE():
     collection.insert_one(posts)
     return render_special_education_forum() #render_template('specialeducationforum.html') #this will also copy the code from def special_education_forum from above.
 
-@app.route('/submitComment')
+@app.route('/submitComment', methods=['GET', 'POST'])
 def newComment():
     objectIDPost = request.args['thread']
     return render_template('comments.html')
 
-@app.route('/comments')
-def loadTheComments():
+@app.route('/viewSEA')
+def viewSEA():
     objectIDPost = request.args['thread']
-    return render_template('comments.html') #This gets the object ID of the post the user clicked on. Use this function to return the post and its comments using that object ID.
+    return render_template('comments.html')
+
+@app.route('/viewSEU')
+def viewSEU():
+    objectIDPost = request.args['thread']
+    return render_template('comments.html')
+
+@app.route('/viewELLA')
+def viewELLA():
+    objectIDPost = request.args['thread']
+    return render_template('comments.html')
+
+@app.route('/viewELLU')
+def viewELLU():
+    objectIDPost = request.args['thread']
+    return render_template('comments.html')
 
 @app.route('/deleteSE', methods=['GET', 'POST'])
 def deleteSE():
