@@ -102,15 +102,10 @@
           <div class="form-group">
             <label for="comment">Message:</label>
             <!--<textarea class="form-control" rows="5" name="userComment" required></textarea>-->
-            <div id="editor2">
+            <input name="about" type="hidden">
+            <div id="editor-container">
               <p></p>
-              <p><br></p>
             </div>
-            <script>
-              var quill = new Quill('#editor2', {
-                theme: 'snow'
-              });
-            </script>
           </div>
           <br><br>
           <div class="form-group">
