@@ -1,3 +1,4 @@
+$(document).ready(function() {
 var form = document.querySelector('form');
 form.onsubmit = function() {
   // Populate hidden form on submit
@@ -10,3 +11,4 @@ form.onsubmit = function() {
   alert('Open the console to see the submit data!')
   return false;
 };
+});
