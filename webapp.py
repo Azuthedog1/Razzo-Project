@@ -300,6 +300,7 @@ def renderAdminPostSubmissionSE():
 
 @app.route('/submitComment')
 def newComment():
+    request.args['language']
     return render_template('comments.html')
 
 @app.route('/comments')
