@@ -332,7 +332,7 @@ def loadTheComments():
     return render_template('comments.html') #This gets the object ID of the post the user clicked on. Use this function to return the post and its comments using that object ID.
 
 @app.route('/deleteSE', methods=['GET', 'POST'])
-def delete():
+def deleteSE():
     objectIDPost = request.form['delete'] #delete post
     connection_string = os.environ["MONGO_CONNECTION_STRING"]
     db_name = os.environ["MONGO_DBNAME"]
@@ -345,7 +345,7 @@ def delete():
     return render_special_education_forum()
 
 @app.route('/deleteELL', methods=['GET', 'POST'])
-def delete():
+def deleteELL():
     objectIDPost = request.form['delete'] #delete post
     connection_string = os.environ["MONGO_CONNECTION_STRING"]
     db_name = os.environ["MONGO_DBNAME"]
