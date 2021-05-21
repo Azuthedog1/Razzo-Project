@@ -220,7 +220,7 @@ def renderUserPostSubmissionELL():
     #session['userStudent']=request.form['userStudent']
     #session['userEmail']=request.form['userEmail']
     anonymous = "true"
-    if request.form['anonymous']:
+    if request.form['userAnon']:
         anonymous = "true"
     else:
         anonymous = "false"
