@@ -214,12 +214,12 @@ def renderUserPostSubmissionELL():
     client = pymongo.MongoClient(connection_string)
     db = client[db_name]
     today = datetime.now()
-    if(int(today.strftime("%H")) > 12):
-        hour = str(int(today.strftime("%H")) - 12)
-        today = today.strftime("%m/%d/%Y, " + hour + ":%M PM GMT")
+    if(int(today.strftime("%H")) + 5 > 12):
+        hour = str(int(today.strftime("%H")) + 5 - 12)
+        today = today.strftime("%m/%d/%Y, " + hour + ":%M PM PT")
     else:
-        hour = today.strftime("%H")
-        today = today.strftime("%m/%d/%Y, " + hour + ":%M AM GMT")
+        hour = str(int(today.strftime("%H")) + 5)
+        today = today.strftime("%m/%d/%Y, " + hour + ":%M AM PT")
     #session['userTitle']=request.form['userTitle']
     #session['userComment']=request.form['userComment']
     #session['userName']=request.form['userName']
@@ -247,12 +247,12 @@ def renderAdminPostSubmissionELL():
     client = pymongo.MongoClient(connection_string)
     db = client[db_name]
     today = datetime.now()
-    if(int(today.strftime("%H")) > 12):
-        hour = str(int(today.strftime("%H")) - 12)
-        today = today.strftime("%m/%d/%Y, " + hour + ":%M PM GMT")
+    if(int(today.strftime("%H")) + 5 > 12):
+        hour = str(int(today.strftime("%H")) + 5 - 12)
+        today = today.strftime("%m/%d/%Y, " + hour + ":%M PM PT")
     else:
-        hour = today.strftime("%H")
-        today = today.strftime("%m/%d/%Y, " + hour + ":%M AM GMT")
+        hour = str(int(today.strftime("%H")) + 5)
+        today = today.strftime("%m/%d/%Y, " + hour + ":%M AM PT")
     #session['adminTitle']=request.form['adminTitle']
     #session['adminComment']=request.form['adminComment']
     #session['adminName']=request.form['adminName']
@@ -271,12 +271,12 @@ def renderUserPostSubmissionSE():
     client = pymongo.MongoClient(connection_string)
     db = client[db_name]
     today = datetime.now()
-    if(int(today.strftime("%H")) > 12):
-        hour = str(int(today.strftime("%H")) - 12)
-        today = today.strftime("%m/%d/%Y, " + hour + ":%M PM GMT")
+    if(int(today.strftime("%H")) + 5 > 12):
+        hour = str(int(today.strftime("%H")) + 5 - 12)
+        today = today.strftime("%m/%d/%Y, " + hour + ":%M PM PT")
     else:
-        hour = today.strftime("%H")
-        today = today.strftime("%m/%d/%Y, " + hour + ":%M AM GMT")
+        hour = str(int(today.strftime("%H")) + 5)
+        today = today.strftime("%m/%d/%Y, " + hour + ":%M AM PT")
     #session['userTitle']=request.form['userTitle']
     #session['userComment']=request.form['userComment']
     #session['userName']=request.form['userName']
@@ -304,12 +304,12 @@ def renderAdminPostSubmissionSE():
     client = pymongo.MongoClient(connection_string)
     db = client[db_name]
     today = datetime.now()
-    if(int(today.strftime("%H")) > 12):
-        hour = str(int(today.strftime("%H")) - 12)
-        today = today.strftime("%m/%d/%Y, " + hour + ":%M PM GMT")
+    if(int(today.strftime("%H")) + 5 > 12):
+        hour = str(int(today.strftime("%H")) + 5 - 12)
+        today = today.strftime("%m/%d/%Y, " + hour + ":%M PM PT")
     else:
-        hour = today.strftime("%H")
-        today = today.strftime("%m/%d/%Y, " + hour + ":%M AM GMT")
+        hour = str(int(today.strftime("%H")) + 5)
+        today = today.strftime("%m/%d/%Y, " + hour + ":%M AM PT")
     #session['adminTitle']=request.form['adminTitle']
     #session['adminComment']=request.form['adminComment']
     #session['adminName']=request.form['adminName']
