@@ -90,10 +90,7 @@ def render_english_learner_forum():
         for post in collection.find():
             bigString1 = bigString1 + Markup ('<tr><td class="col1">IconWIP</td>')  
             bigString1 = bigString1 + Markup('<td class="col2"><form action="/viewELLU"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton">' + post.get('postTitle') + '</button></form></td>')
-            bigString1 = bigString1 + Markup('<td class="col3">' + post.get('parentName') + ' | ' + post.get('studentName+grade') + ' | ' + post.get('parentEmail'))
-            if(post.get('anonymous') == True):
-                bigString1 = bigString1 + Markup(' | Anonymous Post')
-            bigString1 = bigString1 + Markup('</td>')
+            bigString1 = bigString1 + Markup('<td class="col3">' + post.get('parentName') + ' | ' + post.get('studentName+grade') + ' | ' + post.get('parentEmail') + '</td>')
             bigString1 = bigString1 + Markup('<td class="col4"><form action="/deleteELL" method="post"><button type="submit" class="btn btn-danger btn-sm" name="delete" value="' + str(post.get('_id')) + '"><span class="glyphicon glyphicon-trash"></span>Confirm Delete</button></form>')
             if(post.get('approved') == "false"):
                 bigString1 = bigString1 + Markup('<form action="/vetELL" method="post"><button type="submit" class="btn btn-warning btn-sm" name="vet" value="' + str(post.get('_id'))+ '">' + '<span class="glyphicon glyphicon-plus"></span>Vet')
@@ -107,7 +104,7 @@ def render_english_learner_forum():
             if(post.get('approved') == "true"):
                 bigString1 = bigString1 + Markup ('<tr><td class="col1">IconWIP</span></td>')  
                 bigString1 = bigString1 + Markup('<td class="col2"><form action="/viewELLU"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton">' + post.get('postTitle') + '</button></form></td>')
-                if(post.get('anonymous') == True):
+                if(post.get('anonymous') == "true"):
                     bigString1 = bigString1 + Markup('<td class="col3">Anonymous Post</td>')
                 else:
                     bigString1 = bigString1 + Markup('<td class="col3">' + post.get('parentName') + '</td>')
@@ -158,10 +155,7 @@ def render_special_education_forum():
         for post in collection.find():
             bigString1 = bigString1 + Markup ('<tr><td class="col1">IconWIP</span></td>')  
             bigString1 = bigString1 + Markup('<td class="col2"><form action="/viewSEU"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton">' + post.get('postTitle') + '</button></form></td>')
-            bigString1 = bigString1 + Markup('<td class="col3">' + post.get('parentName') + ' | ' + post.get('studentName+grade') + ' | ' + post.get('parentEmail'))
-            if(post.get('anonymous') == True):
-                bigString1 = bigString1 + Markup(' | Anonymous Post')
-            bigString1 = bigString1 + Markup('</td>')
+            bigString1 = bigString1 + Markup('<td class="col3">' + post.get('parentName') + ' | ' + post.get('studentName+grade') + ' | ' + post.get('parentEmail') + '</td>')
             bigString1 = bigString1 + Markup('<td class="col4"><form action="/deleteSE" method="post"><button type="submit" class="btn btn-danger btn-sm lineUp" name="delete" value="' + str(post.get('_id')) + '"><span class="glyphicon glyphicon-trash"></span>Confirm Delete</button></form>')
             if(post.get('approved') == "false"):
                 bigString1 = bigString1 + Markup('<form action="/vetSE" method="post"><button type="submit" class="btn btn-warning btn-sm" name="vet" value="' + str(post.get('_id'))+ '">' + '<span class="glyphicon glyphicon-plus"></span>Vet')
@@ -175,7 +169,7 @@ def render_special_education_forum():
             if(post.get('approved') == "true"):
                 bigString1 = bigString1 + Markup ('<tr><td class="col1">IconWIP</td>')  
                 bigString1 = bigString1 + Markup('<td class="col2"><form action="/viewSEU"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton">' + post.get('postTitle') + '</button></form></td>')
-                if(post.get('anonymous') == True):
+                if(post.get('anonymous') == "true"):
                     bigString1 = bigString1 + Markup('<td class="col3">Anonymous Post</td>')
                 else:
                     bigString1 = bigString1 + Markup('<td class="col3">' + post.get('parentName') + '</td>')
@@ -225,11 +219,11 @@ def renderUserPostSubmissionELL():
     #session['userName']=request.form['userName']
     #session['userStudent']=request.form['userStudent']
     #session['userEmail']=request.form['userEmail']
-    anonymous = True
+    anonymous = "true"
     if request.form.getlist('anonymous'):
-        anonymous = True
+        anonymous = "true"
     else:
-        anonymous = False
+        anonymous = "false"
     title = request.form['userTitle']
     message = Markup(request.form['userComment'])
     name = request.form['userName']
@@ -282,11 +276,11 @@ def renderUserPostSubmissionSE():
     #session['userName']=request.form['userName']
     #session['userStudent']=request.form['userStudent']
     #session['userEmail']=request.form['userEmail']
-    anonymous = True
+    anonymous = "true"
     if request.form.getlist('anonymous'):
-        anonymous = True
+        anonymous = "true"
     else:
-        anonymous = False
+        anonymous = "false'
     title = request.form['userTitle']
     message = Markup(request.form['userComment'])
     name = request.form['userName']
@@ -373,7 +367,7 @@ def viewELLU():
         studentNameGrade = x.get('studentName+grade')
         parentEmail = x.get('parentEmail')
     else:
-        if x.get('anonymous') == false:
+        if x.get('anonymous') == "false":
             parentName = x.get('parentName')
         else:
             parentName = "Anonymous Post"
