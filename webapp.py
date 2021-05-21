@@ -204,7 +204,7 @@ def render_special_education_forum():
             bigString2 = ""
     for item in postList:
         bigString2 = bigString2 + item
-    return render_template('specialeducationforum.html', SEUPosts = bigString1)
+    return render_template('specialeducationforum.html', SEUPosts = bigString1, SEAPosts = bigString2)
 
 @app.route('/userSubmitPostELL', methods=['GET','POST'])
 def renderUserPostSubmissionELL():
