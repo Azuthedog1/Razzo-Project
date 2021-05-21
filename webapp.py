@@ -8,6 +8,7 @@ import os
 import sys
 import pymongo
 from datetime import datetime
+import pytz
 
 app = Flask(__name__)
 
@@ -213,9 +214,10 @@ def renderUserPostSubmissionELL():
     db_name = os.environ["MONGO_DBNAME"]
     client = pymongo.MongoClient(connection_string)
     db = client[db_name]
-    today = datetime.now()
-    if(int(today.strftime("%H")) + 5 > 12):
-        hour = str(int(today.strftime("%H")) + 5 - 12)
+    tz_LA = pytz.timezone('America/Los_Angeles')
+    today = datetime.now(tz_LA)
+    if((int(today.strftime("%H")) > 12):
+        hour = str(int(today.strftime("%H") - 12)
         today = today.strftime("%m/%d/%Y, " + hour + ":%M AM PT")
     else:
         hour = str(int(today.strftime("%H")) + 5)
@@ -271,8 +273,10 @@ def renderUserPostSubmissionSE():
     client = pymongo.MongoClient(connection_string)
     db = client[db_name]
     today = datetime.now()
-    if(int(today.strftime("%H")) + 5 > 12):
-        hour = str(int(today.strftime("%H")) + 5 - 12)
+    tz_LA = pytz.timezone('America/Los_Angeles')
+    today = datetime.now(tz_LA)
+    if((int(today.strftime("%H")) > 12):
+        hour = str(int(today.strftime("%H") - 12)
         today = today.strftime("%m/%d/%Y, " + hour + ":%M AM PT")
     else:
         hour = str(int(today.strftime("%H")) + 5)
