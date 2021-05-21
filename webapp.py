@@ -94,11 +94,11 @@ def render_english_learner_forum():
             if(post.get('anonymous') == "true"):
                 bigString1 = bigString1 + Markup(' | Anonymous Post')
             bigString1 = bigString1 + Markup('</td>')
-            bigString1 = bigString1 + Markup('<td class="col4"><form action="/delete" method="post"><button type="submit" class="btn btn-danger btn-sm lineUp" name="delete" value="' + str(post.get('_id')) + '">Confirm Delete</button></form><form action="/vet" method="post"><button type="submit" class="btn btn-warning btn-sm lineUp" name="vet" value="' + str(post.get('_id')) + '">')
+            bigString1 = bigString1 + Markup('<td class="col4"><form action="/delete" method="post"><button type="submit" class="btn btn-danger btn-sm" name="delete" value="' + str(post.get('_id')) + '">Confirm Delete</button></form>)
             if(post.get('approved') == "false"):
-                bigString1 = bigString1 + Markup('Vet')
+                bigString1 = bigString1 + Markup('<form action="/vetELL" method="post"><button type="submit" class="btn btn-warning btn-sm" name="vet" value="' + str(post.get('_id'))+ '">' + 'Vet')
             else:
-                bigString1 = bigString1 + Markup('Unvet')
+                bigString1 = bigString1 + Markup('<form action="/unvetELL" method="post"><button type="submit" class="btn btn-warning btn-sm" name="vet" value="' + str(post.get('_id'))+ '">' + 'Unvet')
             bigString1 = bigString1 + Markup('</button></form>' + str(post.get('dateTime')) + '</td></tr>')
             postList.insert(0, bigString1)
             bigString1 = ""
@@ -139,9 +139,9 @@ def render_english_learner_forum():
         bigString2 = bigString2 + item
     return render_template('englishlearnerforum.html', ELLUPosts = bigString1, ELLAPosts = bigString2)
 
-@app.route('/adminLog')
-def render_admin_log():
-    return render_template('adminlog.html')
+@app.route('/pendingQuestions')
+def render_pending_Questions():
+    return render_template('pendingQuestions.html')
 
 @app.route('/specialeducationforum')
 def render_special_education_forum():
@@ -162,11 +162,11 @@ def render_special_education_forum():
             if(post.get('anonymous') == "true"):
                 bigString1 = bigString1 + Markup(' | Anonymous Post')
             bigString1 = bigString1 + Markup('</td>')
-            bigString1 = bigString1 + Markup('<td class="col4"><form action="/delete" method="post"><button type="submit" class="btn btn-danger btn-sm lineUp" name="delete" value="' + str(post.get('_id')) + '">Confirm Delete</button></form><form action="/vet" method="post"><button type="submit" class="btn btn-warning btn-sm lineUp" name="vet" value="' + str(post.get('_id')) + '">')
+            bigString1 = bigString1 + Markup('<td class="col4"><form action="/delete" method="post"><button type="submit" class="btn btn-danger btn-sm lineUp" name="delete" value="' + str(post.get('_id')) + '">Confirm Delete</button></form>)
             if(post.get('approved') == "false"):
-                bigString1 = bigString1 + Markup('Vet')
+                bigString1 = bigString1 + Markup('<form action="/vetSE" method="post"><button type="submit" class="btn btn-warning btn-sm" name="vet" value="' + str(post.get('_id'))+ '">' + 'Vet')
             else:
-                bigString1 = bigString1 + Markup('Unvet')
+                bigString1 = bigString1 + Markup('<form action="/unvetSE" method="post"><button type="submit" class="btn btn-warning btn-sm" name="vet" value="' + str(post.get('_id'))+ '">' + 'Unvet')
             bigString1 = bigString1 + Markup('</button></form>' + str(post.get('dateTime')) + '</td></tr>')
             postList.insert(0, bigString1)
             bigString1 = ""
@@ -216,10 +216,10 @@ def renderUserPostSubmissionELL():
     today = datetime.now()
     if(int(today.strftime("%H")) > 12):
         hour = str(int(today.strftime("%H")) - 12)
-        today = today.strftime("%m/%d/%Y, " + hour + ":%M PM")
+        today = today.strftime("%m/%d/%Y, " + hour + ":%M PM GMT")
     else:
         hour = today.strftime("%H")
-        today = today.strftime("%m/%d/%Y, " + hour + ":%M AM")
+        today = today.strftime("%m/%d/%Y, " + hour + ":%M AM GMT")
     #session['userTitle']=request.form['userTitle']
     #session['userComment']=request.form['userComment']
     #session['userName']=request.form['userName']
@@ -249,10 +249,10 @@ def renderAdminPostSubmissionELL():
     today = datetime.now()
     if(int(today.strftime("%H")) > 12):
         hour = str(int(today.strftime("%H")) - 12)
-        today = today.strftime("%m/%d/%Y, " + hour + ":%M PM")
+        today = today.strftime("%m/%d/%Y, " + hour + ":%M PM GMT")
     else:
         hour = today.strftime("%H")
-        today = today.strftime("%m/%d/%Y, " + hour + ":%M AM")
+        today = today.strftime("%m/%d/%Y, " + hour + ":%M AM GMT")
     #session['adminTitle']=request.form['adminTitle']
     #session['adminComment']=request.form['adminComment']
     #session['adminName']=request.form['adminName']
@@ -273,10 +273,10 @@ def renderUserPostSubmissionSE():
     today = datetime.now()
     if(int(today.strftime("%H")) > 12):
         hour = str(int(today.strftime("%H")) - 12)
-        today = today.strftime("%m/%d/%Y, " + hour + ":%M PM")
+        today = today.strftime("%m/%d/%Y, " + hour + ":%M PM GMT")
     else:
         hour = today.strftime("%H")
-        today = today.strftime("%m/%d/%Y, " + hour + ":%M AM")
+        today = today.strftime("%m/%d/%Y, " + hour + ":%M AM GMT")
     #session['userTitle']=request.form['userTitle']
     #session['userComment']=request.form['userComment']
     #session['userName']=request.form['userName']
@@ -306,10 +306,10 @@ def renderAdminPostSubmissionSE():
     today = datetime.now()
     if(int(today.strftime("%H")) > 12):
         hour = str(int(today.strftime("%H")) - 12)
-        today = today.strftime("%m/%d/%Y, " + hour + ":%M PM")
+        today = today.strftime("%m/%d/%Y, " + hour + ":%M PM GMT")
     else:
         hour = today.strftime("%H")
-        today = today.strftime("%m/%d/%Y, " + hour + ":%M AM")
+        today = today.strftime("%m/%d/%Y, " + hour + ":%M AM GMT")
     #session['adminTitle']=request.form['adminTitle']
     #session['adminComment']=request.form['adminComment']
     #session['adminName']=request.form['adminName']
@@ -348,10 +348,53 @@ def delete():
     collection.delete_one({'_id': ObjectId(objectIDPost)})
     return render_information()
 
-@app.route('/vet', methods=['GET', 'POST'])
-def vet():
+@app.route('/vetELL', methods=['GET', 'POST'])
+def vetELL():
     objectIDPost = request.form['vet'] #vet and unvet posts
-    
+    connection_string = os.environ["MONGO_CONNECTION_STRING"]
+    db_name = os.environ["MONGO_DBNAME"]
+    client = pymongo.MongoClient(connection_string)
+    db = client[db_name]
+    collection = db['ELLU']
+    collection.find_one_and_update({"_id": ObjectId(objectIDPost)},
+                                   {"$set": {"approved": "true"}})
+    return render_english_learner_forum()
+                                             
+@app.route('/unvetELL', methods=['GET', 'POST'])
+def unvetELL():
+    objectIDPost = request.form['vet'] #vet and unvet posts
+    connection_string = os.environ["MONGO_CONNECTION_STRING"]
+    db_name = os.environ["MONGO_DBNAME"]
+    client = pymongo.MongoClient(connection_string)
+    db = client[db_name]
+    collection = db['ELLU']
+    collection.find_one_and_update({"_id": ObjectId(objectIDPost)},
+                                   {"$set": {"approved": "false"}})
+    return render_english_learner_forum()
+                                             
+@app.route('/vetSE', methods=['GET', 'POST'])
+def vetSE():
+    objectIDPost = request.form['vet'] #vet and unvet posts
+    connection_string = os.environ["MONGO_CONNECTION_STRING"]
+    db_name = os.environ["MONGO_DBNAME"]
+    client = pymongo.MongoClient(connection_string)
+    db = client[db_name]       
+    collection = db['SEU']
+    collection.find_one_and_update({"_id": ObjectId(objectIDPost)},
+                                   {"$set": {"approved": "true"}})
+    return render_special_education_forum()
+                                             
+@app.route('/unvetSE', methods=['GET', 'POST'])
+def unvetSE():
+    objectIDPost = request.form['vet'] #vet and unvet posts
+    connection_string = os.environ["MONGO_CONNECTION_STRING"]
+    db_name = os.environ["MONGO_DBNAME"]
+    client = pymongo.MongoClient(connection_string)
+    db = client[db_name]
+    collection = db['SEU']
+    collection.find_one_and_update({"_id": ObjectId(objectIDPost)},
+                                   {"$set": {"approved": "false"}})
+    return render_special_education_forum()
 
 #make sure the jinja variables use Markup 
 @github.tokengetter
