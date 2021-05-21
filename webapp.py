@@ -225,11 +225,11 @@ def renderUserPostSubmissionELL():
     #session['userName']=request.form['userName']
     #session['userStudent']=request.form['userStudent']
     #session['userEmail']=request.form['userEmail']
-    anonymous = "true"
-    if request.form.getlist('userAnon'):
-        anonymous = "true"
-    else:
-        anonymous = "false"
+    anonymous = request.form('anon')
+    #if request.form('anon'): #getList
+    #    anonymous = "true"
+    #else:
+    #    anonymous = "false"
     title = request.form['userTitle']
     message = Markup(request.form['userComment'])
     name = request.form['userName']
@@ -282,11 +282,11 @@ def renderUserPostSubmissionSE():
     #session['userName']=request.form['userName']
     #session['userStudent']=request.form['userStudent']
     #session['userEmail']=request.form['userEmail']
-    anonymous = "true"
-    if request.form.getlist('userAnon'): #getList
-        anonymous = "true"
-    else:
-        anonymous = "false"
+    anonymous = request.form('anon')
+    #if request.form('anon'): #getList
+    #    anonymous = "true"
+    #else:
+    #    anonymous = "false"
     title = request.form['userTitle']
     message = Markup(request.form['userComment'])
     name = request.form['userName']
