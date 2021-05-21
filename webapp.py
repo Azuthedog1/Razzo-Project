@@ -130,10 +130,11 @@ def render_english_learner_forum():
                 bigString2 = ""
     except:
         for post in collection.find():
-            bigString2 = bigString2 + Markup('<tr><td class="col1">IconWIP</td>' +
-                                             '<td class="col2"><form action="/comments"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton">' + post.get('postTitle') + '</button></form></td>' +
-                                             '<td class="col3">' + post.get('displayName') + '</td>' +
-                                             '<td class="col4"><span>' + str(post.get('dateTime')) + '</span></td></tr>')
+            if(post.get('approved') == "true"):
+                bigString2 = bigString2 + Markup('<tr><td class="col1">IconWIP</td>' +
+                                                '<td class="col2"><form action="/comments"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton">' + post.get('postTitle') + '</button></form></td>' +
+                                                '<td class="col3">' + post.get('displayName') + '</td>' +
+                                                '<td class="col4"><span>' + str(post.get('dateTime')) + '</span></td></tr>')
             postList.insert(0, bigString2)
             bigString2 = ""
     for item in postList:
@@ -173,7 +174,7 @@ def render_special_education_forum():
                 bigString1 = ""
     except:
         for post in collection.find():
-            if 'github_token' in session:
+            if(post.get('approved') == "true"):
                 bigString1 = bigString1 + Markup ('<tr><td class="col1">IconWIP</td>')  
                 bigString1 = bigString1 + Markup('<td class="col2"><form action="/comments"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton">' + post.get('postTitle') + '</button></form></td>')
                 if(post.get('anonymous') == "true"):
@@ -198,10 +199,11 @@ def render_special_education_forum():
                 bigString2 = ""
     except:
         for post in collection.find():
-            bigString2 = bigString2 + Markup('<tr><td class="col1">IconWIP</td>' +
-                                             '<td class="col2"><form action="/comments"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton">' + post.get('postTitle') + '</button></form></td>' +
-                                             '<td class="col3">' + post.get('displayName') + '</td>' +
-                                             '<td class="col4"><span>' + str(post.get('dateTime')) + '</span></td></tr>')
+            if(post.get('approved') == "true"):
+                bigString2 = bigString2 + Markup('<tr><td class="col1">IconWIP</td>' +
+                                                '<td class="col2"><form action="/comments"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton">' + post.get('postTitle') + '</button></form></td>' +
+                                                '<td class="col3">' + post.get('displayName') + '</td>' +
+                                                '<td class="col4"><span>' + str(post.get('dateTime')) + '</span></td></tr>')
             postList.insert(0, bigString2)
             bigString2 = ""
     for item in postList:
