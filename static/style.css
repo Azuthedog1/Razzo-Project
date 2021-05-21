@@ -135,6 +135,12 @@ tr {
   display: none;
 }
 
+.myInputAdmin {
+  margin-left: 10px;
+}
+.myInputUser {
+  margin-left: 10px;
+}
 .navbar-default {
   background-color: #ffffff;
   border: none;
