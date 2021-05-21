@@ -334,7 +334,24 @@ def viewSEA():
     client = pymongo.MongoClient(connection_string)
     db = client[db_name]
     collection = db['SEA']
-    return render_template('comments.html')
+    x = collection.find_one({'_id': ObjectId(objectIDPost)})
+    postTitle = x.get('postTitle')
+    postContent = x.get('postContent')
+    dateTime = x.get('dateTime')
+    if 'github_token' in session:
+        parentName = x.get('parentName')
+        studentNameGrade = x.get('studentName+grade')
+        parentEmail = x.get('parentEmail')
+        if parentEmail == "":
+            parentEmail = "Email not provided"
+    else:
+        if x.get('anonymous') == "false":
+            parentName = x.get('parentName')
+        else:
+            parentName = "Anonymous Post"
+        studentNameGrade = ""
+        parentEmail = ""
+    return render_template('comments.html', title = postTitle, name = parentName, student = studentNameGrade, email = parentEmail, time = dateTime, content = postContent)
 
 @app.route('/viewSEU')
 def viewSEU():
@@ -344,7 +361,24 @@ def viewSEU():
     client = pymongo.MongoClient(connection_string)
     db = client[db_name]
     collection = db['SEU']
-    return render_template('comments.html')
+    x = collection.find_one({'_id': ObjectId(objectIDPost)})
+    postTitle = x.get('postTitle')
+    postContent = x.get('postContent')
+    dateTime = x.get('dateTime')
+    if 'github_token' in session:
+        parentName = x.get('parentName')
+        studentNameGrade = x.get('studentName+grade')
+        parentEmail = x.get('parentEmail')
+        if parentEmail == "":
+            parentEmail = "Email not provided"
+    else:
+        if x.get('anonymous') == "false":
+            parentName = x.get('parentName')
+        else:
+            parentName = "Anonymous Post"
+        studentNameGrade = ""
+        parentEmail = ""
+    return render_template('comments.html', title = postTitle, name = parentName, student = studentNameGrade, email = parentEmail, time = dateTime, content = postContent)
 
 @app.route('/viewELLA')
 def viewELLA():
@@ -354,7 +388,24 @@ def viewELLA():
     client = pymongo.MongoClient(connection_string)
     db = client[db_name]
     collection = db['ELLA']
-    return render_template('comments.html')
+    x = collection.find_one({'_id': ObjectId(objectIDPost)})
+    postTitle = x.get('postTitle')
+    postContent = x.get('postContent')
+    dateTime = x.get('dateTime')
+    if 'github_token' in session:
+        parentName = x.get('parentName')
+        studentNameGrade = x.get('studentName+grade')
+        parentEmail = x.get('parentEmail')
+        if parentEmail == "":
+            parentEmail = "Email not provided"
+    else:
+        if x.get('anonymous') == "false":
+            parentName = x.get('parentName')
+        else:
+            parentName = "Anonymous Post"
+        studentNameGrade = ""
+        parentEmail = ""
+    return render_template('comments.html', title = postTitle, name = parentName, student = studentNameGrade, email = parentEmail, time = dateTime, content = postContent)
 
 @app.route('/viewELLU')
 def viewELLU():
