@@ -233,7 +233,7 @@ def renderUserPostSubmissionELL():
     collection = db['ELLU']
     posts = {"comments": {"comment4":"comment 4", "comment5": "comment 5"},"postTitle":title,"postContent":message, "parentName": name, "studentName+grade": student, "parentEmail": email, "anonymous": anonymous,"dateTime": today, "approved":"false"}
     collection.insert_one(posts)
-    return render_template('englishlearnerforum.html')
+    return render_english_learner_forum() #render_template('englishlearnerforum.html')
 
 @app.route('/adminSubmitPostELL', methods=['GET', 'POST']) #Same as above, except no name, student name and grade, no anonymous, etc.
 def renderAdminPostSubmissionELL():
@@ -251,7 +251,7 @@ def renderAdminPostSubmissionELL():
     collection = db['ELLA']
     posts = {"comments": {"comment4":"comment 4", "comment5": "comment 5"},"postTitle":title,"postContent":message,"displayName": name, "dateTime": today}#put all info here using variables
     collection.insert_one(posts)
-    return render_template('englishlearnerforum.html') #this will also copy the code from def render_english_learner_forum from above.
+    return render_english_learner_forum() #render_template('englishlearnerforum.html') #this will also copy the code from def render_english_learner_forum from above.
 
 @app.route('/userSubmitPostSE', methods=['GET', 'POST']) #for the other forum
 def renderUserPostSubmissionSE():
@@ -278,7 +278,7 @@ def renderUserPostSubmissionSE():
     collection = db['SEU']
     posts = {"comments": {"comment4":"comment 4", "comment5": "comment 5"},"postTitle":title,"postContent":message, "parentName": name, "studentName+grade": student, "parentEmail": email, "anonymous": anonymous,"dateTime": today, "approved":"false"}
     collection.insert_one(posts)
-    return render_template('specialeducationforum.html') #this will also copy the code from def special_education_forum from above.
+    return render_special_education_forum() #render_template('specialeducationforum.html') #this will also copy the code from def special_education_forum from above.
 
 @app.route('/adminSubmitPostSE', methods=['GET', 'POST'])
 def renderAdminPostSubmissionSE():
@@ -296,7 +296,7 @@ def renderAdminPostSubmissionSE():
     collection = db['SEA']
     posts = {"comments": {"comment4":"comment 4", "comment5": "comment 5"},"postTitle":title,"postContent":message,"displayName": name, "dateTime": today}#put all info here using variables
     collection.insert_one(posts)
-    return render_template('specialeducationforum.html') #this will also copy the code from def special_education_forum from above.
+    return render_special_education_forum() #render_template('specialeducationforum.html') #this will also copy the code from def special_education_forum from above.
 
 @app.route('/submitComment')
 def newComment():
