@@ -216,10 +216,10 @@ def renderUserPostSubmissionELL():
     today = datetime.now()
     if(int(today.strftime("%H")) + 5 > 12):
         hour = str(int(today.strftime("%H")) + 5 - 12)
-        today = today.strftime("%m/%d/%Y, " + hour + ":%M PM PT")
+        today = today.strftime("%m/%d/%Y, " + hour + ":%M AM PT")
     else:
         hour = str(int(today.strftime("%H")) + 5)
-        today = today.strftime("%m/%d/%Y, " + hour + ":%M AM PT")
+        today = today.strftime("%m/%d/%Y, " + hour + ":%M PM PT")
     #session['userTitle']=request.form['userTitle']
     #session['userComment']=request.form['userComment']
     #session['userName']=request.form['userName']
@@ -249,10 +249,10 @@ def renderAdminPostSubmissionELL():
     today = datetime.now()
     if(int(today.strftime("%H")) + 5 > 12):
         hour = str(int(today.strftime("%H")) + 5 - 12)
-        today = today.strftime("%m/%d/%Y, " + hour + ":%M PM PT")
+        today = today.strftime("%m/%d/%Y, " + hour + ":%M AM PT")
     else:
         hour = str(int(today.strftime("%H")) + 5)
-        today = today.strftime("%m/%d/%Y, " + hour + ":%M AM PT")
+        today = today.strftime("%m/%d/%Y, " + hour + ":%M PM PT")
     #session['adminTitle']=request.form['adminTitle']
     #session['adminComment']=request.form['adminComment']
     #session['adminName']=request.form['adminName']
@@ -273,10 +273,10 @@ def renderUserPostSubmissionSE():
     today = datetime.now()
     if(int(today.strftime("%H")) + 5 > 12):
         hour = str(int(today.strftime("%H")) + 5 - 12)
-        today = today.strftime("%m/%d/%Y, " + hour + ":%M PM PT")
+        today = today.strftime("%m/%d/%Y, " + hour + ":%M AM PT")
     else:
         hour = str(int(today.strftime("%H")) + 5)
-        today = today.strftime("%m/%d/%Y, " + hour + ":%M AM PT")
+        today = today.strftime("%m/%d/%Y, " + hour + ":%M PM PT")
     #session['userTitle']=request.form['userTitle']
     #session['userComment']=request.form['userComment']
     #session['userName']=request.form['userName']
@@ -306,10 +306,10 @@ def renderAdminPostSubmissionSE():
     today = datetime.now()
     if(int(today.strftime("%H")) + 5 > 12):
         hour = str(int(today.strftime("%H")) + 5 - 12)
-        today = today.strftime("%m/%d/%Y, " + hour + ":%M PM PT")
+        today = today.strftime("%m/%d/%Y, " + hour + ":%M AM PT")
     else:
         hour = str(int(today.strftime("%H")) + 5)
-        today = today.strftime("%m/%d/%Y, " + hour + ":%M AM PT")
+        today = today.strftime("%m/%d/%Y, " + hour + ":%M PM PT")
     #session['adminTitle']=request.form['adminTitle']
     #session['adminComment']=request.form['adminComment']
     #session['adminName']=request.form['adminName']
