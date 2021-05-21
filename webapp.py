@@ -319,7 +319,7 @@ def renderAdminPostSubmissionSE():
     collection = db['SEA']
     posts = {"comments": {"comment4":"comment 4", "comment5": "comment 5"},"postTitle":title,"postContent":message,"displayName": name, "dateTime": today}#put all info here using variables
     collection.insert_one(posts)
-    return render_special_education_forum() #render_template('specialeducationforum.html') #this will also copy the code from def special_education_forum from above.
+    return render_special_education_forum()
 
 @app.route('/submitComment', methods=['GET', 'POST'])
 def newComment():
@@ -329,21 +329,41 @@ def newComment():
 @app.route('/viewSEA')
 def viewSEA():
     objectIDPost = request.args['thread']
+    connection_string = os.environ["MONGO_CONNECTION_STRING"]
+    db_name = os.environ["MONGO_DBNAME"]
+    client = pymongo.MongoClient(connection_string)
+    db = client[db_name]
+    collection = db['SEA']
     return render_template('comments.html')
 
 @app.route('/viewSEU')
 def viewSEU():
     objectIDPost = request.args['thread']
+    connection_string = os.environ["MONGO_CONNECTION_STRING"]
+    db_name = os.environ["MONGO_DBNAME"]
+    client = pymongo.MongoClient(connection_string)
+    db = client[db_name]
+    collection = db['SEU']
     return render_template('comments.html')
 
 @app.route('/viewELLA')
 def viewELLA():
     objectIDPost = request.args['thread']
+    connection_string = os.environ["MONGO_CONNECTION_STRING"]
+    db_name = os.environ["MONGO_DBNAME"]
+    client = pymongo.MongoClient(connection_string)
+    db = client[db_name]
+    collection = db['ELLA']
     return render_template('comments.html')
 
 @app.route('/viewELLU')
 def viewELLU():
     objectIDPost = request.args['thread']
+    connection_string = os.environ["MONGO_CONNECTION_STRING"]
+    db_name = os.environ["MONGO_DBNAME"]
+    client = pymongo.MongoClient(connection_string)
+    db = client[db_name]
+    collection = db['ELLU']
     return render_template('comments.html')
 
 @app.route('/deleteSE', methods=['GET', 'POST'])
