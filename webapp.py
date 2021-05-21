@@ -93,7 +93,7 @@ def render_english_learner_forum():
                 bigString1 = bigString1 + Markup('<td class="col2"><form action="/comments"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton">' + post.get('postTitle') + '</button></form></td>')
                 bigString1 = bigString1 + Markup('<td class="col3">' + post.get('parentName') + ' | ' + post.get('studentName+grade') + ' | ' + post.get('parentEmail'))
                 if(post.get('anonymous') == "true"):
-                    bigString1 = bigString1 + Markup(' | Anonymous')
+                    bigString1 = bigString1 + Markup(' | Anonymous Post')
                 bigString1 = bigString1 + Markup('</td>')
                 bigString1 = bigString1 + Markup('<td class="col4"><form action="/delete" method="post"><button type="submit" class="btn btn-danger btn-sm lineUp" name="delete" value="' + str(post.get('_id')) + '">Confirm Delete</button></form><form action="/vet" method="post"><button type="submit" class="btn btn-warning btn-sm lineUp" name="vet" value="' + str(post.get('_id')) + '">')
                 if(post.get('approved') == "false"):
@@ -109,7 +109,7 @@ def render_english_learner_forum():
                 bigString1 = bigString1 + Markup ('<tr><td class="col1">IconWIP</td>')  
                 bigString1 = bigString1 + Markup('<td class="col2"><form action="/comments"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton">' + post.get('postTitle') + '</button></form></td>')
                 if(post.get('anonymous') == "true"):
-                    bigString1 = bigString1 + Markup('<td class="col3">(Anonymous)</td>')
+                    bigString1 = bigString1 + Markup('<td class="col3">Anonymous Post</td>')
                 else:
                     bigString1 = bigString1 + Markup('<td class="col3">' + post.get('parentName') + '</td>')
                 bigString1 = bigString1 + Markup('<td class="col4">' + str(post.get('dateTime')) + '</td></tr>')
@@ -161,7 +161,7 @@ def render_special_education_forum():
                 bigString1 = bigString1 + Markup('<td class="col2"><form action="/comments"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton">' + post.get('postTitle') + '</button></form></td>')
                 bigString1 = bigString1 + Markup('<td class="col3">' + post.get('parentName') + ' | ' + post.get('studentName+grade') + ' | ' + post.get('parentEmail'))
                 if(post.get('anonymous') == "true"):
-                    bigString1 = bigString1 + Markup(' | Anonymous')
+                    bigString1 = bigString1 + Markup(' | Anonymous Post')
                 bigString1 = bigString1 + Markup('</td>')
                 bigString1 = bigString1 + Markup('<td class="col4"><form action="/delete" method="post"><button type="submit" class="btn btn-danger btn-sm lineUp" name="delete" value="' + str(post.get('_id')) + '">Confirm Delete</button></form><form action="/vet" method="post"><button type="submit" class="btn btn-warning btn-sm lineUp" name="vet" value="' + str(post.get('_id')) + '">')
                 if(post.get('approved') == "false"):
@@ -177,7 +177,7 @@ def render_special_education_forum():
                 bigString1 = bigString1 + Markup ('<tr><td class="col1">IconWIP</td>')  
                 bigString1 = bigString1 + Markup('<td class="col2"><form action="/comments"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton">' + post.get('postTitle') + '</button></form></td>')
                 if(post.get('anonymous') == "true"):
-                    bigString1 = bigString1 + Markup('<td class="col3">(Anonymous)</td>')
+                    bigString1 = bigString1 + Markup('<td class="col3">Anonymous Post</td>')
                 else:
                     bigString1 = bigString1 + Markup('<td class="col3">' + post.get('parentName') + '</td>')
                 bigString1 = bigString1 + Markup('<td class="col4">' + str(post.get('dateTime')) + '</td></tr>')
