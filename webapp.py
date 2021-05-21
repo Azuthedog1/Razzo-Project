@@ -58,7 +58,7 @@ def logout():
 def authorized():
     resp = github.authorized_response()
     if resp is None:
-        #session.clear()
+        session.clear()
         message = 'Access denied: reason=' + request.args['error'] + ' error=' + request.args['error_description'] + ' full=' + pprint.pformat(request.args)      
     else:
         try:
@@ -67,10 +67,10 @@ def authorized():
             if session['user_data']['login'] == admin1 or session['user_data']['login'] == admin2 or session['user_data']['login'] == admin3 or session['user_data']['login'] == admin4 or session['user_data']['login'] == admin5 or session['user_data']['login'] == admin6 or session['user_data']['login'] == admin7:
                 message='You were successfully logged in as ' + session['user_data']['login'] + '. Don\'t forget to log out before exiting this wbesite.'
             else:
-                #session.clear()
+                session.clear()
                 message='Please sign in with a valid admin account. You attempted to log in as ' + session['user_data']['login'] + '. This is not an admin account. To log in as an admin you may need to log out of Github before attempting to log in again.'
         except Exception as inst:
-            #session.clear()
+            session.clear()
             print(inst)
             message='Unable to login, please try again.  '
     return render_template('login.html', message=message)
