@@ -334,10 +334,24 @@ def loadTheComments():
 @app.route('/delete', methods=['GET', 'POST'])
 def delete():
     objectIDPost = request.form['delete'] #delete post
+    connection_string = os.environ["MONGO_CONNECTION_STRING"]
+    db_name = os.environ["MONGO_DBNAME"]
+    client = pymongo.MongoClient(connection_string)
+    db = client[db_name]
+    collection = db['ELLA']
+    collection.delete_one({'_id': ObjectId(objectIDPost)})
+    collection = db['ELLU']
+    collection.delete_one({'_id': ObjectId(objectIDPost)})
+    collection = db['SEA']
+    collection.delete_one({'_id': ObjectId(objectIDPost)})
+    collection = db['SEU']
+    collection.delete_one({'_id': ObjectId(objectIDPost)})
+    return render_information()
 
 @app.route('/vet', methods=['GET', 'POST'])
 def vet():
     objectIDPost = request.form['vet'] #vet and unvet posts
+    
 
 #make sure the jinja variables use Markup 
 @github.tokengetter
