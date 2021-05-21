@@ -127,7 +127,7 @@ def render_english_learner_forum():
                                                  '<td class="col3">' + post.get('displayName') + '</td>' +
                                                  '<td class="col4"><span><form action="/delete" method="post"><button type="submit" class="btn btn-danger btn-sm" name="delete" value="' + str(post.get('_id')) + '">Confirm Delete</button></form>' + str(post.get('dateTime')) + '</span></td></tr>')
                 postList.insert(0, bigString2)
-                bigString1 = ""
+                bigString2 = ""
     except:
         for post in collection.find():
             bigString2 = bigString2 + Markup('<tr><td class="col1">IconWIP</td>' +
