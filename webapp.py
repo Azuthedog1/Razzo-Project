@@ -271,7 +271,7 @@ def renderUserPostSubmissionSE():
         anonymous = False
     title = request.form['userTitle']
     message = Markup(request.form['userComment'])
-    name = session['userName']
+    name = request.form['userName']
     student = request.form['userStudent']
     email = request.form['userEmail']
     collection = db['SEU']
