@@ -129,7 +129,42 @@ def render_special_education_forum():
     client = pymongo.MongoClient(connection_string)
     db = client[db_name]
     collection = db['SEU']
-    return render_template('specialeducationforum.html')
+    postList1 = []
+    postList2 = []
+    bigString1 = ""
+    bigString2 = ""
+    try:
+        if session['user_data']['login'] == admin1 or session['user_data']['login'] == admin2 or session['user_data']['login'] == admin3 or session['user_data']['login'] == admin4 or session['user_data']['login'] == admin5 or session['user_data']['login'] == admin6:
+            for post in collection.find():
+                bigString1 = bigString1 + Markup ('<tr><td class="col1">IconWIP</td>')  
+                bigString1 = bigString1 + Markup('<td class="col2"><form action="/comments"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton">' + post.get('postTitle') + '</button></form></td>')
+                bigString1 = bigString1 + Markup('<td class="col3">' + post.get('parentName') + ' | ' + post.get('studentName+grade') + ' | ' + post.get('parentEmail'))
+                if(post.get('anonymous') == "true"):
+                    bigString1 = bigString1 + Markup(' | Anonymous')
+                bigString1 = bigString1 + Markup('</td>')
+                bigString1 = bigString1 + Markup('<td class="col4"><span><form action="/delete" method="post"><button type="submit" class="btn btn-danger btn-sm" name="delete" value="' + str(post.get('_id')) + '">Confirm Delete</button></form><form action="/vet" method="post"><button type="submit" class="btn btn-warning btn-sm" name="vet" value="' + str(post.get('_id')) + '">')
+                if(post.get('approved') == "false"):
+                    bigString1 = bigString1 + Markup('Vet')
+                else:
+                    bigString1 = bigString1 + Markup('Unvet')
+                bigString1 = bigString1 + Markup('</button></form>' + str(post.get('dateTime')) + '</span></td></tr>')
+                postList1.insert(0, bigString1)
+                bigString1 = ""
+    except:
+        for post in collection.find():
+            if(post.get('approved') == "true"):
+                bigString1 = bigString1 + Markup ('<tr><td class="col1">IconWIP</td>')  
+                bigString1 = bigString1 + Markup('<td class="col2"><form action="/comments"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton">' + post.get('postTitle') + '</button></form></td>')
+                if(post.get('anonymous') == "true"):
+                    bigString1 = bigString1 + Markup('<td class="col3">(Anonymous)</td>')
+                else:
+                    bigString1 = bigString1 + Markup('<td class="col3">' + post.get('parentName') + '</td>')
+                bigString1 = bigString1 + Markup('<td class="col4"><span>' + str(post.get('dateTime')) + '</span></td></tr>')
+                postList1.insert(0, bigString1)
+                bigString1 = ""
+    for item in postList1:
+        bigString1 = bigString1 + item
+    return render_template('specialeducationforum.html', SEUPosts = bigString1)
 
 @app.route('/userSubmitPostELL', methods=['GET','POST'])
 def renderUserPostSubmissionELL():
@@ -172,7 +207,7 @@ def renderAdminPostSubmissionELL():
     message = Markup(request.form['adminComment'])
     name = request.form['adminName']
     collection = db['ELLA']
-    posts = {"comments": {"comment4":"comment 4", "comment5": "comment 5"},"postTitle":title,"postContent":message,"displayName": name, "date+time": today}#put all info here using variables
+    posts = {"comments": {"comment4":"comment 4", "comment5": "comment 5"},"postTitle":title,"postContent":message,"displayName": name, "dateTime": today}#put all info here using variables
     collection.insert_one(posts)
     return render_template('englishlearnerforum.html') #this will also copy the code from def render_english_learner_forum from above.
 
@@ -217,7 +252,7 @@ def renderAdminPostSubmissionSE():
     message = Markup(request.form['adminComment'])
     name = request.form['adminName']
     collection = db['SEA']
-    posts = {"comments": {"comment4":"comment 4", "comment5": "comment 5"},"postTitle":title,"postContent":message,"displayName": name, "date+time": today}#put all info here using variables
+    posts = {"comments": {"comment4":"comment 4", "comment5": "comment 5"},"postTitle":title,"postContent":message,"displayName": name, "dateTime": today}#put all info here using variables
     collection.insert_one(posts)
     return render_template('specialeducationforum.html') #this will also copy the code from def special_education_forum from above.
 
