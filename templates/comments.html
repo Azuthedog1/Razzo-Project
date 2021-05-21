@@ -15,7 +15,7 @@
     </table>
     <table class="commentPosts">
       <tr class="commentBox">
-        <td class="comments"><b>{{ title }}</b><br>{{ name }}{% if logged_in %} | {{ student }} | {{ email }}{% endif %}<br>{{ time }}<br>{{ content }}<br>{% if logged_in %}<form action="/delete" method="post"><button type="submit" class="btn btn-danger btn-sm" name="delete" value="docid">Confirm Delete</button></form><form action="/vet" method="post"><button type="submit" class="btn btn-warning btn-sm" name="vet" value="docid">Vet/Unvet</button></form>{% endif %}<td> <!-- student name and grade only see by admin -->
+        <td class="comments"><b>{{ title }}</b><br><i>{{ name }}{% if logged_in %} | {{ student }} | {{ email }}{% endif %}<br>{{ time }}</i><br><br>{{ content }}<br>
       </tr>
     </table>
   </div>
