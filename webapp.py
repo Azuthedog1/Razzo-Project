@@ -94,7 +94,7 @@ def render_english_learner_forum():
             if(post.get('anonymous') == "true"):
                 bigString1 = bigString1 + Markup(' | Anonymous Post')
             bigString1 = bigString1 + Markup('</td>')
-            bigString1 = bigString1 + Markup('<td class="col4"><form action="/delete" method="post"><button type="submit" class="btn btn-danger btn-sm" name="delete" value="' + str(post.get('_id')) + '">Confirm Delete</button></form>)
+            bigString1 = bigString1 + Markup('<td class="col4"><form action="/delete" method="post"><button type="submit" class="btn btn-danger btn-sm" name="delete" value="' + str(post.get('_id')) + '">Confirm Delete</button></form>')
             if(post.get('approved') == "false"):
                 bigString1 = bigString1 + Markup('<form action="/vetELL" method="post"><button type="submit" class="btn btn-warning btn-sm" name="vet" value="' + str(post.get('_id'))+ '">' + 'Vet')
             else:
@@ -162,7 +162,7 @@ def render_special_education_forum():
             if(post.get('anonymous') == "true"):
                 bigString1 = bigString1 + Markup(' | Anonymous Post')
             bigString1 = bigString1 + Markup('</td>')
-            bigString1 = bigString1 + Markup('<td class="col4"><form action="/delete" method="post"><button type="submit" class="btn btn-danger btn-sm lineUp" name="delete" value="' + str(post.get('_id')) + '">Confirm Delete</button></form>)
+            bigString1 = bigString1 + Markup('<td class="col4"><form action="/delete" method="post"><button type="submit" class="btn btn-danger btn-sm lineUp" name="delete" value="' + str(post.get('_id')) + '">Confirm Delete</button></form>')
             if(post.get('approved') == "false"):
                 bigString1 = bigString1 + Markup('<form action="/vetSE" method="post"><button type="submit" class="btn btn-warning btn-sm" name="vet" value="' + str(post.get('_id'))+ '">' + 'Vet')
             else:
