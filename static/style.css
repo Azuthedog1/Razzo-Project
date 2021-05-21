@@ -12,7 +12,7 @@
 
 .scroll {
   overflow-y: scroll;
-  height: 680px;
+  height: 600px;
   display: block;
 }
 
@@ -27,20 +27,20 @@
 }
 
 .postBox {
-  width: 49%;
-  height: 700px;
+  /*width: 49%;*/
+  /*height: 700px;*/
   margin-bottom: 20px;
   border: 2px solid Black;
 }
 
 .postBox2 {
-  width: 49%;
-  height: 700px;
+  /*width: 49%;*/
+  /*height: 700px;*/
   margin-bottom: 20px;
   border: 2px solid Black;
-  position: relative;
-  left:51%;
-  top: -720px;
+  /*position: relative;*/
+  /*left:51%;*/
+  /*top: -720px;*/
 }
 
 .discussionBox {
@@ -94,23 +94,27 @@ tr {
 }
 
 .col1 {
-  width: 7.5%;
+  /*width: 7.5%;*/
+  width: 15%;
   padding: 10px;
 }
 
 .col2 {
-  width: 10%;
+  /*width: 10%;*/
+  width: 30%;
   padding: 10px;
 }
 
 .col3 {
-  width: 10%;
+  /*width: 10%;*/
+  width: 30%;
   padding: 10px;
 }
 
 .col4 {
   text-align: right;
-  width: 22.5%;
+  width: 25%;
+  /*width: 22.5%;*/
   padding: 10px;
 }
 
