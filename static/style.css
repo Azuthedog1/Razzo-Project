@@ -19,7 +19,7 @@
 #google_translate_element {
   right: 5px;
   top: 8px;
-  position: fixed;
+  position: absolute;
   z-index: 1000; 
 }
 
