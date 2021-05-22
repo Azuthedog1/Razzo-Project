@@ -337,7 +337,42 @@ def renderAdminPostSubmissionSE():
     else:
         return render_special_education_forum()
 
-@app.route('/submitComment', methods=['GET', 'POST'])
+@app.route('/submitCommentA', methods=['GET', 'POST'])
+def newComment():
+    if request.method == 'POST':
+        objectIDPost = request.args['thread']
+        connection_string = os.environ["MONGO_CONNECTION_STRING"]
+        db_name = os.environ["MONGO_DBNAME"]
+        client = pymongo.MongoClient(connection_string)
+        db = client[db_name]
+        collection = db['SEA']
+        x = collection.find_one({'_id': ObjectId(objectIDPost)})
+        if x == None:
+            collection = db['SEU']
+            x = collection.find_one({'_id': ObjectId(objectIDPost)})
+        if x == None:
+            collection = db['ELLA']
+            x = collection.find_one({'_id': ObjectId(objectIDPost)})
+        if x == None:
+            collection = db['ELLU']
+            x = collection.find_one({'_id': ObjectId(objectIDPost)})
+        #name = request.form['adminName']
+        #comment = request.form['adminComment']
+        #myquery = { "address": "Valley 345" }
+        #newvalues = { "$set": { "address": "Canyon 123" } }
+        #collection.update_one({'_id': ObjectId(objectIDPost)}, newvalues)
+        
+        #collection.find_one_and_update(
+        #    {"_id" : ObjectId("5cfa4c0ad9edff487939dda0")},
+        #    {"$currentDate": {"some date": True}},
+        #    upsert = True
+        #)
+
+        return render_template('information.html', test = x)
+    else:
+        return render_template('information.html')
+
+@app.route('/submitCommentU', methods=['GET', 'POST'])
 def newComment():
     if request.method == 'POST':
         objectIDPost = request.args['thread']
