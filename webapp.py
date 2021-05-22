@@ -338,7 +338,7 @@ def renderAdminPostSubmissionSE():
         return render_special_education_forum()
 
 @app.route('/submitCommentA', methods=['GET', 'POST'])
-def newComment():
+def newCommentA():
     if request.method == 'POST':
         objectIDPost = request.args['thread']
         connection_string = os.environ["MONGO_CONNECTION_STRING"]
@@ -373,7 +373,7 @@ def newComment():
         return render_template('information.html')
 
 @app.route('/submitCommentU', methods=['GET', 'POST'])
-def newComment():
+def newCommentU():
     if request.method == 'POST':
         objectIDPost = request.args['thread']
     return render_template('information.html')
