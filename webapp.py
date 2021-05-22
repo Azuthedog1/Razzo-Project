@@ -346,16 +346,16 @@ def newCommentA():
         client = pymongo.MongoClient(connection_string)
         db = client[db_name]
         collection = db['SEA']
-        x = collection.find_one({'_id': ObjectId(objectIDPost)})
-        if x == None:
-            collection = db['SEU']
-            x = collection.find_one({'_id': ObjectId(objectIDPost)})
-        if x == None:
-            collection = db['ELLA']
-            x = collection.find_one({'_id': ObjectId(objectIDPost)})
-        if x == None:
-            collection = db['ELLU']
-            x = collection.find_one({'_id': ObjectId(objectIDPost)})
+        #x = collection.find_one({'_id': ObjectId(objectIDPost)})
+        #if x == None:
+        #    collection = db['SEU']
+        #    x = collection.find_one({'_id': ObjectId(objectIDPost)})
+        #if x == None:
+        #    collection = db['ELLA']
+        #    x = collection.find_one({'_id': ObjectId(objectIDPost)})
+        #if x == None:
+        #    collection = db['ELLU']
+        #    x = collection.find_one({'_id': ObjectId(objectIDPost)})
         #name = request.form['adminName']
         #comment = request.form['adminComment']
         #myquery = { "address": "Valley 345" }
@@ -367,8 +367,7 @@ def newCommentA():
         #    {"$currentDate": {"some date": True}},
         #    upsert = True
         #)
-
-        return render_template('information.html', test = x)
+        return render_template('information.html')
     else:
         return render_template('information.html')
 
