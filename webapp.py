@@ -339,13 +339,13 @@ def renderAdminPostSubmissionSE():
 
 @app.route('/submitCommentA', methods=['GET', 'POST'])
 def newCommentA():
-    if request.method == 'POST':
-        objectIDPost = request.args['thread']
-        connection_string = os.environ["MONGO_CONNECTION_STRING"]
-        db_name = os.environ["MONGO_DBNAME"]
-        client = pymongo.MongoClient(connection_string)
-        db = client[db_name]
-        collection = db['SEA']
+    #if request.method == 'POST':
+        #objectIDPost = request.args['thread']
+        #connection_string = os.environ["MONGO_CONNECTION_STRING"]
+        #db_name = os.environ["MONGO_DBNAME"]
+        #client = pymongo.MongoClient(connection_string)
+        #db = client[db_name]
+        #collection = db['SEA']
         #x = collection.find_one({'_id': ObjectId(objectIDPost)})
         #if x == None:
         #    collection = db['SEU']
@@ -367,9 +367,9 @@ def newCommentA():
         #    {"$currentDate": {"some date": True}},
         #    upsert = True
         #)
-        return render_template('information.html')
-    else:
-        return render_template('information.html')
+        #return render_template('information.html')
+    #else:
+    return render_template('information.html')
 
 @app.route('/submitCommentU', methods=['GET', 'POST'])
 def newCommentU():
