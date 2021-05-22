@@ -18,6 +18,8 @@
 
 #google_translate_element {
   float: right;
+  top: 8px;
+  position: absolute;
 }
 
 .back {
