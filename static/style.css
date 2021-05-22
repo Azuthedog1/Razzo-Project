@@ -17,9 +17,9 @@
 }
 
 #google_translate_element {
-  float: right;
+  right: 5px;
   top: 8px;
-  position: absolute;
+  position: fixed;
 }
 
 .back {
