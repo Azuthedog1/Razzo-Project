@@ -88,7 +88,7 @@ def render_english_learner_forum():
     #try:
     if 'github_token' in session: #session['user_data']['login'] == admin1 or session['user_data']['login'] == admin2 or session['user_data']['login'] == admin3 or session['user_data']['login'] == admin4 or session['user_data']['login'] == admin5 or session['user_data']['login'] == admin6 or session['user_data']['login'] == admin7:
         for post in collection.find():
-            bigString1 = bigString1 + Markup ('<tr><td class="col1">IconWIP</td>')  
+            bigString1 = bigString1 + Markup ('<tr><td class="col1"><img src="/static/images/person.png" alt="icon" width="30" height="30"></td>')  
             bigString1 = bigString1 + Markup('<td class="col2"><form action="/viewELLU"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton"><b>' + post.get('postTitle') + '</b></button></form></td>')
             if post.get('parentEmail') == "":
                 bigString1 = bigString1 + Markup('<td class="col3"><i>' + post.get('parentName') + ' / ' + post.get('studentName+grade') + ' / Email not provided</i></td>')
@@ -105,7 +105,7 @@ def render_english_learner_forum():
     else:
         for post in collection.find():
             if(post.get('approved') == "true"):
-                bigString1 = bigString1 + Markup ('<tr><td class="col1">IconWIP</span></td>')  
+                bigString1 = bigString1 + Markup ('<tr><td class="col1"><img src="/static/images/person.png" alt="icon" width="30" height="30"></span></td>')  
                 bigString1 = bigString1 + Markup('<td class="col2"><form action="/viewELLU"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton"><b>' + post.get('postTitle') + '</b></button></form></td>')
                 if(post.get('anonymous') == "true"):
                     bigString1 = bigString1 + Markup('<td class="col3"><i>Anonymous Post</i></td>')
@@ -121,7 +121,7 @@ def render_english_learner_forum():
     #try:
     if 'github_token' in session: #if session['user_data']['login'] == admin1 or session['user_data']['login'] == admin2 or session['user_data']['login'] == admin3 or session['user_data']['login'] == admin4 or session['user_data']['login'] == admin5 or session['user_data']['login'] == admin6 or session['user_data']['login'] == admin7:
         for post in collection.find():
-            bigString2 = bigString2 + Markup('<tr><td class="col1">IconWIP</td>' +
+            bigString2 = bigString2 + Markup('<tr><td class="col1"><img src="/static/images/person.png" alt="icon" width="30" height="30"></td>' +
                                              '<td class="col2"><form action="/viewELLA"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton"><b>' + post.get('postTitle') + '</b></button></form></td>' +
                                              '<td class="col3"><i>' + post.get('displayName') + '</i></td>' +
                                              '<td class="col4"><form action="/deleteELL" method="post"><button type="submit" class="btn btn-danger btn-sm lineUp" name="delete" value="' + str(post.get('_id')) + '"><span class="glyphicon glyphicon-trash"></span>Confirm Delete</button></form><i>' + str(post.get('dateTime')) + '</i></td></tr>')
@@ -129,7 +129,7 @@ def render_english_learner_forum():
             bigString2 = ""
     else:
         for post in collection.find():
-            bigString2 = bigString2 + Markup('<tr><td class="col1">IconWIP</span></td>' +
+            bigString2 = bigString2 + Markup('<tr><td class="col1"><img src="/static/images/person.png" alt="icon" width="30" height="30"></span></td>' +
                                              '<td class="col2"><form action="/viewELLA"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton"><b>' + post.get('postTitle') + '</b></button></form></td>' +
                                              '<td class="col3"><i>' + post.get('displayName') + '</i></td>' +
                                              '<td class="col4"><i>' + str(post.get('dateTime')) + '</i></td></tr>')
@@ -156,7 +156,7 @@ def render_special_education_forum():
     #try:
     if 'github_token' in session: #if session['user_data']['login'] == admin1 or session['user_data']['login'] == admin2 or session['user_data']['login'] == admin3 or session['user_data']['login'] == admin4 or session['user_data']['login'] == admin5 or session['user_data']['login'] == admin6 or session['user_data']['login'] == admin7:
         for post in collection.find():
-            bigString1 = bigString1 + Markup ('<tr><td class="col1">IconWIP</span></td>')  
+            bigString1 = bigString1 + Markup ('<tr><td class="col1"><img src="/static/images/person.png" alt="icon" width="30" height="30"></span></td>')  
             bigString1 = bigString1 + Markup('<td class="col2"><form action="/viewSEU"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton"><b>' + post.get('postTitle') + '</b></button></form></td>')
             if post.get('parentEmail') == "":
                 bigString1 = bigString1 + Markup('<td class="col3"><i>' + post.get('parentName') + ' / ' + post.get('studentName+grade') + ' / Email not provided</i></td>')
@@ -173,7 +173,7 @@ def render_special_education_forum():
     else:
         for post in collection.find():
             if(post.get('approved') == "true"):
-                bigString1 = bigString1 + Markup ('<tr><td class="col1">IconWIP</td>')  
+                bigString1 = bigString1 + Markup ('<tr><td class="col1"><img src="/static/images/person.png" alt="icon" width="30" height="30"></td>')  
                 bigString1 = bigString1 + Markup('<td class="col2"><form action="/viewSEU"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton"><b>' + post.get('postTitle') + '</b></button></form></td>')
                 if(post.get('anonymous') == "true"):
                     bigString1 = bigString1 + Markup('<td class="col3"><i>Anonymous Post</i></td>')
@@ -189,7 +189,7 @@ def render_special_education_forum():
     #try:
     if 'github_token' in session: #if session['user_data']['login'] == admin1 or session['user_data']['login'] == admin2 or session['user_data']['login'] == admin3 or session['user_data']['login'] == admin4 or session['user_data']['login'] == admin5 or session['user_data']['login'] == admin6 or session['user_data']['login'] == admin7:
         for post in collection.find():
-            bigString2 = bigString2 + Markup('<tr><td class="col1">IconWIP</td>' +
+            bigString2 = bigString2 + Markup('<tr><td class="col1"><img src="/static/images/person.png" alt="icon" width="30" height="30"></td>' +
                                              '<td class="col2"><form action="/viewSEA"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton"><b>' + post.get('postTitle') + '</b></button></form></td>' +
                                              '<td class="col3"><i>' + post.get('displayName') + '</i></td>' +
                                              '<td class="col4"><form action="/deleteSE" method="post"><button type="submit" class="btn btn-danger btn-sm lineUp" name="delete" value="' + str(post.get('_id')) + '"><span class="glyphicon glyphicon-trash"></span>Confirm Delete</button></form><i>' + str(post.get('dateTime')) + '</i></td></tr>')
@@ -197,7 +197,7 @@ def render_special_education_forum():
             bigString2 = ""
     else:
         for post in collection.find():
-            bigString2 = bigString2 + Markup('<tr><td class="col1">IconWIP</td>' +
+            bigString2 = bigString2 + Markup('<tr><td class="col1"><img src="/static/images/person.png" alt="icon" width="30" height="30"></td>' +
                                              '<td class="col2"><form action="/viewSEA"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton"><b>' + post.get('postTitle') + '</b></button></form></td>' +
                                              '<td class="col3"><i>' + post.get('displayName') + '</i></td>' +
                                              '<td class="col4"><i>' + str(post.get('dateTime')) + '</i></td></tr>')
