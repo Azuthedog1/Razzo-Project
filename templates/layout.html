@@ -17,6 +17,11 @@
         new google.translate.TranslateElement({pageLanguage: 'en', includedLanguages: 'ar,zh-CN,nl,en,fr,de,it,pt,ru,es', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
       }
     </script>
+    <script>
+      var quill = new Quill('#editor', {
+        theme: 'snow'
+      });
+    </script>
     <title>{% block title %}{% endblock %} - Santa Barbara High School</title>
   </head>
 
