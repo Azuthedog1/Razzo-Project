@@ -7,6 +7,6 @@ $(document).ready(function() {
   var form2 = document.querySelector('#userform'); 
   form2.onsubmit = function() { 
     var about = document.querySelector('input[name=userComment]'); 
-    about.value = JSON.stringify(quill.getContents());
+    about.value = JSON.stringify(quill2.getContents());
   }; 
 });
