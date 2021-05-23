@@ -332,7 +332,7 @@ def submitComment():
         keyList = list(post.keys())
         if "comment" in keyList[-1]:
             lastNumber = keyList[-1]
-            lastNumber = lastKey.replace('comment', '')
+            lastNumber = lastNumber.replace('comment', '')
             lastNumber = str(int(lastNumber + 1))
         else:
             lastNumber = "0"
