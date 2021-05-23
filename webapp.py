@@ -366,7 +366,7 @@ def newCommentA():
         #newvalues = { "$set": { "address": "Canyon 123" } }
         #collection.update_one({'_id': ObjectId(objectIDPost)}, newvalues)
         i = 0
-        while i < len(x) and i != -1:
+        while i < len(post) and i != -1:
             if("comment" + str(i) in post):
                 i += 1;
             else:
