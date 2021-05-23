@@ -97,8 +97,11 @@ function myFunction2() {
             <textarea class="form-control" rows="1" name="adminTitle" required></textarea>
           </div>
           <div class="form-group">
-            <label for="comment">Message:</label>
-            <textarea class="form-control" rows="5" name="adminComment" required></textarea>
+            <label for="adminComment">Message:</label>
+            <input name="adminComment" type="hidden" required>
+            <div id="editor">
+              <p></p>
+            </div>
           </div>
           <button type="submit" class="btn btn-primary">Submit</button>
         </form>
@@ -124,8 +127,11 @@ function myFunction2() {
             <textarea class="form-control" rows="1" name="userTitle" required></textarea>
           </div>
           <div class="form-group">
-            <label for="comment">Message:</label>
-            <textarea class="form-control" rows="5" name="userComment" required></textarea>
+            <label for="userComment">Message:</label>
+            <input name="userComment" type="hidden" required>
+            <div id="editor">
+              <p></p>
+            </div>
           </div>
           <br><br>
           <div class="form-group">
