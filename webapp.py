@@ -329,7 +329,7 @@ def submitComment():
         if post == None:
             collection = db['ELLU']
             post = collection.find_one({'_id': ObjectId(objectIDPost)})
-        keyList = post.keys()
+        keyList = list(post.keys())
         if "comment" in keyList[-1]:
             lastNumber = keyList[-1]
             lastNumber = lastKey.replace('comment', '')
