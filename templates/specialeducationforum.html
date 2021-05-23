@@ -87,7 +87,7 @@ function myFunction2() {
         <h4 class="modal-title">Admin Post:</h4>
       </div>
       <div class="modal-body">
-        <form action="/adminSubmitPostSE" method="POST">
+        <form action="/adminSubmitPostSE" method="POST" id="adminform">
           <div class="form-group">
             <label for="name">Display Name:</label>
             <textarea class="form-control" rows="1" name="adminName" required></textarea>
@@ -98,11 +98,23 @@ function myFunction2() {
           </div>
           <div class="form-group">
             <label for="adminComment">Message:</label>
+            <input name="adminComment" type="hidden">
+            <div id="editor">
+              <p></p>
+            </div>
+            <script>
+              var quill = new Quill('#editor', {
+              theme: 'snow'
+              });
+            </script>
+          </div>
+          <!--<div class="form-group">
+            <label for="adminComment">Message:</label>
             <input name="adminComment" type="hidden" required>
             <div id="editor">
               <p></p>
             </div>
-          </div>
+          </div> -->
           <button type="submit" class="btn btn-primary">Submit</button>
         </form>
       </div>
@@ -121,17 +133,22 @@ function myFunction2() {
         <h4 class="modal-title">Create Post</h4>
       </div>
       <div class="modal-body">
-        <form action="/userSubmitPostSE" method="POST"> <!-- Replace most of this form with a jinja variable. An admin posting a comment or post on the user forum should not have to answer certain questions. -->
+        <form action="/userSubmitPostSE" method="POST" id="userform"> <!-- Replace most of this form with a jinja variable. An admin posting a comment or post on the user forum should not have to answer certain questions. -->
           <div class="form-group">
             <label for="title">Title:</label>
             <textarea class="form-control" rows="1" name="userTitle" required></textarea>
           </div>
           <div class="form-group">
             <label for="userComment">Message:</label>
-            <input name="userComment" type="hidden" required>
+            <input name="userComment" type="hidden">
             <div id="editor2">
               <p></p>
             </div>
+            <script>
+              var quill = new Quill('#editor2', {
+              theme: 'snow'
+              });
+            </script>
           </div>
           <br><br>
           <div class="form-group">
