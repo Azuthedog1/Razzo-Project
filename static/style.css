@@ -97,6 +97,17 @@ tr {
   background-color: #e0e0e0;
 }
 
+.headCol1 {
+  width: 50%;
+  padding: 10px;
+}
+
+.headCol2 {
+  width: 50%;
+  padding: 10px;
+  text-align: right;
+}
+
 .col1 {
   /*width: 7.5%;*/
   width: 15%;
