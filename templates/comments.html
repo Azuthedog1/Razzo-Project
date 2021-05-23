@@ -29,14 +29,22 @@
         <h4 class="modal-title">Admin Comment:</h4>
       </div>
       <div class="modal-body">
-        <form action="/submitCommentA" method="POST">
+        <form action="/submitCommentA" method="POST" id="adminform">
           <div class="form-group">
             <label for="name">Display Name:</label>
             <textarea class="form-control" rows="1" name="adminName" required></textarea>
           </div>
           <div class="form-group">
-            <label for="comment">Message:</label>
-            <textarea class="form-control" rows="5" name="adminComment" required></textarea>
+            <label for="adminComment">Message:</label>
+            <input name="adminComment" type="hidden">
+            <div id="editor">
+              <p></p>
+            </div>
+            <script>
+              var quill = new Quill('#editor', {
+              theme: 'snow'
+              });
+            </script>
           </div>
           <button type="submit" class="btn btn-primary" disabled>Submit</button>
         </form>
@@ -56,10 +64,18 @@
         <h4 class="modal-title">Create Comment</h4>
       </div>
       <div class="modal-body">
-        <form action="/submitCommentU" method="POST"> <!-- Replace most of this form with a jinja variable. An admin posting a comment or post on the user forum should not have to answer certain questions. -->
+        <form action="/submitCommentU" method="POST" id="userform"> <!-- Replace most of this form with a jinja variable. An admin posting a comment or post on the user forum should not have to answer certain questions. -->
           <div class="form-group">
-            <label for="comment">Message:</label>
-            <textarea class="form-control" rows="5" name="userComment" required></textarea>
+            <label for="adminComment">Message:</label>
+            <input name="adminComment" type="hidden">
+            <div id="editor">
+              <p></p>
+            </div>
+            <script>
+              var quill = new Quill('#editor', {
+              theme: 'snow'
+              });
+            </script>
           </div>
           <br><br>
           <div class="form-group">
