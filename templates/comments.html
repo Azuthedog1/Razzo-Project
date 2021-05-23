@@ -66,13 +66,13 @@
       <div class="modal-body">
         <form action="/submitCommentU" method="POST" id="userform"> <!-- Replace most of this form with a jinja variable. An admin posting a comment or post on the user forum should not have to answer certain questions. -->
           <div class="form-group">
-            <label for="adminComment">Message:</label>
-            <input name="adminComment" type="hidden">
-            <div id="editor">
+            <label for="userComment">Message:</label>
+            <input name="userComment" type="hidden">
+            <div id="editor2">
               <p></p>
             </div>
             <script>
-              var quill = new Quill('#editor', {
+              var quill = new Quill('#editor2', {
               theme: 'snow'
               });
             </script>
