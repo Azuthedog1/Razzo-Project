@@ -54,7 +54,7 @@ def login():
 @app.route('/logout')
 def logout():
     session.clear()
-    return render_template('login.html', message='You were logged out')
+    return render_template('login.html', message='&nbsp;&nbsp;You were logged out')
 
 @app.route('/login/authorized')
 def authorized():
@@ -67,14 +67,14 @@ def authorized():
             session['github_token'] = (resp['access_token'], '') #save the token to prove that the user logged in
             session['user_data']=github.get('user').data
             if session['user_data']['login'] == admin1 or session['user_data']['login'] == admin2 or session['user_data']['login'] == admin3 or session['user_data']['login'] == admin4 or session['user_data']['login'] == admin5 or session['user_data']['login'] == admin6 or session['user_data']['login'] == admin7:
-                message='You were successfully logged in as ' + session['user_data']['login'] + '. Don\'t forget to log out before exiting this wbesite.'
+                message='&nbsp;&nbsp;You were successfully logged in as ' + session['user_data']['login'] + '. Don\'t forget to log out before exiting this wbesite.'
             else:
                 session.clear()
-                message='Please sign in with a valid admin account. You attempted to log in as ' + session['user_data']['login'] + '. This is not an admin account. To log in as an admin you may need to log out of Github before attempting to log in again.'
+                message='&nbsp;&nbsp;Please sign in with a valid admin account. You attempted to log in as ' + session['user_data']['login'] + '. This is not an admin account. To log in as an admin you may need to log out of Github before attempting to log in again.'
         except Exception as inst:
             session.clear()
             print(inst)
-            message='Unable to login, please try again.'
+            message='&nbsp;&nbsp;Unable to login, please try again.'
     session['username'] = 'admin'
     return render_template('login.html', message = message)
 
