@@ -379,7 +379,7 @@ def newCommentA():
                 #    upsert = True
                 #)
                 i = -1
-        return render_template('information.html', info = x)
+        return render_template('information.html', info = post)
     else:
         return render_template('information.html')
 
@@ -397,19 +397,19 @@ def viewSEA():
     client = pymongo.MongoClient(connection_string)
     db = client[db_name]
     collection = db['SEA']
-    x = collection.find_one({'_id': ObjectId(objectIDPost)})
-    postTitle = x.get('postTitle')
-    postContent = x.get('postContent')
+    post = collection.find_one({'_id': ObjectId(objectIDPost)})
+    postTitle = post.get('postTitle')
+    postContent = post.get('postContent')
     postContent = postContent.replace('\\"', '')
     postContent = Markup(postContent[1:len(postContent)-1])
-    utc_dt = datetime(int(x.get('dateTime').strftime("%Y")), int(x.get('dateTime').strftime("%m")), int(x.get('dateTime').strftime("%d")), int(x.get('dateTime').strftime("%H")), int(x.get('dateTime').strftime("%M")), 0, tzinfo=pytz.utc)
+    utc_dt = datetime(int(post.get('dateTime').strftime("%Y")), int(post.get('dateTime').strftime("%m")), int(post.get('dateTime').strftime("%d")), int(post.get('dateTime').strftime("%H")), int(post.get('dateTime').strftime("%M")), 0, tzinfo=pytz.utc)
     loc_dt = utc_dt.astimezone(timezone('America/Los_Angeles'))
     if int(loc_dt.strftime("%H")) > 12:
         hour = str(int(loc_dt.strftime("%H")) - 12)
         loc_dt = loc_dt.strftime("%m/%d/%Y, " + hour + ":%M PM PT")
     else:
         loc_dt = loc_dt.strftime("%m/%d/%Y, %H:%M AM PT")
-    displayName = x.get('displayName')
+    displayName = post.get('displayName')
     info = ""
     return render_template('comments.html', title = postTitle, name = displayName, information = info, time = loc_dt, content = postContent, ID = objectIDPost)
 
@@ -421,12 +421,12 @@ def viewSEU():
     client = pymongo.MongoClient(connection_string)
     db = client[db_name]
     collection = db['SEU']
-    x = collection.find_one({'_id': ObjectId(objectIDPost)})
-    postTitle = x.get('postTitle')
-    postContent = x.get('postContent')
+    post = collection.find_one({'_id': ObjectId(objectIDPost)})
+    postTitle = post.get('postTitle')
+    postContent = post.get('postContent')
     postContent = postContent.replace('\\"', '')
     postContent = Markup(postContent[1:len(postContent)-1])
-    utc_dt = datetime(int(x.get('dateTime').strftime("%Y")), int(x.get('dateTime').strftime("%m")), int(x.get('dateTime').strftime("%d")), int(x.get('dateTime').strftime("%H")), int(x.get('dateTime').strftime("%M")), 0, tzinfo=pytz.utc)
+    utc_dt = datetime(int(post.get('dateTime').strftime("%Y")), int(post.get('dateTime').strftime("%m")), int(post.get('dateTime').strftime("%d")), int(post.get('dateTime').strftime("%H")), int(post.get('dateTime').strftime("%M")), 0, tzinfo=pytz.utc)
     loc_dt = utc_dt.astimezone(timezone('America/Los_Angeles'))
     if int(loc_dt.strftime("%H")) > 12:
         hour = str(int(loc_dt.strftime("%H")) - 12)
@@ -434,14 +434,14 @@ def viewSEU():
     else:
         loc_dt = loc_dt.strftime("%m/%d/%Y, %H:%M AM PT")
     if 'github_token' in session:
-        parentName = x.get('parentName')
-        studentNameGrade = x.get('studentName+grade')
-        parentEmail = x.get('parentEmail')
+        parentName = post.get('parentName')
+        studentNameGrade = post.get('studentName+grade')
+        parentEmail = post.get('parentEmail')
         if parentEmail == "":
             parentEmail = "Email not provided"
     else:
-        if x.get('anonymous') == "false":
-            parentName = x.get('parentName')
+        if post.get('anonymous') == "false":
+            parentName = post.get('parentName')
         else:
             parentName = "Anonymous Post"
         studentNameGrade = ""
@@ -457,19 +457,19 @@ def viewELLA():
     client = pymongo.MongoClient(connection_string)
     db = client[db_name]
     collection = db['ELLA']
-    x = collection.find_one({'_id': ObjectId(objectIDPost)})
-    postTitle = x.get('postTitle')
-    postContent = x.get('postContent')
+    post = collection.find_one({'_id': ObjectId(objectIDPost)})
+    postTitle = post.get('postTitle')
+    postContent = post.get('postContent')
     postContent = postContent.replace('\\"', '')
     postContent = Markup(postContent[1:len(postContent)-1])
-    utc_dt = datetime(int(x.get('dateTime').strftime("%Y")), int(x.get('dateTime').strftime("%m")), int(x.get('dateTime').strftime("%d")), int(x.get('dateTime').strftime("%H")), int(x.get('dateTime').strftime("%M")), 0, tzinfo=pytz.utc)
+    utc_dt = datetime(int(post.get('dateTime').strftime("%Y")), int(v.get('dateTime').strftime("%m")), int(post.get('dateTime').strftime("%d")), int(post.get('dateTime').strftime("%H")), int(post.get('dateTime').strftime("%M")), 0, tzinfo=pytz.utc)
     loc_dt = utc_dt.astimezone(timezone('America/Los_Angeles'))
     if int(loc_dt.strftime("%H")) > 12:
         hour = str(int(loc_dt.strftime("%H")) - 12)
         loc_dt = loc_dt.strftime("%m/%d/%Y, " + hour + ":%M PM PT")
     else:
         loc_dt = loc_dt.strftime("%m/%d/%Y, %H:%M AM PT")
-    displayName = x.get('displayName')
+    displayName = post.get('displayName')
     info = ""
     return render_template('comments.html', title = postTitle, name = displayName, information = info, time = loc_dt, content = postContent, ID = objectIDPost)
 
@@ -481,12 +481,12 @@ def viewELLU():
     client = pymongo.MongoClient(connection_string)
     db = client[db_name]
     collection = db['ELLU']
-    x = collection.find_one({'_id': ObjectId(objectIDPost)})
-    postTitle = x.get('postTitle')
-    postContent = x.get('postContent')
+    post = collection.find_one({'_id': ObjectId(objectIDPost)})
+    postTitle = post.get('postTitle')
+    postContent = post.get('postContent')
     postContent = postContent.replace('\\"', '')
     postContent = Markup(postContent[1:len(postContent)-1])
-    utc_dt = datetime(int(x.get('dateTime').strftime("%Y")), int(x.get('dateTime').strftime("%m")), int(x.get('dateTime').strftime("%d")), int(x.get('dateTime').strftime("%H")), int(x.get('dateTime').strftime("%M")), 0, tzinfo=pytz.utc)
+    utc_dt = datetime(int(post.get('dateTime').strftime("%Y")), int(post.get('dateTime').strftime("%m")), int(post.get('dateTime').strftime("%d")), int(post.get('dateTime').strftime("%H")), int(post.get('dateTime').strftime("%M")), 0, tzinfo=pytz.utc)
     loc_dt = utc_dt.astimezone(timezone('America/Los_Angeles'))
     if int(loc_dt.strftime("%H")) > 12:
         hour = str(int(loc_dt.strftime("%H")) - 12)
@@ -494,14 +494,14 @@ def viewELLU():
     else:
         loc_dt = loc_dt.strftime("%m/%d/%Y, %H:%M AM PT")
     if 'github_token' in session:
-        parentName = x.get('parentName')
-        studentNameGrade = x.get('studentName+grade')
-        parentEmail = x.get('parentEmail')
+        parentName = post.get('parentName')
+        studentNameGrade = v.get('studentName+grade')
+        parentEmail = post.get('parentEmail')
         if parentEmail == "":
             parentEmail = "Email not provided"
     else:
-        if x.get('anonymous') == "false":
-            parentName = x.get('parentName')
+        if post.get('anonymous') == "false":
+            parentName = post.get('parentName')
         else:
             parentName = "Anonymous Post"
         studentNameGrade = ""
