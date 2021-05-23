@@ -177,18 +177,20 @@ def render_special_education_forum():
             year = int(post.get('dateTime').strftime("%Y"))
             month = int(post.get('dateTime').strftime("%m"))
             day = int(post.get('dateTime').strftime("%d"))
-            if int(post.get('dateTime').strftime("%H")) > 12:
-                hour = int(post.get('dateTime').strftime("%H")) - 12
-            else:
-                hour = int(post.get('dateTime').strftime("%H"))
+            #if int(post.get('dateTime').strftime("%H")) > 12:
+            #    hour = int(post.get('dateTime').strftime("%H")) - 12
+            #else:
+            #    hour = int(post.get('dateTime').strftime("%H"))
+            hour = int(post.get('dateTime').strftime("%H"))
             minute = int(post.get('dateTime').strftime("%M"))
             second = int(post.get('dateTime').strftime("%S"))
             utc_dt = datetime(year, month, day, hour, minute, second, tzinfo=utc)
             loc_dt = utc_dt.astimezone(pacific)
-            if int(post.get('dateTime').strftime("%H")) > 12:
-                loc_dt.strftime(fmtPM)
+            if int(loc_dt.strftime("%H")) > 12:
+                hour = int(loc_dt.strftime("%H")) - 12
+                loc_dt = loc_dt.strftime("%m/%d/%Y, " + hour + ":%M:%S PM PT")
             else:
-                loc_dt.strftime(fmtAM)
+                loc_dt = loc_dt.strftime("%m/%d/%Y, %H:%M:%S AM PT")
             bigString1 = bigString1 + Markup('</button></form><i>' + str(loc_dt) + 'TEST PLEASE</i></td></tr>')
             postList.insert(0, bigString1)
             bigString1 = ""
