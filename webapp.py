@@ -350,27 +350,34 @@ def newCommentA():
         client = pymongo.MongoClient(connection_string)
         db = client[db_name]
         collection = db['SEA']
-        x = collection.find_one({'_id': ObjectId(objectIDPost)})
+        post = collection.find_one({'_id': ObjectId(objectIDPost)})
         if x == None:
             collection = db['SEU']
-            x = collection.find_one({'_id': ObjectId(objectIDPost)})
+            post = collection.find_one({'_id': ObjectId(objectIDPost)})
         if x == None:
             collection = db['ELLA']
-            x = collection.find_one({'_id': ObjectId(objectIDPost)})
+            post = collection.find_one({'_id': ObjectId(objectIDPost)})
         if x == None:
             collection = db['ELLU']
-            x = collection.find_one({'_id': ObjectId(objectIDPost)})
+            post = collection.find_one({'_id': ObjectId(objectIDPost)})
         #name = request.form['adminName']
         #comment = request.form['adminComment']
         #myquery = { "address": "Valley 345" }
         #newvalues = { "$set": { "address": "Canyon 123" } }
         #collection.update_one({'_id': ObjectId(objectIDPost)}, newvalues)
-        
-        #collection.find_one_and_update(
-        #    {"_id" : ObjectId("5cfa4c0ad9edff487939dda0")},
-        #    {"$currentDate": {"some date": True}},
-        #    upsert = True
-        #)
+        i = 0
+        while i < len(x) and i != -1:
+            if("comment" + str(i) in post):
+            else:
+                post["comment" + str(i)] = {"adminName" = request.form['adminName'], "adminComment" = request.form['adminComment']}
+                collection.delete_one({'_id': ObjectId(objectIDPost)})
+                collection.insert_one(post)
+                #collection.find_one_and_update(
+                #    {"_id" : ObjectId(objectIDPost)},
+                #    {"$currentDate": {"some date": True}},
+                #    upsert = True
+                #)
+                i = -1
         return render_template('information.html', info = x)
     else:
         return render_template('information.html')
