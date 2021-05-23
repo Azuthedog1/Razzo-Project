@@ -11,6 +11,10 @@ from datetime import datetime, timedelta
 from pytz import timezone
 import pytz
 
+utc = pytz.utc
+eastern = timezone('US/Eastern')
+fmt = '%Y-%m-%d %H:%M:%S %Z%z'
+
 app = Flask(__name__)
 
 app.secret_key = os.environ['SECRET_KEY'] #used to sign session cookies
