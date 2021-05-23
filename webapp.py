@@ -368,6 +368,7 @@ def newCommentA():
         i = 0
         while i < len(x) and i != -1:
             if("comment" + str(i) in post):
+                i += 1;
             else:
                 post["comment" + str(i)] = {"adminName" = request.form['adminName'], "adminComment" = request.form['adminComment']}
                 collection.delete_one({'_id': ObjectId(objectIDPost)})
