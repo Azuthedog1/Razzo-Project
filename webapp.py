@@ -343,8 +343,8 @@ def renderAdminPostSubmissionSE():
 
 @app.route('/submitCommentA', methods=['GET', 'POST'])
 def newCommentA():
-    #if request.method == 'POST':
-    objectIDPost = request.form['thread']
+    if request.method == 'POST':
+        objectIDPost = request.args['thread']
         #connection_string = os.environ["MONGO_CONNECTION_STRING"]
         #db_name = os.environ["MONGO_DBNAME"]
         #client = pymongo.MongoClient(connection_string)
@@ -371,9 +371,9 @@ def newCommentA():
         #    {"$currentDate": {"some date": True}},
         #    upsert = True
         #)
-        #return render_template('information.html')
-    #else:
-    return render_template('comments.html')
+        return render_template('information.html')
+    else:
+        return render_template('information.html')
 
 @app.route('/submitCommentU', methods=['GET', 'POST'])
 def newCommentU():
@@ -403,7 +403,7 @@ def viewSEA():
         loc_dt = loc_dt.strftime("%m/%d/%Y, %H:%M AM PT")
     displayName = x.get('displayName')
     info = ""
-    return render_template('comments.html', title = postTitle, name = displayName, information = info, time = loc_dt, content = postContent)
+    return render_template('comments.html', title = postTitle, name = displayName, information = info, time = loc_dt, content = postContent, ID = objectIDPost)
 
 @app.route('/viewSEU')
 def viewSEU():
@@ -439,7 +439,7 @@ def viewSEU():
         studentNameGrade = ""
         parentEmail = ""
     info = " / " + studentNameGrade + " / " + parentEmail
-    return render_template('comments.html', title = postTitle, name = parentName, information = info, time = loc_dt, content = postContent)
+    return render_template('comments.html', title = postTitle, name = parentName, information = info, time = loc_dt, content = postContent, ID = objectIDPost)
 
 @app.route('/viewELLA')
 def viewELLA():
@@ -463,7 +463,7 @@ def viewELLA():
         loc_dt = loc_dt.strftime("%m/%d/%Y, %H:%M AM PT")
     displayName = x.get('displayName')
     info = ""
-    return render_template('comments.html', title = postTitle, name = displayName, information = info, time = loc_dt, content = postContent)
+    return render_template('comments.html', title = postTitle, name = displayName, information = info, time = loc_dt, content = postContent, ID = objectIDPost)
 
 @app.route('/viewELLU')
 def viewELLU():
@@ -499,7 +499,7 @@ def viewELLU():
         studentNameGrade = ""
         parentEmail = ""
     info = " / " + studentNameGrade + " / " + parentEmail
-    return render_template('comments.html', title = postTitle, name = parentName, information = info, time = loc_dt, content = postContent)
+    return render_template('comments.html', title = postTitle, name = parentName, information = info, time = loc_dt, content = postContent, ID = objectIDPost)
 
 @app.route('/deleteSE', methods=['GET', 'POST'])
 def deleteSE():
