@@ -7,7 +7,7 @@
   <div class="discussionBox">
     <table class="toprow">
       <tr>
-        <th class="col1">Comments</th>
+        <th class="col1">{{ title }}<br><i>{{ name }}{% if logged_in %}{{ information }}{% endif %}<br>{{ time }}</i></th>
         <th class="col2"></th>
         <th class="col3"></th>
         <th class="col4">{% if logged_in %}<button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#adminModal">Comment</button>{% else %}<button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#userModal">Comment</button>{% endif %}</th>
@@ -15,7 +15,7 @@
     </table>
     <table class="commentPosts">
       <tr class="commentBox">
-        <td class="comments"><b>{{ title }}</b><br><i>{{ name }}{% if logged_in %}{{ information }}{% endif %}<br>{{ time }}</i><br><br>{{ content }}<br>
+        <td class="comments">{{ content }}
       </tr>
     </table>
   </div>
