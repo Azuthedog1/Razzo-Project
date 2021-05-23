@@ -334,7 +334,7 @@ def submitComment():
                 if("comment" + str(i) in post):
                     i += 1
                 else:
-                    post["comment" + str(i)] = {"adminName": request.form['adminName'], "adminComment": request.form['adminComment']}
+                    post["comment" + str(i)] = {"adminName": request.form['adminName'], "postContent": request.form['adminMessage']}
                     collection.delete_one({'_id': ObjectId(objectIDPost)})
                     collection.insert_one(post)
                     i = -1
@@ -344,7 +344,7 @@ def submitComment():
                 if("comment" + str(i) in post):
                     i += 1
                 else:
-                    post["comment" + str(i)] = {"parentName": request.form['userName'], "studentNameGrade": request.form['userStudent'], "anonymous": request.form['anon'], "dateTime": datetime.now(), "parentComment": request.form['userComment'], "approved": "false"}
+                    post["comment" + str(i)] = {"parentName": request.form['userName'], "studentNameGrade": request.form['userStudent'], "anonymous": request.form['anon'], "dateTime": datetime.now(), "postContent": request.form['userMessage'], "approved": "false"}
                     collection.delete_one({'_id': ObjectId(objectIDPost)})
                     collection.insert_one(post)
                     i = -1
