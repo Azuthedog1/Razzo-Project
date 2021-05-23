@@ -87,8 +87,7 @@ def render_english_learner_forum():
     postList = []
     bigString1 = ""
     bigString2 = ""
-    #try:
-    if 'github_token' in session: #session['user_data']['login'] == admin1 or session['user_data']['login'] == admin2 or session['user_data']['login'] == admin3 or session['user_data']['login'] == admin4 or session['user_data']['login'] == admin5 or session['user_data']['login'] == admin6 or session['user_data']['login'] == admin7:
+    if 'github_token' in session:
         for post in collection.find():
             bigString1 = bigString1 + Markup('<tr><td class="col1"><img src="/static/images/person.png" alt="icon" width="30" height="30"></td>')  
             bigString1 = bigString1 + Markup('<td class="col2"><form action="/viewELLU"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton"><b>' + post.get('postTitle') + '</b></button></form></td>')
@@ -134,8 +133,7 @@ def render_english_learner_forum():
         bigString1 = bigString1 + item
     postList.clear()
     collection = db['ELLA']
-    #try:
-    if 'github_token' in session: #if session['user_data']['login'] == admin1 or session['user_data']['login'] == admin2 or session['user_data']['login'] == admin3 or session['user_data']['login'] == admin4 or session['user_data']['login'] == admin5 or session['user_data']['login'] == admin6 or session['user_data']['login'] == admin7:
+    if 'github_token' in session: 
         for post in collection.find():
             utc_dt = datetime(int(post.get('dateTime').strftime("%Y")), int(post.get('dateTime').strftime("%m")), int(post.get('dateTime').strftime("%d")), int(post.get('dateTime').strftime("%H")), int(post.get('dateTime').strftime("%M")), 0, tzinfo=pytz.utc)
             loc_dt = utc_dt.astimezone(timezone('America/Los_Angeles'))
@@ -280,7 +278,7 @@ def renderUserPostSubmissionELL():
         student = request.form['userStudent']
         email = request.form['userEmail']
         collection = db['ELLU']
-        posts = {"comments": {"comment4":"comment 4", "comment5": "comment 5"},"postTitle":title,"postContent":message, "parentName": name, "studentName+grade": student, "parentEmail": email, "anonymous": anonymous,"dateTime": today, "approved":"false"}
+        posts = {"postTitle":title,"postContent":message, "parentName": name, "studentName+grade": student, "parentEmail": email, "anonymous": anonymous,"dateTime": today, "approved":"false"}
         collection.insert_one(posts)
         return render_english_learner_forum() #render_template('englishlearnerforum.html')
     else:
@@ -298,7 +296,7 @@ def renderAdminPostSubmissionELL():
         message = request.form['adminComment']
         name = request.form['adminName']
         collection = db['ELLA']
-        posts = {"comments": {"comment4":"comment 4", "comment5": "comment 5"},"postTitle":title,"postContent":message,"displayName": name, "dateTime": today}#put all info here using variables
+        posts = {"postTitle":title,"postContent":message,"displayName": name, "dateTime": today}#put all info here using variables
         collection.insert_one(posts)
         return render_english_learner_forum() #render_template('englishlearnerforum.html') #this will also copy the code from def render_english_learner_forum from above.
     else:
@@ -319,7 +317,7 @@ def renderUserPostSubmissionSE():
         student = request.form['userStudent']
         email = request.form['userEmail']
         collection = db['SEU']
-        posts = {"comments": {"comment4":"comment 4", "comment5": "comment 5"},"postTitle":title,"postContent":message, "parentName": name, "studentName+grade": student, "parentEmail": email, "anonymous": anonymous,"dateTime": today, "approved":"false"}
+        posts = {"postTitle":title,"postContent": message, "parentName": name, "studentName+grade": student, "parentEmail": email, "anonymous": anonymous,"dateTime": today, "approved":"false"}
         collection.insert_one(posts)
         return render_special_education_forum() #render_template('specialeducationforum.html') #this will also copy the code from def special_education_forum from above.
     else:
@@ -337,7 +335,7 @@ def renderAdminPostSubmissionSE():
         message = request.form['adminComment']
         name = request.form['adminName']
         collection = db['SEA']
-        posts = {"comments": {"comment4":"comment 4", "comment5": "comment 5"},"postTitle":title,"postContent":message,"displayName": name, "dateTime": today}#put all info here using variables
+        posts = {"postTitle":title,"postContent":message,"displayName": name, "dateTime": today}#put all info here using variables
         collection.insert_one(posts)
         return render_special_education_forum()
     else:
@@ -375,7 +373,7 @@ def newCommentA():
         #)
         #return render_template('information.html')
     #else:
-    return render_template('information.html')
+    return render_template('comments.html')
 
 @app.route('/submitCommentU', methods=['GET', 'POST'])
 def newCommentU():
