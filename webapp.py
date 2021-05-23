@@ -11,9 +11,6 @@ from datetime import datetime, timedelta
 from pytz import timezone
 import pytz
 
-#utc = pytz.utc
-pacific = timezone('America/Los_Angeles')
-
 app = Flask(__name__)
 
 app.secret_key = os.environ['SECRET_KEY'] #used to sign session cookies
@@ -105,7 +102,7 @@ def render_english_learner_forum():
             else:
                 bigString1 = bigString1 + Markup('<form action="/unvetELL" method="post"><button type="submit" class="btn btn-warning btn-sm" name="vet" value="' + str(post.get('_id'))+ '">' + '<span class="glyphicon glyphicon-minus">Unvet')
             utc_dt = datetime(int(post.get('dateTime').strftime("%Y")), int(post.get('dateTime').strftime("%m")), int(post.get('dateTime').strftime("%d")), int(post.get('dateTime').strftime("%H")), int(post.get('dateTime').strftime("%M")), 0, tzinfo=pytz.utc)
-            loc_dt = utc_dt.astimezone(pacific)
+            loc_dt = utc_dt.astimezone(timezone('America/Los_Angeles'))
             if int(loc_dt.strftime("%H")) > 12:
                 hour = str(int(loc_dt.strftime("%H")) - 12)
                 loc_dt = loc_dt.strftime("%m/%d/%Y, " + hour + ":%M PM PT")
@@ -124,7 +121,7 @@ def render_english_learner_forum():
                 else:
                     bigString1 = bigString1 + Markup('<td class="col3"><i>' + post.get('parentName') + '</i></td>')
                 utc_dt = datetime(int(post.get('dateTime').strftime("%Y")), int(post.get('dateTime').strftime("%m")), int(post.get('dateTime').strftime("%d")), int(post.get('dateTime').strftime("%H")), int(post.get('dateTime').strftime("%M")), 0, tzinfo=pytz.utc)
-                loc_dt = utc_dt.astimezone(pacific)
+                loc_dt = utc_dt.astimezone(timezone('America/Los_Angeles'))
                 if int(loc_dt.strftime("%H")) > 12:
                     hour = str(int(loc_dt.strftime("%H")) - 12)
                     loc_dt = loc_dt.strftime("%m/%d/%Y, " + hour + ":%M PM PT")
@@ -141,7 +138,7 @@ def render_english_learner_forum():
     if 'github_token' in session: #if session['user_data']['login'] == admin1 or session['user_data']['login'] == admin2 or session['user_data']['login'] == admin3 or session['user_data']['login'] == admin4 or session['user_data']['login'] == admin5 or session['user_data']['login'] == admin6 or session['user_data']['login'] == admin7:
         for post in collection.find():
             utc_dt = datetime(int(post.get('dateTime').strftime("%Y")), int(post.get('dateTime').strftime("%m")), int(post.get('dateTime').strftime("%d")), int(post.get('dateTime').strftime("%H")), int(post.get('dateTime').strftime("%M")), 0, tzinfo=pytz.utc)
-            loc_dt = utc_dt.astimezone(pacific)
+            loc_dt = utc_dt.astimezone(timezone('America/Los_Angeles'))
             if int(loc_dt.strftime("%H")) > 12:
                 hour = str(int(loc_dt.strftime("%H")) - 12)
                 loc_dt = loc_dt.strftime("%m/%d/%Y, " + hour + ":%M PM PT")
@@ -156,7 +153,7 @@ def render_english_learner_forum():
     else:
         for post in collection.find():
             utc_dt = datetime(int(post.get('dateTime').strftime("%Y")), int(post.get('dateTime').strftime("%m")), int(post.get('dateTime').strftime("%d")), int(post.get('dateTime').strftime("%H")), int(post.get('dateTime').strftime("%M")), 0, tzinfo=pytz.utc)
-            loc_dt = utc_dt.astimezone(pacific)
+            loc_dt = utc_dt.astimezone(timezone('America/Los_Angeles'))
             if int(loc_dt.strftime("%H")) > 12:
                 hour = str(int(loc_dt.strftime("%H")) - 12)
                 loc_dt = loc_dt.strftime("%m/%d/%Y, " + hour + ":%M PM PT")
@@ -201,7 +198,7 @@ def render_special_education_forum():
             else:
                 bigString1 = bigString1 + Markup('<form action="/unvetSE" method="post"><button type="submit" class="btn btn-warning btn-sm" name="vet" value="' + str(post.get('_id'))+ '">' + '<span class="glyphicon glyphicon-minus">Unvet')
             utc_dt = datetime(int(post.get('dateTime').strftime("%Y")), int(post.get('dateTime').strftime("%m")), int(post.get('dateTime').strftime("%d")), int(post.get('dateTime').strftime("%H")), int(post.get('dateTime').strftime("%M")), 0, tzinfo=pytz.utc)
-            loc_dt = utc_dt.astimezone(pacific)
+            loc_dt = utc_dt.astimezone(timezone('America/Los_Angeles'))
             if int(loc_dt.strftime("%H")) > 12:
                 hour = str(int(loc_dt.strftime("%H")) - 12)
                 loc_dt = loc_dt.strftime("%m/%d/%Y, " + hour + ":%M PM PT")
@@ -220,7 +217,7 @@ def render_special_education_forum():
                 else:
                     bigString1 = bigString1 + Markup('<td class="col3"><i>' + post.get('parentName') + '</i></td>')
                 utc_dt = datetime(int(post.get('dateTime').strftime("%Y")), int(post.get('dateTime').strftime("%m")), int(post.get('dateTime').strftime("%d")), int(post.get('dateTime').strftime("%H")), int(post.get('dateTime').strftime("%M")), 0, tzinfo=pytz.utc)
-                loc_dt = utc_dt.astimezone(pacific)
+                loc_dt = utc_dt.astimezone(timezone('America/Los_Angeles'))
                 if int(loc_dt.strftime("%H")) > 12:
                     hour = str(int(loc_dt.strftime("%H")) - 12)
                     loc_dt = loc_dt.strftime("%m/%d/%Y, " + hour + ":%M PM PT")
@@ -237,7 +234,7 @@ def render_special_education_forum():
     if 'github_token' in session: #if session['user_data']['login'] == admin1 or session['user_data']['login'] == admin2 or session['user_data']['login'] == admin3 or session['user_data']['login'] == admin4 or session['user_data']['login'] == admin5 or session['user_data']['login'] == admin6 or session['user_data']['login'] == admin7:
         for post in collection.find():
             utc_dt = datetime(int(post.get('dateTime').strftime("%Y")), int(post.get('dateTime').strftime("%m")), int(post.get('dateTime').strftime("%d")), int(post.get('dateTime').strftime("%H")), int(post.get('dateTime').strftime("%M")), 0, tzinfo=pytz.utc)
-            loc_dt = utc_dt.astimezone(pacific)
+            loc_dt = utc_dt.astimezone(timezone('America/Los_Angeles'))
             if int(loc_dt.strftime("%H")) > 12:
                 hour = str(int(loc_dt.strftime("%H")) - 12)
                 loc_dt = loc_dt.strftime("%m/%d/%Y, " + hour + ":%M PM PT")
@@ -252,7 +249,7 @@ def render_special_education_forum():
     else:
         for post in collection.find():
             utc_dt = datetime(int(post.get('dateTime').strftime("%Y")), int(post.get('dateTime').strftime("%m")), int(post.get('dateTime').strftime("%d")), int(post.get('dateTime').strftime("%H")), int(post.get('dateTime').strftime("%M")), 0, tzinfo=pytz.utc)
-            loc_dt = utc_dt.astimezone(pacific)
+            loc_dt = utc_dt.astimezone(timezone('America/Los_Angeles'))
             if int(loc_dt.strftime("%H")) > 12:
                 hour = str(int(loc_dt.strftime("%H")) - 12)
                 loc_dt = loc_dt.strftime("%m/%d/%Y, " + hour + ":%M PM PT")
