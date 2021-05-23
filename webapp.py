@@ -90,7 +90,7 @@ def render_english_learner_forum():
     #try:
     if 'github_token' in session: #session['user_data']['login'] == admin1 or session['user_data']['login'] == admin2 or session['user_data']['login'] == admin3 or session['user_data']['login'] == admin4 or session['user_data']['login'] == admin5 or session['user_data']['login'] == admin6 or session['user_data']['login'] == admin7:
         for post in collection.find():
-            bigString1 = bigString1 + Markup ('<tr><td class="col1"><img src="/static/images/person.png" alt="icon" width="30" height="30"></td>')  
+            bigString1 = bigString1 + Markup('<tr><td class="col1"><img src="/static/images/person.png" alt="icon" width="30" height="30"></td>')  
             bigString1 = bigString1 + Markup('<td class="col2"><form action="/viewELLU"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton"><b>' + post.get('postTitle') + '</b></button></form></td>')
             if post.get('parentEmail') == "":
                 bigString1 = bigString1 + Markup('<td class="col3"><i>' + post.get('parentName') + ' / ' + post.get('studentName+grade') + ' / Email not provided</i></td>')
@@ -114,7 +114,7 @@ def render_english_learner_forum():
     else:
         for post in collection.find():
             if(post.get('approved') == "true"):
-                bigString1 = bigString1 + Markup ('<tr><td class="col1"><img src="/static/images/person.png" alt="icon" width="30" height="30"></span></td>')  
+                bigString1 = bigString1 + Markup('<tr><td class="col1"><img src="/static/images/person.png" alt="icon" width="30" height="30"></span></td>')  
                 bigString1 = bigString1 + Markup('<td class="col2"><form action="/viewELLU"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton"><b>' + post.get('postTitle') + '</b></button></form></td>')
                 if(post.get('anonymous') == "true"):
                     bigString1 = bigString1 + Markup('<td class="col3"><i>Anonymous Post</i></td>')
@@ -186,7 +186,7 @@ def render_special_education_forum():
     #try:
     if 'github_token' in session: 
         for post in collection.find():
-            bigString1 = bigString1 + Markup ('<tr><td class="col1"><img src="/static/images/person.png" alt="icon" width="30" height="30"></span></td>')  
+            bigString1 = bigString1 + Markup('<tr><td class="col1"><img src="/static/images/person.png" alt="icon" width="30" height="30"></span></td>')  
             bigString1 = bigString1 + Markup('<td class="col2"><form action="/viewSEU"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton"><b>' + post.get('postTitle') + '</b></button></form></td>')
             if post.get('parentEmail') == "":
                 bigString1 = bigString1 + Markup('<td class="col3"><i>' + post.get('parentName') + ' / ' + post.get('studentName+grade') + ' / Email not provided</i></td>')
@@ -210,7 +210,7 @@ def render_special_education_forum():
     else:
         for post in collection.find():
             if(post.get('approved') == "true"):
-                bigString1 = bigString1 + Markup ('<tr><td class="col1"><img src="/static/images/person.png" alt="icon" width="30" height="30"></td>')  
+                bigString1 = bigString1 + Markup('<tr><td class="col1"><img src="/static/images/person.png" alt="icon" width="30" height="30"></td>')  
                 bigString1 = bigString1 + Markup('<td class="col2"><form action="/viewSEU"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton"><b>' + post.get('postTitle') + '</b></button></form></td>')
                 if(post.get('anonymous') == "true"):
                     bigString1 = bigString1 + Markup('<td class="col3"><i>Anonymous Post</i></td>')
@@ -273,25 +273,9 @@ def renderUserPostSubmissionELL():
         client = pymongo.MongoClient(connection_string)
         db = client[db_name]
         today = datetime.now()
-        #if(int(today.strftime("%H")) + 5 > 12):
-        #    hour = str(int(today.strftime("%H")) + 5 - 12)
-        #    today = today.strftime("%m/%d/%Y, " + hour + ":%M AM PT")
-        #else:
-        #    hour = str(int(today.strftime("%H")) + 5)
-        #    today = today.strftime("%m/%d/%Y, " + hour + ":%M PM PT")
-        #today = today.strftime("%m/%d/%Y, %H:%M GMT")
-        #session['userTitle']=request.form['userTitle']
-        #session['userComment']=request.form['userComment']
-        #session['userName']=request.form['userName']
-        #session['userStudent']=request.form['userStudent']
-        #session['userEmail']=request.form['userEmail']
         anonymous = request.form['anon']
-        #if request.form('anon'): #getList
-        #    anonymous = "true"
-        #else:
-        #    anonymous = "false"
         title = request.form['userTitle']
-        message = Markup(request.form['userComment'])
+        message = request.form['userComment']
         name = request.form['userName']
         student = request.form['userStudent']
         email = request.form['userEmail']
@@ -310,18 +294,8 @@ def renderAdminPostSubmissionELL():
         client = pymongo.MongoClient(connection_string)
         db = client[db_name]
         today = datetime.now()
-        #if(int(today.strftime("%H")) + 5 > 12):
-        #    hour = str(int(today.strftime("%H")) + 5 - 12)
-        #    today = today.strftime("%m/%d/%Y, " + hour + ":%M AM PT")
-        #else:
-        #    hour = str(int(today.strftime("%H")) + 5)
-        #    today = today.strftime("%m/%d/%Y, " + hour + ":%M PM PT")
-        #today = today.strftime("%m/%d/%Y, %H:%M GMT")
-        #session['adminTitle']=request.form['adminTitle']
-        #session['adminComment']=request.form['adminComment']
-        #session['adminName']=request.form['adminName']
         title = request.form['adminTitle']
-        message = Markup(request.form['adminComment'])
+        message = request.form['adminComment']
         name = request.form['adminName']
         collection = db['ELLA']
         posts = {"comments": {"comment4":"comment 4", "comment5": "comment 5"},"postTitle":title,"postContent":message,"displayName": name, "dateTime": today}#put all info here using variables
@@ -338,25 +312,9 @@ def renderUserPostSubmissionSE():
         client = pymongo.MongoClient(connection_string)
         db = client[db_name]
         today = datetime.now()
-        #if(int(today.strftime("%H")) + 5 > 12):
-        #    hour = str(int(today.strftime("%H")) + 5 - 12)
-        #    today = today.strftime("%m/%d/%Y, " + hour + ":%M AM PT")
-        #else:
-        #    hour = str(int(today.strftime("%H")) + 5)
-        #    today = today.strftime("%m/%d/%Y, " + hour + ":%M PM PT")
-        #today = today.strftime("%m/%d/%Y, %H:%M GMT")
-        #session['userTitle']=request.form['userTitle']
-        #session['userComment']=request.form['userComment']
-        #session['userName']=request.form['userName']
-        #session['userStudent']=request.form['userStudent']
-        #session['userEmail']=request.form['userEmail']
         anonymous = request.form['anon']
-        #if request.form('anon'): #getList
-        #    anonymous = "true"
-        #else:
-        #    anonymous = "false"
         title = request.form['userTitle']
-        message = Markup(request.form['userComment'])
+        message = request.form['userComment']
         name = request.form['userName']
         student = request.form['userStudent']
         email = request.form['userEmail']
@@ -375,18 +333,8 @@ def renderAdminPostSubmissionSE():
         client = pymongo.MongoClient(connection_string)
         db = client[db_name]
         today = datetime.now()
-        #if(int(today.strftime("%H")) + 5 > 12):
-        #    hour = str(int(today.strftime("%H")) + 5 - 12)
-        #    today = today.strftime("%m/%d/%Y, " + hour + ":%M AM PT")
-        #else:
-        #    hour = str(int(today.strftime("%H")) + 5)
-        #    today = today.strftime("%m/%d/%Y, " + hour + ":%M PM PT")
-        #today = today.strftime("%m/%d/%Y, %H:%M GMT")
-        #session['adminTitle']=request.form['adminTitle']
-        #session['adminComment']=request.form['adminComment']
-        #session['adminName']=request.form['adminName']
         title = request.form['adminTitle']
-        message = Markup(request.form['adminComment'])
+        message = request.form['adminComment']
         name = request.form['adminName']
         collection = db['SEA']
         posts = {"comments": {"comment4":"comment 4", "comment5": "comment 5"},"postTitle":title,"postContent":message,"displayName": name, "dateTime": today}#put all info here using variables
@@ -446,6 +394,7 @@ def viewSEA():
     x = collection.find_one({'_id': ObjectId(objectIDPost)})
     postTitle = x.get('postTitle')
     postContent = x.get('postContent')
+    postContent = Markup(postContent[1:len(postContent)])
     dateTime = x.get('dateTime')
     displayName = x.get('displayName')
     info = ""
@@ -462,6 +411,7 @@ def viewSEU():
     x = collection.find_one({'_id': ObjectId(objectIDPost)})
     postTitle = x.get('postTitle')
     postContent = x.get('postContent')
+    postContent = Markup(postContent[1:len(postContent)])
     dateTime = x.get('dateTime')
     if 'github_token' in session:
         parentName = x.get('parentName')
@@ -490,6 +440,7 @@ def viewELLA():
     x = collection.find_one({'_id': ObjectId(objectIDPost)})
     postTitle = x.get('postTitle')
     postContent = x.get('postContent')
+    postContent = Markup(postContent[1:len(postContent)])
     dateTime = x.get('dateTime')
     displayName = x.get('displayName')
     info = ""
@@ -506,6 +457,7 @@ def viewELLU():
     x = collection.find_one({'_id': ObjectId(objectIDPost)})
     postTitle = x.get('postTitle')
     postContent = x.get('postContent')
+    postContent = Markup(postContent[1:len(postContent)])
     dateTime = x.get('dateTime')
     if 'github_token' in session:
         parentName = x.get('parentName')
