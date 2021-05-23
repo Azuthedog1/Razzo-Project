@@ -351,13 +351,13 @@ def newCommentA():
         db = client[db_name]
         collection = db['SEA']
         post = collection.find_one({'_id': ObjectId(objectIDPost)})
-        if x == None:
+        if post == None:
             collection = db['SEU']
             post = collection.find_one({'_id': ObjectId(objectIDPost)})
-        if x == None:
+        if post == None:
             collection = db['ELLA']
             post = collection.find_one({'_id': ObjectId(objectIDPost)})
-        if x == None:
+        if post == None:
             collection = db['ELLU']
             post = collection.find_one({'_id': ObjectId(objectIDPost)})
         #name = request.form['adminName']
