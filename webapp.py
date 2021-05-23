@@ -13,7 +13,8 @@ import pytz
 
 utc = pytz.utc
 pacific = timezone('America/Los_Angeles')
-fmt = '%Y-%m-%d %H:%M:%S %Z%z'
+fmtPM = '%m/%d/%Y, %H:%M:%S AM PT'
+fmtPM = '%m/%d/%Y, %H:%M:%S PM PT'
 
 app = Flask(__name__)
 
@@ -176,12 +177,18 @@ def render_special_education_forum():
             year = int(post.get('dateTime').strftime("%Y"))
             month = int(post.get('dateTime').strftime("%m"))
             day = int(post.get('dateTime').strftime("%d"))
-            hour = int(post.get('dateTime').strftime("%H"))
+            if int(post.get('dateTime').strftime("%H")) > 12:
+                hour = int(post.get('dateTime').strftime("%H")) - 12
+            else:
+                hour = int(post.get('dateTime').strftime("%H"))
             minute = int(post.get('dateTime').strftime("%M"))
             second = int(post.get('dateTime').strftime("%S"))
             utc_dt = datetime(year, month, day, hour, minute, second, tzinfo=utc)
             loc_dt = utc_dt.astimezone(pacific)
-            loc_dt.strftime(fmt)
+            if int(post.get('dateTime').strftime("%H")) > 12:
+                loc_dt.strftime(fmtPM)
+            else:
+                loc_dt.strftime(fmtAM)
             bigString1 = bigString1 + Markup('</button></form><i>' + str(loc_dt) + 'TEST PLEASE</i></td></tr>')
             postList.insert(0, bigString1)
             bigString1 = ""
