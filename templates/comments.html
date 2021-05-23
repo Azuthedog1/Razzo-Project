@@ -7,10 +7,8 @@
   <div class="discussionBox">
     <table class="toprow">
       <tr>
-        <td class="col1"><b>{{ title }}</b><br><i>{{ name }}{% if logged_in %}{{ information }}{% endif %}<br>{{ time }}</i></td>
-        <td class="col2"></td>
-        <td class="col3"></td>
-        <td class="col4">{% if logged_in %}<button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#adminModal">Comment</button>{% else %}<button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#userModal">Comment</button>{% endif %}</td>
+        <td class="headCol1"><b>{{ title }}</b><br><i>{{ name }}{% if logged_in %}{{ information }}{% endif %}<br>{{ time }}</i></td>
+        <td class="headCol2">{% if logged_in %}<button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#adminModal">Comment</button>{% else %}<button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#userModal">Comment</button>{% endif %}</td>
       </tr> <!-- Get this by assigning the object ID of each post document, using a submit button, and processing it in python --> <!-- we will also need to put the parent's full name, student name and grade here for only admins to see -->
     </table>
     <table class="commentPosts">
