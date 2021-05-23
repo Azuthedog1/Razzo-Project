@@ -11,7 +11,7 @@ from datetime import datetime, timedelta
 from pytz import timezone
 import pytz
 
-utc = pytz.utc
+#utc = pytz.utc
 pacific = timezone('America/Los_Angeles')
 
 app = Flask(__name__)
@@ -116,7 +116,7 @@ def render_english_learner_forum():
                 loc_dt = loc_dt.strftime("%m/%d/%Y, " + hour + ":%M PM PT")
             else:
                 loc_dt = loc_dt.strftime("%m/%d/%Y, %H:%M AM PT")
-            bigString1 = bigString1 + Markup('</button></form><i>' + str(loc_dt) + '</i></td></tr>')
+            bigString1 = bigString1 + Markup('</button></form><i>' + loc_dt + '</i></td></tr>')
             postList.insert(0, bigString1)
             bigString1 = ""
     else:
@@ -140,7 +140,7 @@ def render_english_learner_forum():
                     loc_dt = loc_dt.strftime("%m/%d/%Y, " + hour + ":%M PM PT")
                 else:
                     loc_dt = loc_dt.strftime("%m/%d/%Y, %H:%M AM PT")
-                bigString1 = bigString1 + Markup('<td class="col4"><i>' + str(loc_dt) + '</i></td></tr>')
+                bigString1 = bigString1 + Markup('<td class="col4"><i>' + loc_dt + '</i></td></tr>')
                 postList.insert(0, bigString1)
                 bigString1 = ""
     for item in postList:
@@ -165,7 +165,7 @@ def render_english_learner_forum():
             bigString2 = bigString2 + Markup('<tr><td class="col1"><img src="/static/images/person.png" alt="icon" width="30" height="30"></td>' +
                                              '<td class="col2"><form action="/viewELLA"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton"><b>' + post.get('postTitle') + '</b></button></form></td>' +
                                              '<td class="col3"><i>' + post.get('displayName') + '</i></td>' +
-                                             '<td class="col4"><form action="/deleteELL" method="post"><button type="submit" class="btn btn-danger btn-sm lineUp" name="delete" value="' + str(loc_dt) + '"><span class="glyphicon glyphicon-trash"></span>Confirm Delete</button></form><i>' + str(post.get('dateTime')) + '</i></td></tr>')
+                                             '<td class="col4"><form action="/deleteELL" method="post"><button type="submit" class="btn btn-danger btn-sm lineUp" name="delete" value="' + str(post.get('_id')) + '"><span class="glyphicon glyphicon-trash"></span>Confirm Delete</button></form><i>' + loc_dt + '</i></td></tr>')
             postList.insert(0, bigString2)
             bigString2 = ""
     else:
@@ -185,7 +185,7 @@ def render_english_learner_forum():
             bigString2 = bigString2 + Markup('<tr><td class="col1"><img src="/static/images/person.png" alt="icon" width="30" height="30"></span></td>' +
                                              '<td class="col2"><form action="/viewELLA"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton"><b>' + post.get('postTitle') + '</b></button></form></td>' +
                                              '<td class="col3"><i>' + post.get('displayName') + '</i></td>' +
-                                             '<td class="col4"><i>' + str(loc_dt) + '</i></td></tr>')
+                                             '<td class="col4"><i>' + loc_dt + '</i></td></tr>')
             postList.insert(0, bigString2)
             bigString2 = ""
     for item in postList:
@@ -232,7 +232,7 @@ def render_special_education_forum():
                 loc_dt = loc_dt.strftime("%m/%d/%Y, " + hour + ":%M PM PT")
             else:
                 loc_dt = loc_dt.strftime("%m/%d/%Y, %H:%M AM PT")
-            bigString1 = bigString1 + Markup('</button></form><i>' + str(loc_dt) + '</i></td></tr>')
+            bigString1 = bigString1 + Markup('</button></form><i>' + loc_dt + '</i></td></tr>')
             postList.insert(0, bigString1)
             bigString1 = ""
     else:
@@ -256,7 +256,7 @@ def render_special_education_forum():
                     loc_dt = loc_dt.strftime("%m/%d/%Y, " + hour + ":%M PM PT")
                 else:
                     loc_dt = loc_dt.strftime("%m/%d/%Y, %H:%M AM PT")
-                bigString1 = bigString1 + Markup('<td class="col4"><i>' + str(loc_dt) + '</i></td></tr>')
+                bigString1 = bigString1 + Markup('<td class="col4"><i>' + loc_dt + '</i></td></tr>')
                 postList.insert(0, bigString1)
                 bigString1 = ""
     for item in postList:
@@ -281,7 +281,7 @@ def render_special_education_forum():
             bigString2 = bigString2 + Markup('<tr><td class="col1"><img src="/static/images/person.png" alt="icon" width="30" height="30"></td>' +
                                              '<td class="col2"><form action="/viewSEA"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton"><b>' + post.get('postTitle') + '</b></button></form></td>' +
                                              '<td class="col3"><i>' + post.get('displayName') + '</i></td>' +
-                                             '<td class="col4"><form action="/deleteSE" method="post"><button type="submit" class="btn btn-danger btn-sm lineUp" name="delete" value="' + str(post.get('_id')) + '"><span class="glyphicon glyphicon-trash"></span>Confirm Delete</button></form><i>' + str(loc_dt) + '</i></td></tr>')
+                                             '<td class="col4"><form action="/deleteSE" method="post"><button type="submit" class="btn btn-danger btn-sm lineUp" name="delete" value="' + str(post.get('_id')) + '"><span class="glyphicon glyphicon-trash"></span>Confirm Delete</button></form><i>' + loc_dt + '</i></td></tr>')
             postList.insert(0, bigString2)
             bigString2 = ""
     else:
@@ -301,7 +301,7 @@ def render_special_education_forum():
             bigString2 = bigString2 + Markup('<tr><td class="col1"><img src="/static/images/person.png" alt="icon" width="30" height="30"></td>' +
                                              '<td class="col2"><form action="/viewSEA"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton"><b>' + post.get('postTitle') + '</b></button></form></td>' +
                                              '<td class="col3"><i>' + post.get('displayName') + '</i></td>' +
-                                             '<td class="col4"><i>' + str(loc_dt) + '</i></td></tr>')
+                                             '<td class="col4"><i>' + loc_dt + '</i></td></tr>')
             postList.insert(0, bigString2)
             bigString2 = ""
     for item in postList:
