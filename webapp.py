@@ -187,7 +187,7 @@ def render_special_education_forum():
             utc_dt = datetime(year, month, day, hour, minute, second, tzinfo=utc)
             loc_dt = utc_dt.astimezone(pacific)
             if int(loc_dt.strftime("%H")) > 12:
-                hour = int(loc_dt.strftime("%H")) - 12
+                hour = str(int(loc_dt.strftime("%H")) - 12)
                 loc_dt = loc_dt.strftime("%m/%d/%Y, " + hour + ":%M:%S PM PT")
             else:
                 loc_dt = loc_dt.strftime("%m/%d/%Y, %H:%M:%S AM PT")
