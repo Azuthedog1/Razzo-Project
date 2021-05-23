@@ -207,7 +207,7 @@ def render_special_education_forum():
     bigString1 = ""
     bigString2 = ""
     #try:
-    if 'github_token' in session: #if session['user_data']['login'] == admin1 or session['user_data']['login'] == admin2 or session['user_data']['login'] == admin3 or session['user_data']['login'] == admin4 or session['user_data']['login'] == admin5 or session['user_data']['login'] == admin6 or session['user_data']['login'] == admin7:
+    if 'github_token' in session: 
         for post in collection.find():
             bigString1 = bigString1 + Markup ('<tr><td class="col1"><img src="/static/images/person.png" alt="icon" width="30" height="30"></span></td>')  
             bigString1 = bigString1 + Markup('<td class="col2"><form action="/viewSEU"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton"><b>' + post.get('postTitle') + '</b></button></form></td>')
@@ -220,12 +220,7 @@ def render_special_education_forum():
                 bigString1 = bigString1 + Markup('<form action="/vetSE" method="post"><button type="submit" class="btn btn-warning btn-sm" name="vet" value="' + str(post.get('_id'))+ '">' + '<span class="glyphicon glyphicon-plus"></span>Vet')
             else:
                 bigString1 = bigString1 + Markup('<form action="/unvetSE" method="post"><button type="submit" class="btn btn-warning btn-sm" name="vet" value="' + str(post.get('_id'))+ '">' + '<span class="glyphicon glyphicon-minus">Unvet')
-            year = int(post.get('dateTime').strftime("%Y"))
-            month = int(post.get('dateTime').strftime("%m"))
-            day = int(post.get('dateTime').strftime("%d"))
-            hour = int(post.get('dateTime').strftime("%H"))
-            minute = int(post.get('dateTime').strftime("%M"))
-            utc_dt = datetime(year, month, day, hour, minute, 0, tzinfo=pytz.utc)
+            utc_dt = datetime(int(post.get('dateTime').strftime("%Y")), int(post.get('dateTime').strftime("%m")), int(post.get('dateTime').strftime("%d")), int(post.get('dateTime').strftime("%H")), int(post.get('dateTime').strftime("%M")), 0, tzinfo=pytz.utc)
             loc_dt = utc_dt.astimezone(pacific)
             if int(loc_dt.strftime("%H")) > 12:
                 hour = str(int(loc_dt.strftime("%H")) - 12)
