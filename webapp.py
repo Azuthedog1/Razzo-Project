@@ -333,7 +333,7 @@ def submitComment():
         if "comment" in keyList[-1]:
             lastNumber = keyList[-1]
             lastNumber = lastNumber.replace('comment', '')
-            lastNumber = str(int(lastNumber + 1))
+            lastNumber = str(int(lastNumber) + 1)
         else:
             lastNumber = "0"
         if 'github_token' in session:
