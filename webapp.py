@@ -370,7 +370,7 @@ def newCommentA():
             if("comment" + str(i) in post):
                 i += 1;
             else:
-                post["comment" + str(i)] = {"adminName" = request.form['adminName'], "adminComment" = request.form['adminComment']}
+                post["comment" + str(i)] = {"adminName": request.form['adminName'], "adminComment": request.form['adminComment']}
                 collection.delete_one({'_id': ObjectId(objectIDPost)})
                 collection.insert_one(post)
                 #collection.find_one_and_update(
