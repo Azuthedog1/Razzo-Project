@@ -100,7 +100,7 @@ def render_english_learner_forum():
             if(post.get('approved') == "false"):
                 bigString1 = bigString1 + Markup('<form action="/vetELL" method="post"><button type="submit" class="btn btn-warning btn-sm" name="vet" value="' + str(post.get('_id'))+ '">' + '<span class="glyphicon glyphicon-plus"></span>Vet')
             else:
-                bigString1 = bigString1 + Markup('<form action="/unvetELL" method="post"><button type="submit" class="btn btn-warning btn-sm" name="vet" value="' + str(post.get('_id'))+ '">' + '<span class="glyphicon glyphicon-minus">Unvet')
+                bigString1 = bigString1 + Markup('<form action="/unvetELL" method="post"><button type="submit" class="btn btn-warning btn-sm" name="vet" value="' + str(post.get('_id'))+ '">' + '<span class="glyphicon glyphicon-minus"></span>Unvet')
             utc_dt = datetime(int(post.get('dateTime').strftime("%Y")), int(post.get('dateTime').strftime("%m")), int(post.get('dateTime').strftime("%d")), int(post.get('dateTime').strftime("%H")), int(post.get('dateTime').strftime("%M")), 0, tzinfo=pytz.utc)
             loc_dt = utc_dt.astimezone(timezone('America/Los_Angeles'))
             if int(loc_dt.strftime("%H")) > 12:
@@ -114,7 +114,7 @@ def render_english_learner_forum():
     else:
         for post in collection.find():
             if(post.get('approved') == "true"):
-                bigString1 = bigString1 + Markup('<tr><td class="col1"><img src="/static/images/person.png" alt="icon" width="30" height="30"></span></td>')  
+                bigString1 = bigString1 + Markup('<tr><td class="col1"><img src="/static/images/person.png" alt="icon" width="30" height="30"></td>')  
                 bigString1 = bigString1 + Markup('<td class="col2"><form action="/viewELLU"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton"><b>' + post.get('postTitle') + '</b></button></form></td>')
                 if(post.get('anonymous') == "true"):
                     bigString1 = bigString1 + Markup('<td class="col3"><i>Anonymous Post</i></td>')
@@ -158,7 +158,7 @@ def render_english_learner_forum():
                 loc_dt = loc_dt.strftime("%m/%d/%Y, " + hour + ":%M PM PT")
             else:
                 loc_dt = loc_dt.strftime("%m/%d/%Y, %H:%M AM PT")
-            bigString2 = bigString2 + Markup('<tr><td class="col1"><img src="/static/images/person.png" alt="icon" width="30" height="30"></span></td>' +
+            bigString2 = bigString2 + Markup('<tr><td class="col1"><img src="/static/images/person.png" alt="icon" width="30" height="30"></td>' +
                                              '<td class="col2"><form action="/viewELLA"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton"><b>' + post.get('postTitle') + '</b></button></form></td>' +
                                              '<td class="col3"><i>' + post.get('adminName') + '</i></td>' +
                                              '<td class="col4"><i>' + loc_dt + '</i></td></tr>')
@@ -184,7 +184,7 @@ def render_special_education_forum():
     bigString2 = ""
     if 'github_token' in session: 
         for post in collection.find():
-            bigString1 = bigString1 + Markup('<tr><td class="col1"><img src="/static/images/person.png" alt="icon" width="30" height="30"></span></td>')  
+            bigString1 = bigString1 + Markup('<tr><td class="col1"><img src="/static/images/person.png" alt="icon" width="30" height="30"></td>')  
             bigString1 = bigString1 + Markup('<td class="col2"><form action="/viewSEU"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton"><b>' + post.get('postTitle') + '</b></button></form></td>')
             if post.get('parentEmail') == "":
                 bigString1 = bigString1 + Markup('<td class="col3"><i>' + post.get('parentName') + ' / ' + post.get('studentNameGrade') + ' / Email not provided</i></td>')
@@ -194,7 +194,7 @@ def render_special_education_forum():
             if(post.get('approved') == "false"):
                 bigString1 = bigString1 + Markup('<form action="/vetSE" method="post"><button type="submit" class="btn btn-warning btn-sm" name="vet" value="' + str(post.get('_id'))+ '">' + '<span class="glyphicon glyphicon-plus"></span>Vet')
             else:
-                bigString1 = bigString1 + Markup('<form action="/unvetSE" method="post"><button type="submit" class="btn btn-warning btn-sm" name="vet" value="' + str(post.get('_id'))+ '">' + '<span class="glyphicon glyphicon-minus">Unvet')
+                bigString1 = bigString1 + Markup('<form action="/unvetSE" method="post"><button type="submit" class="btn btn-warning btn-sm" name="vet" value="' + str(post.get('_id'))+ '">' + '<span class="glyphicon glyphicon-minus"></span>Unvet')
             utc_dt = datetime(int(post.get('dateTime').strftime("%Y")), int(post.get('dateTime').strftime("%m")), int(post.get('dateTime').strftime("%d")), int(post.get('dateTime').strftime("%H")), int(post.get('dateTime').strftime("%M")), 0, tzinfo=pytz.utc)
             loc_dt = utc_dt.astimezone(timezone('America/Los_Angeles'))
             if int(loc_dt.strftime("%H")) > 12:
@@ -329,26 +329,19 @@ def submitComment():
         if post == None:
             collection = db['ELLU']
             post = collection.find_one({'_id': ObjectId(objectIDPost)})
-        if 'github_token' in session:
-            i = 0
-            while i < len(post) and i != -1:
-                if("comment" + str(i) in post):
-                    i += 1
-                else:
-                    post["comment" + str(i)] = {"adminName": request.form['adminName'], "postContent": request.form['adminMessage']}
-                    collection.delete_one({'_id': ObjectId(objectIDPost)})
-                    collection.insert_one(post)
-                    i = -1
+        if "comment" in post.keys()[-1]:
+            lastNumber = post.keys()[-1]
+            lastNumber = lastKey.replace('comment', '')
         else:
-            i = 0
-            while i < len(post) and i != -1:
-                if("comment" + str(i) in post):
-                    i += 1
-                else:
-                    post["comment" + str(i)] = {"parentName": request.form['userName'], "studentNameGrade": request.form['userStudent'], "anonymous": request.form['anon'], "dateTime": datetime.now(), "postContent": request.form['userMessage'], "approved": "false"}
-                    collection.delete_one({'_id': ObjectId(objectIDPost)})
-                    collection.insert_one(post)
-                    i = -1
+            lastNumber = "0"
+        if 'github_token' in session:
+            post["comment" + lastNumber] = {"adminName": request.form['adminName'], "postContent": request.form['adminMessage']}
+            collection.delete_one({'_id': ObjectId(objectIDPost)})
+            collection.insert_one(post)
+        else:
+            post["comment" + lastNumber] = {"parentName": request.form['userName'], "studentNameGrade": request.form['userStudent'], "anonymous": request.form['anon'], "dateTime": datetime.now(), "postContent": request.form['userMessage'], "approved": "false"}
+            collection.delete_one({'_id': ObjectId(objectIDPost)})
+            collection.insert_one(post)
     return render_template('information.html')
 
 @app.route('/viewSEA')
@@ -373,43 +366,43 @@ def viewSEA():
         loc_dt = loc_dt.strftime("%m/%d/%Y, %H:%M AM PT")
     displayName = post.get('adminName')
     bigString = ''
-    if 'github_token' in session:
-        i = 0
-        while i - z < len(post) and i != -1:
-            if("comment" + str(i) in post):
-                utc_dt = datetime(int(post.get('dateTime').strftime("%Y")), int(post.get('dateTime').strftime("%m")), int(post.get('dateTime').strftime("%d")), int(post.get('dateTime').strftime("%H")), int(post.get('dateTime').strftime("%M")), 0, tzinfo=pytz.utc)
-                loc_dt = utc_dt.astimezone(timezone('America/Los_Angeles'))
-                if int(loc_dt.strftime("%H")) > 12:
-                    hour = str(int(loc_dt.strftime("%H")) - 12)
-                    loc_dt = loc_dt.strftime("%m/%d/%Y, " + hour + ":%M PM PT")
-                else:
-                    loc_dt = loc_dt.strftime("%m/%d/%Y, %H:%M AM PT")
-                if post.get("comment" + str(i), {}).get("adminName") != None: 
-                    bigstring += Markup('<tr class="commentBox"><td class="comments"><b>' + post.get("comment" + str(i), {}).get("adminName") + '</b> by ' + post.get("comment" + str(i), {}).get("adminName"))
-                    if post.get('parentEmail') == "": #'<form action="/deleteSE" method="post"><button type="submit" class="btn btn-danger btn-sm lineUp" name="delete" value="' + str(post.get('_id')) + '"><span class="glyphicon glyphicon-trash"></span>Confirm Delete</button></form>'
-                    
-                    else:                             #'<form action="/vetELL" method="post"><button type="submit" class="btn btn-warning btn-sm" name="vet" value="' + str(post.get('_id'))+ '">' + '<span class="glyphicon glyphicon-plus"></span>Vet'
-                    
-                    if(post.get('approved') == "false"):
-                    else:
-                    bigstring += Markup('<tr class="commentBox"><td class="comments"><td>')
-                    i += 1
-                else:
-            else:
-                post["comment" + str(i)] = {"adminName": request.form['adminName'], "postContent": request.form['adminMessage']}
-                collection.delete_one({'_id': ObjectId(objectIDPost)})
-                collection.insert_one(post)
-                i = -1b
-    else:
-        i = 0
-        while i < len(post) and i != -1:
-            if("comment" + str(i) in post):
-                i += 1
-            else:
-                post["comment" + str(i)] = {"parentName": request.form['userName'], "studentNameGrade": request.form['userStudent'], "anonymous": request.form['anon'], "dateTime": datetime.now(), "postContent": request.form['userMessage'], "approved": "false"}
-                collection.delete_one({'_id': ObjectId(objectIDPost)})
-                collection.insert_one(post)
-                i = -1
+    #if 'github_token' in session:
+    #    i = 0
+    #    while i - z < len(post) and i != -1:
+    #        if("comment" + str(i) in post):
+    #            utc_dt = datetime(int(post.get('dateTime').strftime("%Y")), int(post.get('dateTime').strftime("%m")), int(post.get('dateTime').strftime("%d")), int(post.get('dateTime').strftime("%H")), int(post.get('dateTime').strftime("%M")), 0, tzinfo=pytz.utc)
+    #            loc_dt = utc_dt.astimezone(timezone('America/Los_Angeles'))
+    #            if int(loc_dt.strftime("%H")) > 12:
+    #                hour = str(int(loc_dt.strftime("%H")) - 12)
+    #                loc_dt = loc_dt.strftime("%m/%d/%Y, " + hour + ":%M PM PT")
+    #            else:
+    #                loc_dt = loc_dt.strftime("%m/%d/%Y, %H:%M AM PT")
+    #            if post.get("comment" + str(i), {}).get("adminName") != None: 
+    #                bigstring += Markup('<tr class="commentBox"><td class="comments"><b>' + post.get("comment" + str(i), {}).get("adminName") + '</b> by ' + post.get("comment" + str(i), {}).get("adminName"))
+    #                if post.get('parentEmail') == "": #'<form action="/deleteSE" method="post"><button type="submit" class="btn btn-danger btn-sm lineUp" name="delete" value="' + str(post.get('_id')) + '"><span class="glyphicon glyphicon-trash"></span>Confirm Delete</button></form>'
+    #                
+    #                else:                             #'<form action="/vetELL" method="post"><button type="submit" class="btn btn-warning btn-sm" name="vet" value="' + str(post.get('_id'))+ '">' + '<span class="glyphicon glyphicon-plus"></span>Vet'
+    #                
+    #                if(post.get('approved') == "false"):
+    #                else:
+    #                bigstring += Markup('<tr class="commentBox"><td class="comments"><td>')
+    #                i += 1
+    #            else:
+    #        else:
+    #            post["comment" + str(i)] = {"adminName": request.form['adminName'], "postContent": request.form['adminMessage']}
+    #            collection.delete_one({'_id': ObjectId(objectIDPost)})
+    #            collection.insert_one(post)
+    #            i = -1b
+    #else:
+    #    i = 0
+    #    while i < len(post) and i != -1:
+    #        if("comment" + str(i) in post):
+    #            i += 1
+    #        else:
+    #            post["comment" + str(i)] = {"parentName": request.form['userName'], "studentNameGrade": request.form['userStudent'], "anonymous": request.form['anon'], "dateTime": datetime.now(), "postContent": request.form['userMessage'], "approved": "false"}
+    #            collection.delete_one({'_id': ObjectId(objectIDPost)})
+    #            collection.insert_one(post)
+    #            i = -1
     return render_template('comments.html', title = postTitle, name = displayName, information = '', time = loc_dt, content = postContent, ID = objectIDPost, comments = bigString)
 
 @app.route('/viewSEU')
