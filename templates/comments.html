@@ -33,8 +33,8 @@
             <textarea class="form-control" rows="1" name="adminName" required></textarea>
           </div>
           <div class="form-group">
-            <label for="adminComment">Message:</label>
-            <input name="adminComment" type="hidden">
+            <label for="adminMessage">Message:</label>
+            <input name="adminMessage" type="hidden">
             <div id="editor">
               <p></p>
             </div>
@@ -65,8 +65,8 @@
       <div class="modal-body">
         <form action="/submitCommentU" method="POST" id="userform"> <!-- Replace most of this form with a jinja variable. An admin posting a comment or post on the user forum should not have to answer certain questions. -->
           <div class="form-group">
-            <label for="userComment">Message:</label>
-            <input name="userComment" type="hidden">
+            <label for="userMessage">Message:</label>
+            <input name="userMessage" type="hidden">
             <div id="editor2">
               <p></p>
             </div>
