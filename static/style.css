@@ -150,7 +150,7 @@ tr {
   display: none;
 }
 
-.footer {
+#footer {
   background-color: grey;
   width: 100%;
   height: 300px;
