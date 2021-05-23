@@ -412,8 +412,8 @@ def viewSEU():
     x = collection.find_one({'_id': ObjectId(objectIDPost)})
     postTitle = x.get('postTitle')
     postContent = x.get('postContent')
+    postContent = postContent.replace('\"', '')
     postContent = Markup(postContent[1:len(postContent)-1])
-    postContent = postContent.replace('\"', "")
     dateTime = x.get('dateTime')
     if 'github_token' in session:
         parentName = x.get('parentName')
@@ -442,8 +442,8 @@ def viewELLA():
     x = collection.find_one({'_id': ObjectId(objectIDPost)})
     postTitle = x.get('postTitle')
     postContent = x.get('postContent')
+    postContent = postContent.replace('\"', '')
     postContent = Markup(postContent[1:len(postContent)-1])
-    postContent = postContent.replace('\"', "")
     dateTime = x.get('dateTime')
     displayName = x.get('displayName')
     info = ""
@@ -460,8 +460,8 @@ def viewELLU():
     x = collection.find_one({'_id': ObjectId(objectIDPost)})
     postTitle = x.get('postTitle')
     postContent = x.get('postContent')
+    postContent = postContent.replace('\"', '')
     postContent = Markup(postContent[1:len(postContent)-1])
-    postContent = postContent.replace('\"', "")
     dateTime = x.get('dateTime')
     if 'github_token' in session:
         parentName = x.get('parentName')
