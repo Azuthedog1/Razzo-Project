@@ -396,10 +396,16 @@ def viewSEA():
     postContent = x.get('postContent')
     postContent = postContent.replace('\\"', '')
     postContent = Markup(postContent[1:len(postContent)-1])
-    dateTime = x.get('dateTime')
+    utc_dt = datetime(int(x.get('dateTime').strftime("%Y")), int(x.get('dateTime').strftime("%m")), int(x.get('dateTime').strftime("%d")), int(x.get('dateTime').strftime("%H")), int(x.get('dateTime').strftime("%M")), 0, tzinfo=pytz.utc)
+    loc_dt = utc_dt.astimezone(timezone('America/Los_Angeles'))
+    if int(loc_dt.strftime("%H")) > 12:
+        hour = str(int(loc_dt.strftime("%H")) - 12)
+        loc_dt = loc_dt.strftime("%m/%d/%Y, " + hour + ":%M PM PT")
+    else:
+        loc_dt = loc_dt.strftime("%m/%d/%Y, %H:%M AM PT")
     displayName = x.get('displayName')
     info = ""
-    return render_template('comments.html', title = postTitle, name = displayName, information = info, time = dateTime, content = postContent)
+    return render_template('comments.html', title = postTitle, name = displayName, information = info, time = loc_dt, content = postContent)
 
 @app.route('/viewSEU')
 def viewSEU():
@@ -414,7 +420,13 @@ def viewSEU():
     postContent = x.get('postContent')
     postContent = postContent.replace('\\"', '')
     postContent = Markup(postContent[1:len(postContent)-1])
-    dateTime = x.get('dateTime')
+    utc_dt = datetime(int(x.get('dateTime').strftime("%Y")), int(x.get('dateTime').strftime("%m")), int(x.get('dateTime').strftime("%d")), int(x.get('dateTime').strftime("%H")), int(x.get('dateTime').strftime("%M")), 0, tzinfo=pytz.utc)
+    loc_dt = utc_dt.astimezone(timezone('America/Los_Angeles'))
+    if int(loc_dt.strftime("%H")) > 12:
+        hour = str(int(loc_dt.strftime("%H")) - 12)
+        loc_dt = loc_dt.strftime("%m/%d/%Y, " + hour + ":%M PM PT")
+    else:
+        loc_dt = loc_dt.strftime("%m/%d/%Y, %H:%M AM PT")
     if 'github_token' in session:
         parentName = x.get('parentName')
         studentNameGrade = x.get('studentName+grade')
@@ -429,7 +441,7 @@ def viewSEU():
         studentNameGrade = ""
         parentEmail = ""
     info = " / " + studentNameGrade + " / " + parentEmail
-    return render_template('comments.html', title = postTitle, name = parentName, information = info, time = dateTime, content = postContent)
+    return render_template('comments.html', title = postTitle, name = parentName, information = info, time = loc_dt, content = postContent)
 
 @app.route('/viewELLA')
 def viewELLA():
@@ -444,10 +456,16 @@ def viewELLA():
     postContent = x.get('postContent')
     postContent = postContent.replace('\\"', '')
     postContent = Markup(postContent[1:len(postContent)-1])
-    dateTime = x.get('dateTime')
+    utc_dt = datetime(int(x.get('dateTime').strftime("%Y")), int(x.get('dateTime').strftime("%m")), int(x.get('dateTime').strftime("%d")), int(x.get('dateTime').strftime("%H")), int(x.get('dateTime').strftime("%M")), 0, tzinfo=pytz.utc)
+    loc_dt = utc_dt.astimezone(timezone('America/Los_Angeles'))
+    if int(loc_dt.strftime("%H")) > 12:
+        hour = str(int(loc_dt.strftime("%H")) - 12)
+        loc_dt = loc_dt.strftime("%m/%d/%Y, " + hour + ":%M PM PT")
+    else:
+        loc_dt = loc_dt.strftime("%m/%d/%Y, %H:%M AM PT")
     displayName = x.get('displayName')
     info = ""
-    return render_template('comments.html', title = postTitle, name = displayName, information = info, time = dateTime, content = postContent)
+    return render_template('comments.html', title = postTitle, name = displayName, information = info, time = loc_dt, content = postContent)
 
 @app.route('/viewELLU')
 def viewELLU():
@@ -462,7 +480,13 @@ def viewELLU():
     postContent = x.get('postContent')
     postContent = postContent.replace('\\"', '')
     postContent = Markup(postContent[1:len(postContent)-1])
-    dateTime = x.get('dateTime')
+    utc_dt = datetime(int(x.get('dateTime').strftime("%Y")), int(x.get('dateTime').strftime("%m")), int(x.get('dateTime').strftime("%d")), int(x.get('dateTime').strftime("%H")), int(x.get('dateTime').strftime("%M")), 0, tzinfo=pytz.utc)
+    loc_dt = utc_dt.astimezone(timezone('America/Los_Angeles'))
+    if int(loc_dt.strftime("%H")) > 12:
+        hour = str(int(loc_dt.strftime("%H")) - 12)
+        loc_dt = loc_dt.strftime("%m/%d/%Y, " + hour + ":%M PM PT")
+    else:
+        loc_dt = loc_dt.strftime("%m/%d/%Y, %H:%M AM PT")
     if 'github_token' in session:
         parentName = x.get('parentName')
         studentNameGrade = x.get('studentName+grade')
@@ -477,7 +501,7 @@ def viewELLU():
         studentNameGrade = ""
         parentEmail = ""
     info = " / " + studentNameGrade + " / " + parentEmail
-    return render_template('comments.html', title = postTitle, name = parentName, information = info, time = dateTime, content = postContent)
+    return render_template('comments.html', title = postTitle, name = parentName, information = info, time = loc_dt, content = postContent)
 
 @app.route('/deleteSE', methods=['GET', 'POST'])
 def deleteSE():
