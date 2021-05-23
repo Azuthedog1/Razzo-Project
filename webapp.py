@@ -13,8 +13,6 @@ import pytz
 
 utc = pytz.utc
 pacific = timezone('America/Los_Angeles')
-fmtAM = '%m/%d/%Y, %H:%M:%S AM PT'
-fmtPM = '%m/%d/%Y, %H:%M:%S PM PT'
 
 app = Flask(__name__)
 
@@ -111,7 +109,7 @@ def render_english_learner_forum():
             day = int(post.get('dateTime').strftime("%d"))
             hour = int(post.get('dateTime').strftime("%H"))
             minute = int(post.get('dateTime').strftime("%M"))
-            utc_dt = datetime(year, month, day, hour, minute, 0, tzinfo=utc)
+            utc_dt = datetime(year, month, day, hour, minute, 0, tzinfo=pytz.utc)
             loc_dt = utc_dt.astimezone(pacific)
             if int(loc_dt.strftime("%H")) > 12:
                 hour = str(int(loc_dt.strftime("%H")) - 12)
@@ -135,7 +133,7 @@ def render_english_learner_forum():
                 day = int(post.get('dateTime').strftime("%d"))
                 hour = int(post.get('dateTime').strftime("%H"))
                 minute = int(post.get('dateTime').strftime("%M"))
-                utc_dt = datetime(year, month, day, hour, minute, 0, tzinfo=utc)
+                utc_dt = datetime(year, month, day, hour, minute, 0, tzinfo=pytz.utc)
                 loc_dt = utc_dt.astimezone(pacific)
                 if int(loc_dt.strftime("%H")) > 12:
                     hour = str(int(loc_dt.strftime("%H")) - 12)
@@ -157,7 +155,7 @@ def render_english_learner_forum():
             day = int(post.get('dateTime').strftime("%d"))
             hour = int(post.get('dateTime').strftime("%H"))
             minute = int(post.get('dateTime').strftime("%M"))
-            utc_dt = datetime(year, month, day, hour, minute, 0, tzinfo=utc)
+            utc_dt = datetime(year, month, day, hour, minute, 0, tzinfo=pytz.utc)
             loc_dt = utc_dt.astimezone(pacific)
             if int(loc_dt.strftime("%H")) > 12:
                 hour = str(int(loc_dt.strftime("%H")) - 12)
@@ -177,7 +175,7 @@ def render_english_learner_forum():
             day = int(post.get('dateTime').strftime("%d"))
             hour = int(post.get('dateTime').strftime("%H"))
             minute = int(post.get('dateTime').strftime("%M"))
-            utc_dt = datetime(year, month, day, hour, minute, 0, tzinfo=utc)
+            utc_dt = datetime(year, month, day, hour, minute, 0, tzinfo=pytz.utc)
             loc_dt = utc_dt.astimezone(pacific)
             if int(loc_dt.strftime("%H")) > 12:
                 hour = str(int(loc_dt.strftime("%H")) - 12)
@@ -227,7 +225,7 @@ def render_special_education_forum():
             day = int(post.get('dateTime').strftime("%d"))
             hour = int(post.get('dateTime').strftime("%H"))
             minute = int(post.get('dateTime').strftime("%M"))
-            utc_dt = datetime(year, month, day, hour, minute, 0, tzinfo=utc)
+            utc_dt = datetime(year, month, day, hour, minute, 0, tzinfo=pytz.utc)
             loc_dt = utc_dt.astimezone(pacific)
             if int(loc_dt.strftime("%H")) > 12:
                 hour = str(int(loc_dt.strftime("%H")) - 12)
@@ -251,7 +249,7 @@ def render_special_education_forum():
                 day = int(post.get('dateTime').strftime("%d"))
                 hour = int(post.get('dateTime').strftime("%H"))
                 minute = int(post.get('dateTime').strftime("%M"))
-                utc_dt = datetime(year, month, day, hour, minute, 0, tzinfo=utc)
+                utc_dt = datetime(year, month, day, hour, minute, 0, tzinfo=pytz.utc)
                 loc_dt = utc_dt.astimezone(pacific)
                 if int(loc_dt.strftime("%H")) > 12:
                     hour = str(int(loc_dt.strftime("%H")) - 12)
@@ -273,7 +271,7 @@ def render_special_education_forum():
             day = int(post.get('dateTime').strftime("%d"))
             hour = int(post.get('dateTime').strftime("%H"))
             minute = int(post.get('dateTime').strftime("%M"))
-            utc_dt = datetime(year, month, day, hour, minute, 0, tzinfo=utc)
+            utc_dt = datetime(year, month, day, hour, minute, 0, tzinfo=pytz.utc)
             loc_dt = utc_dt.astimezone(pacific)
             if int(loc_dt.strftime("%H")) > 12:
                 hour = str(int(loc_dt.strftime("%H")) - 12)
@@ -293,7 +291,7 @@ def render_special_education_forum():
             day = int(post.get('dateTime').strftime("%d"))
             hour = int(post.get('dateTime').strftime("%H"))
             minute = int(post.get('dateTime').strftime("%M"))
-            utc_dt = datetime(year, month, day, hour, minute, 0, tzinfo=utc)
+            utc_dt = datetime(year, month, day, hour, minute, 0, tzinfo=pytz.utc)
             loc_dt = utc_dt.astimezone(pacific)
             if int(loc_dt.strftime("%H")) > 12:
                 hour = str(int(loc_dt.strftime("%H")) - 12)
