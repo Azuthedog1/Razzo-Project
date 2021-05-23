@@ -173,7 +173,8 @@ def render_special_education_forum():
                 bigString1 = bigString1 + Markup('<form action="/vetSE" method="post"><button type="submit" class="btn btn-warning btn-sm" name="vet" value="' + str(post.get('_id'))+ '">' + '<span class="glyphicon glyphicon-plus"></span>Vet')
             else:
                 bigString1 = bigString1 + Markup('<form action="/unvetSE" method="post"><button type="submit" class="btn btn-warning btn-sm" name="vet" value="' + str(post.get('_id'))+ '">' + '<span class="glyphicon glyphicon-minus">Unvet')
-            bigString1 = bigString1 + Markup('</button></form><i>' + str(post.get('dateTime')) + '</i></td></tr>')
+            loc_dt = pacific.localize(dateTime)
+            bigString1 = bigString1 + Markup('</button></form><i>' + loc_dt + '</i></td></tr>')
             postList.insert(0, bigString1)
             bigString1 = ""
     else:
