@@ -73,9 +73,9 @@ def authorized():
         except Exception as inst:
             session.clear()
             print(inst)
-            message='Unable to login, please try again.  '
+            message='Unable to login, please try again.'
     session['username'] = 'admin'
-    return render_template('login.html', message=message)
+    return render_template('login.html', message = message)
 
 @app.route('/englishlearnerforum')
 def render_english_learner_forum():
@@ -371,8 +371,7 @@ def viewSEA():
     else:
         loc_dt = loc_dt.strftime("%m/%d/%Y, %H:%M AM PT")
     displayName = post.get('adminName')
-    info = ""
-    return render_template('comments.html', title = postTitle, name = displayName, information = info, time = loc_dt, content = postContent, ID = objectIDPost)
+    return render_template('comments.html', title = postTitle, name = displayName, information = '', time = loc_dt, content = postContent, ID = objectIDPost, comments = bigString)
 
 @app.route('/viewSEU')
 def viewSEU():
@@ -431,8 +430,7 @@ def viewELLA():
     else:
         loc_dt = loc_dt.strftime("%m/%d/%Y, %H:%M AM PT")
     displayName = post.get('adminName')
-    info = ""
-    return render_template('comments.html', title = postTitle, name = displayName, information = info, time = loc_dt, content = postContent, ID = objectIDPost)
+    return render_template('comments.html', title = postTitle, name = displayName, information = '', time = loc_dt, content = postContent, ID = objectIDPost)
 
 @app.route('/viewELLU')
 def viewELLU():
