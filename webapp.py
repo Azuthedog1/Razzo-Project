@@ -173,8 +173,16 @@ def render_special_education_forum():
                 bigString1 = bigString1 + Markup('<form action="/vetSE" method="post"><button type="submit" class="btn btn-warning btn-sm" name="vet" value="' + str(post.get('_id'))+ '">' + '<span class="glyphicon glyphicon-plus"></span>Vet')
             else:
                 bigString1 = bigString1 + Markup('<form action="/unvetSE" method="post"><button type="submit" class="btn btn-warning btn-sm" name="vet" value="' + str(post.get('_id'))+ '">' + '<span class="glyphicon glyphicon-minus">Unvet')
-            loc_dt = str(pacific.localize(post.get('dateTime')))
-            bigString1 = bigString1 + Markup('</button></form><i>' + loc_dt + '</i></td></tr>')
+            year = int(post.get('dateTime').strftime("%Y"))
+            month = int(post.get('dateTime').strftime("%m"))
+            day = int(post.get('dateTime').strftime("%d"))
+            hour = int(post.get('dateTime').strftime("%H"))
+            minute = int(post.get('dateTime').strftime("%M"))
+            second = int(post.get('dateTime').strftime("%S"))
+            utc_dt = datetime(year, month, day, hour, minute, second, tzinfo=utc)
+            loc_dt = utc_dt.astimezone(pacific)
+            loc_dt.strftime(fmt)
+            bigString1 = bigString1 + Markup('</button></form><i>' + str(loc_dt) + 'TEST PLEASE</i></td></tr>')
             postList.insert(0, bigString1)
             bigString1 = ""
     else:
