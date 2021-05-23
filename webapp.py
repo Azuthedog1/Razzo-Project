@@ -344,7 +344,7 @@ def renderAdminPostSubmissionSE():
 @app.route('/submitCommentA', methods=['GET', 'POST'])
 def newCommentA():
     if request.method == 'POST':
-        objectIDPost = request.args['thread']
+        objectIDPost = request.args['ID']
         #connection_string = os.environ["MONGO_CONNECTION_STRING"]
         #db_name = os.environ["MONGO_DBNAME"]
         #client = pymongo.MongoClient(connection_string)
