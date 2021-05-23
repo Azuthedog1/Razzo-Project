@@ -92,9 +92,9 @@ def render_english_learner_forum():
             bigString1 = bigString1 + Markup('<tr><td class="col1"><img src="/static/images/person.png" alt="icon" width="30" height="30"></td>')  
             bigString1 = bigString1 + Markup('<td class="col2"><form action="/viewELLU"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton"><b>' + post.get('postTitle') + '</b></button></form></td>')
             if post.get('parentEmail') == "":
-                bigString1 = bigString1 + Markup('<td class="col3"><i>' + post.get('parentName') + ' / ' + post.get('studentName+grade') + ' / Email not provided</i></td>')
+                bigString1 = bigString1 + Markup('<td class="col3"><i>' + post.get('parentName') + ' / ' + post.get('studentNameGrade') + ' / Email not provided</i></td>')
             else:
-                bigString1 = bigString1 + Markup('<td class="col3"><i>' + post.get('parentName') + ' / ' + post.get('studentName+grade') + ' / ' + post.get('parentEmail') + '</i></td>')
+                bigString1 = bigString1 + Markup('<td class="col3"><i>' + post.get('parentName') + ' / ' + post.get('studentNameGrade') + ' / ' + post.get('parentEmail') + '</i></td>')
             bigString1 = bigString1 + Markup('<td class="col4"><form action="/deleteELL" method="post"><button type="submit" class="btn btn-danger btn-sm" name="delete" value="' + str(post.get('_id')) + '"><span class="glyphicon glyphicon-trash"></span>Confirm Delete</button></form>')
             if(post.get('approved') == "false"):
                 bigString1 = bigString1 + Markup('<form action="/vetELL" method="post"><button type="submit" class="btn btn-warning btn-sm" name="vet" value="' + str(post.get('_id'))+ '">' + '<span class="glyphicon glyphicon-plus"></span>Vet')
@@ -144,7 +144,7 @@ def render_english_learner_forum():
                 loc_dt = loc_dt.strftime("%m/%d/%Y, %H:%M AM PT")
             bigString2 = bigString2 + Markup('<tr><td class="col1"><img src="/static/images/person.png" alt="icon" width="30" height="30"></td>' +
                                              '<td class="col2"><form action="/viewELLA"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton"><b>' + post.get('postTitle') + '</b></button></form></td>' +
-                                             '<td class="col3"><i>' + post.get('displayName') + '</i></td>' +
+                                             '<td class="col3"><i>' + post.get('adminName') + '</i></td>' +
                                              '<td class="col4"><form action="/deleteELL" method="post"><button type="submit" class="btn btn-danger btn-sm lineUp" name="delete" value="' + str(post.get('_id')) + '"><span class="glyphicon glyphicon-trash"></span>Confirm Delete</button></form><i>' + loc_dt + '</i></td></tr>')
             postList.insert(0, bigString2)
             bigString2 = ""
@@ -159,7 +159,7 @@ def render_english_learner_forum():
                 loc_dt = loc_dt.strftime("%m/%d/%Y, %H:%M AM PT")
             bigString2 = bigString2 + Markup('<tr><td class="col1"><img src="/static/images/person.png" alt="icon" width="30" height="30"></span></td>' +
                                              '<td class="col2"><form action="/viewELLA"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton"><b>' + post.get('postTitle') + '</b></button></form></td>' +
-                                             '<td class="col3"><i>' + post.get('displayName') + '</i></td>' +
+                                             '<td class="col3"><i>' + post.get('adminName') + '</i></td>' +
                                              '<td class="col4"><i>' + loc_dt + '</i></td></tr>')
             postList.insert(0, bigString2)
             bigString2 = ""
@@ -186,9 +186,9 @@ def render_special_education_forum():
             bigString1 = bigString1 + Markup('<tr><td class="col1"><img src="/static/images/person.png" alt="icon" width="30" height="30"></span></td>')  
             bigString1 = bigString1 + Markup('<td class="col2"><form action="/viewSEU"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton"><b>' + post.get('postTitle') + '</b></button></form></td>')
             if post.get('parentEmail') == "":
-                bigString1 = bigString1 + Markup('<td class="col3"><i>' + post.get('parentName') + ' / ' + post.get('studentName+grade') + ' / Email not provided</i></td>')
+                bigString1 = bigString1 + Markup('<td class="col3"><i>' + post.get('parentName') + ' / ' + post.get('studentNameGrade') + ' / Email not provided</i></td>')
             else:
-                bigString1 = bigString1 + Markup('<td class="col3"><i>' + post.get('parentName') + ' / ' + post.get('studentName+grade') + ' / ' + post.get('parentEmail') + '</i></td>')
+                bigString1 = bigString1 + Markup('<td class="col3"><i>' + post.get('parentName') + ' / ' + post.get('studentNameGrade') + ' / ' + post.get('parentEmail') + '</i></td>')
             bigString1 = bigString1 + Markup('<td class="col4"><form action="/deleteSE" method="post"><button type="submit" class="btn btn-danger btn-sm lineUp" name="delete" value="' + str(post.get('_id')) + '"><span class="glyphicon glyphicon-trash"></span>Confirm Delete</button></form>')
             if(post.get('approved') == "false"):
                 bigString1 = bigString1 + Markup('<form action="/vetSE" method="post"><button type="submit" class="btn btn-warning btn-sm" name="vet" value="' + str(post.get('_id'))+ '">' + '<span class="glyphicon glyphicon-plus"></span>Vet')
@@ -238,7 +238,7 @@ def render_special_education_forum():
                 loc_dt = loc_dt.strftime("%m/%d/%Y, %H:%M AM PT")
             bigString2 = bigString2 + Markup('<tr><td class="col1"><img src="/static/images/person.png" alt="icon" width="30" height="30"></td>' +
                                              '<td class="col2"><form action="/viewSEA"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton"><b>' + post.get('postTitle') + '</b></button></form></td>' +
-                                             '<td class="col3"><i>' + post.get('displayName') + '</i></td>' +
+                                             '<td class="col3"><i>' + post.get('adminName') + '</i></td>' +
                                              '<td class="col4"><form action="/deleteSE" method="post"><button type="submit" class="btn btn-danger btn-sm lineUp" name="delete" value="' + str(post.get('_id')) + '"><span class="glyphicon glyphicon-trash"></span>Confirm Delete</button></form><i>' + loc_dt + '</i></td></tr>')
             postList.insert(0, bigString2)
             bigString2 = ""
@@ -253,7 +253,7 @@ def render_special_education_forum():
                 loc_dt = loc_dt.strftime("%m/%d/%Y, %H:%M AM PT")
             bigString2 = bigString2 + Markup('<tr><td class="col1"><img src="/static/images/person.png" alt="icon" width="30" height="30"></td>' +
                                              '<td class="col2"><form action="/viewSEA"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton"><b>' + post.get('postTitle') + '</b></button></form></td>' +
-                                             '<td class="col3"><i>' + post.get('displayName') + '</i></td>' +
+                                             '<td class="col3"><i>' + post.get('adminName') + '</i></td>' +
                                              '<td class="col4"><i>' + loc_dt + '</i></td></tr>')
             postList.insert(0, bigString2)
             bigString2 = ""
@@ -268,16 +268,9 @@ def renderUserPostSubmissionELL():
         db_name = os.environ["MONGO_DBNAME"]
         client = pymongo.MongoClient(connection_string)
         db = client[db_name]
-        today = datetime.now()
-        anonymous = request.form['anon']
-        title = request.form['userTitle']
-        message = request.form['userComment']
-        name = request.form['userName']
-        student = request.form['userStudent']
-        email = request.form['userEmail']
         collection = db['ELLU']
-        posts = {"postTitle":title,"postContent":message, "parentName": name, "studentName+grade": student, "parentEmail": email, "anonymous": anonymous,"dateTime": today, "approved":"false"}
-        collection.insert_one(posts)
+        post = {"postTitle": request.form['userTitle'], "parentName": request.form['userName'], "studentNameGrade": request.form['userStudent'], "parentEmail": request.form['userEmail'], "anonymous": request.form['anon'], "dateTime": datetime.now(), "postContent": request.form['userMessage'], "approved": "false"}
+        collection.insert_one(post)
     return render_english_learner_forum()
 
 @app.route('/adminSubmitPostELL', methods=['GET', 'POST']) #Same as above, except no name, student name and grade, no anonymous, etc.
@@ -287,13 +280,9 @@ def renderAdminPostSubmissionELL():
         db_name = os.environ["MONGO_DBNAME"]
         client = pymongo.MongoClient(connection_string)
         db = client[db_name]
-        today = datetime.now()
-        title = request.form['adminTitle']
-        message = request.form['adminComment']
-        name = request.form['adminName']
         collection = db['ELLA']
-        posts = {"postTitle":title,"postContent":message,"displayName": name, "dateTime": today}#put all info here using variables
-        collection.insert_one(posts)
+        post = {"postTitle": request.form['adminTitle'], "adminName": request.form['adminName'], "dateTime": datetime.now(), "postContent": request.form['adminMessage']}#put all info here using variables
+        collection.insert_one(post)
     return render_english_learner_forum() #this will also copy the code from def render_english_learner_forum from above.
     
 @app.route('/userSubmitPostSE', methods=['GET', 'POST'])
@@ -303,16 +292,9 @@ def renderUserPostSubmissionSE():
         db_name = os.environ["MONGO_DBNAME"]
         client = pymongo.MongoClient(connection_string)
         db = client[db_name]
-        today = datetime.now()
-        anonymous = request.form['anon']
-        title = request.form['userTitle']
-        message = request.form['userComment']
-        name = request.form['userName']
-        student = request.form['userStudent']
-        email = request.form['userEmail']
         collection = db['SEU']
-        posts = {"postTitle":title,"postContent": message, "parentName": name, "studentName+grade": student, "parentEmail": email, "anonymous": anonymous,"dateTime": today, "approved":"false"}
-        collection.insert_one(posts)
+        post = {"postTitle": request.form['userTitle'], "parentName": request.form['userName'], "studentNameGrade": request.form['userStudent'], "parentEmail": request.form['userEmail'], "anonymous": request.form['anon'], "dateTime": datetime.now(), "postContent": request.form['userMessage'], "approved": "false"}
+        collection.insert_one(post)
     return render_special_education_forum()
 
 @app.route('/adminSubmitPostSE', methods=['GET', 'POST'])
@@ -322,17 +304,13 @@ def renderAdminPostSubmissionSE():
         db_name = os.environ["MONGO_DBNAME"]
         client = pymongo.MongoClient(connection_string)
         db = client[db_name]
-        today = datetime.now()
-        title = request.form['adminTitle']
-        message = request.form['adminComment']
-        name = request.form['adminName']
         collection = db['SEA']
-        posts = {"postTitle":title,"postContent":message,"displayName": name, "dateTime": today}#put all info here using variables
-        collection.insert_one(posts)
+        post = {"postTitle": request.form['adminTitle'], "adminName": request.form['adminName'], "dateTime": datetime.now(), "postContent": request.form['adminMessage']}#put all info here using variables
+        collection.insert_one(post)
     return render_special_education_forum()
 
-@app.route('/submitCommentA', methods=['GET', 'POST'])
-def newCommentA():
+@app.route('/submitComment', methods=['GET', 'POST'])
+def submitComment():
     if request.method == 'POST':
         objectIDPost = request.form['ID']
         connection_string = os.environ["MONGO_CONNECTION_STRING"]
@@ -350,23 +328,26 @@ def newCommentA():
         if post == None:
             collection = db['ELLU']
             post = collection.find_one({'_id': ObjectId(objectIDPost)})
-        i = 0
-        while i < len(post) and i != -1:
-            if("comment" + str(i) in post):
-                i += 1
-            else:
-                post["comment" + str(i)] = {"adminName": request.form['adminName'], "adminComment": request.form['adminComment']}
-                collection.delete_one({'_id': ObjectId(objectIDPost)})
-                collection.insert_one(post)
-                i = -1
-        return render_template('information.html', info = post)
-    else:
-        return render_template('information.html')
-
-@app.route('/submitCommentU', methods=['GET', 'POST'])
-def newCommentU():
-    if request.method == 'POST':
-        objectIDPost = request.args['thread']
+        if 'github_token' in session:
+            i = 0
+            while i < len(post) and i != -1:
+                if("comment" + str(i) in post):
+                    i += 1
+                else:
+                    post["comment" + str(i)] = {"adminName": request.form['adminName'], "adminComment": request.form['adminComment']}
+                    collection.delete_one({'_id': ObjectId(objectIDPost)})
+                    collection.insert_one(post)
+                    i = -1
+        else:
+            i = 0
+            while i < len(post) and i != -1:
+                if("comment" + str(i) in post):
+                    i += 1
+                else:
+                    post["comment" + str(i)] = {"parentName": request.form['userName'], "studentNameGrade": request.form['userStudent'], "anonymous": request.form['anon'], "parentComment": request.form['userComment'], "approved": "false"}
+                    collection.delete_one({'_id': ObjectId(objectIDPost)})
+                    collection.insert_one(post)
+                    i = -1
     return render_template('information.html')
 
 @app.route('/viewSEA')
@@ -389,7 +370,7 @@ def viewSEA():
         loc_dt = loc_dt.strftime("%m/%d/%Y, " + hour + ":%M PM PT")
     else:
         loc_dt = loc_dt.strftime("%m/%d/%Y, %H:%M AM PT")
-    displayName = post.get('displayName')
+    displayName = post.get('adminName')
     info = ""
     return render_template('comments.html', title = postTitle, name = displayName, information = info, time = loc_dt, content = postContent, ID = objectIDPost)
 
@@ -415,7 +396,7 @@ def viewSEU():
         loc_dt = loc_dt.strftime("%m/%d/%Y, %H:%M AM PT")
     if 'github_token' in session:
         parentName = post.get('parentName')
-        studentNameGrade = post.get('studentName+grade')
+        studentNameGrade = post.get('studentNameGrade')
         parentEmail = post.get('parentEmail')
         if parentEmail == "":
             parentEmail = "Email not provided"
@@ -449,7 +430,7 @@ def viewELLA():
         loc_dt = loc_dt.strftime("%m/%d/%Y, " + hour + ":%M PM PT")
     else:
         loc_dt = loc_dt.strftime("%m/%d/%Y, %H:%M AM PT")
-    displayName = post.get('displayName')
+    displayName = post.get('adminName')
     info = ""
     return render_template('comments.html', title = postTitle, name = displayName, information = info, time = loc_dt, content = postContent, ID = objectIDPost)
 
@@ -475,7 +456,7 @@ def viewELLU():
         loc_dt = loc_dt.strftime("%m/%d/%Y, %H:%M AM PT")
     if 'github_token' in session:
         parentName = post.get('parentName')
-        studentNameGrade = post.get('studentName+grade')
+        studentNameGrade = post.get('studentNameGrade')
         parentEmail = post.get('parentEmail')
         if parentEmail == "":
             parentEmail = "Email not provided"
