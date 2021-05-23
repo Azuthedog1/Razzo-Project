@@ -329,9 +329,11 @@ def submitComment():
         if post == None:
             collection = db['ELLU']
             post = collection.find_one({'_id': ObjectId(objectIDPost)})
-        if "comment" in post.keys()[-1]:
-            lastNumber = post.keys()[-1]
+        keyList = post.keys()
+        if "comment" in keyList[-1]:
+            lastNumber = keyList[-1]
             lastNumber = lastKey.replace('comment', '')
+            lastNumber = str(int(lastNumber + 1))
         else:
             lastNumber = "0"
         if 'github_token' in session:
