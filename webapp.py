@@ -495,7 +495,7 @@ def viewELLU():
         loc_dt = loc_dt.strftime("%m/%d/%Y, %H:%M AM PT")
     if 'github_token' in session:
         parentName = post.get('parentName')
-        studentNameGrade = v.get('studentName+grade')
+        studentNameGrade = post.get('studentName+grade')
         parentEmail = post.get('parentEmail')
         if parentEmail == "":
             parentEmail = "Email not provided"
