@@ -98,18 +98,24 @@ function myFunction2() {
             <textarea class="form-control" rows="1" name="adminTitle" required></textarea>
           </div>
           <div class="form-group">
-            <label for="comment">Message:</label>
-            <textarea class="form-control" rows="5" name="adminComment" required></textarea>
-            <!--<div id="editor">
-              <p></p>
-              <p><br></p>
+            <label for="about">About me</label>
+            <input name="about" type="hidden">
+            <div id="editor">
+              <p>Type your message here...</p>
             </div>
             <script>
               var quill = new Quill('#editor', {
                 theme: 'snow'
               });
-            </script>-->
+            </script>
           </div>
+          <!--<div class="form-group">
+            <label for="comment">Message:</label>
+            <textarea class="form-control" rows="5" name="adminComment" required></textarea>
+            <div id="editor">
+              <p></p>
+              <p><br></p>
+            </div>-->
           <button type="submit" class="btn btn-primary">Submit</button>
         </form>
       </div>
