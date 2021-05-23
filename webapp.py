@@ -13,7 +13,7 @@ import pytz
 
 utc = pytz.utc
 pacific = timezone('America/Los_Angeles')
-fmtPM = '%m/%d/%Y, %H:%M:%S AM PT'
+fmtAM = '%m/%d/%Y, %H:%M:%S AM PT'
 fmtPM = '%m/%d/%Y, %H:%M:%S PM PT'
 
 app = Flask(__name__)
