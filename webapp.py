@@ -12,7 +12,7 @@ from pytz import timezone
 import pytz
 
 utc = pytz.utc
-eastern = timezone('America/Los_Angeles')
+pacific = timezone('America/Los_Angeles')
 fmt = '%Y-%m-%d %H:%M:%S %Z%z'
 
 app = Flask(__name__)
