@@ -223,7 +223,7 @@ def renderUserPostSubmissionELL():
         #else:
         #    hour = str(int(today.strftime("%H")) + 5)
         #    today = today.strftime("%m/%d/%Y, " + hour + ":%M PM PT")
-        today = today.strftime("%m/%d/%Y, %H:%M GMT")
+        #today = today.strftime("%m/%d/%Y, %H:%M GMT")
         #session['userTitle']=request.form['userTitle']
         #session['userComment']=request.form['userComment']
         #session['userName']=request.form['userName']
@@ -260,7 +260,7 @@ def renderAdminPostSubmissionELL():
         #else:
         #    hour = str(int(today.strftime("%H")) + 5)
         #    today = today.strftime("%m/%d/%Y, " + hour + ":%M PM PT")
-        today = today.strftime("%m/%d/%Y, %H:%M GMT")
+        #today = today.strftime("%m/%d/%Y, %H:%M GMT")
         #session['adminTitle']=request.form['adminTitle']
         #session['adminComment']=request.form['adminComment']
         #session['adminName']=request.form['adminName']
@@ -288,7 +288,7 @@ def renderUserPostSubmissionSE():
         #else:
         #    hour = str(int(today.strftime("%H")) + 5)
         #    today = today.strftime("%m/%d/%Y, " + hour + ":%M PM PT")
-        today = today.strftime("%m/%d/%Y, %H:%M GMT")
+        #today = today.strftime("%m/%d/%Y, %H:%M GMT")
         #session['userTitle']=request.form['userTitle']
         #session['userComment']=request.form['userComment']
         #session['userName']=request.form['userName']
@@ -325,7 +325,7 @@ def renderAdminPostSubmissionSE():
         #else:
         #    hour = str(int(today.strftime("%H")) + 5)
         #    today = today.strftime("%m/%d/%Y, " + hour + ":%M PM PT")
-        today = today.strftime("%m/%d/%Y, %H:%M GMT")
+        #today = today.strftime("%m/%d/%Y, %H:%M GMT")
         #session['adminTitle']=request.form['adminTitle']
         #session['adminComment']=request.form['adminComment']
         #session['adminName']=request.form['adminName']
