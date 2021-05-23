@@ -27,7 +27,7 @@
         <h4 class="modal-title">Admin Comment:</h4>
       </div>
       <div class="modal-body">
-        <form action="/submitCommentA" method="POST" id="adminform">
+        <form action="/submitComment" method="POST" id="adminform">
           <div class="form-group">
             <label for="name">Display Name:</label>
             <textarea class="form-control" rows="1" name="adminName" required></textarea>
@@ -63,7 +63,7 @@
         <h4 class="modal-title">Create Comment</h4>
       </div>
       <div class="modal-body">
-        <form action="/submitCommentU" method="POST" id="userform"> <!-- Replace most of this form with a jinja variable. An admin posting a comment or post on the user forum should not have to answer certain questions. -->
+        <form action="/submitComment" method="POST" id="userform"> <!-- Replace most of this form with a jinja variable. An admin posting a comment or post on the user forum should not have to answer certain questions. -->
           <div class="form-group">
             <label for="userMessage">Message:</label>
             <input name="userMessage" type="hidden">
