@@ -395,6 +395,7 @@ def viewSEA():
     postTitle = x.get('postTitle')
     postContent = x.get('postContent')
     postContent = Markup(postContent[1:len(postContent)-1])
+    postContent = postContent.replace('\"', "")
     dateTime = x.get('dateTime')
     displayName = x.get('displayName')
     info = ""
@@ -412,6 +413,7 @@ def viewSEU():
     postTitle = x.get('postTitle')
     postContent = x.get('postContent')
     postContent = Markup(postContent[1:len(postContent)-1])
+    postContent = postContent.replace('\"', "")
     dateTime = x.get('dateTime')
     if 'github_token' in session:
         parentName = x.get('parentName')
@@ -441,6 +443,7 @@ def viewELLA():
     postTitle = x.get('postTitle')
     postContent = x.get('postContent')
     postContent = Markup(postContent[1:len(postContent)-1])
+    postContent = postContent.replace('\"', "")
     dateTime = x.get('dateTime')
     displayName = x.get('displayName')
     info = ""
@@ -458,6 +461,7 @@ def viewELLU():
     postTitle = x.get('postTitle')
     postContent = x.get('postContent')
     postContent = Markup(postContent[1:len(postContent)-1])
+    postContent = postContent.replace('\"', "")
     dateTime = x.get('dateTime')
     if 'github_token' in session:
         parentName = x.get('parentName')
