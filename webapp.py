@@ -181,7 +181,6 @@ def render_special_education_forum():
     postList = []
     bigString1 = ""
     bigString2 = ""
-    #try:
     if 'github_token' in session: 
         for post in collection.find():
             bigString1 = bigString1 + Markup('<tr><td class="col1"><img src="/static/images/person.png" alt="icon" width="30" height="30"></span></td>')  
@@ -228,8 +227,7 @@ def render_special_education_forum():
         bigString1 = bigString1 + item
     postList.clear()
     collection = db['SEA']
-    #try:
-    if 'github_token' in session: #if session['user_data']['login'] == admin1 or session['user_data']['login'] == admin2 or session['user_data']['login'] == admin3 or session['user_data']['login'] == admin4 or session['user_data']['login'] == admin5 or session['user_data']['login'] == admin6 or session['user_data']['login'] == admin7:
+    if 'github_token' in session: 
         for post in collection.find():
             utc_dt = datetime(int(post.get('dateTime').strftime("%Y")), int(post.get('dateTime').strftime("%m")), int(post.get('dateTime').strftime("%d")), int(post.get('dateTime').strftime("%H")), int(post.get('dateTime').strftime("%M")), 0, tzinfo=pytz.utc)
             loc_dt = utc_dt.astimezone(timezone('America/Los_Angeles'))
@@ -280,9 +278,7 @@ def renderUserPostSubmissionELL():
         collection = db['ELLU']
         posts = {"postTitle":title,"postContent":message, "parentName": name, "studentName+grade": student, "parentEmail": email, "anonymous": anonymous,"dateTime": today, "approved":"false"}
         collection.insert_one(posts)
-        return render_english_learner_forum() #render_template('englishlearnerforum.html')
-    else:
-        return render_english_learner_forum()
+    return render_english_learner_forum()
 
 @app.route('/adminSubmitPostELL', methods=['GET', 'POST']) #Same as above, except no name, student name and grade, no anonymous, etc.
 def renderAdminPostSubmissionELL():
@@ -298,11 +294,9 @@ def renderAdminPostSubmissionELL():
         collection = db['ELLA']
         posts = {"postTitle":title,"postContent":message,"displayName": name, "dateTime": today}#put all info here using variables
         collection.insert_one(posts)
-        return render_english_learner_forum() #render_template('englishlearnerforum.html') #this will also copy the code from def render_english_learner_forum from above.
-    else:
-        return render_english_learner_forum()
+    return render_english_learner_forum() #this will also copy the code from def render_english_learner_forum from above.
     
-@app.route('/userSubmitPostSE', methods=['GET', 'POST']) #for the other forum
+@app.route('/userSubmitPostSE', methods=['GET', 'POST'])
 def renderUserPostSubmissionSE():
     if request.method == 'POST':
         connection_string = os.environ["MONGO_CONNECTION_STRING"]
@@ -319,9 +313,7 @@ def renderUserPostSubmissionSE():
         collection = db['SEU']
         posts = {"postTitle":title,"postContent": message, "parentName": name, "studentName+grade": student, "parentEmail": email, "anonymous": anonymous,"dateTime": today, "approved":"false"}
         collection.insert_one(posts)
-        return render_special_education_forum() #render_template('specialeducationforum.html') #this will also copy the code from def special_education_forum from above.
-    else:
-        return render_special_education_forum()
+    return render_special_education_forum()
 
 @app.route('/adminSubmitPostSE', methods=['GET', 'POST'])
 def renderAdminPostSubmissionSE():
@@ -337,9 +329,7 @@ def renderAdminPostSubmissionSE():
         collection = db['SEA']
         posts = {"postTitle":title,"postContent":message,"displayName": name, "dateTime": today}#put all info here using variables
         collection.insert_one(posts)
-        return render_special_education_forum()
-    else:
-        return render_special_education_forum()
+    return render_special_education_forum()
 
 @app.route('/submitCommentA', methods=['GET', 'POST'])
 def newCommentA():
@@ -360,24 +350,14 @@ def newCommentA():
         if post == None:
             collection = db['ELLU']
             post = collection.find_one({'_id': ObjectId(objectIDPost)})
-        #name = request.form['adminName']
-        #comment = request.form['adminComment']
-        #myquery = { "address": "Valley 345" }
-        #newvalues = { "$set": { "address": "Canyon 123" } }
-        #collection.update_one({'_id': ObjectId(objectIDPost)}, newvalues)
         i = 0
         while i < len(post) and i != -1:
             if("comment" + str(i) in post):
-                i += 1;
+                i += 1
             else:
                 post["comment" + str(i)] = {"adminName": request.form['adminName'], "adminComment": request.form['adminComment']}
                 collection.delete_one({'_id': ObjectId(objectIDPost)})
                 collection.insert_one(post)
-                #collection.find_one_and_update(
-                #    {"_id" : ObjectId(objectIDPost)},
-                #    {"$currentDate": {"some date": True}},
-                #    upsert = True
-                #)
                 i = -1
         return render_template('information.html', info = post)
     else:
