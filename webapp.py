@@ -345,21 +345,21 @@ def renderAdminPostSubmissionSE():
 def newCommentA():
     if request.method == 'POST':
         objectIDPost = request.form['ID']
-        #connection_string = os.environ["MONGO_CONNECTION_STRING"]
-        #db_name = os.environ["MONGO_DBNAME"]
-        #client = pymongo.MongoClient(connection_string)
-        #db = client[db_name]
-        #collection = db['SEA']
-        #x = collection.find_one({'_id': ObjectId(objectIDPost)})
-        #if x == None:
-        #    collection = db['SEU']
-        #    x = collection.find_one({'_id': ObjectId(objectIDPost)})
-        #if x == None:
-        #    collection = db['ELLA']
-        #    x = collection.find_one({'_id': ObjectId(objectIDPost)})
-        #if x == None:
-        #    collection = db['ELLU']
-        #    x = collection.find_one({'_id': ObjectId(objectIDPost)})
+        connection_string = os.environ["MONGO_CONNECTION_STRING"]
+        db_name = os.environ["MONGO_DBNAME"]
+        client = pymongo.MongoClient(connection_string)
+        db = client[db_name]
+        collection = db['SEA']
+        x = collection.find_one({'_id': ObjectId(objectIDPost)})
+        if x == None:
+            collection = db['SEU']
+            x = collection.find_one({'_id': ObjectId(objectIDPost)})
+        if x == None:
+            collection = db['ELLA']
+            x = collection.find_one({'_id': ObjectId(objectIDPost)})
+        if x == None:
+            collection = db['ELLU']
+            x = collection.find_one({'_id': ObjectId(objectIDPost)})
         #name = request.form['adminName']
         #comment = request.form['adminComment']
         #myquery = { "address": "Valley 345" }
@@ -371,7 +371,7 @@ def newCommentA():
         #    {"$currentDate": {"some date": True}},
         #    upsert = True
         #)
-        return render_template('information.html')
+        return render_template('information.html', info = x)
     else:
         return render_template('information.html')
 
