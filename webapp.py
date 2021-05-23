@@ -220,7 +220,7 @@ def renderUserPostSubmissionELL():
         db_name = os.environ["MONGO_DBNAME"]
         client = pymongo.MongoClient(connection_string)
         db = client[db_name]
-        today = datetime.now()
+        today = datetime.tzinfo()
         #if(int(today.strftime("%H")) + 5 > 12):
         #    hour = str(int(today.strftime("%H")) + 5 - 12)
         #    today = today.strftime("%m/%d/%Y, " + hour + ":%M AM PT")
@@ -257,7 +257,7 @@ def renderAdminPostSubmissionELL():
         db_name = os.environ["MONGO_DBNAME"]
         client = pymongo.MongoClient(connection_string)
         db = client[db_name]
-        today = datetime.now()
+        today = datetime.tzinfo()
         #if(int(today.strftime("%H")) + 5 > 12):
         #    hour = str(int(today.strftime("%H")) + 5 - 12)
         #    today = today.strftime("%m/%d/%Y, " + hour + ":%M AM PT")
@@ -285,7 +285,7 @@ def renderUserPostSubmissionSE():
         db_name = os.environ["MONGO_DBNAME"]
         client = pymongo.MongoClient(connection_string)
         db = client[db_name]
-        today = datetime.now()
+        today = datetime.tzinfo()
         #if(int(today.strftime("%H")) + 5 > 12):
         #    hour = str(int(today.strftime("%H")) + 5 - 12)
         #    today = today.strftime("%m/%d/%Y, " + hour + ":%M AM PT")
@@ -322,7 +322,7 @@ def renderAdminPostSubmissionSE():
         db_name = os.environ["MONGO_DBNAME"]
         client = pymongo.MongoClient(connection_string)
         db = client[db_name]
-        today = datetime.now()
+        today = datetime.tzinfo()
         #if(int(today.strftime("%H")) + 5 > 12):
         #    hour = str(int(today.strftime("%H")) + 5 - 12)
         #    today = today.strftime("%m/%d/%Y, " + hour + ":%M AM PT")
