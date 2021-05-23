@@ -106,7 +106,7 @@ function myFunction2() {
             <script>
               var quill = new Quill('#editor', {
               theme: 'snow'
-               });
+              });
             </script>
           </div>
           <!--<div class="form-group">
@@ -140,10 +140,22 @@ function myFunction2() {
             <textarea class="form-control" rows="1" name="userTitle" required></textarea>
           </div>
           <div class="form-group">
+            <label for="userComment">Message:</label>
+            <input name="userComment" type="hidden">
+            <div id="editor2">
+              <p></p>
+            </div>
+            <script>
+              var quill2 = new Quill('#editor2', {
+              theme: 'snow'
+              });
+            </script>
+          </div>
+          <!--<div class="form-group">
             <label for="comment">Message:</label>
             <textarea class="form-control" rows="5" name="userComment" required></textarea>
           </div>
-            <!--<div id="editor2">
+            <div id="editor2">
               <p></p>
               <p><br></p>
             </div>
