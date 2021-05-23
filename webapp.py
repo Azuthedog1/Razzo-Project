@@ -100,7 +100,7 @@ def render_english_learner_forum():
                 bigString1 = bigString1 + Markup('<form action="/vetELL" method="post"><button type="submit" class="btn btn-warning btn-sm" name="vet" value="' + str(post.get('_id'))+ '">' + '<span class="glyphicon glyphicon-plus"></span>Vet')
             else:
                 bigString1 = bigString1 + Markup('<form action="/unvetELL" method="post"><button type="submit" class="btn btn-warning btn-sm" name="vet" value="' + str(post.get('_id'))+ '">' + '<span class="glyphicon glyphicon-minus">Unvet')
-            utc_dt = datetime(int(post.get('dateTime').strftime("%Y")), int(post.get('dateTime').strftime("%m")), int(post.get('dateTime').strftime("%d")), int(post.get('dateTime').strftime("%H")), int(post.get('dateTime').strftime("%M")), 0, tzinfo=pytz.utc)
+            utc_dt = datetime(post.get('dateTime'), tzinfo = pytz.utc) #int(post.get('dateTime').strftime("%Y")), int(post.get('dateTime').strftime("%m")), int(post.get('dateTime').strftime("%d")), int(post.get('dateTime').strftime("%H")), int(post.get('dateTime').strftime("%M")), 0, tzinfo=pytz.utc)
             loc_dt = utc_dt.astimezone(timezone('America/Los_Angeles'))
             if int(loc_dt.strftime("%H")) > 12:
                 hour = str(int(loc_dt.strftime("%H")) - 12)
