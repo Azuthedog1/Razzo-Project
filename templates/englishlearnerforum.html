@@ -134,7 +134,7 @@ function myFunction2() {
         <h4 class="modal-title">Create Post</h4>
       </div>
       <div class="modal-body">
-        <form action="/userSubmitPostELL" method="POST"> <!-- Replace most of this form with a jinja variable. An admin posting a comment or post on the user forum should not have to answer certain questions. -->
+        <form action="/userSubmitPostELL" method="POST" id="userform"> <!-- Replace most of this form with a jinja variable. An admin posting a comment or post on the user forum should not have to answer certain questions. -->
           <div class="form-group">
             <label for="title">Title:</label>
             <textarea class="form-control" rows="1" name="userTitle" required></textarea>
