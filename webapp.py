@@ -501,7 +501,7 @@ def viewSEU():
                     bigString += Markup('<tr class="commentBox"><td class="comments"><b>' + post.get("comment" + str(i), {}).get("parentName") + '</b> / ' + post.get("comment" + str(i), {}).get("studentNameGrade") + '<br><i>' + loc_dt + '</i><br><br>' + commentContent + '<br></td></tr>')
                 counter += 1
             i += 1
-    return render_template('comments.html', title = postTitle, name = parentName, information = info, time = loc_dt, content = postContent, ID = objectIDPost, comments = bigString)
+    return render_template('comments.html', title = postTitle, name = parentName, information = info, time = loc_dt, content = postContent, comments = bigString, ID = objectIDPost)
 
 @app.route('/viewELLA')
 def viewELLA():
