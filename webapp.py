@@ -352,14 +352,14 @@ def submitComment():
             content = request.form['adminMessage']
             content = content.replace('\\"', '')
             content = Markup(content[1:len(content)-1])
-            post["comment" + lastNumber] = {"adminName": request.form['adminName'], "dateTime": datetime.now(), "postContent": request.form['adminMessage']}
+            post["comment" + lastNumber] = {"adminName": request.form['adminName'], "dateTime": datetime.now(), "postContent": content}
             collection.delete_one({'_id': ObjectId(objectIDPost)})
             collection.insert_one(post)
         else:
             content = request.form['userMessage']
             content = content.replace('\\"', '')
             content = Markup(content[1:len(content)-1])
-            post["comment" + lastNumber] = {"parentName": request.form['userName'], "studentNameGrade": request.form['userStudent'], "anonymous": request.form['anon'], "dateTime": datetime.now(), "postContent": request.form['userMessage'], "approved": "false"}
+            post["comment" + lastNumber] = {"parentName": request.form['userName'], "studentNameGrade": request.form['userStudent'], "anonymous": request.form['anon'], "dateTime": datetime.now(), "postContent": content, "approved": "false"}
             collection.delete_one({'_id': ObjectId(objectIDPost)})
             collection.insert_one(post)
     return render_template('information.html')
