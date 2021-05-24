@@ -370,9 +370,9 @@ def viewSEA():
     bigString = ''
     keyList = list(post.keys())
     commentAmount = 0
-        for item in keyList:
-            if "comment" in item:
-                commentAmount += 1
+    for item in keyList:
+        if "comment" in item:
+            commentAmount += 1
     bigString = ''
     counter = 0
     i = 0
