@@ -614,15 +614,15 @@ def viewELLU():
                     commentContent = post.get("comment" + str(i), {}).get("postContent")
                     commentContent = commentContent.replace('\\"', '')
                     commentContent = Markup(commentContent[1:len(commentContent)-1])
-                    bigString = bigString + Markup('<tr class="commentBox"><td class="comments"><b>' + post.get("comment" + str(i), {}).get("adminName") + '</b><br><i>' + loc_dt + '</i><br><br>' + commentContent + '<br></td></tr>')
+                    bigString += Markup('<tr class="commentBox"><td class="comments"><b>' + post.get("comment" + str(i), {}).get("adminName") + '</b><br><i>' + loc_dt + '</i><br><br>' + commentContent + '<br></td></tr>')
                 else:
                     commentContent = post.get("comment" + str(i), {}).get("postContent")
                     commentContent = commentContent.replace('\\"', '')
                     commentContent = Markup(commentContent[1:len(commentContent)-1])
-                    bigString = bigString + Markup('<tr class="commentBox"><td class="comments"><b>' + post.get("comment" + str(i), {}).get("parentName") + '</b> / ' + post.get("comment" + str(i), {}).get("studentNameGrade") + '<br><i>' + loc_dt + '</i><br><br>' + commentContent + '<br></td></tr>')
+                    bigString += Markup('<tr class="commentBox"><td class="comments"><b>' + post.get("comment" + str(i), {}).get("parentName") + '</b> / ' + post.get("comment" + str(i), {}).get("studentNameGrade") + '<br><i>' + loc_dt + '</i><br><br>' + commentContent + '<br></td></tr>')
                 counter += 1
             i += 1
-    return render_template('comments.html', title = postTitle, name = parentName, information = info, time = loc_dt, content = postContent, ID = objectIDPost, comments = bigString)
+    return render_template('comments.html', title = postTitle, name = parentName, information = info, time = loc_dt, content = postContent, ID = objectIDPost, comments = Markup(bigString))
 
 @app.route('/deleteSE', methods=['GET', 'POST'])
 def deleteSE():
