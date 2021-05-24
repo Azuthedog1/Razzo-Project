@@ -349,10 +349,16 @@ def submitComment():
         else:
             lastNumber = "0"
         if 'github_token' in session:
+            content = request.form['adminMessage']
+            content = content.replace('\\"', '')
+            content = Markup(content[1:len(content)-1])
             post["comment" + lastNumber] = {"adminName": request.form['adminName'], "dateTime": datetime.now(), "postContent": request.form['adminMessage']}
             collection.delete_one({'_id': ObjectId(objectIDPost)})
             collection.insert_one(post)
         else:
+            content = request.form['userMessage']
+            content = content.replace('\\"', '')
+            content = Markup(content[1:len(content)-1])
             post["comment" + lastNumber] = {"parentName": request.form['userName'], "studentNameGrade": request.form['userStudent'], "anonymous": request.form['anon'], "dateTime": datetime.now(), "postContent": request.form['userMessage'], "approved": "false"}
             collection.delete_one({'_id': ObjectId(objectIDPost)})
             collection.insert_one(post)
