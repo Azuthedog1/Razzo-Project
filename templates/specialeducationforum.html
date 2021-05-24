@@ -7,13 +7,12 @@
 {% block content %}
 <div class="back">
   <div class="postBox">
-    <div class="boxHeading">
-      <table class="toprow">
-        <tr>
-          <td class="headCol1"><b>Resources and Announcements</b></td>
-          <td class="headCol2"><input type="text" id="myInputAdmin" onkeyup="myFunction2()" placeholder="Search">   {% if logged_in %}<button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#adminModal">Post</button>{% endif %}</td>
-        </tr>
-      </table>
+    <table class="toprow">
+      <tr>
+        <td class="headCol1"><b>Resources and Announcements</b></td>
+        <td class="headCol2"><input type="text" id="myInputAdmin" onkeyup="myFunction2()" placeholder="Search">   {% if logged_in %}<button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#adminModal">Post</button>{% endif %}</td>
+      </tr>
+    </table>
     </div>
     <div class="scroll">
       <table class="adminPosts" id="targetSearchAdmin">
