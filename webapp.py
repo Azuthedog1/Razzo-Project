@@ -602,8 +602,8 @@ def viewELLU():
     i = 0
     if 'github_token' in session: #if admin is logged in
         while counter < commentAmount:
-            if("comment" + str(i) in post):
-                utc_dt = datetime(int(post.get('dateTime').strftime("%Y")), int(post.get('dateTime').strftime("%m")), int(post.get('dateTime').strftime("%d")), int(post.get('dateTime').strftime("%H")), int(post.get('dateTime').strftime("%M")), 0, tzinfo=pytz.utc)
+            if("comment" + str(i) in post): post.get("comment" + str(i), {}).get("adminName")
+                utc_dt = datetime(int(post.get("comment" + str(i), {}).get("dateTime").strftime("%Y")), int(post.get("comment" + str(i), {}).get("dateTime").strftime("%m")), int(post.get("comment" + str(i), {}).get("dateTime").strftime("%d")), int(post.get("comment" + str(i), {}).get("dateTime").strftime("%H")), int(post.get("comment" + str(i), {}).get("dateTime").strftime("%M")), 0, tzinfo=pytz.utc)
                 loc_dt = utc_dt.astimezone(timezone('America/Los_Angeles'))
                 if int(loc_dt.strftime("%H")) > 12:
                     hour = str(int(loc_dt.strftime("%H")) - 12)
@@ -614,7 +614,7 @@ def viewELLU():
                     commentContent = post.get("comment" + str(i), {}).get("postContent")
                     commentContent = commentContent.replace('\\"', '')
                     commentContent = commentContent[1:len(commentContent)-1]
-                    bigString += '<tr><td class="comments"><b>' + post.get("comment" + str(i), {}).get("adminName") + '(Staff)</b><br><i>' + loc_dt + '</i><br><br>' + commentContent + '<br></td></tr>'
+                    bigString += '<tr><td class="comments"><b>' + post.get("comment" + str(i), {}).get("adminName") + ' (Staff)</b><br><i>' + loc_dt + '</i><br><br>' + commentContent + '</td></tr>'
                 else:
                     commentContent = post.get("comment" + str(i), {}).get("postContent")
                     commentContent = commentContent.replace('\\"', '')
