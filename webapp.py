@@ -391,7 +391,6 @@ def rerouteViewELLU():
     objectIDPost = request.args['thread']
     return viewELLU(objectIDPost)
 
-@app.route('/viewSEA')
 def viewSEA(objectIDPost):
     #objectIDPost = request.args['thread']
     connection_string = os.environ["MONGO_CONNECTION_STRING"]
@@ -457,7 +456,6 @@ def viewSEA(objectIDPost):
             i += 1
     return render_template('comments.html', title = postTitle, name = displayName, information = '', time = loc_dt, content = Markup(postContent), ID = objectIDPost, comments = Markup(bigString))
 
-@app.route('/viewSEU')
 def viewSEU(objectID):
     #objectIDPost = request.args['thread']
     connection_string = os.environ["MONGO_CONNECTION_STRING"]
@@ -536,7 +534,6 @@ def viewSEU(objectID):
             i += 1
     return render_template('comments.html', title = postTitle, name = parentName, information = info, time = loc_dt, content = Markup(postContent), ID = objectIDPost, comments = Markup(bigString))
 
-@app.route('/viewELLA')
 def viewELLA(objectID):
     #objectIDPost = request.args['thread']
     connection_string = os.environ["MONGO_CONNECTION_STRING"]
@@ -608,7 +605,6 @@ def viewELLA(objectID):
             i += 1
     return render_template('comments.html', title = postTitle, name = displayName, information = '', time = loc_dt, content = Markup(postContent), ID = objectIDPost, comments = Markup(bigString))
 
-@app.route('/viewELLU')
 def viewELLU(objectID):
     #objectIDPost = request.args['thread']
     connection_string = os.environ["MONGO_CONNECTION_STRING"]
