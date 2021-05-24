@@ -622,7 +622,7 @@ def viewELLU():
                     commentContent = Markup(commentContent[1:len(commentContent)-1])
                     name = post.get("comment" + str(i), {}).get("parentName")
                     student = post.get("comment" + str(i), {}).get("studentNameGrade")
-                    bigString += Markup('<tr><td class="comments">' + name + + student + loc_dt + commentContent + '</td></tr>')
+                    bigString += Markup('<tr><td class="comments">' + name + student + loc_dt + commentContent + '</td></tr>')
                 counter += 1
             i += 1
     return render_template('comments.html', title = postTitle, name = parentName, information = info, time = loc_dt, content = postContent, ID = objectIDPost, comments = bigString)
