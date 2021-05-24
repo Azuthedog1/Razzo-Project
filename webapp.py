@@ -184,7 +184,7 @@ def render_special_education_forum():
     if 'github_token' in session:
         for post in collection.find():
             bigString1 += '<tr><td class="col1"><img src="/static/images/person.png" alt="icon" width="30" height="30"></td>'
-            bigString1 += '<td class="col2"><form action="/viewELLU"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton"><b>' + post.get('postTitle') + '</b></button></form></td>'
+            bigString1 += '<td class="col2"><form action="/viewSEU"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton"><b>' + post.get('postTitle') + '</b></button></form></td>'
             if post.get('parentEmail') == "":
                 bigString1 += '<td class="col3"><i>' + post.get('parentName') + ' / ' + post.get('studentNameGrade') + ' / Email not provided</i></td>'
             else:
@@ -208,7 +208,7 @@ def render_special_education_forum():
         for post in collection.find():
             if(post.get('approved') == "true"):
                 bigString1 += '<tr><td class="col1"><img src="/static/images/person.png" alt="icon" width="30" height="30"></td>'
-                bigString1 += '<td class="col2"><form action="/viewELLU"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton"><b>' + post.get('postTitle') + '</b></button></form></td>'
+                bigString1 += '<td class="col2"><form action="/viewSEU"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton"><b>' + post.get('postTitle') + '</b></button></form></td>'
                 if(post.get('anonymous') == "true"):
                     bigString1 += '<td class="col3"><i>Anonymous Post</i></td>'
                 else:
@@ -237,7 +237,7 @@ def render_special_education_forum():
             else:
                 loc_dt = loc_dt.strftime("%m/%d/%Y, %H:%M AM PT")
             bigString2 += ('<tr><td class="col1"><img src="/static/images/person.png" alt="icon" width="30" height="30"></td>' +
-                           '<td class="col2"><form action="/viewELLA"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton"><b>' + post.get('postTitle') + '</b></button></form></td>' +
+                           '<td class="col2"><form action="/viewSEA"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton"><b>' + post.get('postTitle') + '</b></button></form></td>' +
                            '<td class="col3"><i>' + post.get('adminName') + '</i></td>' +
                            '<td class="col4"><form action="/deleteELL" method="post"><button type="submit" class="btn btn-danger btn-sm lineUp" name="delete" value="' + str(post.get('_id')) + '"><span class="glyphicon glyphicon-trash"></span>Confirm Delete</button></form><i>' + loc_dt + '</i></td></tr>')
             postList.insert(0, bigString2)
@@ -252,7 +252,7 @@ def render_special_education_forum():
             else:
                 loc_dt = loc_dt.strftime("%m/%d/%Y, %H:%M AM PT")
             bigString2 += ('<tr><td class="col1"><img src="/static/images/person.png" alt="icon" width="30" height="30"></td>' +
-                           '<td class="col2"><form action="/viewELLA"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton"><b>' + post.get('postTitle') + '</b></button></form></td>' +
+                           '<td class="col2"><form action="/viewSEA"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton"><b>' + post.get('postTitle') + '</b></button></form></td>' +
                            '<td class="col3"><i>' + post.get('adminName') + '</i></td>' +
                            '<td class="col4"><i>' + loc_dt + '</i></td></tr>')
             postList.insert(0, bigString2)
