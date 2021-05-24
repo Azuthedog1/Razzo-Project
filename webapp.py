@@ -585,7 +585,7 @@ def viewELLU():
     collection = db['ELLU']
     post = collection.find_one({'_id': ObjectId(objectIDPost)})
     postTitle = post.get('postTitle')
-    postContent = Markup(postContent[1:len(postContent)-1])
+    postContent = post.get('postContent')
     utc_dt = datetime(int(post.get('dateTime').strftime("%Y")), int(post.get('dateTime').strftime("%m")), int(post.get('dateTime').strftime("%d")), int(post.get('dateTime').strftime("%H")), int(post.get('dateTime').strftime("%M")), 0, tzinfo=pytz.utc)
     loc_dt = utc_dt.astimezone(timezone('America/Los_Angeles'))
     if int(loc_dt.strftime("%H")) > 12:
