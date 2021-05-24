@@ -25,3 +25,4 @@ Flask-PyMongo
 pymongo
 dnspython
 pytz
+pyautogui
