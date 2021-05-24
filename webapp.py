@@ -10,7 +10,6 @@ import pymongo
 from datetime import datetime, timedelta
 from pytz import timezone
 import pytz
-import pyautogui
 
 app = Flask(__name__)
 
@@ -363,18 +362,38 @@ def submitComment():
             collection.delete_one({'_id': ObjectId(objectIDPost)})
             collection.insert_one(post)
     if collection == db['SEA']:
-        pyautogui.hotkey('f5')
+        return viewSEA(objectIDPost)
     elif collection == db['SEU']:
-        pyautogui.hotkey('f5')
+        return viewSEU(objectIDPost)
     elif collection == db['ELLA']:
-        pyautogui.hotkey('f5')
+        return viewELLA(objectIDPost)
     elif collection == db['ELLU']:
-        pyautogui.hotkey('f5')
+        return viewELLU(objectIDPost)
     return render_template('information.html')
 
 @app.route('/viewSEA')
-def viewSEA():
+def rerouteViewSEA():
     objectIDPost = request.args['thread']
+    return viewSEA(objectIDPost)
+
+@app.route('/viewSEU')
+def rerouteViewSEU():
+    objectIDPost = request.args['thread']
+    return viewSEU(objectIDPost)
+
+@app.route('/viewELLA')
+def rerouteViewELLA():
+    objectIDPost = request.args['thread']
+    return viewELLA(objectIDPost)
+
+@app.route('/viewELLU')
+def rerouteViewELLU():
+    objectIDPost = request.args['thread']
+    return viewELLU(objectIDPost)
+
+@app.route('/viewSEA')
+def viewSEA(objectIDPost):
+    #objectIDPost = request.args['thread']
     connection_string = os.environ["MONGO_CONNECTION_STRING"]
     db_name = os.environ["MONGO_DBNAME"]
     client = pymongo.MongoClient(connection_string)
@@ -440,13 +459,7 @@ def viewSEA():
 
 @app.route('/viewSEU')
 def viewSEU(objectID):
-    objectIDPost == ""
-    try:
-        objectIDPost = objectID
-    except: 
-        pass
-    if(objectIDPost == ""):
-        objectIDPost = request.args['thread']
+    #objectIDPost = request.args['thread']
     connection_string = os.environ["MONGO_CONNECTION_STRING"]
     db_name = os.environ["MONGO_DBNAME"]
     client = pymongo.MongoClient(connection_string)
@@ -525,13 +538,7 @@ def viewSEU(objectID):
 
 @app.route('/viewELLA')
 def viewELLA(objectID):
-    objectIDPost == ""
-    try:
-        objectIDPost = objectID
-    except: 
-        pass
-    if(objectIDPost == ""):
-        objectIDPost = request.args['thread']
+    #objectIDPost = request.args['thread']
     connection_string = os.environ["MONGO_CONNECTION_STRING"]
     db_name = os.environ["MONGO_DBNAME"]
     client = pymongo.MongoClient(connection_string)
@@ -603,13 +610,7 @@ def viewELLA(objectID):
 
 @app.route('/viewELLU')
 def viewELLU(objectID):
-    objectIDPost == ""
-    try:
-        objectIDPost = objectID
-    except: 
-        pass
-    if(objectIDPost == ""):
-        objectIDPost = request.args['thread']
+    #objectIDPost = request.args['thread']
     connection_string = os.environ["MONGO_CONNECTION_STRING"]
     db_name = os.environ["MONGO_DBNAME"]
     client = pymongo.MongoClient(connection_string)
