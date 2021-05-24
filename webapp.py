@@ -622,6 +622,30 @@ def viewELLU():
                     bigString += '<tr><td class="comments"><b>' + post.get("comment" + str(i), {}).get("parentName") + '</b> / ' + post.get("comment" + str(i), {}).get("studentNameGrade") + '<br><i>' + loc_dt + '</i><br><br>' + commentContent + '</td></tr>'
                 counter += 1
             i += 1
+        else:
+            while counter < commentAmount:
+                if("comment" + str(i) in post):
+                    utc_dt = datetime(int(post.get("comment" + str(i), {}).get("dateTime").strftime("%Y")), int(post.get("comment" + str(i), {}).get("dateTime").strftime("%m")), int(post.get("comment" + str(i), {}).get("dateTime").strftime("%d")), int(post.get("comment" + str(i), {}).get("dateTime").strftime("%H")), int(post.get("comment" + str(i), {}).get("dateTime").strftime("%M")), 0, tzinfo=pytz.utc)
+                    loc_dt = utc_dt.astimezone(timezone('America/Los_Angeles'))
+                    if int(loc_dt.strftime("%H")) > 12:
+                        hour = str(int(loc_dt.strftime("%H")) - 12)
+                        loc_dt = loc_dt.strftime("%m/%d/%Y, " + hour + ":%M PM PT")
+                    else:
+                        loc_dt = loc_dt.strftime("%m/%d/%Y, %H:%M AM PT")
+                    if post.get("comment" + str(i), {}).get("adminName") != None:
+                        commentContent = post.get("comment" + str(i), {}).get("postContent")
+                        commentContent = commentContent.replace('\\"', '')
+                        commentContent = commentContent[1:len(commentContent)-1]
+                        bigString += '<tr><td class="comments"><b>' + post.get("comment" + str(i), {}).get("adminName") + ' (Staff)</b><br><i>' + loc_dt + '</i><br><br>' + commentContent + '</td></tr>'
+                    else:
+                        if post.get("comment" + str(i), {}).get("approved") == "true":
+                            commentContent = post.get("comment" + str(i), {}).get("postContent")
+                            commentContent = commentContent.replace('\\"', '')
+                            commentContent = commentContent[1:len(commentContent)-1]
+                            if post.get("comment" + str(i), {}).get("anonymous") == "true":
+                                bigString += '<tr><td class="comments"><b> Anonymous Comment</b><br><i>' + loc_dt + '</i><br><br>' + commentContent + '</td></tr>'
+                            else:
+                                bigString += '<tr><td class="comments"><b>' + post.get("comment" + str(i), {}).get("parentName") + '</b><br><i>' + loc_dt + '</i><br><br>' + commentContent + '</td></tr>'
     return render_template('comments.html', title = postTitle, name = parentName, information = info, time = loc_dt, content = postContent, ID = objectIDPost, comments = Markup(bigString))
 
 @app.route('/deleteSE', methods=['GET', 'POST'])
