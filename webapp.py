@@ -613,13 +613,13 @@ def viewELLU():
                 if post.get("comment" + str(i), {}).get("adminName") != None: #checks if it is admin post
                     commentContent = post.get("comment" + str(i), {}).get("postContent")
                     commentContent = commentContent.replace('\\"', '')
-                    commentContent = Markup(commentContent[1:len(commentContent)-1])
+                    commentContent = commentContent[1:len(commentContent)-1]
                     name = post.get("comment" + str(i), {}).get("adminName")
                     bigString += '<tr><td class="comments"><b>' + name + '</b><br><i>' + loc_dt + '</i><br><br>' + commentContent + '<br></td></tr>'
                 else:
                     commentContent = post.get("comment" + str(i), {}).get("postContent")
                     commentContent = commentContent.replace('\\"', '')
-                    commentContent = Markup(commentContent[1:len(commentContent)-1])
+                    commentContent = commentContent[1:len(commentContent)-1]
                     name = post.get("comment" + str(i), {}).get("parentName")
                     student = post.get("comment" + str(i), {}).get("studentNameGrade")
                     bigString += '<tr><td class="comments"><b>' + name + '</b> / ' + student + '<br><i>' + loc_dt + '</i><br><br>' + commentContent + '<br></td></tr>'
