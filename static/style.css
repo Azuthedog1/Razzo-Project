@@ -56,11 +56,11 @@
 }
 
 .commentBox {
+  border: 1px solid Black;
   width: 100%;
 }
 
 .comments {
-  border: 1px solid Black;
   padding: 10px;
 }
 
