@@ -10,6 +10,7 @@ import pymongo
 from datetime import datetime, timedelta
 from pytz import timezone
 import pytz
+import pyautogui
 
 app = Flask(__name__)
 
@@ -362,25 +363,18 @@ def submitComment():
             collection.delete_one({'_id': ObjectId(objectIDPost)})
             collection.insert_one(post)
     if collection == db['SEA']:
-        return viewSEA(objectIDPost)
+        pyautogui.hotkey('f5')
     elif collection == db['SEU']:
-        return viewSEU(objectIDPost)
+        pyautogui.hotkey('f5')
     elif collection == db['ELLA']:
-        return viewELLA(objectIDPost)
+        pyautogui.hotkey('f5')
     elif collection == db['ELLU']:
-        return viewELLU(objectIDPost)
-    else:
-        return render_template('information.html')
+        pyautogui.hotkey('f5')
+    return render_template('information.html')
 
 @app.route('/viewSEA')
-def viewSEA(objectID):
-    objectIDPost == ""
-    try:
-        objectIDPost = objectID
-    except: 
-        pass
-    if objectIDPost == "":
-        objectIDPost = request.args['thread']
+def viewSEA():
+    objectIDPost = request.args['thread']
     connection_string = os.environ["MONGO_CONNECTION_STRING"]
     db_name = os.environ["MONGO_DBNAME"]
     client = pymongo.MongoClient(connection_string)
