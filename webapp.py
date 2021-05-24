@@ -470,7 +470,38 @@ def viewSEU():
         studentNameGrade = ""
         parentEmail = ""
     info = " / " + studentNameGrade + " / " + parentEmail
-    return render_template('comments.html', title = postTitle, name = parentName, information = info, time = loc_dt, content = postContent, ID = objectIDPost)
+    bigString = ''
+    keyList = list(post.keys())
+    commentAmount = 0
+    for item in keyList:
+        if "comment" in item:
+            commentAmount += 1
+    bigString = ''
+    counter = 0
+    i = 0
+    if 'github_token' in session: #if admin is logged in
+        while counter < commentAmount:
+            if("comment" + str(i) in post):
+                utc_dt = datetime(int(post.get('dateTime').strftime("%Y")), int(post.get('dateTime').strftime("%m")), int(post.get('dateTime').strftime("%d")), int(post.get('dateTime').strftime("%H")), int(post.get('dateTime').strftime("%M")), 0, tzinfo=pytz.utc)
+                loc_dt = utc_dt.astimezone(timezone('America/Los_Angeles'))
+                if int(loc_dt.strftime("%H")) > 12:
+                    hour = str(int(loc_dt.strftime("%H")) - 12)
+                    loc_dt = loc_dt.strftime("%m/%d/%Y, " + hour + ":%M PM PT")
+                else:
+                    loc_dt = loc_dt.strftime("%m/%d/%Y, %H:%M AM PT")
+                if post.get("comment" + str(i), {}).get("adminName") != None: #checks if it is admin post
+                    commentContent = post.get("comment" + str(i), {}).get("postContent")
+                    commentContent = commentContent.replace('\\"', '')
+                    commentContent = Markup(commentContent[1:len(commentContent)-1])
+                    bigString += Markup('<tr class="commentBox"><td class="comments"><b>' + post.get("comment" + str(i), {}).get("adminName") + '</b><br><i>' + loc_dt + '</i><br><br>' + commentContent + '<br></td></tr>')
+                else:
+                    commentContent = post.get("comment" + str(i), {}).get("postContent")
+                    commentContent = commentContent.replace('\\"', '')
+                    commentContent = Markup(commentContent[1:len(commentContent)-1])
+                    bigString += Markup('<tr class="commentBox"><td class="comments"><b>' + post.get("comment" + str(i), {}).get("parentName") + '</b> / ' + post.get("comment" + str(i), {}).get("studentNameGrade") + '<br><i>' + loc_dt + '</i><br><br>' + commentContent + '<br></td></tr>')
+                counter += 1
+            i += 1
+    return render_template('comments.html', title = postTitle, name = parentName, information = info, time = loc_dt, content = postContent, ID = objectIDPost, comments = bigString)
 
 @app.route('/viewELLA')
 def viewELLA():
@@ -493,7 +524,38 @@ def viewELLA():
     else:
         loc_dt = loc_dt.strftime("%m/%d/%Y, %H:%M AM PT")
     displayName = post.get('adminName')
-    return render_template('comments.html', title = postTitle, name = displayName, information = '', time = loc_dt, content = postContent, ID = objectIDPost)
+    bigString = ''
+    keyList = list(post.keys())
+    commentAmount = 0
+    for item in keyList:
+        if "comment" in item:
+            commentAmount += 1
+    bigString = ''
+    counter = 0
+    i = 0
+    if 'github_token' in session: #if admin is logged in
+        while counter < commentAmount:
+            if("comment" + str(i) in post):
+                utc_dt = datetime(int(post.get('dateTime').strftime("%Y")), int(post.get('dateTime').strftime("%m")), int(post.get('dateTime').strftime("%d")), int(post.get('dateTime').strftime("%H")), int(post.get('dateTime').strftime("%M")), 0, tzinfo=pytz.utc)
+                loc_dt = utc_dt.astimezone(timezone('America/Los_Angeles'))
+                if int(loc_dt.strftime("%H")) > 12:
+                    hour = str(int(loc_dt.strftime("%H")) - 12)
+                    loc_dt = loc_dt.strftime("%m/%d/%Y, " + hour + ":%M PM PT")
+                else:
+                    loc_dt = loc_dt.strftime("%m/%d/%Y, %H:%M AM PT")
+                if post.get("comment" + str(i), {}).get("adminName") != None: #checks if it is admin post
+                    commentContent = post.get("comment" + str(i), {}).get("postContent")
+                    commentContent = commentContent.replace('\\"', '')
+                    commentContent = Markup(commentContent[1:len(commentContent)-1])
+                    bigString += Markup('<tr class="commentBox"><td class="comments"><b>' + post.get("comment" + str(i), {}).get("adminName") + '</b><br><i>' + loc_dt + '</i><br><br>' + commentContent + '<br></td></tr>')
+                else:
+                    commentContent = post.get("comment" + str(i), {}).get("postContent")
+                    commentContent = commentContent.replace('\\"', '')
+                    commentContent = Markup(commentContent[1:len(commentContent)-1])
+                    bigString += Markup('<tr class="commentBox"><td class="comments"><b>' + post.get("comment" + str(i), {}).get("parentName") + '</b> / ' + post.get("comment" + str(i), {}).get("studentNameGrade") + '<br><i>' + loc_dt + '</i><br><br>' + commentContent + '<br></td></tr>')
+                counter += 1
+            i += 1
+    return render_template('comments.html', title = postTitle, name = displayName, information = '', time = loc_dt, content = postContent, ID = objectIDPost, comments = bigString)
 
 @app.route('/viewELLU')
 def viewELLU():
@@ -529,7 +591,38 @@ def viewELLU():
         studentNameGrade = ""
         parentEmail = ""
     info = " / " + studentNameGrade + " / " + parentEmail
-    return render_template('comments.html', title = postTitle, name = parentName, information = info, time = loc_dt, content = postContent, ID = objectIDPost)
+    bigString = ''
+    keyList = list(post.keys())
+    commentAmount = 0
+    for item in keyList:
+        if "comment" in item:
+            commentAmount += 1
+    bigString = ''
+    counter = 0
+    i = 0
+    if 'github_token' in session: #if admin is logged in
+        while counter < commentAmount:
+            if("comment" + str(i) in post):
+                utc_dt = datetime(int(post.get('dateTime').strftime("%Y")), int(post.get('dateTime').strftime("%m")), int(post.get('dateTime').strftime("%d")), int(post.get('dateTime').strftime("%H")), int(post.get('dateTime').strftime("%M")), 0, tzinfo=pytz.utc)
+                loc_dt = utc_dt.astimezone(timezone('America/Los_Angeles'))
+                if int(loc_dt.strftime("%H")) > 12:
+                    hour = str(int(loc_dt.strftime("%H")) - 12)
+                    loc_dt = loc_dt.strftime("%m/%d/%Y, " + hour + ":%M PM PT")
+                else:
+                    loc_dt = loc_dt.strftime("%m/%d/%Y, %H:%M AM PT")
+                if post.get("comment" + str(i), {}).get("adminName") != None: #checks if it is admin post
+                    commentContent = post.get("comment" + str(i), {}).get("postContent")
+                    commentContent = commentContent.replace('\\"', '')
+                    commentContent = Markup(commentContent[1:len(commentContent)-1])
+                    bigString += Markup('<tr class="commentBox"><td class="comments"><b>' + post.get("comment" + str(i), {}).get("adminName") + '</b><br><i>' + loc_dt + '</i><br><br>' + commentContent + '<br></td></tr>')
+                else:
+                    commentContent = post.get("comment" + str(i), {}).get("postContent")
+                    commentContent = commentContent.replace('\\"', '')
+                    commentContent = Markup(commentContent[1:len(commentContent)-1])
+                    bigString += Markup('<tr class="commentBox"><td class="comments"><b>' + post.get("comment" + str(i), {}).get("parentName") + '</b> / ' + post.get("comment" + str(i), {}).get("studentNameGrade") + '<br><i>' + loc_dt + '</i><br><br>' + commentContent + '<br></td></tr>')
+                counter += 1
+            i += 1
+    return render_template('comments.html', title = postTitle, name = parentName, information = info, time = loc_dt, content = postContent, ID = objectIDPost, comments = bigString)
 
 @app.route('/deleteSE', methods=['GET', 'POST'])
 def deleteSE():
@@ -543,9 +636,7 @@ def deleteSE():
         collection.delete_one({'_id': ObjectId(objectIDPost)})
         collection = db['SEU']
         collection.delete_one({'_id': ObjectId(objectIDPost)})
-        return render_special_education_forum()
-    else:
-        return render_special_education_forum()
+    return render_special_education_forum()
 
 @app.route('/deleteELL', methods=['GET', 'POST'])
 def deleteELL():
@@ -559,9 +650,7 @@ def deleteELL():
         collection.delete_one({'_id': ObjectId(objectIDPost)})
         collection = db['ELLU']
         collection.delete_one({'_id': ObjectId(objectIDPost)})
-        return render_english_learner_forum()
-    else:
-        return render_english_learner_forum()
+    return render_english_learner_forum()
 
 @app.route('/vetELL', methods=['GET', 'POST'])
 def vetELL():
@@ -574,9 +663,7 @@ def vetELL():
         collection = db['ELLU']
         collection.find_one_and_update({"_id": ObjectId(objectIDPost)},
                                        {"$set": {"approved": "true"}})
-        return render_english_learner_forum()
-    else:
-        return render_english_learner_forum()
+    return render_english_learner_forum()
                                              
 @app.route('/unvetELL', methods=['GET', 'POST'])
 def unvetELL():
@@ -589,10 +676,7 @@ def unvetELL():
         collection = db['ELLU']
         collection.find_one_and_update({"_id": ObjectId(objectIDPost)},
                                        {"$set": {"approved": "false"}})
-        return render_english_learner_forum()
-    else:
-        return render_english_learner_forum()
-
+    return render_english_learner_forum()
                                              
 @app.route('/vetSE', methods=['GET', 'POST'])
 def vetSE():
@@ -605,9 +689,7 @@ def vetSE():
         collection = db['SEU']
         collection.find_one_and_update({"_id": ObjectId(objectIDPost)},
                                        {"$set": {"approved": "true"}})
-        return render_special_education_forum()
-    else:
-        return render_special_education_forum()
+    return render_special_education_forum()
                                              
 @app.route('/unvetSE', methods=['GET', 'POST'])
 def unvetSE():
@@ -620,9 +702,7 @@ def unvetSE():
         collection = db['SEU']
         collection.find_one_and_update({"_id": ObjectId(objectIDPost)},
                                        {"$set": {"approved": "false"}})
-        return render_special_education_forum()
-    else:
-        return render_special_education_forum()
+    return render_special_education_forum()
 
 #make sure the jinja variables use Markup 
 @github.tokengetter
