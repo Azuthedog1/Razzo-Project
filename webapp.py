@@ -1,4 +1,3 @@
-#note: implement standardized quotes and better concatenation for strings, postContent and commentContent modifications when creating new document 
 from flask import Flask, redirect, Markup, url_for, session, request, jsonify
 from flask_oauthlib.client import OAuth
 from flask import render_template
