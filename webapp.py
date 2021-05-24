@@ -602,7 +602,7 @@ def viewELLU():
     i = 0
     if 'github_token' in session: #if admin is logged in
         while counter < commentAmount:
-            if("comment" + str(i) in post): post.get("comment" + str(i), {}).get("adminName")
+            if("comment" + str(i) in post):
                 utc_dt = datetime(int(post.get("comment" + str(i), {}).get("dateTime").strftime("%Y")), int(post.get("comment" + str(i), {}).get("dateTime").strftime("%m")), int(post.get("comment" + str(i), {}).get("dateTime").strftime("%d")), int(post.get("comment" + str(i), {}).get("dateTime").strftime("%H")), int(post.get("comment" + str(i), {}).get("dateTime").strftime("%M")), 0, tzinfo=pytz.utc)
                 loc_dt = utc_dt.astimezone(timezone('America/Los_Angeles'))
                 if int(loc_dt.strftime("%H")) > 12:
