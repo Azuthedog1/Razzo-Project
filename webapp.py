@@ -625,7 +625,7 @@ def viewELLU():
                     bigString += Markup('<tr class="commentBox"><td class="comments"><b>' + name + '</b> / ' + student + '<br><i>' + loc_dt + '</i><br><br>' + commentContent + '<br></td></tr>')
                 counter += 1
             i += 1
-    return render_template('comments.html', title = postTitle, name = parentName, information = info, time = loc_dt, content = postContent, ID = objectIDPost, comments = Markup('<tr class="commentBox"><td class="comments>Hello</td></tr'))
+    return render_template('comments.html', title = postTitle, name = parentName, information = info, time = loc_dt, content = postContent, ID = objectIDPost, comments = Markup('<tr class="commentBox"><td class="comments">Hello</td></tr'))
 
 @app.route('/deleteSE', methods=['GET', 'POST'])
 def deleteSE():
