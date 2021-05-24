@@ -90,17 +90,17 @@ def render_english_learner_forum():
     bigString2 = ""
     if 'github_token' in session:
         for post in collection.find():
-            bigString1 = bigString1 + Markup('<tr><td class="col1"><img src="/static/images/person.png" alt="icon" width="30" height="30"></td>')  
-            bigString1 = bigString1 + Markup('<td class="col2"><form action="/viewELLU"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton"><b>' + post.get('postTitle') + '</b></button></form></td>')
+            bigString1 += '<tr><td class="col1"><img src="/static/images/person.png" alt="icon" width="30" height="30"></td>'
+            bigString1 += '<td class="col2"><form action="/viewELLU"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton"><b>' + post.get('postTitle') + '</b></button></form></td>'
             if post.get('parentEmail') == "":
-                bigString1 = bigString1 + Markup('<td class="col3"><i>' + post.get('parentName') + ' / ' + post.get('studentNameGrade') + ' / Email not provided</i></td>')
+                bigString1 += '<td class="col3"><i>' + post.get('parentName') + ' / ' + post.get('studentNameGrade') + ' / Email not provided</i></td>'
             else:
-                bigString1 = bigString1 + Markup('<td class="col3"><i>' + post.get('parentName') + ' / ' + post.get('studentNameGrade') + ' / ' + post.get('parentEmail') + '</i></td>')
-            bigString1 = bigString1 + Markup('<td class="col4"><form action="/deleteELL" method="post"><button type="submit" class="btn btn-danger btn-sm" name="delete" value="' + str(post.get('_id')) + '"><span class="glyphicon glyphicon-trash"></span>Confirm Delete</button></form>')
+                bigString1 += '<td class="col3"><i>' + post.get('parentName') + ' / ' + post.get('studentNameGrade') + ' / ' + post.get('parentEmail') + '</i></td>'
+            bigString1 += '<td class="col4"><form action="/deleteELL" method="post"><button type="submit" class="btn btn-danger btn-sm" name="delete" value="' + str(post.get('_id')) + '"><span class="glyphicon glyphicon-trash"></span>Confirm Delete</button></form>'
             if(post.get('approved') == "false"):
-                bigString1 = bigString1 + Markup('<form action="/vetELL" method="post"><button type="submit" class="btn btn-warning btn-sm" name="vet" value="' + str(post.get('_id'))+ '">' + '<span class="glyphicon glyphicon-plus"></span>Vet')
+                bigString1 += '<form action="/vetELL" method="post"><button type="submit" class="btn btn-warning btn-sm" name="vet" value="' + str(post.get('_id'))+ '">' + '<span class="glyphicon glyphicon-plus"></span>Vet'
             else:
-                bigString1 = bigString1 + Markup('<form action="/unvetELL" method="post"><button type="submit" class="btn btn-warning btn-sm" name="vet" value="' + str(post.get('_id'))+ '">' + '<span class="glyphicon glyphicon-minus"></span>Unvet')
+                bigString1 += '<form action="/unvetELL" method="post"><button type="submit" class="btn btn-warning btn-sm" name="vet" value="' + str(post.get('_id'))+ '">' + '<span class="glyphicon glyphicon-minus"></span>Unvet'
             utc_dt = datetime(int(post.get('dateTime').strftime("%Y")), int(post.get('dateTime').strftime("%m")), int(post.get('dateTime').strftime("%d")), int(post.get('dateTime').strftime("%H")), int(post.get('dateTime').strftime("%M")), 0, tzinfo=pytz.utc)
             loc_dt = utc_dt.astimezone(timezone('America/Los_Angeles'))
             if int(loc_dt.strftime("%H")) > 12:
@@ -108,18 +108,18 @@ def render_english_learner_forum():
                 loc_dt = loc_dt.strftime("%m/%d/%Y, " + hour + ":%M PM PT")
             else:
                 loc_dt = loc_dt.strftime("%m/%d/%Y, %H:%M AM PT")
-            bigString1 = bigString1 + Markup('</button></form><i>' + loc_dt + '</i></td></tr>')
+            bigString1 += '</button></form><i>' + loc_dt + '</i></td></tr>'
             postList.insert(0, bigString1)
             bigString1 = ""
     else:
         for post in collection.find():
             if(post.get('approved') == "true"):
-                bigString1 = bigString1 + Markup('<tr><td class="col1"><img src="/static/images/person.png" alt="icon" width="30" height="30"></td>')  
-                bigString1 = bigString1 + Markup('<td class="col2"><form action="/viewELLU"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton"><b>' + post.get('postTitle') + '</b></button></form></td>')
+                bigString1 += '<tr><td class="col1"><img src="/static/images/person.png" alt="icon" width="30" height="30"></td>'
+                bigString1 += '<td class="col2"><form action="/viewELLU"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton"><b>' + post.get('postTitle') + '</b></button></form></td>'
                 if(post.get('anonymous') == "true"):
-                    bigString1 = bigString1 + Markup('<td class="col3"><i>Anonymous Post</i></td>')
+                    bigString1 += '<td class="col3"><i>Anonymous Post</i></td>'
                 else:
-                    bigString1 = bigString1 + Markup('<td class="col3"><i>' + post.get('parentName') + '</i></td>')
+                    bigString1 += '<td class="col3"><i>' + post.get('parentName') + '</i></td>'
                 utc_dt = datetime(int(post.get('dateTime').strftime("%Y")), int(post.get('dateTime').strftime("%m")), int(post.get('dateTime').strftime("%d")), int(post.get('dateTime').strftime("%H")), int(post.get('dateTime').strftime("%M")), 0, tzinfo=pytz.utc)
                 loc_dt = utc_dt.astimezone(timezone('America/Los_Angeles'))
                 if int(loc_dt.strftime("%H")) > 12:
@@ -127,11 +127,11 @@ def render_english_learner_forum():
                     loc_dt = loc_dt.strftime("%m/%d/%Y, " + hour + ":%M PM PT")
                 else:
                     loc_dt = loc_dt.strftime("%m/%d/%Y, %H:%M AM PT")
-                bigString1 = bigString1 + Markup('<td class="col4"><i>' + loc_dt + '</i></td></tr>')
+                bigString1 += '<td class="col4"><i>' + loc_dt + '</i></td></tr>'
                 postList.insert(0, bigString1)
                 bigString1 = ""
     for item in postList:
-        bigString1 = bigString1 + item
+        bigString1 += item
     postList.clear()
     collection = db['ELLA']
     if 'github_token' in session: 
@@ -143,10 +143,10 @@ def render_english_learner_forum():
                 loc_dt = loc_dt.strftime("%m/%d/%Y, " + hour + ":%M PM PT")
             else:
                 loc_dt = loc_dt.strftime("%m/%d/%Y, %H:%M AM PT")
-            bigString2 = bigString2 + Markup('<tr><td class="col1"><img src="/static/images/person.png" alt="icon" width="30" height="30"></td>' +
-                                             '<td class="col2"><form action="/viewELLA"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton"><b>' + post.get('postTitle') + '</b></button></form></td>' +
-                                             '<td class="col3"><i>' + post.get('adminName') + '</i></td>' +
-                                             '<td class="col4"><form action="/deleteELL" method="post"><button type="submit" class="btn btn-danger btn-sm lineUp" name="delete" value="' + str(post.get('_id')) + '"><span class="glyphicon glyphicon-trash"></span>Confirm Delete</button></form><i>' + loc_dt + '</i></td></tr>')
+            bigString2 += ('<tr><td class="col1"><img src="/static/images/person.png" alt="icon" width="30" height="30"></td>' +
+                           '<td class="col2"><form action="/viewELLA"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton"><b>' + post.get('postTitle') + '</b></button></form></td>' +
+                           '<td class="col3"><i>' + post.get('adminName') + '</i></td> +
+                           '<td class="col4"><form action="/deleteELL" method="post"><button type="submit" class="btn btn-danger btn-sm lineUp" name="delete" value="' + str(post.get('_id')) + '"><span class="glyphicon glyphicon-trash"></span>Confirm Delete</button></form><i>' + loc_dt + '</i></td></tr>')
             postList.insert(0, bigString2)
             bigString2 = ""
     else:
@@ -158,15 +158,15 @@ def render_english_learner_forum():
                 loc_dt = loc_dt.strftime("%m/%d/%Y, " + hour + ":%M PM PT")
             else:
                 loc_dt = loc_dt.strftime("%m/%d/%Y, %H:%M AM PT")
-            bigString2 = bigString2 + Markup('<tr><td class="col1"><img src="/static/images/person.png" alt="icon" width="30" height="30"></td>' +
-                                             '<td class="col2"><form action="/viewELLA"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton"><b>' + post.get('postTitle') + '</b></button></form></td>' +
-                                             '<td class="col3"><i>' + post.get('adminName') + '</i></td>' +
-                                             '<td class="col4"><i>' + loc_dt + '</i></td></tr>')
+            bigString2 += ('<tr><td class="col1"><img src="/static/images/person.png" alt="icon" width="30" height="30"></td>' +
+                           '<td class="col2"><form action="/viewELLA"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton"><b>' + post.get('postTitle') + '</b></button></form></td>' +
+                           '<td class="col3"><i>' + post.get('adminName') + '</i></td>' +
+                           '<td class="col4"><i>' + loc_dt + '</i></td></tr>')
             postList.insert(0, bigString2)
             bigString2 = ""
     for item in postList:
-        bigString2 = bigString2 + item
-    return render_template('englishlearnerforum.html', ELLUPosts = bigString1, ELLAPosts = bigString2)
+        bigString2 += item
+    return render_template('englishlearnerforum.html', ELLUPosts = Markup(bigString1), ELLAPosts = Markup(bigString2))
 
 @app.route('/adminLog')
 def render_admin_log():
@@ -182,19 +182,19 @@ def render_special_education_forum():
     postList = []
     bigString1 = ""
     bigString2 = ""
-    if 'github_token' in session: 
+    if 'github_token' in session:
         for post in collection.find():
-            bigString1 = bigString1 + Markup('<tr><td class="col1"><img src="/static/images/person.png" alt="icon" width="30" height="30"></td>')  
-            bigString1 = bigString1 + Markup('<td class="col2"><form action="/viewSEU"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton"><b>' + post.get('postTitle') + '</b></button></form></td>')
+            bigString1 += '<tr><td class="col1"><img src="/static/images/person.png" alt="icon" width="30" height="30"></td>'
+            bigString1 += '<td class="col2"><form action="/viewELLU"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton"><b>' + post.get('postTitle') + '</b></button></form></td>'
             if post.get('parentEmail') == "":
-                bigString1 = bigString1 + Markup('<td class="col3"><i>' + post.get('parentName') + ' / ' + post.get('studentNameGrade') + ' / Email not provided</i></td>')
+                bigString1 += '<td class="col3"><i>' + post.get('parentName') + ' / ' + post.get('studentNameGrade') + ' / Email not provided</i></td>'
             else:
-                bigString1 = bigString1 + Markup('<td class="col3"><i>' + post.get('parentName') + ' / ' + post.get('studentNameGrade') + ' / ' + post.get('parentEmail') + '</i></td>')
-            bigString1 = bigString1 + Markup('<td class="col4"><form action="/deleteSE" method="post"><button type="submit" class="btn btn-danger btn-sm lineUp" name="delete" value="' + str(post.get('_id')) + '"><span class="glyphicon glyphicon-trash"></span>Confirm Delete</button></form>')
+                bigString1 += '<td class="col3"><i>' + post.get('parentName') + ' / ' + post.get('studentNameGrade') + ' / ' + post.get('parentEmail') + '</i></td>'
+            bigString1 += '<td class="col4"><form action="/deleteELL" method="post"><button type="submit" class="btn btn-danger btn-sm" name="delete" value="' + str(post.get('_id')) + '"><span class="glyphicon glyphicon-trash"></span>Confirm Delete</button></form>'
             if(post.get('approved') == "false"):
-                bigString1 = bigString1 + Markup('<form action="/vetSE" method="post"><button type="submit" class="btn btn-warning btn-sm" name="vet" value="' + str(post.get('_id'))+ '">' + '<span class="glyphicon glyphicon-plus"></span>Vet')
+                bigString1 += '<form action="/vetELL" method="post"><button type="submit" class="btn btn-warning btn-sm" name="vet" value="' + str(post.get('_id'))+ '">' + '<span class="glyphicon glyphicon-plus"></span>Vet'
             else:
-                bigString1 = bigString1 + Markup('<form action="/unvetSE" method="post"><button type="submit" class="btn btn-warning btn-sm" name="vet" value="' + str(post.get('_id'))+ '">' + '<span class="glyphicon glyphicon-minus"></span>Unvet')
+                bigString1 += '<form action="/unvetELL" method="post"><button type="submit" class="btn btn-warning btn-sm" name="vet" value="' + str(post.get('_id'))+ '">' + '<span class="glyphicon glyphicon-minus"></span>Unvet'
             utc_dt = datetime(int(post.get('dateTime').strftime("%Y")), int(post.get('dateTime').strftime("%m")), int(post.get('dateTime').strftime("%d")), int(post.get('dateTime').strftime("%H")), int(post.get('dateTime').strftime("%M")), 0, tzinfo=pytz.utc)
             loc_dt = utc_dt.astimezone(timezone('America/Los_Angeles'))
             if int(loc_dt.strftime("%H")) > 12:
@@ -202,18 +202,18 @@ def render_special_education_forum():
                 loc_dt = loc_dt.strftime("%m/%d/%Y, " + hour + ":%M PM PT")
             else:
                 loc_dt = loc_dt.strftime("%m/%d/%Y, %H:%M AM PT")
-            bigString1 = bigString1 + Markup('</button></form><i>' + loc_dt + '</i></td></tr>')
+            bigString1 += '</button></form><i>' + loc_dt + '</i></td></tr>'
             postList.insert(0, bigString1)
             bigString1 = ""
     else:
         for post in collection.find():
             if(post.get('approved') == "true"):
-                bigString1 = bigString1 + Markup('<tr><td class="col1"><img src="/static/images/person.png" alt="icon" width="30" height="30"></td>')  
-                bigString1 = bigString1 + Markup('<td class="col2"><form action="/viewSEU"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton"><b>' + post.get('postTitle') + '</b></button></form></td>')
+                bigString1 += '<tr><td class="col1"><img src="/static/images/person.png" alt="icon" width="30" height="30"></td>'
+                bigString1 += '<td class="col2"><form action="/viewELLU"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton"><b>' + post.get('postTitle') + '</b></button></form></td>'
                 if(post.get('anonymous') == "true"):
-                    bigString1 = bigString1 + Markup('<td class="col3"><i>Anonymous Post</i></td>')
+                    bigString1 += '<td class="col3"><i>Anonymous Post</i></td>'
                 else:
-                    bigString1 = bigString1 + Markup('<td class="col3"><i>' + post.get('parentName') + '</i></td>')
+                    bigString1 += '<td class="col3"><i>' + post.get('parentName') + '</i></td>'
                 utc_dt = datetime(int(post.get('dateTime').strftime("%Y")), int(post.get('dateTime').strftime("%m")), int(post.get('dateTime').strftime("%d")), int(post.get('dateTime').strftime("%H")), int(post.get('dateTime').strftime("%M")), 0, tzinfo=pytz.utc)
                 loc_dt = utc_dt.astimezone(timezone('America/Los_Angeles'))
                 if int(loc_dt.strftime("%H")) > 12:
@@ -221,11 +221,11 @@ def render_special_education_forum():
                     loc_dt = loc_dt.strftime("%m/%d/%Y, " + hour + ":%M PM PT")
                 else:
                     loc_dt = loc_dt.strftime("%m/%d/%Y, %H:%M AM PT")
-                bigString1 = bigString1 + Markup('<td class="col4"><i>' + loc_dt + '</i></td></tr>')
+                bigString1 += '<td class="col4"><i>' + loc_dt + '</i></td></tr>'
                 postList.insert(0, bigString1)
                 bigString1 = ""
     for item in postList:
-        bigString1 = bigString1 + item
+        bigString1 += item
     postList.clear()
     collection = db['SEA']
     if 'github_token' in session: 
@@ -237,10 +237,10 @@ def render_special_education_forum():
                 loc_dt = loc_dt.strftime("%m/%d/%Y, " + hour + ":%M PM PT")
             else:
                 loc_dt = loc_dt.strftime("%m/%d/%Y, %H:%M AM PT")
-            bigString2 = bigString2 + Markup('<tr><td class="col1"><img src="/static/images/person.png" alt="icon" width="30" height="30"></td>' +
-                                             '<td class="col2"><form action="/viewSEA"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton"><b>' + post.get('postTitle') + '</b></button></form></td>' +
-                                             '<td class="col3"><i>' + post.get('adminName') + '</i></td>' +
-                                             '<td class="col4"><form action="/deleteSE" method="post"><button type="submit" class="btn btn-danger btn-sm lineUp" name="delete" value="' + str(post.get('_id')) + '"><span class="glyphicon glyphicon-trash"></span>Confirm Delete</button></form><i>' + loc_dt + '</i></td></tr>')
+            bigString2 += ('<tr><td class="col1"><img src="/static/images/person.png" alt="icon" width="30" height="30"></td>' +
+                           '<td class="col2"><form action="/viewELLA"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton"><b>' + post.get('postTitle') + '</b></button></form></td>' +
+                           '<td class="col3"><i>' + post.get('adminName') + '</i></td> +
+                           '<td class="col4"><form action="/deleteELL" method="post"><button type="submit" class="btn btn-danger btn-sm lineUp" name="delete" value="' + str(post.get('_id')) + '"><span class="glyphicon glyphicon-trash"></span>Confirm Delete</button></form><i>' + loc_dt + '</i></td></tr>')
             postList.insert(0, bigString2)
             bigString2 = ""
     else:
@@ -252,15 +252,15 @@ def render_special_education_forum():
                 loc_dt = loc_dt.strftime("%m/%d/%Y, " + hour + ":%M PM PT")
             else:
                 loc_dt = loc_dt.strftime("%m/%d/%Y, %H:%M AM PT")
-            bigString2 = bigString2 + Markup('<tr><td class="col1"><img src="/static/images/person.png" alt="icon" width="30" height="30"></td>' +
-                                             '<td class="col2"><form action="/viewSEA"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton"><b>' + post.get('postTitle') + '</b></button></form></td>' +
-                                             '<td class="col3"><i>' + post.get('adminName') + '</i></td>' +
-                                             '<td class="col4"><i>' + loc_dt + '</i></td></tr>')
+            bigString2 += ('<tr><td class="col1"><img src="/static/images/person.png" alt="icon" width="30" height="30"></td>' +
+                           '<td class="col2"><form action="/viewELLA"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton"><b>' + post.get('postTitle') + '</b></button></form></td>' +
+                           '<td class="col3"><i>' + post.get('adminName') + '</i></td>' +
+                           '<td class="col4"><i>' + loc_dt + '</i></td></tr>')
             postList.insert(0, bigString2)
             bigString2 = ""
     for item in postList:
-        bigString2 = bigString2 + item
-    return render_template('specialeducationforum.html', SEUPosts = bigString1, SEAPosts = bigString2)
+        bigString2 += item
+    return render_template('specialeducationforum.html', SEUPosts = Markup(bigString1), SEAPosts = Markup(bigString2))
 
 @app.route('/userSubmitPostELL', methods=['GET','POST'])
 def renderUserPostSubmissionELL():
