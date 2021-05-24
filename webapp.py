@@ -377,7 +377,9 @@ def viewSEA(objectID):
     objectIDPost == ""
     try:
         objectIDPost = objectID
-    if(objectIDPost == ""):
+    except: 
+        pass
+    if objectIDPost == "":
         objectIDPost = request.args['thread']
     connection_string = os.environ["MONGO_CONNECTION_STRING"]
     db_name = os.environ["MONGO_DBNAME"]
@@ -447,6 +449,8 @@ def viewSEU(objectID):
     objectIDPost == ""
     try:
         objectIDPost = objectID
+    except: 
+        pass
     if(objectIDPost == ""):
     connection_string = os.environ["MONGO_CONNECTION_STRING"]
     db_name = os.environ["MONGO_DBNAME"]
@@ -529,6 +533,8 @@ def viewELLA(objectID):
     objectIDPost == ""
     try:
         objectIDPost = objectID
+    except: 
+        pass
     if(objectIDPost == ""):
         objectIDPost = request.args['thread']
     connection_string = os.environ["MONGO_CONNECTION_STRING"]
@@ -605,6 +611,8 @@ def viewELLU(objectID):
     objectIDPost == ""
     try:
         objectIDPost = objectID
+    except: 
+        pass
     if(objectIDPost == ""):
         objectIDPost = request.args['thread']
     connection_string = os.environ["MONGO_CONNECTION_STRING"]
