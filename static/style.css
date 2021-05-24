@@ -151,7 +151,7 @@ tr {
 }
 
 #footer {
-  bottom: 0px;
+  bottom: 0;
   margin-top: 20px;
   background-color: grey;
   width: 100%;
