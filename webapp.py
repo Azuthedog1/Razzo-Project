@@ -376,7 +376,7 @@ def viewSEA():
     bigString = ''
     counter = 0
     i = 0
-    if 'github_token' in session:
+    if 'github_token' in session: #if admin is logged in
         while counter < commentAmount:
             if("comment" + str(i) in post):
                 utc_dt = datetime(int(post.get('dateTime').strftime("%Y")), int(post.get('dateTime').strftime("%m")), int(post.get('dateTime').strftime("%d")), int(post.get('dateTime').strftime("%H")), int(post.get('dateTime').strftime("%M")), 0, tzinfo=pytz.utc)
@@ -390,12 +390,12 @@ def viewSEA():
                     commentContent = post.get("comment" + str(i), {}).get("postContent")
                     commentContent = commentContent.replace('\\"', '')
                     commentContent = Markup(commentContent[1:len(commentContent)-1])
-                    bigstring += Markup('<tr class="commentBox"><td class="comments"><b>' + post.get("comment" + str(i), {}).get("adminName") + '</b><br><i>' + loc_dt + '</i><br><br>' + commentContent + '<br></td></tr>')
+                    bigString += Markup('<tr class="commentBox"><td class="comments"><b>' + post.get("comment" + str(i), {}).get("adminName") + '</b><br><i>' + loc_dt + '</i><br><br>' + commentContent + '<br></td></tr>')
                 else:
                     commentContent = post.get("comment" + str(i), {}).get("postContent")
                     commentContent = commentContent.replace('\\"', '')
                     commentContent = Markup(commentContent[1:len(commentContent)-1])
-                    bigstring += Markup('<tr class="commentBox"><td class="comments"><b>' + post.get("comment" + str(i), {}).get("parentName") + '</b> / ' + post.get("comment" + str(i), {}).get("studentNameGrade") + '<br><i>' + loc_dt + '</i><br><br>' + commentContent + '<br></td></tr>')
+                    bigString += Markup('<tr class="commentBox"><td class="comments"><b>' + post.get("comment" + str(i), {}).get("parentName") + '</b> / ' + post.get("comment" + str(i), {}).get("studentNameGrade") + '<br><i>' + loc_dt + '</i><br><br>' + commentContent + '<br></td></tr>')
                 counter += 1
             i += 1
     #    i = 0
