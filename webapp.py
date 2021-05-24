@@ -337,7 +337,7 @@ def submitComment():
         else:
             lastNumber = "0"
         if 'github_token' in session:
-            post["comment" + lastNumber] = {"adminName": request.form['adminName'], "postContent": request.form['adminMessage']}
+            post["comment" + lastNumber] = {"adminName": request.form['adminName'], "dateTime": datetime.now(), "postContent": request.form['adminMessage']}
             collection.delete_one({'_id': ObjectId(objectIDPost)})
             collection.insert_one(post)
         else:
