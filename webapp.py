@@ -1,4 +1,4 @@
-#note: implement standardized quotes and better concatenation for strings 
+#note: implement standardized quotes and better concatenation for strings, postContent and commentContent modifications when creating new document 
 from flask import Flask, redirect, Markup, url_for, session, request, jsonify
 from flask_oauthlib.client import OAuth
 from flask import render_template
@@ -368,7 +368,36 @@ def viewSEA():
         loc_dt = loc_dt.strftime("%m/%d/%Y, %H:%M AM PT")
     displayName = post.get('adminName')
     bigString = ''
-    #if 'github_token' in session:
+    keyList = list(post.keys())
+    commentAmount = 0
+        for item in keyList:
+            if "comment" in item:
+                commentAmount += 1
+    bigString = ''
+    counter = 0
+    i = 0
+    if 'github_token' in session:
+        while counter < commentAmount:
+            if("comment" + str(i) in post):
+                utc_dt = datetime(int(post.get('dateTime').strftime("%Y")), int(post.get('dateTime').strftime("%m")), int(post.get('dateTime').strftime("%d")), int(post.get('dateTime').strftime("%H")), int(post.get('dateTime').strftime("%M")), 0, tzinfo=pytz.utc)
+                loc_dt = utc_dt.astimezone(timezone('America/Los_Angeles'))
+                if int(loc_dt.strftime("%H")) > 12:
+                    hour = str(int(loc_dt.strftime("%H")) - 12)
+                    loc_dt = loc_dt.strftime("%m/%d/%Y, " + hour + ":%M PM PT")
+                else:
+                    loc_dt = loc_dt.strftime("%m/%d/%Y, %H:%M AM PT")
+                if post.get("comment" + str(i), {}).get("adminName") != None: #checks if it is admin post
+                    commentContent = post.get("comment" + str(i), {}).get("postContent")
+                    commentContent = commentContent.replace('\\"', '')
+                    commentContent = Markup(commentContent[1:len(commentContent)-1])
+                    bigstring += Markup('<tr class="commentBox"><td class="comments"><b>' + post.get("comment" + str(i), {}).get("adminName") + '</b><br><i>' + loc_dt + '</i><br><br>' + commentContent + '<br></td></tr>')
+                else:
+                    commentContent = post.get("comment" + str(i), {}).get("postContent")
+                    commentContent = commentContent.replace('\\"', '')
+                    commentContent = Markup(commentContent[1:len(commentContent)-1])
+                    bigstring += Markup('<tr class="commentBox"><td class="comments"><b>' + post.get("comment" + str(i), {}).get("parentName") + '</b> / ' + post.get("comment" + str(i), {}).get("studentNameGrade") + '<br><i>' + loc_dt + '</i><br><br>' + commentContent + '<br></td></tr>')
+                counter += 1
+            i += 1
     #    i = 0
     #    while i - z < len(post) and i != -1:
     #        if("comment" + str(i) in post):
