@@ -47,12 +47,12 @@
 }
 
 .discussionBox {
-  width: 100%;
   border: 2px solid Black;
 }
 
 .commentPosts {
   width: 100%;
+  border-collapse: collapse;
 }
 
 .commentBox {
