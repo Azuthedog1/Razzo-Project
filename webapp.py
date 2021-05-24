@@ -428,7 +428,7 @@ def viewSEA():
                             bigString += '<tr><td class="comments"><b>' + post.get("comment" + str(i), {}).get("parentName") + '</b><br><i>' + loc_dt + '</i><br><br>' + post.get("comment" + str(i), {}).get("postContent") + '</td></tr>'
                 counter += 1
             i += 1
-    return render_template('comments.html', title = postTitle, name = parentName, information = info, time = loc_dt, content = postContent, ID = objectIDPost, comments = Markup(bigString))
+    return render_template('comments.html', title = postTitle, name = parentName, information = info, time = loc_dt, content = Markup(postContent), ID = objectIDPost, comments = Markup(bigString))
 
 @app.route('/viewSEU')
 def viewSEU():
@@ -507,7 +507,7 @@ def viewSEU():
                             bigString += '<tr><td class="comments"><b>' + post.get("comment" + str(i), {}).get("parentName") + '</b><br><i>' + loc_dt + '</i><br><br>' + post.get("comment" + str(i), {}).get("postContent") + '</td></tr>'
                 counter += 1
             i += 1
-    return render_template('comments.html', title = postTitle, name = parentName, information = info, time = loc_dt, content = postContent, ID = objectIDPost, comments = Markup(bigString))
+    return render_template('comments.html', title = postTitle, name = parentName, information = info, time = loc_dt, content = Markup(postContent), ID = objectIDPost, comments = Markup(bigString))
 
 @app.route('/viewELLA')
 def viewELLA():
@@ -579,7 +579,7 @@ def viewELLA():
                             bigString += '<tr><td class="comments"><b>' + post.get("comment" + str(i), {}).get("parentName") + '</b><br><i>' + loc_dt + '</i><br><br>' + post.get("comment" + str(i), {}).get("postContent") + '</td></tr>'
                 counter += 1
             i += 1
-    return render_template('comments.html', title = postTitle, name = parentName, information = info, time = loc_dt, content = postContent, ID = objectIDPost, comments = Markup(bigString))
+    return render_template('comments.html', title = postTitle, name = parentName, information = info, time = loc_dt, content = Markup(postContent), ID = objectIDPost, comments = Markup(bigString))
 
 @app.route('/viewELLU')
 def viewELLU():
@@ -658,7 +658,7 @@ def viewELLU():
                             bigString += '<tr><td class="comments"><b>' + post.get("comment" + str(i), {}).get("parentName") + '</b><br><i>' + loc_dt + '</i><br><br>' + post.get("comment" + str(i), {}).get("postContent") + '</td></tr>'
                 counter += 1
             i += 1
-    return render_template('comments.html', title = postTitle, name = parentName, information = info, time = loc_dt, content = postContent, ID = objectIDPost, comments = Markup(bigString))
+    return render_template('comments.html', title = postTitle, name = parentName, information = info, time = loc_dt, content = Markup(postContent), ID = objectIDPost, comments = Markup(bigString))
 
 @app.route('/deleteSE', methods=['GET', 'POST'])
 def deleteSE():
