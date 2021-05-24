@@ -145,7 +145,7 @@ def render_english_learner_forum():
                 loc_dt = loc_dt.strftime("%m/%d/%Y, %H:%M AM PT")
             bigString2 += ('<tr><td class="col1"><img src="/static/images/person.png" alt="icon" width="30" height="30"></td>' +
                            '<td class="col2"><form action="/viewELLA"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton"><b>' + post.get('postTitle') + '</b></button></form></td>' +
-                           '<td class="col3"><i>' + post.get('adminName') + '</i></td> +
+                           '<td class="col3"><i>' + post.get('adminName') + '</i></td>' +
                            '<td class="col4"><form action="/deleteELL" method="post"><button type="submit" class="btn btn-danger btn-sm lineUp" name="delete" value="' + str(post.get('_id')) + '"><span class="glyphicon glyphicon-trash"></span>Confirm Delete</button></form><i>' + loc_dt + '</i></td></tr>')
             postList.insert(0, bigString2)
             bigString2 = ""
@@ -239,7 +239,7 @@ def render_special_education_forum():
                 loc_dt = loc_dt.strftime("%m/%d/%Y, %H:%M AM PT")
             bigString2 += ('<tr><td class="col1"><img src="/static/images/person.png" alt="icon" width="30" height="30"></td>' +
                            '<td class="col2"><form action="/viewELLA"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton"><b>' + post.get('postTitle') + '</b></button></form></td>' +
-                           '<td class="col3"><i>' + post.get('adminName') + '</i></td> +
+                           '<td class="col3"><i>' + post.get('adminName') + '</i></td>' +
                            '<td class="col4"><form action="/deleteELL" method="post"><button type="submit" class="btn btn-danger btn-sm lineUp" name="delete" value="' + str(post.get('_id')) + '"><span class="glyphicon glyphicon-trash"></span>Confirm Delete</button></form><i>' + loc_dt + '</i></td></tr>')
             postList.insert(0, bigString2)
             bigString2 = ""
