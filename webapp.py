@@ -373,8 +373,11 @@ def submitComment():
         return render_template('information.html')
 
 @app.route('/viewSEA')
-def viewSEA(objectIDPost):
-    if(objectIDPost == None):
+def viewSEA(objectID):
+    objectIDPost == ""
+    try:
+        objectIDPost = objectID
+    if(objectIDPost == ""):
         objectIDPost = request.args['thread']
     connection_string = os.environ["MONGO_CONNECTION_STRING"]
     db_name = os.environ["MONGO_DBNAME"]
@@ -440,9 +443,11 @@ def viewSEA(objectIDPost):
     return render_template('comments.html', title = postTitle, name = displayName, information = '', time = loc_dt, content = Markup(postContent), ID = objectIDPost, comments = Markup(bigString))
 
 @app.route('/viewSEU')
-def viewSEU(objectIDPost):
-    if(objectIDPost == None):
-        objectIDPost = request.args['thread']
+def viewSEU(objectID):
+    objectIDPost == ""
+    try:
+        objectIDPost = objectID
+    if(objectIDPost == ""):
     connection_string = os.environ["MONGO_CONNECTION_STRING"]
     db_name = os.environ["MONGO_DBNAME"]
     client = pymongo.MongoClient(connection_string)
@@ -520,8 +525,11 @@ def viewSEU(objectIDPost):
     return render_template('comments.html', title = postTitle, name = parentName, information = info, time = loc_dt, content = Markup(postContent), ID = objectIDPost, comments = Markup(bigString))
 
 @app.route('/viewELLA')
-def viewELLA(objectIDPost):
-    if(objectIDPost == None):
+def viewELLA(objectID):
+    objectIDPost == ""
+    try:
+        objectIDPost = objectID
+    if(objectIDPost == ""):
         objectIDPost = request.args['thread']
     connection_string = os.environ["MONGO_CONNECTION_STRING"]
     db_name = os.environ["MONGO_DBNAME"]
@@ -593,8 +601,11 @@ def viewELLA(objectIDPost):
     return render_template('comments.html', title = postTitle, name = displayName, information = '', time = loc_dt, content = Markup(postContent), ID = objectIDPost, comments = Markup(bigString))
 
 @app.route('/viewELLU')
-def viewELLU(objectIDPost):
-    if(objectIDPost == None):
+def viewELLU(objectID):
+    objectIDPost == ""
+    try:
+        objectIDPost = objectID
+    if(objectIDPost == ""):
         objectIDPost = request.args['thread']
     connection_string = os.environ["MONGO_CONNECTION_STRING"]
     db_name = os.environ["MONGO_DBNAME"]
