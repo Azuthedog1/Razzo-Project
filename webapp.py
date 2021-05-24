@@ -362,19 +362,20 @@ def submitComment():
             collection.delete_one({'_id': ObjectId(objectIDPost)})
             collection.insert_one(post)
     if collection == db['SEA']:
-        return viewSEA()
+        return viewSEA(objectIDPost)
     elif collection == db['SEU']:
-        return viewSEU()
+        return viewSEU(objectIDPost)
     elif collection == db['ELLA']:
-        return viewELLA()
+        return viewELLA(objectIDPost)
     elif collection == db['ELLU']:
-        return viewELLU()
+        return viewELLU(objectIDPost)
     else:
         return render_template('information.html')
 
 @app.route('/viewSEA')
-def viewSEA():
-    objectIDPost = request.args['thread']
+def viewSEA(objectIDPost):
+    if(objectIDPost == None):
+        objectIDPost = request.args['thread']
     connection_string = os.environ["MONGO_CONNECTION_STRING"]
     db_name = os.environ["MONGO_DBNAME"]
     client = pymongo.MongoClient(connection_string)
@@ -439,8 +440,9 @@ def viewSEA():
     return render_template('comments.html', title = postTitle, name = displayName, information = '', time = loc_dt, content = Markup(postContent), ID = objectIDPost, comments = Markup(bigString))
 
 @app.route('/viewSEU')
-def viewSEU():
-    objectIDPost = request.args['thread']
+def viewSEU(objectIDPost):
+    if(objectIDPost == None):
+        objectIDPost = request.args['thread']
     connection_string = os.environ["MONGO_CONNECTION_STRING"]
     db_name = os.environ["MONGO_DBNAME"]
     client = pymongo.MongoClient(connection_string)
@@ -518,8 +520,9 @@ def viewSEU():
     return render_template('comments.html', title = postTitle, name = parentName, information = info, time = loc_dt, content = Markup(postContent), ID = objectIDPost, comments = Markup(bigString))
 
 @app.route('/viewELLA')
-def viewELLA():
-    objectIDPost = request.args['thread']
+def viewELLA(objectIDPost):
+    if(objectIDPost == None):
+        objectIDPost = request.args['thread']
     connection_string = os.environ["MONGO_CONNECTION_STRING"]
     db_name = os.environ["MONGO_DBNAME"]
     client = pymongo.MongoClient(connection_string)
@@ -590,8 +593,9 @@ def viewELLA():
     return render_template('comments.html', title = postTitle, name = displayName, information = '', time = loc_dt, content = Markup(postContent), ID = objectIDPost, comments = Markup(bigString))
 
 @app.route('/viewELLU')
-def viewELLU():
-    objectIDPost = request.args['thread']
+def viewELLU(objectIDPost):
+    if(objectIDPost == None):
+        objectIDPost = request.args['thread']
     connection_string = os.environ["MONGO_CONNECTION_STRING"]
     db_name = os.environ["MONGO_DBNAME"]
     client = pymongo.MongoClient(connection_string)
