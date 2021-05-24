@@ -614,7 +614,7 @@ def viewELLU():
                     commentContent = post.get("comment" + str(i), {}).get("postContent")
                     commentContent = commentContent.replace('\\"', '')
                     commentContent = commentContent[1:len(commentContent)-1]
-                    bigString += '<tr><td class="comments"><b>' + name = post.get("comment" + str(i), {}).get("adminName") + '(Staff)</b><br><i>' + loc_dt + '</i><br><br>' + commentContent + '<br></td></tr>'
+                    bigString += '<tr><td class="comments"><b>' + post.get("comment" + str(i), {}).get("adminName") + '(Staff)</b><br><i>' + loc_dt + '</i><br><br>' + commentContent + '<br></td></tr>'
                 else:
                     commentContent = post.get("comment" + str(i), {}).get("postContent")
                     commentContent = commentContent.replace('\\"', '')
