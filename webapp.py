@@ -456,7 +456,7 @@ def viewSEA(objectIDPost):
             i += 1
     return render_template('comments.html', title = postTitle, name = displayName, information = '', time = loc_dt, content = Markup(postContent), ID = objectIDPost, comments = Markup(bigString))
 
-def viewSEU(objectID):
+def viewSEU(objectIDPost):
     #objectIDPost = request.args['thread']
     connection_string = os.environ["MONGO_CONNECTION_STRING"]
     db_name = os.environ["MONGO_DBNAME"]
@@ -534,7 +534,7 @@ def viewSEU(objectID):
             i += 1
     return render_template('comments.html', title = postTitle, name = parentName, information = info, time = loc_dt, content = Markup(postContent), ID = objectIDPost, comments = Markup(bigString))
 
-def viewELLA(objectID):
+def viewELLA(objectIDPost):
     #objectIDPost = request.args['thread']
     connection_string = os.environ["MONGO_CONNECTION_STRING"]
     db_name = os.environ["MONGO_DBNAME"]
@@ -605,7 +605,7 @@ def viewELLA(objectID):
             i += 1
     return render_template('comments.html', title = postTitle, name = displayName, information = '', time = loc_dt, content = Markup(postContent), ID = objectIDPost, comments = Markup(bigString))
 
-def viewELLU(objectID):
+def viewELLU(objectIDPost):
     #objectIDPost = request.args['thread']
     connection_string = os.environ["MONGO_CONNECTION_STRING"]
     db_name = os.environ["MONGO_DBNAME"]
