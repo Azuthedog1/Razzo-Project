@@ -258,8 +258,9 @@ def render_admin_log():
     client = pymongo.MongoClient(connection_string)
     db = client[db_name]
     collection = db['LOG']
+    cursor = collection.find({})
     bigString = ''
-    for item in collection:
+    for item in cursor:
         utc_dt = datetime(int(item.get('dateTime').strftime("%Y")), int(item.get('dateTime').strftime("%m")), int(item.get('dateTime').strftime("%d")), int(item.get('dateTime').strftime("%H")), int(item.get('dateTime').strftime("%M")), 0, tzinfo=pytz.utc)
         loc_dt = utc_dt.astimezone(timezone('America/Los_Angeles'))
         if int(loc_dt.strftime("%H")) > 12:
@@ -267,7 +268,7 @@ def render_admin_log():
             loc_dt = loc_dt.strftime("%m/%d/%Y, " + hour + ":%M PM PT")
         else:
             loc_dt = loc_dt.strftime("%m/%d/%Y, %H:%M AM PT")
-        bigString += loc_dt + ": " + item.get('action') + '<br>'
+        bigString += loc_dt + ": " + item.get('action') + '<br><br>'
     return render_template('adminlog.html', log = Markup(bigString))
 
 def add_admin_log(dateTime, action):
