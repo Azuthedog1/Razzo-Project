@@ -40,6 +40,12 @@
   border: 2px solid Black;
 }
 
+.logBox {
+  overflow-y: scroll;
+  height: 700px;
+  display: block;
+}
+
 .commentPosts, .logContent {
   width: 100%;
   border-collapse: collapse;
