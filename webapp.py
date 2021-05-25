@@ -314,7 +314,7 @@ def admin_submit_post_ELL():
         content = Markup(content[1:len(content)-1])
         post = {"postTitle": request.form['adminTitle'], "adminName": request.form['adminName'], "dateTime": datetime.now(), "postContent": content}#put all info here using variables
         collection.insert_one(post)
-        action = request.form['adminName'] + ' submitted <b>' + request.form['adminTitle'] + '</b> in english language learners forum'
+        action = request.form['adminName'] + ' submitted <b>' + request.form['adminTitle'] + '</b> in english language learner forum'
         add_admin_log(datetime.now(), action)
     return render_english_learner_forum() #this will also copy the code from def render_english_learner_forum from above.
     
@@ -348,7 +348,7 @@ def admin_submit_post_SE():
         content = Markup(content[1:len(content)-1])
         post = {"postTitle": request.form['adminTitle'], "adminName": request.form['adminName'], "dateTime": datetime.now(), "postContent": content}#put all info here using variables
         collection.insert_one(post)
-        action = request.form['adminName'] + ' submitted <b>' + request.form['adminTitle'] + '</b> in english language learners forum'
+        action = request.form['adminName'] + ' submitted <b>' + request.form['adminTitle'] + '</b> in english language learner forum'
         add_admin_log(datetime.now(), action)
     return render_special_education_forum()
 
@@ -394,17 +394,35 @@ def submit_comment():
             collection.insert_one(post)
     if collection == db['SEA']:
         if 'github_token' in session:
+            action = request.form['adminName'] + ' commented on <b><a href="https://razzoforumproject.herokuapp.com/viewSEA?thread=' + objectIDPost + '>' + post.get('postTitle') + '</a></b> in special education forum'
+            add_admin_log(datetime.now(), action)
+        else:
+            action = request.form['userName'] + ' commented on <b><a href="https://razzoforumproject.herokuapp.com/viewSEA?thread=' + objectIDPost + '>' + post.get('postTitle') + '</a></b> in special education forum'
+            add_admin_log(datetime.now(), action)
+        return view_SEA(objectIDPost)
+    elif collection == db['SEU']:
+        if 'github_token' in session:
             action = request.form['adminName'] + ' commented on <b>' + post.get('postTitle') + '</b> in special education forum'
             add_admin_log(datetime.now(), action)
         else:
             action = request.form['userName'] + ' commented on <b>' + post.get('postTitle') + '</b> in special education forum'
             add_admin_log(datetime.now(), action)
-        return view_SEA(objectIDPost)
-    elif collection == db['SEU']:
         return view_SEU(objectIDPost)
     elif collection == db['ELLA']:
+        if 'github_token' in session:
+            action = request.form['adminName'] + ' commented on <b>' + post.get('postTitle') + '</b> in english language learner forum'
+            add_admin_log(datetime.now(), action)
+        else:
+            action = request.form['userName'] + ' commented on <b>' + post.get('postTitle') + '</b> in english language learner forum'
+            add_admin_log(datetime.now(), action)
         return view_ELLA(objectIDPost)
     elif collection == db['ELLU']:
+        if 'github_token' in session:
+            action = request.form['adminName'] + ' commented on <b>' + post.get('postTitle') + '</b> in english language learner forum'
+            add_admin_log(datetime.now(), action)
+        else:
+            action = request.form['userName'] + ' commented on <b>' + post.get('postTitle') + '</b> in special education forum'
+            add_admin_log(datetime.now(), action)
         return view_ELLU(objectIDPost)
     return render_template('information.html')
 
