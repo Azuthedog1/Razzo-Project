@@ -269,7 +269,7 @@ def render_admin_log():
             loc_dt = loc_dt.strftime("%m/%d/%Y, " + hour + ":%M PM PT")
         else:
             loc_dt = loc_dt.strftime("%m/%d/%Y, %H:%M AM PT")
-        bigString += '<tr><td>'loc_dt + ": " + item.get('action') + '<br></td></tr>'
+        bigString += '<tr><td>' + loc_dt + ": " + item.get('action') + '<br></td></tr>'
         logList.insert(0, bigString)
         bigString = ''
     for item in logList:
