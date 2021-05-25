@@ -89,13 +89,10 @@ def render_english_learner_forum():
     bigString2 = ""
     if 'github_token' in session:
         for post in collection.find():
-            bigString1 += '<tr><td class="col1"><img src="/static/images/person.png" alt="icon" width="30" height="30"></td>'
-            bigString1 += '<td class="col2"><form action="/viewELLU"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton"><b>' + post.get('postTitle') + '</b></button></form></td>'
-            if post.get('parentEmail') == "":
-                bigString1 += '<td class="col3"><i>' + post.get('parentName') + ' / ' + post.get('studentNameGrade') + ' / Email not provided</i></td>'
-            else:
-                bigString1 += '<td class="col3"><i>' + post.get('parentName') + ' / ' + post.get('studentNameGrade') + ' / ' + post.get('parentEmail') + '</i></td>'
-            bigString1 += '<td class="col4"><form action="/deleteELL" method="post"><button type="submit" class="btn btn-danger btn-sm" name="delete" value="' + str(post.get('_id')) + '"><span class="glyphicon glyphicon-trash"></span>Confirm Delete</button></form>'
+            bigString1 += ('<tr><td class="col1"><img src="/static/images/person.png" alt="icon" width="30" height="30"></td>' +
+                           '<td class="col2"><form action="/viewELLU"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton"><b>' + post.get('postTitle') + '</b></button></form></td>' +
+                           '<td class="col3"><i>' + post.get('parentName') + ' / ' + post.get('studentNameGrade') + ' / ' + post.get('parentEmail') + '</i></td>' +
+                           '<td class="col4"><form action="/deleteELL" method="post"><button type="submit" class="btn btn-danger btn-sm" name="delete" value="' + str(post.get('_id')) + '"><span class="glyphicon glyphicon-trash"></span>Confirm Delete</button></form>')
             if(post.get('approved') == "false"):
                 bigString1 += '<form action="/vetELL" method="post"><button type="submit" class="btn btn-warning btn-sm" name="vet" value="' + str(post.get('_id'))+ '">' + '<span class="glyphicon glyphicon-plus"></span>Vet'
             else:
@@ -113,8 +110,8 @@ def render_english_learner_forum():
     else:
         for post in collection.find():
             if(post.get('approved') == "true"):
-                bigString1 += '<tr><td class="col1"><img src="/static/images/person.png" alt="icon" width="30" height="30"></td>'
-                bigString1 += '<td class="col2"><form action="/viewELLU"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton"><b>' + post.get('postTitle') + '</b></button></form></td>'
+                bigString1 += ('<tr><td class="col1"><img src="/static/images/person.png" alt="icon" width="30" height="30"></td>' +
+                               '<td class="col2"><form action="/viewELLU"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton"><b>' + post.get('postTitle') + '</b></button></form></td>')
                 if(post.get('anonymous') == "true"):
                     bigString1 += '<td class="col3"><i>Anonymous Post</i></td>'
                 else:
@@ -179,13 +176,10 @@ def render_special_education_forum():
     bigString2 = ""
     if 'github_token' in session:
         for post in collection.find():
-            bigString1 += '<tr><td class="col1"><img src="/static/images/person.png" alt="icon" width="30" height="30"></td>'
-            bigString1 += '<td class="col2"><form action="/viewSEU"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton"><b>' + post.get('postTitle') + '</b></button></form></td>'
-            if post.get('parentEmail') == "":
-                bigString1 += '<td class="col3"><i>' + post.get('parentName') + ' / ' + post.get('studentNameGrade') + ' / Email not provided</i></td>'
-            else:
-                bigString1 += '<td class="col3"><i>' + post.get('parentName') + ' / ' + post.get('studentNameGrade') + ' / ' + post.get('parentEmail') + '</i></td>'
-            bigString1 += '<td class="col4"><form action="/deleteSE" method="post"><button type="submit" class="btn btn-danger btn-sm" name="delete" value="' + str(post.get('_id')) + '"><span class="glyphicon glyphicon-trash"></span>Confirm Delete</button></form>'
+            bigString1 += ('<tr><td class="col1"><img src="/static/images/person.png" alt="icon" width="30" height="30"></td>' +
+                           '<td class="col2"><form action="/viewSEU"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton"><b>' + post.get('postTitle') + '</b></button></form></td>' +
+                           '<td class="col3"><i>' + post.get('parentName') + ' / ' + post.get('studentNameGrade') + ' / ' + post.get('parentEmail') + '</i></td>' +
+                           '<td class="col4"><form action="/deleteSE" method="post"><button type="submit" class="btn btn-danger btn-sm" name="delete" value="' + str(post.get('_id')) + '"><span class="glyphicon glyphicon-trash"></span>Confirm Delete</button></form>')
             if(post.get('approved') == "false"):
                 bigString1 += '<form action="/vetSE" method="post"><button type="submit" class="btn btn-warning btn-sm" name="vet" value="' + str(post.get('_id'))+ '">' + '<span class="glyphicon glyphicon-plus"></span>Vet'
             else:
@@ -203,8 +197,8 @@ def render_special_education_forum():
     else:
         for post in collection.find():
             if(post.get('approved') == "true"):
-                bigString1 += '<tr><td class="col1"><img src="/static/images/person.png" alt="icon" width="30" height="30"></td>'
-                bigString1 += '<td class="col2"><form action="/viewSEU"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton"><b>' + post.get('postTitle') + '</b></button></form></td>'
+                bigString1 += ('<tr><td class="col1"><img src="/static/images/person.png" alt="icon" width="30" height="30"></td>' +
+                               '<td class="col2"><form action="/viewSEU"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton"><b>' + post.get('postTitle') + '</b></button></form></td>')
                 if(post.get('anonymous') == "true"):
                     bigString1 += '<td class="col3"><i>Anonymous Post</i></td>'
                 else:
@@ -295,7 +289,11 @@ def user_submit_post_ELL():
         content = request.form['userMessage']
         content = content.replace('\\"', '')
         content = Markup(content[1:len(content)-1])
-        post = {"postTitle": request.form['userTitle'], "parentName": request.form['userName'], "studentNameGrade": request.form['userStudent'], "parentEmail": request.form['userEmail'], "anonymous": request.form['anon'], "dateTime": datetime.now(), "postContent": content, "approved": "false"}
+        if request.form['userEmail'] == '':
+            email = 'Email not provided'
+        else:
+            email = request.form['userEmail']
+        post = {"postTitle": request.form['userTitle'], "parentName": request.form['userName'], "studentNameGrade": request.form['userStudent'], "parentEmail": email, "anonymous": request.form['anon'], "dateTime": datetime.now(), "postContent": content, "approved": "false"}
         collection.insert_one(post)
         action = request.form['userName'] + ' submitted <b>' + request.form['userTitle'] + '</b> in english language learners forum'
         add_admin_log(datetime.now(), action)
@@ -329,7 +327,11 @@ def user_submit_post_SE():
         content = request.form['userMessage']
         content = content.replace('\\"', '')
         content = Markup(content[1:len(content)-1])
-        post = {"postTitle": request.form['userTitle'], "parentName": request.form['userName'], "studentNameGrade": request.form['userStudent'], "parentEmail": request.form['userEmail'], "anonymous": request.form['anon'], "dateTime": datetime.now(), "postContent": content, "approved": "false"}
+        if request.form['userEmail'] == '':
+            email = 'Email not provided'
+        else:
+            email = request.form['userEmail']
+        post = {"postTitle": request.form['userTitle'], "parentName": request.form['userName'], "studentNameGrade": request.form['userStudent'], "parentEmail": email, "anonymous": request.form['anon'], "dateTime": datetime.now(), "postContent": content, "approved": "false"}
         collection.insert_one(post)
         action = request.form['userName'] + ' submitted <b>' + request.form['userTitle'] + '</b> in special education forum'
         add_admin_log(datetime.now(), action)
@@ -402,26 +404,26 @@ def submit_comment():
         return view_SEA(objectIDPost)
     elif collection == db['SEU']:
         if 'github_token' in session:
-            action = request.form['adminName'] + ' commented on <b>' + post.get('postTitle') + '</b> in special education forum'
+            action = request.form['adminName'] + ' commented on <b><a href="https://razzoforumproject.herokuapp.com/viewSEU?thread=' + objectIDPost + '>' + post.get('postTitle') + '</a></b> in special education forum'
             add_admin_log(datetime.now(), action)
         else:
-            action = request.form['userName'] + ' commented on <b>' + post.get('postTitle') + '</b> in special education forum'
+            action = request.form['userName'] + ' commented on <b><a href="https://razzoforumproject.herokuapp.com/viewSEU?thread=' + objectIDPost + '>' + post.get('postTitle') + '</a></b> in special education forum'
             add_admin_log(datetime.now(), action)
         return view_SEU(objectIDPost)
     elif collection == db['ELLA']:
         if 'github_token' in session:
-            action = request.form['adminName'] + ' commented on <b>' + post.get('postTitle') + '</b> in english language learner forum'
+            action = request.form['adminName'] + ' commented on <b><a href="https://razzoforumproject.herokuapp.com/viewELLA?thread=' + objectIDPost + '>' + post.get('postTitle') + '</a></b> in english language learner forum'
             add_admin_log(datetime.now(), action)
         else:
-            action = request.form['userName'] + ' commented on <b>' + post.get('postTitle') + '</b> in english language learner forum'
+            action = request.form['userName'] + ' commented on <b><a href="https://razzoforumproject.herokuapp.com/viewELLA?thread=' + objectIDPost + '>' + post.get('postTitle') + '</a></b> in english language learner forum'
             add_admin_log(datetime.now(), action)
         return view_ELLA(objectIDPost)
     elif collection == db['ELLU']:
         if 'github_token' in session:
-            action = request.form['adminName'] + ' commented on <b>' + post.get('postTitle') + '</b> in english language learner forum'
+            action = request.form['adminName'] + ' commented on <b><a href="https://razzoforumproject.herokuapp.com/viewELLU?thread=' + objectIDPost + '>' + post.get('postTitle') + '</a></b> in english language learner forum'
             add_admin_log(datetime.now(), action)
         else:
-            action = request.form['userName'] + ' commented on <b>' + post.get('postTitle') + '</b> in special education forum'
+            action = request.form['userName'] + ' commented on <b><a href="https://razzoforumproject.herokuapp.com/viewELLU?thread=' + objectIDPost + '>' + post.get('postTitle') + '</a></b> in english language learner forum'
             add_admin_log(datetime.now(), action)
         return view_ELLU(objectIDPost)
     return render_template('information.html')
@@ -743,9 +745,15 @@ def delete_SE():
         client = pymongo.MongoClient(connection_string)
         db = client[db_name]
         collection = db['SEA']
+        post = collection.find_one({'_id': ObjectId(objectIDPost)})
+        name = post.get('adminName')
+        if post == None:
+            collection = db['SEU']
+            post = collection.find_one({'_id': ObjectId(objectIDPost)})
         collection.delete_one({'_id': ObjectId(objectIDPost)})
-        collection = db['SEU']
-        collection.delete_one({'_id': ObjectId(objectIDPost)})
+        name = post.get('userName') + '/' + post.get('studentNameGrade') + 
+        action = session['user_data']['login'] + ' deleted <b>' + post.get('postTitle') + '</b> by ' + post.get('') + ' in english language learner forum<br>' + post.get('postContent')
+        add_admin_log(datetime.now(), action)
     return render_special_education_forum()
 
 @app.route('/deleteELL', methods=['GET', 'POST'])
