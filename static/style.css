@@ -29,7 +29,7 @@
   margin-top: 20px;
 }
 
-.postBox {
+.postBox .postBox2 {
   /*width: 49%;*/
   /*height: 700px;*/
   margin-bottom: 20px;
@@ -46,7 +46,7 @@
   /*top: -720px;*/
 }
 
-.discussionBox {
+.discussionBox .logBox {
   border: 2px solid Black;
 }
 
