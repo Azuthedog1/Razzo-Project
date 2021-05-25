@@ -360,7 +360,7 @@ def admin_submit_post_SE():
         post = {"postTitle": request.form['adminTitle'], "adminName": request.form['adminName'], "dateTime": datetime.now(), "postContent": content}#put all info here using variables
         post = collection.insert_one(post)
         post = collection.find_one({"postTitle": request.form['adminTitle'], "adminName": request.form['adminName'], "postContent": content})
-        action = request.form['adminName'] + ' posted <b><a href="https://razzoforumproject.herokuapp.com/viewSEA?thread=' + str(post.get('_id')) + ">' + request.form['adminTitle'] + '</a></b> in english language learner forum'
+        action = request.form['adminName'] + ' posted <b><a href="https://razzoforumproject.herokuapp.com/viewSEA?thread=' + str(post.get('_id')) + '">' + request.form['adminTitle'] + '</a></b> in english language learner forum'
         add_admin_log(datetime.now(), action)
     return render_special_education_forum()
 
@@ -800,7 +800,7 @@ def vet_ELL():
         collection.find_one_and_update({"_id": ObjectId(objectIDPost)},
                                        {"$set": {"approved": "true"}})
         post = collection.find_one({'_id': ObjectId(objectIDPost)})
-        action = session['user_data']['login'] + ' vetted <b><a href="https://razzoforumproject.herokuapp.com/viewELLU?thread=' + objectIDPost + '>' + post.get('postTitle') + '</a></b> in english language learner forum'
+        action = session['user_data']['login'] + ' vetted <b><a href="https://razzoforumproject.herokuapp.com/viewELLU?thread=' + objectIDPost + '">' + post.get('postTitle') + '</a></b> in english language learner forum'
         add_admin_log(datetime.now(), action)
     return render_english_learner_forum()
                                              
@@ -816,7 +816,7 @@ def unvet_ELL():
         collection.find_one_and_update({"_id": ObjectId(objectIDPost)},
                                        {"$set": {"approved": "false"}})
         post = collection.find_one({'_id': ObjectId(objectIDPost)})
-        action = session['user_data']['login'] + ' unvetted <b><a href="https://razzoforumproject.herokuapp.com/viewELLU?thread=' + objectIDPost + '>' + post.get('postTitle') + '</a></b> in english language learner forum'
+        action = session['user_data']['login'] + ' unvetted <b><a href="https://razzoforumproject.herokuapp.com/viewELLU?thread=' + objectIDPost + '">' + post.get('postTitle') + '</a></b> in english language learner forum'
         add_admin_log(datetime.now(), action)
     return render_english_learner_forum()
                                              
@@ -832,7 +832,7 @@ def vet_SE():
         collection.find_one_and_update({"_id": ObjectId(objectIDPost)},
                                        {"$set": {"approved": "true"}})
         post = collection.find_one({'_id': ObjectId(objectIDPost)})
-        action = session['user_data']['login'] + ' vetted <b><a href="https://razzoforumproject.herokuapp.com/viewSEU?thread=' + objectIDPost + '>' + post.get('postTitle') + '</a></b> in special education forum'
+        action = session['user_data']['login'] + ' vetted <b><a href="https://razzoforumproject.herokuapp.com/viewSEU?thread=' + objectIDPost + '">' + post.get('postTitle') + '</a></b> in special education forum'
         add_admin_log(datetime.now(), action)
     return render_special_education_forum()
                                              
@@ -848,7 +848,7 @@ def unvet_SE():
         collection.find_one_and_update({"_id": ObjectId(objectIDPost)},
                                        {"$set": {"approved": "false"}})
         post = collection.find_one({'_id': ObjectId(objectIDPost)})
-        action = session['user_data']['login'] + ' vetted <b><a href="https://razzoforumproject.herokuapp.com/viewSEU?thread=' + objectIDPost + '>' + post.get('postTitle') + '</a></b> in special education forum'
+        action = session['user_data']['login'] + ' vetted <b><a href="https://razzoforumproject.herokuapp.com/viewSEU?thread=' + objectIDPost + '">' + post.get('postTitle') + '</a></b> in special education forum'
         add_admin_log(datetime.now(), action)
     return render_special_education_forum()
 
