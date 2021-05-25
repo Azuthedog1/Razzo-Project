@@ -259,10 +259,30 @@ def render_special_education_forum():
 
 @app.route('/adminLog')
 def render_admin_log():
-    return render_template('adminlog.html')
+    connection_string = os.environ["MONGO_CONNECTION_STRING"]
+    db_name = os.environ["MONGO_DBNAME"]
+    client = pymongo.MongoClient(connection_string)
+    db = client[db_name]
+    collection = db['LOG']
+    bigString = ''
+    for item in collection:
+        utc_dt = datetime(int(item.get('dateTime').strftime("%Y")), int(item.get('dateTime').strftime("%m")), int(item.get('dateTime').strftime("%d")), int(item.get('dateTime').strftime("%H")), int(item.get('dateTime').strftime("%M")), 0, tzinfo=pytz.utc)
+        loc_dt = utc_dt.astimezone(timezone('America/Los_Angeles'))
+        if int(loc_dt.strftime("%H")) > 12:
+            hour = str(int(loc_dt.strftime("%H")) - 12)
+            loc_dt = loc_dt.strftime("%m/%d/%Y, " + hour + ":%M PM PT")
+        else:
+            loc_dt = loc_dt.strftime("%m/%d/%Y, %H:%M AM PT")
+        bigString += loc_dt + ": " + item.get('action') + '<br>'
+    return render_template('adminlog.html', log = Markup(bigString))
 
-def add_admin_log():
-    
+def add_admin_log(dateTime, action):
+    connection_string = os.environ["MONGO_CONNECTION_STRING"]
+    db_name = os.environ["MONGO_DBNAME"]
+    client = pymongo.MongoClient(connection_string)
+    db = client[db_name]
+    collection = db['LOG']
+    collection.insert_one({'dateTime': dateTime, 'action': action})
 
 @app.route('/userSubmitPostELL', methods=['GET','POST'])
 def user_submit_post_ELL():
@@ -277,6 +297,8 @@ def user_submit_post_ELL():
         content = Markup(content[1:len(content)-1])
         post = {"postTitle": request.form['userTitle'], "parentName": request.form['userName'], "studentNameGrade": request.form['userStudent'], "parentEmail": request.form['userEmail'], "anonymous": request.form['anon'], "dateTime": datetime.now(), "postContent": content, "approved": "false"}
         collection.insert_one(post)
+        action = request.form['userName'] + ' submitted <b>' + request.form['userTitle'] + '</b> in english language learners forum'
+        add_admin_log(datetime.now(), action)
     return render_english_learner_forum()
 
 @app.route('/adminSubmitPostELL', methods=['GET', 'POST']) #Same as above, except no name, student name and grade, no anonymous, etc.
@@ -292,6 +314,8 @@ def admin_submit_post_ELL():
         content = Markup(content[1:len(content)-1])
         post = {"postTitle": request.form['adminTitle'], "adminName": request.form['adminName'], "dateTime": datetime.now(), "postContent": content}#put all info here using variables
         collection.insert_one(post)
+        action = request.form['adminName'] + ' submitted <b>' + request.form['userTitle'] + '</b> in english language learners forum'
+        add_admin_log(datetime.now(), action)
     return render_english_learner_forum() #this will also copy the code from def render_english_learner_forum from above.
     
 @app.route('/userSubmitPostSE', methods=['GET', 'POST'])
@@ -307,6 +331,8 @@ def user_submit_post_SE():
         content = Markup(content[1:len(content)-1])
         post = {"postTitle": request.form['userTitle'], "parentName": request.form['userName'], "studentNameGrade": request.form['userStudent'], "parentEmail": request.form['userEmail'], "anonymous": request.form['anon'], "dateTime": datetime.now(), "postContent": content, "approved": "false"}
         collection.insert_one(post)
+        action = request.form['userName'] + ' submitted <b>' + request.form['userTitle'] + '</b> in special education forum'
+        add_admin_log(datetime.now(), action)
     return render_special_education_forum()
 
 @app.route('/adminSubmitPostSE', methods=['GET', 'POST'])
@@ -322,6 +348,8 @@ def admin_submit_post_SE():
         content = Markup(content[1:len(content)-1])
         post = {"postTitle": request.form['adminTitle'], "adminName": request.form['adminName'], "dateTime": datetime.now(), "postContent": content}#put all info here using variables
         collection.insert_one(post)
+        action = request.form['adminName'] + ' submitted <b>' + request.form['userTitle'] + '</b> in special education forum'
+        add_admin_log(datetime.now(), action)
     return render_special_education_forum()
 
 @app.route('/submitComment', methods=['GET', 'POST'])
@@ -365,6 +393,10 @@ def submit_comment():
             collection.delete_one({'_id': ObjectId(objectIDPost)})
             collection.insert_one(post)
     if collection == db['SEA']:
+        post = collection.find_one({'_id': ObjectId(objectIDPost)})
+        if 'github_token' in session:
+            action = request.form['adminName'] + ' commented on <b>' + post.get('postTitle') + '</b> in special education forum'
+            add_admin_log(datetime.now(), action)
         return view_SEA(objectIDPost)
     elif collection == db['SEU']:
         return view_SEU(objectIDPost)
