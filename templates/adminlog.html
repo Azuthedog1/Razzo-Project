@@ -13,12 +13,11 @@
         <td class="headCol2"></td>
       </tr>
     </table>
-    <table class="logContent">
-      <tr>
-        <td>{{ log }}</td>
-      </tr>
-      {{ comments }}
-    </table>
+    <div class="scroll">
+      <table class="logContent">
+        {{ log }}
+      </table>
+    </div>
   </div>
 </div>
 {% endblock %}
