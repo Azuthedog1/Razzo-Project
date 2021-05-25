@@ -513,6 +513,11 @@ def view_SEA(objectIDPost):
                     bigString += '<tr><td class="comments"><b>' + post.get("comment" + str(i), {}).get("adminName") + ' (Staff)</b><br><i>' + loc_dt + '</i><br><br>' + post.get("comment" + str(i), {}).get("postContent") + '</td></tr>'
                 else:
                     bigString += '<tr><td class="comments"><b>' + post.get("comment" + str(i), {}).get("parentName") + '</b> / ' + post.get("comment" + str(i), {}).get("studentNameGrade") + '<br><i>' + loc_dt + '</i><br><br>' + post.get("comment" + str(i), {}).get("postContent") + '</td></tr>'
+                bigString += '<form action="/deleteComment" method="post"><input name="comment" type="hidden" value="' + 'comment' + str(i) + '"><button type="submit" class="btn btn-danger btn-sm" name="delete" value="' + str(post.get('_id')) + '"><span class="glyphicon glyphicon-trash"></span>Confirm Delete</button></form>'
+                if(post.get('approved') == "false"):
+                    bigString1 += '<form action="/vetComment" method="post"><input name="comment" type="hidden" value="' + 'comment' + str(i) + '"><button type="submit" class="btn btn-warning btn-sm" name="vet" value="' + str(post.get('_id'))+ '">' + '<span class="glyphicon glyphicon-plus"></span>Vet</button></form>'
+                else:
+                    bigString1 += '<form action="/unvetComment" method="post"><input name="comment" type="hidden" value="' + 'comment' + str(i) + '"><button type="submit" class="btn btn-warning btn-sm" name="vet" value="' + str(post.get('_id'))+ '">' + '<span class="glyphicon glyphicon-minus"></span>Unvet</button></form>'
                 counter += 1
             i += 1
     else:
