@@ -516,9 +516,9 @@ def view_SEA(objectIDPost):
                 bigString += '<form action="/deleteComment" method="post"><input name="comment" type="hidden" value="' + 'comment' + str(i) + '"><button type="submit" class="btn btn-danger btn-sm" name="delete" value="' + str(post.get('_id')) + '"><span class="glyphicon glyphicon-trash"></span>Confirm Delete</button></form>'
                 if post.get("comment" + str(i), {}).get("adminName") == None:
                     if(post.get("comment" + str(i), {}).get("approved") == "false"):
-                        bigString1 += '<form action="/vetComment" method="post"><input name="comment" type="hidden" value="' + 'comment' + str(i) + '"><button type="submit" class="btn btn-warning btn-sm" name="vet" value="' + str(post.get('_id'))+ '">' + '<span class="glyphicon glyphicon-plus"></span>Vet</button></form>'
+                        bigString += '<form action="/vetComment" method="post"><input name="comment" type="hidden" value="' + 'comment' + str(i) + '"><button type="submit" class="btn btn-warning btn-sm" name="vet" value="' + str(post.get('_id'))+ '">' + '<span class="glyphicon glyphicon-plus"></span>Vet</button></form>'
                     else:
-                        bigString1 += '<form action="/unvetComment" method="post"><input name="comment" type="hidden" value="' + 'comment' + str(i) + '"><button type="submit" class="btn btn-warning btn-sm" name="vet" value="' + str(post.get('_id'))+ '">' + '<span class="glyphicon glyphicon-minus"></span>Unvet</button></form>'
+                        bigString += '<form action="/unvetComment" method="post"><input name="comment" type="hidden" value="' + 'comment' + str(i) + '"><button type="submit" class="btn btn-warning btn-sm" name="vet" value="' + str(post.get('_id'))+ '">' + '<span class="glyphicon glyphicon-minus"></span>Unvet</button></form>'
                 bigString += '</td></tr>'
                 counter += 1
             i += 1
@@ -600,9 +600,9 @@ def view_SEU(objectIDPost):
                 bigString += '<form action="/deleteComment" method="post"><input name="comment" type="hidden" value="' + 'comment' + str(i) + '"><button type="submit" class="btn btn-danger btn-sm" name="delete" value="' + str(post.get('_id')) + '"><span class="glyphicon glyphicon-trash"></span>Confirm Delete</button></form>'
                 if post.get("comment" + str(i), {}).get("adminName") == None:
                     if(post.get("comment" + str(i), {}).get("approved") == "false"):
-                        bigString1 += '<form action="/vetComment" method="post"><input name="comment" type="hidden" value="' + 'comment' + str(i) + '"><button type="submit" class="btn btn-warning btn-sm" name="vet" value="' + str(post.get('_id'))+ '">' + '<span class="glyphicon glyphicon-plus"></span>Vet</button></form>'
+                        bigString += '<form action="/vetComment" method="post"><input name="comment" type="hidden" value="' + 'comment' + str(i) + '"><button type="submit" class="btn btn-warning btn-sm" name="vet" value="' + str(post.get('_id'))+ '">' + '<span class="glyphicon glyphicon-plus"></span>Vet</button></form>'
                     else:
-                        bigString1 += '<form action="/unvetComment" method="post"><input name="comment" type="hidden" value="' + 'comment' + str(i) + '"><button type="submit" class="btn btn-warning btn-sm" name="vet" value="' + str(post.get('_id'))+ '">' + '<span class="glyphicon glyphicon-minus"></span>Unvet</button></form>'
+                        bigString += '<form action="/unvetComment" method="post"><input name="comment" type="hidden" value="' + 'comment' + str(i) + '"><button type="submit" class="btn btn-warning btn-sm" name="vet" value="' + str(post.get('_id'))+ '">' + '<span class="glyphicon glyphicon-minus"></span>Unvet</button></form>'
                 bigString += '</td></tr>'
                 counter += 1
             i += 1
@@ -677,9 +677,9 @@ def view_ELLA(objectIDPost):
                 bigString += '<form action="/deleteComment" method="post"><input name="comment" type="hidden" value="' + 'comment' + str(i) + '"><button type="submit" class="btn btn-danger btn-sm" name="delete" value="' + str(post.get('_id')) + '"><span class="glyphicon glyphicon-trash"></span>Confirm Delete</button></form>'
                 if post.get("comment" + str(i), {}).get("adminName") == None:
                     if(post.get("comment" + str(i), {}).get("approved") == "false"):
-                        bigString1 += '<form action="/vetComment" method="post"><input name="comment" type="hidden" value="' + 'comment' + str(i) + '"><button type="submit" class="btn btn-warning btn-sm" name="vet" value="' + str(post.get('_id'))+ '">' + '<span class="glyphicon glyphicon-plus"></span>Vet</button></form>'
+                        bigString += '<form action="/vetComment" method="post"><input name="comment" type="hidden" value="' + 'comment' + str(i) + '"><button type="submit" class="btn btn-warning btn-sm" name="vet" value="' + str(post.get('_id'))+ '">' + '<span class="glyphicon glyphicon-plus"></span>Vet</button></form>'
                     else:
-                        bigString1 += '<form action="/unvetComment" method="post"><input name="comment" type="hidden" value="' + 'comment' + str(i) + '"><button type="submit" class="btn btn-warning btn-sm" name="vet" value="' + str(post.get('_id'))+ '">' + '<span class="glyphicon glyphicon-minus"></span>Unvet</button></form>'
+                        bigString += '<form action="/unvetComment" method="post"><input name="comment" type="hidden" value="' + 'comment' + str(i) + '"><button type="submit" class="btn btn-warning btn-sm" name="vet" value="' + str(post.get('_id'))+ '">' + '<span class="glyphicon glyphicon-minus"></span>Unvet</button></form>'
                 bigString += '</td></tr>'
                 counter += 1
             i += 1
@@ -761,9 +761,9 @@ def view_ELLU(objectIDPost):
                 bigString += '<form action="/deleteComment" method="post"><input name="comment" type="hidden" value="' + 'comment' + str(i) + '"><button type="submit" class="btn btn-danger btn-sm" name="delete" value="' + str(post.get('_id')) + '"><span class="glyphicon glyphicon-trash"></span>Confirm Delete</button></form>'
                 if post.get("comment" + str(i), {}).get("adminName") == None:
                     if(post.get("comment" + str(i), {}).get("approved") == "false"):
-                        bigString1 += '<form action="/vetComment" method="post"><input name="comment" type="hidden" value="' + 'comment' + str(i) + '"><button type="submit" class="btn btn-warning btn-sm" name="vet" value="' + str(post.get('_id'))+ '">' + '<span class="glyphicon glyphicon-plus"></span>Vet</button></form>'
+                        bigString += '<form action="/vetComment" method="post"><input name="comment" type="hidden" value="' + 'comment' + str(i) + '"><button type="submit" class="btn btn-warning btn-sm" name="vet" value="' + str(post.get('_id'))+ '">' + '<span class="glyphicon glyphicon-plus"></span>Vet</button></form>'
                     else:
-                        bigString1 += '<form action="/unvetComment" method="post"><input name="comment" type="hidden" value="' + 'comment' + str(i) + '"><button type="submit" class="btn btn-warning btn-sm" name="vet" value="' + str(post.get('_id'))+ '">' + '<span class="glyphicon glyphicon-minus"></span>Unvet</button></form>'
+                        bigString += '<form action="/unvetComment" method="post"><input name="comment" type="hidden" value="' + 'comment' + str(i) + '"><button type="submit" class="btn btn-warning btn-sm" name="vet" value="' + str(post.get('_id'))+ '">' + '<span class="glyphicon glyphicon-minus"></span>Unvet</button></form>'
                 bigString +=  '</td></tr>'
                 counter += 1
             i += 1
