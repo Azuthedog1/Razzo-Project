@@ -393,9 +393,11 @@ def submit_comment():
             collection.delete_one({'_id': ObjectId(objectIDPost)})
             collection.insert_one(post)
     if collection == db['SEA']:
-        post = collection.find_one({'_id': ObjectId(objectIDPost)})
         if 'github_token' in session:
             action = request.form['adminName'] + ' commented on <b>' + post.get('postTitle') + '</b> in special education forum'
+            add_admin_log(datetime.now(), action)
+        else:
+            action = request.form['userName'] + ' commented on <b>' + post.get('postTitle') + '</b> in special education forum'
             add_admin_log(datetime.now(), action)
         return view_SEA(objectIDPost)
     elif collection == db['SEU']:
