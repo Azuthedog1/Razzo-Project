@@ -167,10 +167,6 @@ def render_english_learner_forum():
         bigString2 += item
     return render_template('englishlearnerforum.html', ELLUPosts = Markup(bigString1), ELLAPosts = Markup(bigString2))
 
-@app.route('/adminLog')
-def render_admin_log():
-    return render_template('adminlog.html')
-
 @app.route('/specialeducationforum')
 def render_special_education_forum():
     connection_string = os.environ["MONGO_CONNECTION_STRING"]
@@ -261,8 +257,15 @@ def render_special_education_forum():
         bigString2 += item
     return render_template('specialeducationforum.html', SEUPosts = Markup(bigString1), SEAPosts = Markup(bigString2))
 
+@app.route('/adminLog')
+def render_admin_log():
+    return render_template('adminlog.html')
+
+def add_admin_log():
+    
+
 @app.route('/userSubmitPostELL', methods=['GET','POST'])
-def renderUserPostSubmissionELL():
+def user_submit_post_ELL():
     if request.method == 'POST':
         connection_string = os.environ["MONGO_CONNECTION_STRING"]
         db_name = os.environ["MONGO_DBNAME"]
@@ -277,7 +280,7 @@ def renderUserPostSubmissionELL():
     return render_english_learner_forum()
 
 @app.route('/adminSubmitPostELL', methods=['GET', 'POST']) #Same as above, except no name, student name and grade, no anonymous, etc.
-def renderAdminPostSubmissionELL():
+def admin_submit_post_ELL():
     if request.method == 'POST':
         connection_string = os.environ["MONGO_CONNECTION_STRING"]
         db_name = os.environ["MONGO_DBNAME"]
@@ -292,7 +295,7 @@ def renderAdminPostSubmissionELL():
     return render_english_learner_forum() #this will also copy the code from def render_english_learner_forum from above.
     
 @app.route('/userSubmitPostSE', methods=['GET', 'POST'])
-def renderUserPostSubmissionSE():
+def user_submit_post_SE():
     if request.method == 'POST':
         connection_string = os.environ["MONGO_CONNECTION_STRING"]
         db_name = os.environ["MONGO_DBNAME"]
@@ -307,7 +310,7 @@ def renderUserPostSubmissionSE():
     return render_special_education_forum()
 
 @app.route('/adminSubmitPostSE', methods=['GET', 'POST'])
-def renderAdminPostSubmissionSE():
+def admin_submit_post_SE():
     if request.method == 'POST':
         connection_string = os.environ["MONGO_CONNECTION_STRING"]
         db_name = os.environ["MONGO_DBNAME"]
@@ -322,7 +325,7 @@ def renderAdminPostSubmissionSE():
     return render_special_education_forum()
 
 @app.route('/submitComment', methods=['GET', 'POST'])
-def submitComment():
+def submit_comment():
     if request.method == 'POST':
         objectIDPost = request.form['ID']
         connection_string = os.environ["MONGO_CONNECTION_STRING"]
@@ -362,37 +365,36 @@ def submitComment():
             collection.delete_one({'_id': ObjectId(objectIDPost)})
             collection.insert_one(post)
     if collection == db['SEA']:
-        return viewSEA(objectIDPost)
+        return view_SEA(objectIDPost)
     elif collection == db['SEU']:
-        return viewSEU(objectIDPost)
+        return view_SEU(objectIDPost)
     elif collection == db['ELLA']:
-        return viewELLA(objectIDPost)
+        return view_ELLA(objectIDPost)
     elif collection == db['ELLU']:
-        return viewELLU(objectIDPost)
+        return view_ELLU(objectIDPost)
     return render_template('information.html')
 
 @app.route('/viewSEA')
-def rerouteViewSEA():
+def reroute_view_SEA():
     objectIDPost = request.args['thread']
-    return viewSEA(objectIDPost)
+    return view_SEA(objectIDPost)
 
 @app.route('/viewSEU')
-def rerouteViewSEU():
+def reroute_view_SEU():
     objectIDPost = request.args['thread']
-    return viewSEU(objectIDPost)
+    return view_SEU(objectIDPost)
 
 @app.route('/viewELLA')
-def rerouteViewELLA():
+def reroute_view_ELLA():
     objectIDPost = request.args['thread']
-    return viewELLA(objectIDPost)
+    return view_ELLA(objectIDPost)
 
 @app.route('/viewELLU')
-def rerouteViewELLU():
+def reroute_view_ELLU():
     objectIDPost = request.args['thread']
-    return viewELLU(objectIDPost)
+    return view_ELLU(objectIDPost)
 
-def viewSEA(objectIDPost):
-    #objectIDPost = request.args['thread']
+def view_SEA(objectIDPost):
     connection_string = os.environ["MONGO_CONNECTION_STRING"]
     db_name = os.environ["MONGO_DBNAME"]
     client = pymongo.MongoClient(connection_string)
@@ -456,8 +458,7 @@ def viewSEA(objectIDPost):
             i += 1
     return render_template('comments.html', title = postTitle, name = displayName, information = '', time = loc_dt, content = Markup(postContent), ID = objectIDPost, comments = Markup(bigString))
 
-def viewSEU(objectIDPost):
-    #objectIDPost = request.args['thread']
+def view_SEU(objectIDPost):
     connection_string = os.environ["MONGO_CONNECTION_STRING"]
     db_name = os.environ["MONGO_DBNAME"]
     client = pymongo.MongoClient(connection_string)
@@ -534,8 +535,7 @@ def viewSEU(objectIDPost):
             i += 1
     return render_template('comments.html', title = postTitle, name = parentName, information = info, time = loc_dt, content = Markup(postContent), ID = objectIDPost, comments = Markup(bigString))
 
-def viewELLA(objectIDPost):
-    #objectIDPost = request.args['thread']
+def view_ELLA(objectIDPost):
     connection_string = os.environ["MONGO_CONNECTION_STRING"]
     db_name = os.environ["MONGO_DBNAME"]
     client = pymongo.MongoClient(connection_string)
@@ -605,8 +605,7 @@ def viewELLA(objectIDPost):
             i += 1
     return render_template('comments.html', title = postTitle, name = displayName, information = '', time = loc_dt, content = Markup(postContent), ID = objectIDPost, comments = Markup(bigString))
 
-def viewELLU(objectIDPost):
-    #objectIDPost = request.args['thread']
+def view_ELLU(objectIDPost):
     connection_string = os.environ["MONGO_CONNECTION_STRING"]
     db_name = os.environ["MONGO_DBNAME"]
     client = pymongo.MongoClient(connection_string)
@@ -684,7 +683,7 @@ def viewELLU(objectIDPost):
     return render_template('comments.html', title = postTitle, name = parentName, information = info, time = loc_dt, content = Markup(postContent), ID = objectIDPost, comments = Markup(bigString))
 
 @app.route('/deleteSE', methods=['GET', 'POST'])
-def deleteSE():
+def delete_SE():
     if request.method == 'POST':
         objectIDPost = request.form['delete'] #delete post
         connection_string = os.environ["MONGO_CONNECTION_STRING"]
@@ -698,7 +697,7 @@ def deleteSE():
     return render_special_education_forum()
 
 @app.route('/deleteELL', methods=['GET', 'POST'])
-def deleteELL():
+def delete_ELL():
     if request.method == 'POST':
         objectIDPost = request.form['delete'] #delete post
         connection_string = os.environ["MONGO_CONNECTION_STRING"]
@@ -712,7 +711,7 @@ def deleteELL():
     return render_english_learner_forum()
 
 @app.route('/vetELL', methods=['GET', 'POST'])
-def vetELL():
+def vet_ELL():
     if request.method == 'POST':
         objectIDPost = request.form['vet'] #vet and unvet posts
         connection_string = os.environ["MONGO_CONNECTION_STRING"]
@@ -725,7 +724,7 @@ def vetELL():
     return render_english_learner_forum()
                                              
 @app.route('/unvetELL', methods=['GET', 'POST'])
-def unvetELL():
+def unvet_ELL():
     if request.method == 'POST':
         objectIDPost = request.form['vet'] #vet and unvet posts
         connection_string = os.environ["MONGO_CONNECTION_STRING"]
@@ -738,7 +737,7 @@ def unvetELL():
     return render_english_learner_forum()
                                              
 @app.route('/vetSE', methods=['GET', 'POST'])
-def vetSE():
+def vet_SE():
     if request.method == 'POST':
         objectIDPost = request.form['vet'] #vet and unvet posts
         connection_string = os.environ["MONGO_CONNECTION_STRING"]
@@ -751,7 +750,7 @@ def vetSE():
     return render_special_education_forum()
                                              
 @app.route('/unvetSE', methods=['GET', 'POST'])
-def unvetSE():
+def unvet_SE():
     if request.method == 'POST':
         objectIDPost = request.form['vet'] #vet and unvet posts
         connection_string = os.environ["MONGO_CONNECTION_STRING"]
