@@ -41,6 +41,10 @@
 }
 
 .logBox {
+  height: 700px;
+}
+
+.logscroll {
   overflow-y: scroll;
   height: 700px;
   display: block;
