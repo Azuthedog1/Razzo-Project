@@ -746,13 +746,14 @@ def delete_SE():
         db = client[db_name]
         collection = db['SEA']
         post = collection.find_one({'_id': ObjectId(objectIDPost)})
-        name = post.get('adminName')
         if post == None:
             collection = db['SEU']
             post = collection.find_one({'_id': ObjectId(objectIDPost)})
+            name = post.get('parentName') + ' / ' + post.get('studentNameGrade') + ' / ' + post.get('parentEmail')
+        else:
+            name = post.get('adminName')
         collection.delete_one({'_id': ObjectId(objectIDPost)})
-        name = post.get('userName') + '/' + post.get('studentNameGrade') + 
-        action = session['user_data']['login'] + ' deleted <b>' + post.get('postTitle') + '</b> by ' + post.get('') + ' in english language learner forum<br>' + post.get('postContent')
+        action = session['user_data']['login'] + ' deleted <b>' + post.get('postTitle') + '</b> by ' + name + ' in english language learner forum<br>' + post.get('postContent')
         add_admin_log(datetime.now(), action)
     return render_special_education_forum()
 
@@ -765,9 +766,16 @@ def delete_ELL():
         client = pymongo.MongoClient(connection_string)
         db = client[db_name]
         collection = db['ELLA']
+        post = collection.find_one({'_id': ObjectId(objectIDPost)})
+        if post == None:
+            collection = db['ELLU']
+            post = collection.find_one({'_id': ObjectId(objectIDPost)})
+            name = post.get('parentName') + ' / ' + post.get('studentNameGrade') + ' / ' + post.get('parentEmail')
+        else:
+            name = post.get('adminName')
         collection.delete_one({'_id': ObjectId(objectIDPost)})
-        collection = db['ELLU']
-        collection.delete_one({'_id': ObjectId(objectIDPost)})
+        action = session['user_data']['login'] + ' deleted <b>' + post.get('postTitle') + '</b> by ' + name + ' in english language learner forum<br>' + post.get('postContent')
+        add_admin_log(datetime.now(), action)
     return render_english_learner_forum()
 
 @app.route('/vetELL', methods=['GET', 'POST'])
@@ -781,6 +789,9 @@ def vet_ELL():
         collection = db['ELLU']
         collection.find_one_and_update({"_id": ObjectId(objectIDPost)},
                                        {"$set": {"approved": "true"}})
+        post = collection.find_one({'_id': ObjectId(objectIDPost)})
+        action = session['user_data']['login'] + ' vetted <b>' + post.get('postTitle') + '</b> in english language learner forum'
+        add_admin_log(datetime.now(), action)
     return render_english_learner_forum()
                                              
 @app.route('/unvetELL', methods=['GET', 'POST'])
@@ -794,6 +805,9 @@ def unvet_ELL():
         collection = db['ELLU']
         collection.find_one_and_update({"_id": ObjectId(objectIDPost)},
                                        {"$set": {"approved": "false"}})
+        post = collection.find_one({'_id': ObjectId(objectIDPost)})
+        action = session['user_data']['login'] + ' unvetted <b>' + post.get('postTitle') + '</b> in english language learner forum'
+        add_admin_log(datetime.now(), action)
     return render_english_learner_forum()
                                              
 @app.route('/vetSE', methods=['GET', 'POST'])
@@ -807,6 +821,9 @@ def vet_SE():
         collection = db['SEU']
         collection.find_one_and_update({"_id": ObjectId(objectIDPost)},
                                        {"$set": {"approved": "true"}})
+        post = collection.find_one({'_id': ObjectId(objectIDPost)})
+        action = session['user_data']['login'] + ' vetted <b>' + post.get('postTitle') + '</b> in special education forum'
+        add_admin_log(datetime.now(), action)
     return render_special_education_forum()
                                              
 @app.route('/unvetSE', methods=['GET', 'POST'])
@@ -820,6 +837,9 @@ def unvet_SE():
         collection = db['SEU']
         collection.find_one_and_update({"_id": ObjectId(objectIDPost)},
                                        {"$set": {"approved": "false"}})
+        post = collection.find_one({'_id': ObjectId(objectIDPost)})
+        action = session['user_data']['login'] + ' vetted <b>' + post.get('postTitle') + '</b> in special education forum'
+        add_admin_log(datetime.now(), action)
     return render_special_education_forum()
 
 #make sure the jinja variables use Markup 
