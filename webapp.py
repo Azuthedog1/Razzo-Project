@@ -302,7 +302,7 @@ def user_submit_post_ELL():
         post = {"postTitle": request.form['userTitle'], "parentName": request.form['userName'], "studentNameGrade": request.form['userStudent'], "parentEmail": email, "anonymous": request.form['anon'], "dateTime": datetime.now(), "postContent": content, "approved": "false"}
         collection.insert_one(post)
         post = collection.find_one({"postTitle": request.form['userTitle'], "parentName": request.form['userName'], "studentNameGrade": request.form['userStudent'], "parentEmail": email, "anonymous": request.form['anon'], "postContent": content})
-        action = request.form['userName'] + ' posted <b><a href="https://razzoforumproject.herokuapp.com/viewELLU?thread=' + str(post.get('_id')) + '>' + request.form['userTitle'] + '</a></b> in english language learners forum'
+        action = request.form['userName'] + ' posted <b><a href="https://razzoforumproject.herokuapp.com/viewELLU?thread=' + str(post.get('_id')) + '">' + request.form['userTitle'] + '</a></b> in english language learner forum'
         add_admin_log(datetime.now(), action)
     return render_english_learner_forum()
 
@@ -437,6 +437,21 @@ def submit_comment():
             add_admin_log(datetime.now(), action)
         return view_ELLU(objectIDPost)
     return render_template('information.html')
+
+@app.route('/deleteComment', methods=['GET', 'POST'])
+def delete_comment():
+    if request.method == 'POST':
+        objectIDPost = request.form['delete']
+        comment = request.form['comment']
+        connection_string = os.environ["MONGO_CONNECTION_STRING"]
+        db_name = os.environ["MONGO_DBNAME"]
+        client = pymongo.MongoClient(connection_string)
+        db = client[db_name]       
+        collection = db['SEU']
+        collection.find_one_and_update({"_id": ObjectId(objectIDPost)},
+                                       {"$set": {"approved": "true"}})
+        post = collection.find_one({'_id': ObjectId(objectIDPost)})  
+    return render_special_education_forum()
 
 @app.route('/viewSEA')
 def reroute_view_SEA():
