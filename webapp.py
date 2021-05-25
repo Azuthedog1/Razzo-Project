@@ -300,7 +300,8 @@ def user_submit_post_ELL():
         else:
             email = request.form['userEmail']
         post = {"postTitle": request.form['userTitle'], "parentName": request.form['userName'], "studentNameGrade": request.form['userStudent'], "parentEmail": email, "anonymous": request.form['anon'], "dateTime": datetime.now(), "postContent": content, "approved": "false"}
-        post = collection.insert_one(post)
+        collection.insert_one(post)
+        post = collection.find_one({"postTitle": request.form['userTitle'], "parentName": request.form['userName'], "studentNameGrade": request.form['userStudent'], "parentEmail": email, "anonymous": request.form['anon'], "postContent": content})
         action = request.form['userName'] + ' posted <b><a href="https://razzoforumproject.herokuapp.com/viewELLU?thread=' + post.get('_id') + '>' + request.form['userTitle'] + '</a></b> in english language learners forum'
         add_admin_log(datetime.now(), action)
     return render_english_learner_forum()
@@ -317,7 +318,8 @@ def admin_submit_post_ELL():
         content = content.replace('\\"', '')
         content = Markup(content[1:len(content)-1])
         post = {"postTitle": request.form['adminTitle'], "adminName": request.form['adminName'], "dateTime": datetime.now(), "postContent": content}#put all info here using variables
-        post = collection.insert_one(post)
+        collection.insert_one(post)
+        post = collection.find_one({"postTitle": request.form['adminTitle'], "adminName": request.form['adminName'], "postContent": content})
         action = request.form['adminName'] + ' posted <b><a href="https://razzoforumproject.herokuapp.com/viewELLA?thread=' + post.get('_id') + '>' + request.form['adminTitle'] + '</a></b> in english language learner forum'
         add_admin_log(datetime.now(), action)
     return render_english_learner_forum() #this will also copy the code from def render_english_learner_forum from above.
@@ -339,6 +341,7 @@ def user_submit_post_SE():
             email = request.form['userEmail']
         post = {"postTitle": request.form['userTitle'], "parentName": request.form['userName'], "studentNameGrade": request.form['userStudent'], "parentEmail": email, "anonymous": request.form['anon'], "dateTime": datetime.now(), "postContent": content, "approved": "false"}
         post = collection.insert_one(post)
+        post = collection.find_one({"postTitle": request.form['userTitle'], "parentName": request.form['userName'], "studentNameGrade": request.form['userStudent'], "parentEmail": email, "anonymous": request.form['anon'], "postContent": content})
         action = request.form['userName'] + ' posted <b><a href="https://razzoforumproject.herokuapp.com/viewSEU?thread=' + post.get('_id') + '>' + request.form['userTitle'] + '</a></b> in special education forum'
         add_admin_log(datetime.now(), action)
     return render_special_education_forum()
@@ -356,6 +359,7 @@ def admin_submit_post_SE():
         content = Markup(content[1:len(content)-1])
         post = {"postTitle": request.form['adminTitle'], "adminName": request.form['adminName'], "dateTime": datetime.now(), "postContent": content}#put all info here using variables
         post = collection.insert_one(post)
+        post = collection.find_one({"postTitle": request.form['adminTitle'], "adminName": request.form['adminName'], "postContent": content})
         action = request.form['adminName'] + ' posted <b><a href="https://razzoforumproject.herokuapp.com/viewSEA?thread=' + post.get('_id') + '>' + request.form['adminTitle'] + '</a></b> in english language learner forum'
         add_admin_log(datetime.now(), action)
     return render_special_education_forum()
