@@ -5,6 +5,21 @@
 {% block title %}Administrator Logs{% endblock %}
 
 {% block content %}
-{{ log }}
+<div class="back">
+  <div class="logBox">
+    <table class="toprow">
+      <tr>
+        <td class="headCol1"><b>Admin Logs</b></td>
+        <td class="headCol2"></td>
+      </tr>
+    </table>
+    <table class="commentPosts">
+      <tr>
+        <td>{{ log }}</td>
+      </tr>
+      {{ comments }}
+    </table>
+  </div>
+</div>
 {% endblock %}
 
