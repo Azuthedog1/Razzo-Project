@@ -360,7 +360,7 @@ def admin_submit_post_SE():
         post = {"postTitle": request.form['adminTitle'], "adminName": request.form['adminName'], "dateTime": datetime.now(), "postContent": content}#put all info here using variables
         post = collection.insert_one(post)
         post = collection.find_one({"postTitle": request.form['adminTitle'], "adminName": request.form['adminName'], "postContent": content})
-        action = request.form['adminName'] + ' posted <b><a href="https://razzoforumproject.herokuapp.com/viewSEA?thread=' + str(post.get('_id')) + '">' + request.form['adminTitle'] + '</a></b> in english language learner forum'
+        action = request.form['adminName'] + ' posted <b><a href="https://razzoforumproject.herokuapp.com/viewSEA?thread=' + str(post.get('_id')) + '">' + request.form['adminTitle'] + '</a></b> in special education forum'
         add_admin_log(datetime.now(), action)
     return render_special_education_forum()
 
