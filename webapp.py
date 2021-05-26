@@ -104,7 +104,8 @@ def render_english_learner_forum():
                 hour = str(int(loc_dt.strftime("%H")) - 12)
                 loc_dt = loc_dt.strftime("%m/%d/%Y, " + hour + ":%M PM PT")
             else:
-                loc_dt = loc_dt.strftime("%m/%d/%Y, %H:%M AM PT")
+                hour = str(int(loc_dt.strftime("%H")))
+                loc_dt = loc_dt.strftime("%m/%d/%Y, " + hour + ":%M AM PT")
             bigString1 += '</button></form><br><i>' + loc_dt + '</i></td></tr>'
             postList.insert(0, bigString1)
             bigString1 = ""
