@@ -2,13 +2,13 @@ $(document).ready(function(){
   $('.cancel').hide();
   $('.confirm').hide();
   $('.delete').click(function(){
-    $('.delete').siblings('.cancel').show();
-    $('.delete').siblings('.confirm').show();
+    $(this).siblings('.cancel').show();
+    $(this).siblings('.confirm').show();
     $(this).hide();
   });
   $('.cancel').click(function(){
-    $('.cancel').siblings('.confirm').hide();
-    $('.cancel').siblings('.delete').show();
+    $(this).siblings('.confirm').hide();
+    $(this).siblings('.delete').show();
     $(this).hide();
   });
   var form = document.querySelector('#adminform'); 
