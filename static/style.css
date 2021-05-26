@@ -65,20 +65,20 @@
 
 .adminPosts {
   width: 100%;
-  background-color: #f0f0f0;
+  background-color: #f7f7f7;
 }
 
 .userPosts {
   width: 100%;
-  background-color: #f0f0f0;
+  background-color: #f7f7f7;
 }
 
 .adminPosts tr:hover {
-  background-color: #e3e3e3;
+  background-color: #f0f0f0;
 }
 
 .userPosts tr:hover {
-  background-color: #e3e3e3;
+  background-color: #f0f0f0;
 }
 
 tr {
