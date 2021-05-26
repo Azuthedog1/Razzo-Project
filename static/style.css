@@ -1,3 +1,6 @@
+body {
+  background-image: url('pattern.jpg');
+}
 .top {
   background-color: #0a5c0d;
   padding: 10px;
