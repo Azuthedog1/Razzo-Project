@@ -177,6 +177,10 @@ tr {
   text-align: right;
 }
 
+.delete {
+  display: inline-block;
+}
+
 .cancel {
   display: none;
 }
