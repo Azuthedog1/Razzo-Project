@@ -97,7 +97,7 @@ def render_english_learner_forum():
                 bigString1 += '<td class="col4"><form action="/vetELL" method="post" class="inLine"><button type="submit" class="btn btn-warning btn-sm" name="vet" value="' + str(post.get('_id'))+ '">' + '<span class="glyphicon glyphicon-plus"></span>Vet</button></form> '
             else:
                 bigString1 += '<td class="col4"><form action="/unvetELL" method="post" class="inLine"><button type="submit" class="btn btn-warning btn-sm" name="vet" value="' + str(post.get('_id'))+ '">' + '<span class="glyphicon glyphicon-minus"></span>Unvet</button></form> '
-            bigString1 += '<form action="/deleteELL" method="post" class="inLine"><button type="submit" class="btn btn-danger btn-sm" name="delete" value="' + str(post.get('_id')) + '"><span class="glyphicon glyphicon-trash"></span>Confirm Delete</button></form>'
+            bigString1 += '<button type="button" class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-trash"></span>Delete</button><button type="button" class="btn btn-danger btn-sm">Cancel</button><form action="/deleteELL" method="post" class="inLine"><button type="submit" class="btn btn-danger btn-sm" name="delete" value="' + str(post.get('_id')) + '"><span class="glyphicon glyphicon-trash"></span>Confirm Delete</button></form>'
             utc_dt = datetime(int(post.get('dateTime').strftime('%Y')), int(post.get('dateTime').strftime('%m')), int(post.get('dateTime').strftime('%d')), int(post.get('dateTime').strftime('%H')), int(post.get('dateTime').strftime('%M')), 0, tzinfo=pytz.utc)
             loc_dt = utc_dt.astimezone(timezone('America/Los_Angeles'))
             if int(loc_dt.strftime('%H')) > 12:
