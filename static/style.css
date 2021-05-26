@@ -46,6 +46,10 @@
   display: block;
 }
 
+.logRow {
+  padding: 10px;
+}
+
 .commentPosts, .logContent {
   width: 100%;
   border-collapse: collapse;
