@@ -394,7 +394,7 @@ def submit_comment():
             content = request.form['adminMessage']
             content = content.replace('\\"', '')
             content = Markup(content[1:len(content)-1])
-            post["comment" + lastNumber] = {"_id": objectIDPost, "adminName": request.form['adminName'], "dateTime": datetime.now(), "postContent": content}
+            post["comment" + lastNumber] = {"adminName": request.form['adminName'], "dateTime": datetime.now(), "postContent": content}
             collection.replace_one({'_id': ObjectId(objectIDPost)}, post)
         else:
             content = request.form['userMessage']
