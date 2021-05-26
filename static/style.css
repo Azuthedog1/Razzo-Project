@@ -153,6 +153,22 @@ tr {
   height: 100px;
 }
 
+.timeColor {
+  color: #7289DA;
+}
+
+.vettingColor {
+  color: #FF8C00;
+}
+
+.deleteColor {
+  color: #DC143C;
+}
+
+.createColor {
+  color: #50C878;
+}
+
 .navbar-default {
   background-color: #ffffff;
   border: none;
