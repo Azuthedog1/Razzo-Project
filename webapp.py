@@ -663,8 +663,8 @@ def view_SEA(objectIDPost):
                     bigString += '<tr><td class="comments"><b>' + post.get('comment' + str(i), {}).get('adminName') + ' (Staff)</b><br><i>' + loc_dt + '</i><br><br>' + post.get('comment' + str(i), {}).get('postContent')
                 else:
                     bigString += '<tr><td class="comments"><b>' + post.get('comment' + str(i), {}).get('parentName') + '</b> / ' + post.get('comment' + str(i), {}).get('studentNameGrade') + '<br><i>' + loc_dt + '</i><br><br>' + post.get('comment' + str(i), {}).get('postContent')
+                bigString += '<div class="rightAlign">'
                 if post.get('comment' + str(i), {}).get('adminName') == None:
-                    bigString += '<div class="rightAlign">'
                     if(post.get('comment' + str(i), {}).get('approved') == 'false'):
                         bigString += '<form action="/vetComment" method="post" class="inLine"><input name="comment" type="hidden" value="' + 'comment' + str(i) + '"><button type="submit" class="btn btn-warning btn-sm" name="vet" value="' + str(post.get('_id'))+ '">' + '<span class="glyphicon glyphicon-plus"></span>Vet</button></form> '
                     else:
@@ -751,8 +751,8 @@ def view_SEU(objectIDPost):
                     bigString += '<tr><td class="comments"><b>' + post.get('comment' + str(i), {}).get('adminName') + ' (Staff)</b><br><i>' + loc_dt + '</i><br><br>' + post.get('comment' + str(i), {}).get('postContent')
                 else:
                     bigString += '<tr><td class="comments"><b>' + post.get('comment' + str(i), {}).get('parentName') + '</b> / ' + post.get('comment' + str(i), {}).get('studentNameGrade') + '<br><i>' + loc_dt + '</i><br><br>' + post.get('comment' + str(i), {}).get('postContent')
+                bigString += '<div class="rightAlign">'
                 if post.get('comment' + str(i), {}).get('adminName') == None:
-                    bigString += '<div class="rightAlign">'
                     if(post.get('comment' + str(i), {}).get('approved') == 'false'):
                         bigString += '<form action="/vetComment" method="post" class="inLine"><input name="comment" type="hidden" value="' + 'comment' + str(i) + '"><button type="submit" class="btn btn-warning btn-sm" name="vet" value="' + str(post.get('_id'))+ '">' + '<span class="glyphicon glyphicon-plus"></span>Vet</button></form> '
                     else:
@@ -832,13 +832,14 @@ def view_ELLA(objectIDPost):
                     bigString += '<tr><td class="comments"><b>' + post.get('comment' + str(i), {}).get('adminName') + ' (Staff)</b><br><i>' + loc_dt + '</i><br><br>' + post.get('comment' + str(i), {}).get('postContent')
                 else:
                     bigString += '<tr><td class="comments"><b>' + post.get('comment' + str(i), {}).get('parentName') + '</b> / ' + post.get('comment' + str(i), {}).get('studentNameGrade') + '<br><i>' + loc_dt + '</i><br><br>' + post.get('comment' + str(i), {}).get('postContent')
+                bigString += '<div class="rightAlign">'
                 if post.get('comment' + str(i), {}).get('adminName') == None:
                     if(post.get('comment' + str(i), {}).get('approved') == 'false'):
                         bigString += '<form action="/vetComment" method="post" class="inLine"><input name="comment" type="hidden" value="' + 'comment' + str(i) + '"><button type="submit" class="btn btn-warning btn-sm" name="vet" value="' + str(post.get('_id'))+ '">' + '<span class="glyphicon glyphicon-plus"></span>Vet</button></form> '
                     else:
                         bigString += '<form action="/unvetComment" method="post" class="inLine"><input name="comment" type="hidden" value="' + 'comment' + str(i) + '"><button type="submit" class="btn btn-warning btn-sm" name="vet" value="' + str(post.get('_id'))+ '">' + '<span class="glyphicon glyphicon-minus"></span>Unvet</button></form> '
                 bigString += '<form action="/deleteComment" method="post" class="inLine"><input name="comment" type="hidden" value="' + 'comment' + str(i) + '"><button type="submit" class="btn btn-danger btn-sm" name="delete" value="' + str(post.get('_id')) + '"><span class="glyphicon glyphicon-trash"></span>Confirm Delete</button></form>'
-                bigString += '</td></tr>'
+                bigString += '</div></td></tr>'
                 counter += 1
             i += 1
     else:
@@ -919,8 +920,8 @@ def view_ELLU(objectIDPost):
                     bigString += '<tr><td class="comments"><b>' + post.get('comment' + str(i), {}).get('adminName') + ' (Staff)</b><br><i>' + loc_dt + '</i><br><br>' + post.get('comment' + str(i), {}).get('postContent')
                 else:
                     bigString += '<tr><td class="comments"><b>' + post.get('comment' + str(i), {}).get('parentName') + '</b> / ' + post.get('comment' + str(i), {}).get('studentNameGrade') + '<br><i>' + loc_dt + '</i><br><br>' + post.get('comment' + str(i), {}).get('postContent')
+                bigString += '<div class="rightAlign">'
                 if post.get('comment' + str(i), {}).get('adminName') == None:
-                    bigString += '<div class="rightAlign">'
                     if(post.get('comment' + str(i), {}).get('approved') == 'false'):
                         bigString += '<form action="/vetComment" method="post" class="inLine"><input name="comment" type="hidden" value="' + 'comment' + str(i) + '"><button type="submit" class="btn btn-warning btn-sm" name="vet" value="' + str(post.get('_id'))+ '">' + '<span class="glyphicon glyphicon-plus"></span>Vet</button></form> '
                     else:
