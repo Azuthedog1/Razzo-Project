@@ -40,13 +40,13 @@
   border: 2px solid Black;
 }
 
-.logscroll {
+.logScroll {
   overflow-y: scroll;
   height: 500px;
   display: block;
 }
 
-.logRow {
+.logContent {
   padding: 10px;
 }
 
