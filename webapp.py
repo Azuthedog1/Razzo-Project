@@ -124,7 +124,8 @@ def render_english_learner_forum():
                     hour = str(int(loc_dt.strftime("%H")) - 12)
                     loc_dt = loc_dt.strftime("%m/%d/%Y, " + hour + ":%M PM PT")
                 else:
-                    loc_dt = loc_dt.strftime("%m/%d/%Y, %H:%M AM PT")
+                    hour = str(int(loc_dt.strftime("%H")))
+                    loc_dt = loc_dt.strftime("%m/%d/%Y, " + hour + ":%M AM PT")
                 bigString1 += '<td class="col4"><i>' + loc_dt + '</i></td></tr>'
                 postList.insert(0, bigString1)
                 bigString1 = ""
@@ -140,7 +141,8 @@ def render_english_learner_forum():
                 hour = str(int(loc_dt.strftime("%H")) - 12)
                 loc_dt = loc_dt.strftime("%m/%d/%Y, " + hour + ":%M PM PT")
             else:
-                loc_dt = loc_dt.strftime("%m/%d/%Y, %H:%M AM PT")
+                hour = str(int(loc_dt.strftime("%H")))
+                loc_dt = loc_dt.strftime("%m/%d/%Y, " + hour + ":%M AM PT")
             bigString2 += ('<tr><td class="col1"><img src="/static/images/person.png" alt="icon" width="30" height="30"></td>' +
                            '<td class="col2"><form action="/viewELLA"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton"><b>' + post.get('postTitle') + '</b></button></form></td>' +
                            '<td class="col3"><i>' + post.get('adminName') + '</i></td>' +
@@ -155,7 +157,8 @@ def render_english_learner_forum():
                 hour = str(int(loc_dt.strftime("%H")) - 12)
                 loc_dt = loc_dt.strftime("%m/%d/%Y, " + hour + ":%M PM PT")
             else:
-                loc_dt = loc_dt.strftime("%m/%d/%Y, %H:%M AM PT")
+                hour = str(int(loc_dt.strftime("%H")))
+                loc_dt = loc_dt.strftime("%m/%d/%Y, " + hour + ":%M AM PT")
             bigString2 += ('<tr><td class="col1"><img src="/static/images/person.png" alt="icon" width="30" height="30"></td>' +
                            '<td class="col2"><form action="/viewELLA"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton"><b>' + post.get('postTitle') + '</b></button></form></td>' +
                            '<td class="col3"><i>' + post.get('adminName') + '</i></td>' +
@@ -192,7 +195,8 @@ def render_special_education_forum():
                 hour = str(int(loc_dt.strftime("%H")) - 12)
                 loc_dt = loc_dt.strftime("%m/%d/%Y, " + hour + ":%M PM PT")
             else:
-                loc_dt = loc_dt.strftime("%m/%d/%Y, %H:%M AM PT")
+                hour = str(int(loc_dt.strftime("%H")))
+                loc_dt = loc_dt.strftime("%m/%d/%Y, " + hour + ":%M AM PT")
             bigString1 += '</button></form><br><i>' + loc_dt + '</i></td></tr>'
             postList.insert(0, bigString1)
             bigString1 = ""
@@ -211,7 +215,8 @@ def render_special_education_forum():
                     hour = str(int(loc_dt.strftime("%H")) - 12)
                     loc_dt = loc_dt.strftime("%m/%d/%Y, " + hour + ":%M PM PT")
                 else:
-                    loc_dt = loc_dt.strftime("%m/%d/%Y, %H:%M AM PT")
+                    hour = str(int(loc_dt.strftime("%H")))
+                    loc_dt = loc_dt.strftime("%m/%d/%Y, " + hour + ":%M AM PT")
                 bigString1 += '<td class="col4"><i>' + loc_dt + '</i></td></tr>'
                 postList.insert(0, bigString1)
                 bigString1 = ""
@@ -227,7 +232,8 @@ def render_special_education_forum():
                 hour = str(int(loc_dt.strftime("%H")) - 12)
                 loc_dt = loc_dt.strftime("%m/%d/%Y, " + hour + ":%M PM PT")
             else:
-                loc_dt = loc_dt.strftime("%m/%d/%Y, %H:%M AM PT")
+                hour = str(int(loc_dt.strftime("%H")))
+                loc_dt = loc_dt.strftime("%m/%d/%Y, " + hour + ":%M AM PT")
             bigString2 += ('<tr><td class="col1"><img src="/static/images/person.png" alt="icon" width="30" height="30"></td>' +
                            '<td class="col2"><form action="/viewSEA"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton"><b>' + post.get('postTitle') + '</b></button></form></td>' +
                            '<td class="col3"><i>' + post.get('adminName') + '</i></td>' +
@@ -242,7 +248,8 @@ def render_special_education_forum():
                 hour = str(int(loc_dt.strftime("%H")) - 12)
                 loc_dt = loc_dt.strftime("%m/%d/%Y, " + hour + ":%M PM PT")
             else:
-                loc_dt = loc_dt.strftime("%m/%d/%Y, %H:%M AM PT")
+                hour = str(int(loc_dt.strftime("%H")))
+                loc_dt = loc_dt.strftime("%m/%d/%Y, " + hour + ":%M AM PT")
             bigString2 += ('<tr><td class="col1"><img src="/static/images/person.png" alt="icon" width="30" height="30"></td>' +
                            '<td class="col2"><form action="/viewSEA"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton"><b>' + post.get('postTitle') + '</b></button></form></td>' +
                            '<td class="col3"><i>' + post.get('adminName') + '</i></td>' +
@@ -270,7 +277,8 @@ def render_admin_log():
             hour = str(int(loc_dt.strftime("%H")) - 12)
             loc_dt = loc_dt.strftime("%m/%d/%Y, " + hour + ":%M PM PT")
         else:
-            loc_dt = loc_dt.strftime("%m/%d/%Y, %H:%M AM PT")
+            hour = str(int(loc_dt.strftime("%H")))
+            loc_dt = loc_dt.strftime("%m/%d/%Y, " + hour + ":%M AM PT")
         bigString += '<tr><td class="logContent"><span class="timeColor">' + loc_dt + '</span>: ' + item.get('action') + '<br></td></tr>'
         logList.insert(0, bigString)
         bigString = ''
@@ -628,7 +636,8 @@ def view_SEA(objectIDPost):
         hour = str(int(loc_dt.strftime("%H")) - 12)
         loc_dt = loc_dt.strftime("%m/%d/%Y, " + hour + ":%M PM PT")
     else:
-        loc_dt = loc_dt.strftime("%m/%d/%Y, %H:%M AM PT")
+        hour = str(int(loc_dt.strftime("%H")))
+        loc_dt = loc_dt.strftime("%m/%d/%Y, " + hour + ":%M AM PT")
     displayName = post.get('adminName')
     bigString = ''
     keyList = list(post.keys())
@@ -648,7 +657,8 @@ def view_SEA(objectIDPost):
                     hour = str(int(loc_dt.strftime("%H")) - 12)
                     loc_dt = loc_dt.strftime("%m/%d/%Y, " + hour + ":%M PM PT")
                 else:
-                    loc_dt = loc_dt.strftime("%m/%d/%Y, %H:%M AM PT")
+                    hour = str(int(loc_dt.strftime("%H")))
+                    loc_dt = loc_dt.strftime("%m/%d/%Y, " + hour + ":%M AM PT")
                 if post.get("comment" + str(i), {}).get("adminName") != None: #checks if it is admin post
                     bigString += '<tr><td class="comments"><b>' + post.get("comment" + str(i), {}).get("adminName") + ' (Staff)</b><br><i>' + loc_dt + '</i><br><br>' + post.get("comment" + str(i), {}).get("postContent")
                 else:
@@ -671,7 +681,8 @@ def view_SEA(objectIDPost):
                     hour = str(int(loc_dt.strftime("%H")) - 12)
                     loc_dt = loc_dt.strftime("%m/%d/%Y, " + hour + ":%M PM PT")
                 else:
-                    loc_dt = loc_dt.strftime("%m/%d/%Y, %H:%M AM PT")
+                    hour = str(int(loc_dt.strftime("%H")))
+                    loc_dt = loc_dt.strftime("%m/%d/%Y, " + hour + ":%M AM PT")
                 if post.get("comment" + str(i), {}).get("adminName") != None:
                     bigString += '<tr><td class="comments"><b>' + post.get("comment" + str(i), {}).get("adminName") + ' (Staff)</b><br><i>' + loc_dt + '</i><br><br>' + post.get("comment" + str(i), {}).get("postContent") + '</td></tr>'
                 else:
@@ -699,7 +710,8 @@ def view_SEU(objectIDPost):
         hour = str(int(loc_dt.strftime("%H")) - 12)
         loc_dt = loc_dt.strftime("%m/%d/%Y, " + hour + ":%M PM PT")
     else:
-        loc_dt = loc_dt.strftime("%m/%d/%Y, %H:%M AM PT")
+        hour = str(int(loc_dt.strftime("%H")))
+        loc_dt = loc_dt.strftime("%m/%d/%Y, " + hour + ":%M AM PT")
     if 'github_token' in session:
         parentName = post.get('parentName')
         studentNameGrade = post.get('studentNameGrade')
@@ -732,7 +744,8 @@ def view_SEU(objectIDPost):
                     hour = str(int(loc_dt.strftime("%H")) - 12)
                     loc_dt = loc_dt.strftime("%m/%d/%Y, " + hour + ":%M PM PT")
                 else:
-                    loc_dt = loc_dt.strftime("%m/%d/%Y, %H:%M AM PT")
+                    hour = str(int(loc_dt.strftime("%H")))
+                    loc_dt = loc_dt.strftime("%m/%d/%Y, " + hour + ":%M AM PT")
                 if post.get("comment" + str(i), {}).get("adminName") != None: #checks if it is admin post
                     bigString += '<tr><td class="comments"><b>' + post.get("comment" + str(i), {}).get("adminName") + ' (Staff)</b><br><i>' + loc_dt + '</i><br><br>' + post.get("comment" + str(i), {}).get("postContent")
                 else:
@@ -755,7 +768,8 @@ def view_SEU(objectIDPost):
                     hour = str(int(loc_dt.strftime("%H")) - 12)
                     loc_dt = loc_dt.strftime("%m/%d/%Y, " + hour + ":%M PM PT")
                 else:
-                    loc_dt = loc_dt.strftime("%m/%d/%Y, %H:%M AM PT")
+                    hour = str(int(loc_dt.strftime("%H")))
+                    loc_dt = loc_dt.strftime("%m/%d/%Y, " + hour + ":%M AM PT")
                 if post.get("comment" + str(i), {}).get("adminName") != None:
                     bigString += '<tr><td class="comments"><b>' + post.get("comment" + str(i), {}).get("adminName") + ' (Staff)</b><br><i>' + loc_dt + '</i><br><br>' + post.get("comment" + str(i), {}).get("postContent") + '</td></tr>'
                 else:
@@ -783,7 +797,8 @@ def view_ELLA(objectIDPost):
         hour = str(int(loc_dt.strftime("%H")) - 12)
         loc_dt = loc_dt.strftime("%m/%d/%Y, " + hour + ":%M PM PT")
     else:
-        loc_dt = loc_dt.strftime("%m/%d/%Y, %H:%M AM PT")
+        hour = str(int(loc_dt.strftime("%H")))
+        loc_dt = loc_dt.strftime("%m/%d/%Y, " + hour + ":%M AM PT")
     displayName = post.get('adminName')
     bigString = ''
     keyList = list(post.keys())
@@ -809,7 +824,8 @@ def view_ELLA(objectIDPost):
                     hour = str(int(loc_dt.strftime("%H")) - 12)
                     loc_dt = loc_dt.strftime("%m/%d/%Y, " + hour + ":%M PM PT")
                 else:
-                    loc_dt = loc_dt.strftime("%m/%d/%Y, %H:%M AM PT")
+                    hour = str(int(loc_dt.strftime("%H")))
+                    loc_dt = loc_dt.strftime("%m/%d/%Y, " + hour + ":%M AM PT")
                 if post.get("comment" + str(i), {}).get("adminName") != None: #checks if it is admin post
                     bigString += '<tr><td class="comments"><b>' + post.get("comment" + str(i), {}).get("adminName") + ' (Staff)</b><br><i>' + loc_dt + '</i><br><br>' + post.get("comment" + str(i), {}).get("postContent")
                 else:
@@ -832,7 +848,8 @@ def view_ELLA(objectIDPost):
                     hour = str(int(loc_dt.strftime("%H")) - 12)
                     loc_dt = loc_dt.strftime("%m/%d/%Y, " + hour + ":%M PM PT")
                 else:
-                    loc_dt = loc_dt.strftime("%m/%d/%Y, %H:%M AM PT")
+                    hour = str(int(loc_dt.strftime("%H")))
+                    loc_dt = loc_dt.strftime("%m/%d/%Y, " + hour + ":%M AM PT")
                 if post.get("comment" + str(i), {}).get("adminName") != None:
                     bigString += '<tr><td class="comments"><b>' + post.get("comment" + str(i), {}).get("adminName") + ' (Staff)</b><br><i>' + loc_dt + '</i><br><br>' + post.get("comment" + str(i), {}).get("postContent") + '</td></tr>'
                 else:
@@ -860,7 +877,8 @@ def view_ELLU(objectIDPost):
         hour = str(int(loc_dt.strftime("%H")) - 12)
         loc_dt = loc_dt.strftime("%m/%d/%Y, " + hour + ":%M PM PT")
     else:
-        loc_dt = loc_dt.strftime("%m/%d/%Y, %H:%M AM PT")
+        hour = str(int(loc_dt.strftime("%H")))
+        loc_dt = loc_dt.strftime("%m/%d/%Y, " + hour + ":%M AM PT")
     if 'github_token' in session:
         parentName = post.get('parentName')
         studentNameGrade = post.get('studentNameGrade')
@@ -893,7 +911,8 @@ def view_ELLU(objectIDPost):
                     hour = str(int(loc_dt.strftime("%H")) - 12)
                     loc_dt = loc_dt.strftime("%m/%d/%Y, " + hour + ":%M PM PT")
                 else:
-                    loc_dt = loc_dt.strftime("%m/%d/%Y, %H:%M AM PT")
+                    hour = str(int(loc_dt.strftime("%H")))
+                    loc_dt = loc_dt.strftime("%m/%d/%Y, " + hour + ":%M AM PT")
                 if post.get("comment" + str(i), {}).get("adminName") != None: #checks if it is admin post
                     bigString += '<tr><td class="comments"><b>' + post.get("comment" + str(i), {}).get("adminName") + ' (Staff)</b><br><i>' + loc_dt + '</i><br><br>' + post.get("comment" + str(i), {}).get("postContent")
                 else:
@@ -916,7 +935,8 @@ def view_ELLU(objectIDPost):
                     hour = str(int(loc_dt.strftime("%H")) - 12)
                     loc_dt = loc_dt.strftime("%m/%d/%Y, " + hour + ":%M PM PT")
                 else:
-                    loc_dt = loc_dt.strftime("%m/%d/%Y, %H:%M AM PT")
+                    hour = str(int(loc_dt.strftime("%H")))
+                    loc_dt = loc_dt.strftime("%m/%d/%Y, " + hour + ":%M AM PT")
                 if post.get("comment" + str(i), {}).get("adminName") != None:
                     bigString += '<tr><td class="comments"><b>' + post.get("comment" + str(i), {}).get("adminName") + ' (Staff)</b><br><i>' + loc_dt + '</i><br><br>' + post.get("comment" + str(i), {}).get("postContent") + '</td></tr>'
                 else:
