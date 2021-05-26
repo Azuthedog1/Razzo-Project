@@ -40,13 +40,9 @@
   border: 2px solid Black;
 }
 
-.logBox {
-  height: 700px;
-}
-
 .logscroll {
   overflow-y: scroll;
-  height: 700px;
+  height: 500px;
   display: block;
 }
 
