@@ -1,5 +1,5 @@
 body {
-  background-image: url('pattern.jpg');
+  background-image: url('/static/images/pattern.jpg');
 }
 .top {
   background-color: #0a5c0d;
