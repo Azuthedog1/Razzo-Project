@@ -1,6 +1,9 @@
 $(document).ready(function() { 
-  $('.delete').siblings('.cancel').css({'display': 'inline-block'});
-  $('.delete').siblings('.confirm').css({'display': 'inline-block'});
+  $('.delete').on('click', function(){
+    $('.delete').siblings('.cancel').show();
+    $('.delete').siblings('.confirm').show();
+    $(this).hide();
+  });
   var form = document.querySelector('#adminform'); 
   form.onsubmit = function() { 
     var about = document.querySelector('input[name=adminMessage]'); 
