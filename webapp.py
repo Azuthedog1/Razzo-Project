@@ -460,7 +460,7 @@ def delete_comment():
         post.pop(comment, None)
         collection.replace_one({'_id': ObjectId(objectIDPost)}, post)
         if collection == db['SEA']:
-            if post.get(comment, {}).get('adminName') != None:
+            if postCopy.get(comment, {}).get('adminName') != None:
                 action = session['user_data']['login'] + '<span class="deleteColor"> deleted </span>a comment by ' + postCopy.get(comment, {}).get('adminName') + ' in the post <b><a href="https://razzoforumproject.herokuapp.com/viewSEA?thread=' + objectIDPost + '">' + postCopy.get('postTitle') + '</a></b> in special education forum<br>' + postCopy.get(comment, {}).get('postContent')
                 add_admin_log(datetime.now(), action)
             else:
@@ -468,7 +468,7 @@ def delete_comment():
                 add_admin_log(datetime.now(), action)
             return view_SEA(objectIDPost)
         elif collection == db['SEU']:
-            if post.get(comment, {}).get('adminName') != None:
+            if postCopy.get(comment, {}).get('adminName') != None:
                 action = session['user_data']['login'] + '<span class="deleteColor"> deleted </span>a comment by ' + postCopy.get(comment, {}).get('adminName') + ' in the post <b><a href="https://razzoforumproject.herokuapp.com/viewSEU?thread=' + objectIDPost + '">' + postCopy.get('postTitle') + '</a></b> in special education forum<br>' + postCopy.get(comment, {}).get('postContent')
                 add_admin_log(datetime.now(), action)
             else:
@@ -476,7 +476,7 @@ def delete_comment():
                 add_admin_log(datetime.now(), action)
             return view_SEU(objectIDPost)
         elif collection == db['ELLA']:
-            if post.get(comment, {}).get('adminName') != None:
+            if postCopy.get(comment, {}).get('adminName') != None:
                 action = session['user_data']['login'] + '<span class="deleteColor"> deleted </span>a comment by ' + postCopy.get(comment, {}).get('adminName') + ' in the post <b><a href="https://razzoforumproject.herokuapp.com/viewELLA?thread=' + objectIDPost + '">' + postCopy.get('postTitle') + '</a></b> in special education forum<br>' + postCopy.get(comment, {}).get('postContent')
                 add_admin_log(datetime.now(), action)
             else:
@@ -484,7 +484,7 @@ def delete_comment():
                 add_admin_log(datetime.now(), action)
             return view_ELLA(objectIDPost)
         elif collection == db['ELLU']:
-            if post.get(comment, {}).get('adminName') != None:
+            if postCopy.get(comment, {}).get('adminName') != None:
                 action = session['user_data']['login'] + '<span class="deleteColor"> deleted </span>a comment by ' + postCopy.get(comment, {}).get('adminName') + ' in the post <b><a href="https://razzoforumproject.herokuapp.com/viewELLU?thread=' + objectIDPost + '">' + postCopy.get('postTitle') + '</a></b> in special education forum<br>' + postCopy.get(comment, {}).get('postContent')
                 add_admin_log(datetime.now(), action)
             else:
