@@ -2,6 +2,7 @@ from flask import Flask, redirect, Markup, url_for, session, request, jsonify
 from flask_oauthlib.client import OAuth
 from flask import render_template
 from bson.objectid import ObjectId
+from mongosanitizer.sanitizer import sanitize
 
 import pprint
 import os
@@ -295,6 +296,7 @@ def user_submit_post_ELL():
         content = request.form['userMessage']
         content = content.replace('\\"', '')
         content = Markup(content[1:len(content)-1])
+        sanitize(content)
         if request.form['userEmail'] == '':
             email = 'Email not provided'
         else:
@@ -317,6 +319,7 @@ def admin_submit_post_ELL():
         content = request.form['adminMessage']
         content = content.replace('\\"', '')
         content = Markup(content[1:len(content)-1])
+        sanitize(content)
         post = {"postTitle": request.form['adminTitle'], "adminName": request.form['adminName'], "dateTime": datetime.now(), "postContent": content}#put all info here using variables
         collection.insert_one(post)
         post = collection.find_one({"postTitle": request.form['adminTitle'], "adminName": request.form['adminName'], "postContent": content})
@@ -335,6 +338,7 @@ def user_submit_post_SE():
         content = request.form['userMessage']
         content = content.replace('\\"', '')
         content = Markup(content[1:len(content)-1])
+        sanitize(content)
         if request.form['userEmail'] == '':
             email = 'Email not provided'
         else:
@@ -357,6 +361,7 @@ def admin_submit_post_SE():
         content = request.form['adminMessage']
         content = content.replace('\\"', '')
         content = Markup(content[1:len(content)-1])
+        sanitize(content)
         post = {"postTitle": request.form['adminTitle'], "adminName": request.form['adminName'], "dateTime": datetime.now(), "postContent": content}#put all info here using variables
         post = collection.insert_one(post)
         post = collection.find_one({"postTitle": request.form['adminTitle'], "adminName": request.form['adminName'], "postContent": content})
@@ -394,12 +399,14 @@ def submit_comment():
             content = request.form['adminMessage']
             content = content.replace('\\"', '')
             content = Markup(content[1:len(content)-1])
+            sanitize(content)
             post["comment" + lastNumber] = {"adminName": request.form['adminName'], "dateTime": datetime.now(), "postContent": content}
             collection.replace_one({'_id': ObjectId(objectIDPost)}, post)
         else:
             content = request.form['userMessage']
             content = content.replace('\\"', '')
             content = Markup(content[1:len(content)-1])
+            sanitize(content)
             post["comment" + lastNumber] = {"parentName": request.form['userName'], "studentNameGrade": request.form['userStudent'], "anonymous": request.form['anon'], "dateTime": datetime.now(), "postContent": content, "approved": "false"}
             collection.replace_one({'_id': ObjectId(objectIDPost)}, post)
     if collection == db['SEA']:
