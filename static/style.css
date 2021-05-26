@@ -101,6 +101,10 @@ tr {
   text-align: right;
 }
 
+.delete, .confirm, .cancel {
+  display: inline-block;
+}
+
 .col1 {
   /*width: 7.5%;*/
   width: 15%;
