@@ -394,16 +394,14 @@ def submit_comment():
             content = request.form['adminMessage']
             content = content.replace('\\"', '')
             content = Markup(content[1:len(content)-1])
-            post["comment" + lastNumber] = {"adminName": request.form['adminName'], "dateTime": datetime.now(), "postContent": content}
-            collection.delete_one({'_id': ObjectId(objectIDPost)})
-            collection.insert_one(post)
+            post["comment" + lastNumber] = {"_id": objectIDPost, "adminName": request.form['adminName'], "dateTime": datetime.now(), "postContent": content}
+            collection.replace_one({'_id': ObjectId(objectIDPost)}, post)
         else:
             content = request.form['userMessage']
             content = content.replace('\\"', '')
             content = Markup(content[1:len(content)-1])
             post["comment" + lastNumber] = {"parentName": request.form['userName'], "studentNameGrade": request.form['userStudent'], "anonymous": request.form['anon'], "dateTime": datetime.now(), "postContent": content, "approved": "false"}
-            collection.delete_one({'_id': ObjectId(objectIDPost)})
-            collection.insert_one(post)
+            collection.replace_one({'_id': ObjectId(objectIDPost)}, post)
     if collection == db['SEA']:
         if 'github_token' in session:
             action = request.form['adminName'] + '<span class="createColor"> commented </span>on <b><a href="https://razzoforumproject.herokuapp.com/viewSEA?thread=' + objectIDPost + '">' + post.get('postTitle') + '</a></b> in special education forum'
@@ -448,9 +446,18 @@ def delete_comment():
         client = pymongo.MongoClient(connection_string)
         db = client[db_name]       
         collection = db['SEU']
-        collection.find_one_and_update({"_id": ObjectId(objectIDPost)},
-                                       {"$set": {"approved": "true"}})
-        post = collection.find_one({'_id': ObjectId(objectIDPost)})  
+        post = collection.find_one({'_id': ObjectId(objectIDPost)})
+        if post == None:
+            collection = db['SEA']
+            post = collection.find_one({'_id': ObjectId(objectIDPost)})
+        if post == None:
+            collection = db['ELLA']
+            post = collection.find_one({'_id': ObjectId(objectIDPost)})
+        if post == None:
+            collection = db['ELLU']
+            post = collection.find_one({'_id': ObjectId(objectIDPost)})
+        del post[comment]
+        collection.replace_one({'_id': ObjectId(objectIDPost)}, post)
     return render_special_education_forum()
 
 @app.route('/viewSEA')
@@ -542,7 +549,7 @@ def view_SEA(objectIDPost):
                             bigString += '<tr><td class="comments"><b>' + post.get("comment" + str(i), {}).get("parentName") + '</b><br><i>' + loc_dt + '</i><br><br>' + post.get("comment" + str(i), {}).get("postContent") + '</td></tr>'
                 counter += 1
             i += 1
-    return render_template('comments.html', title = postTitle, name = displayName, information = '', time = loc_dt, content = Markup(postContent), ID = objectIDPost, comments = Markup(bigString))
+    return render_template('comments.html', title = postTitle, name = displayName, information = '', time = loc_dt, content = Markup(postContent), _id = objectIDPost, comments = Markup(bigString))
 
 def view_SEU(objectIDPost):
     connection_string = os.environ["MONGO_CONNECTION_STRING"]
@@ -626,7 +633,7 @@ def view_SEU(objectIDPost):
                             bigString += '<tr><td class="comments"><b>' + post.get("comment" + str(i), {}).get("parentName") + '</b><br><i>' + loc_dt + '</i><br><br>' + post.get("comment" + str(i), {}).get("postContent") + '</td></tr>'
                 counter += 1
             i += 1
-    return render_template('comments.html', title = postTitle, name = parentName, information = info, time = loc_dt, content = Markup(postContent), ID = objectIDPost, comments = Markup(bigString))
+    return render_template('comments.html', title = postTitle, name = parentName, information = info, time = loc_dt, content = Markup(postContent), _id = objectIDPost, comments = Markup(bigString))
 
 def view_ELLA(objectIDPost):
     connection_string = os.environ["MONGO_CONNECTION_STRING"]
@@ -703,7 +710,7 @@ def view_ELLA(objectIDPost):
                             bigString += '<tr><td class="comments"><b>' + post.get("comment" + str(i), {}).get("parentName") + '</b><br><i>' + loc_dt + '</i><br><br>' + post.get("comment" + str(i), {}).get("postContent") + '</td></tr>'
                 counter += 1
             i += 1
-    return render_template('comments.html', title = postTitle, name = displayName, information = '', time = loc_dt, content = Markup(postContent), ID = objectIDPost, comments = Markup(bigString))
+    return render_template('comments.html', title = postTitle, name = displayName, information = '', time = loc_dt, content = Markup(postContent), _id = objectIDPost, comments = Markup(bigString))
 
 def view_ELLU(objectIDPost):
     connection_string = os.environ["MONGO_CONNECTION_STRING"]
@@ -787,7 +794,7 @@ def view_ELLU(objectIDPost):
                             bigString += '<tr><td class="comments"><b>' + post.get("comment" + str(i), {}).get("parentName") + '</b><br><i>' + loc_dt + '</i><br><br>' + post.get("comment" + str(i), {}).get("postContent") + '</td></tr>'
                 counter += 1
             i += 1
-    return render_template('comments.html', title = postTitle, name = parentName, information = info, time = loc_dt, content = Markup(postContent), ID = objectIDPost, comments = Markup(bigString))
+    return render_template('comments.html', title = postTitle, name = parentName, information = info, time = loc_dt, content = Markup(postContent), _id = objectIDPost, comments = Markup(bigString))
 
 @app.route('/deleteSE', methods=['GET', 'POST'])
 def delete_SE():
