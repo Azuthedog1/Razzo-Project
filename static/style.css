@@ -173,6 +173,10 @@ tr {
   display: inline-block;
 }
 
+.rightAlign {
+  text-align: right;
+}
+
 .navbar-default {
   background-color: #ffffff;
   border: none;
