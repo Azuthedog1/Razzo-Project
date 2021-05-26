@@ -1,6 +1,6 @@
 $(document).ready(function() { 
-  //$('.cancel').hide();
-  //$('.confirm').hide();
+  $('.cancel').hide();
+  $('.confirm').hide();
   //$('.delete').on('click', function(){
     //$('.delete').siblings('.cancel').show();
     //$('.delete').siblings('.confirm').show();
