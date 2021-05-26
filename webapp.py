@@ -18,13 +18,13 @@ app.secret_key = os.environ['SECRET_KEY'] #used to sign session cookies
 oauth = OAuth(app)
 oauth.init_app(app) #initialize the app to be able to make requests for user information
 
-admin1="Azuthedog1"
-admin2="DanaLearnsToCode"
-admin3="MyDSWAccount"
-admin4="Korkz"
-admin5="Ponmo"
-admin6="piemusician"
-admin7="Ramon-W"
+admin1='Azuthedog1'
+admin2='DanaLearnsToCode'
+admin3='MyDSWAccount'
+admin4='Korkz'
+admin5='Ponmo'
+admin6='piemusician'
+admin7='Ramon-W'
 
 #Set up GitHub as OAuth provider
 github = oauth.remote_app(
@@ -41,7 +41,7 @@ github = oauth.remote_app(
    
 @app.context_processor
 def inject_logged_in():
-    return {"logged_in":('github_token' in session)}
+    return {'logged_in':('github_token' in session)}
 
 @app.route('/')
 def render_information():
@@ -80,85 +80,85 @@ def authorized():
 
 @app.route('/englishlearnerforum')
 def render_english_learner_forum():
-    connection_string = os.environ["MONGO_CONNECTION_STRING"]
-    db_name = os.environ["MONGO_DBNAME"]
+    connection_string = os.environ['MONGO_CONNECTION_STRING']
+    db_name = os.environ['MONGO_DBNAME']
     client = pymongo.MongoClient(connection_string)
     db = client[db_name]
     collection = db['ELLU']
     postList = []
-    bigString1 = ""
-    bigString2 = ""
+    bigString1 = ''
+    bigString2 = ''
     if 'github_token' in session:
         for post in collection.find():
             bigString1 += ('<tr><td class="col1"><img src="/static/images/person.png" alt="icon" width="30" height="30"></td>' +
                            '<td class="col2"><form action="/viewELLU"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton"><b>' + post.get('postTitle') + '</b></button></form></td>' +
                            '<td class="col3"><i>' + post.get('parentName') + ' / ' + post.get('studentNameGrade') + ' / ' + post.get('parentEmail') + '</i></td>' +
                            '<td class="col4"><form action="/deleteELL" method="post" class="inLine"><button type="submit" class="btn btn-danger btn-sm" name="delete" value="' + str(post.get('_id')) + '"><span class="glyphicon glyphicon-trash"></span>Confirm Delete</button></form> ')
-            if(post.get('approved') == "false"):
+            if(post.get('approved') == 'false'):
                 bigString1 += '<form action="/vetELL" method="post" class="inLine"><button type="submit" class="btn btn-warning btn-sm" name="vet" value="' + str(post.get('_id'))+ '">' + '<span class="glyphicon glyphicon-plus"></span>Vet'
             else:
                 bigString1 += '<form action="/unvetELL" method="post" class="inLine"><button type="submit" class="btn btn-warning btn-sm" name="vet" value="' + str(post.get('_id'))+ '">' + '<span class="glyphicon glyphicon-minus"></span>Unvet'
-            utc_dt = datetime(int(post.get('dateTime').strftime("%Y")), int(post.get('dateTime').strftime("%m")), int(post.get('dateTime').strftime("%d")), int(post.get('dateTime').strftime("%H")), int(post.get('dateTime').strftime("%M")), 0, tzinfo=pytz.utc)
+            utc_dt = datetime(int(post.get('dateTime').strftime('%Y')), int(post.get('dateTime').strftime('%m')), int(post.get('dateTime').strftime('%d')), int(post.get('dateTime').strftime('%H')), int(post.get('dateTime').strftime('%M')), 0, tzinfo=pytz.utc)
             loc_dt = utc_dt.astimezone(timezone('America/Los_Angeles'))
-            if int(loc_dt.strftime("%H")) > 12:
-                hour = str(int(loc_dt.strftime("%H")) - 12)
-                loc_dt = loc_dt.strftime("%m/%d/%Y, " + hour + ":%M PM PT")
+            if int(loc_dt.strftime('%H')) > 12:
+                hour = str(int(loc_dt.strftime('%H')) - 12)
+                loc_dt = loc_dt.strftime('%m/%d/%Y, ' + hour + ':%M PM PT')
             else:
-                hour = str(int(loc_dt.strftime("%H")))
-                loc_dt = loc_dt.strftime("%m/%d/%Y, " + hour + ":%M AM PT")
+                hour = str(int(loc_dt.strftime('%H')))
+                loc_dt = loc_dt.strftime('%m/%d/%Y, ' + hour + ':%M AM PT')
             bigString1 += '</button></form><br><i>' + loc_dt + '</i></td></tr>'
             postList.insert(0, bigString1)
-            bigString1 = ""
+            bigString1 = ''
     else:
         for post in collection.find():
-            if(post.get('approved') == "true"):
+            if(post.get('approved') == 'true'):
                 bigString1 += ('<tr><td class="col1"><img src="/static/images/person.png" alt="icon" width="30" height="30"></td>' +
                                '<td class="col2"><form action="/viewELLU"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton"><b>' + post.get('postTitle') + '</b></button></form></td>')
-                if(post.get('anonymous') == "true"):
+                if(post.get('anonymous') == 'true'):
                     bigString1 += '<td class="col3"><i>Anonymous Post</i></td>'
                 else:
                     bigString1 += '<td class="col3"><i>' + post.get('parentName') + '</i></td>'
-                utc_dt = datetime(int(post.get('dateTime').strftime("%Y")), int(post.get('dateTime').strftime("%m")), int(post.get('dateTime').strftime("%d")), int(post.get('dateTime').strftime("%H")), int(post.get('dateTime').strftime("%M")), 0, tzinfo=pytz.utc)
+                utc_dt = datetime(int(post.get('dateTime').strftime('%Y')), int(post.get('dateTime').strftime('%m')), int(post.get('dateTime').strftime('%d')), int(post.get('dateTime').strftime('%H')), int(post.get('dateTime').strftime('%M')), 0, tzinfo=pytz.utc)
                 loc_dt = utc_dt.astimezone(timezone('America/Los_Angeles'))
-                if int(loc_dt.strftime("%H")) > 12:
-                    hour = str(int(loc_dt.strftime("%H")) - 12)
-                    loc_dt = loc_dt.strftime("%m/%d/%Y, " + hour + ":%M PM PT")
+                if int(loc_dt.strftime('%H')) > 12:
+                    hour = str(int(loc_dt.strftime('%H')) - 12)
+                    loc_dt = loc_dt.strftime('%m/%d/%Y, ' + hour + ':%M PM PT')
                 else:
-                    hour = str(int(loc_dt.strftime("%H")))
-                    loc_dt = loc_dt.strftime("%m/%d/%Y, " + hour + ":%M AM PT")
+                    hour = str(int(loc_dt.strftime('%H')))
+                    loc_dt = loc_dt.strftime('%m/%d/%Y, ' + hour + ':%M AM PT')
                 bigString1 += '<td class="col4"><i>' + loc_dt + '</i></td></tr>'
                 postList.insert(0, bigString1)
-                bigString1 = ""
+                bigString1 = ''
     for item in postList:
         bigString1 += item
     postList.clear()
     collection = db['ELLA']
     if 'github_token' in session: 
         for post in collection.find():
-            utc_dt = datetime(int(post.get('dateTime').strftime("%Y")), int(post.get('dateTime').strftime("%m")), int(post.get('dateTime').strftime("%d")), int(post.get('dateTime').strftime("%H")), int(post.get('dateTime').strftime("%M")), 0, tzinfo=pytz.utc)
+            utc_dt = datetime(int(post.get('dateTime').strftime('%Y')), int(post.get('dateTime').strftime('%m')), int(post.get('dateTime').strftime('%d')), int(post.get('dateTime').strftime('%H')), int(post.get('dateTime').strftime('%M')), 0, tzinfo=pytz.utc)
             loc_dt = utc_dt.astimezone(timezone('America/Los_Angeles'))
-            if int(loc_dt.strftime("%H")) > 12:
-                hour = str(int(loc_dt.strftime("%H")) - 12)
-                loc_dt = loc_dt.strftime("%m/%d/%Y, " + hour + ":%M PM PT")
+            if int(loc_dt.strftime('%H')) > 12:
+                hour = str(int(loc_dt.strftime('%H')) - 12)
+                loc_dt = loc_dt.strftime('%m/%d/%Y, ' + hour + ':%M PM PT')
             else:
-                hour = str(int(loc_dt.strftime("%H")))
-                loc_dt = loc_dt.strftime("%m/%d/%Y, " + hour + ":%M AM PT")
+                hour = str(int(loc_dt.strftime('%H')))
+                loc_dt = loc_dt.strftime('%m/%d/%Y, ' + hour + ':%M AM PT')
             bigString2 += ('<tr><td class="col1"><img src="/static/images/person.png" alt="icon" width="30" height="30"></td>' +
                            '<td class="col2"><form action="/viewELLA"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton"><b>' + post.get('postTitle') + '</b></button></form></td>' +
                            '<td class="col3"><i>' + post.get('adminName') + '</i></td>' +
                            '<td class="col4"><form action="/deleteELL" method="post" class="inLine"><button type="submit" class="btn btn-danger btn-sm lineUp" name="delete" value="' + str(post.get('_id')) + '"><span class="glyphicon glyphicon-trash"></span>Confirm Delete</button></form><br><i>' + loc_dt + '</i></td></tr>')
             postList.insert(0, bigString2)
-            bigString2 = ""
+            bigString2 = ''
     else:
         for post in collection.find():
-            utc_dt = datetime(int(post.get('dateTime').strftime("%Y")), int(post.get('dateTime').strftime("%m")), int(post.get('dateTime').strftime("%d")), int(post.get('dateTime').strftime("%H")), int(post.get('dateTime').strftime("%M")), 0, tzinfo=pytz.utc)
+            utc_dt = datetime(int(post.get('dateTime').strftime('%Y')), int(post.get('dateTime').strftime('%m')), int(post.get('dateTime').strftime('%d')), int(post.get('dateTime').strftime('%H')), int(post.get('dateTime').strftime('%M')), 0, tzinfo=pytz.utc)
             loc_dt = utc_dt.astimezone(timezone('America/Los_Angeles'))
-            if int(loc_dt.strftime("%H")) > 12:
-                hour = str(int(loc_dt.strftime("%H")) - 12)
-                loc_dt = loc_dt.strftime("%m/%d/%Y, " + hour + ":%M PM PT")
+            if int(loc_dt.strftime('%H')) > 12:
+                hour = str(int(loc_dt.strftime('%H')) - 12)
+                loc_dt = loc_dt.strftime('%m/%d/%Y, ' + hour + ':%M PM PT')
             else:
-                hour = str(int(loc_dt.strftime("%H")))
-                loc_dt = loc_dt.strftime("%m/%d/%Y, " + hour + ":%M AM PT")
+                hour = str(int(loc_dt.strftime('%H')))
+                loc_dt = loc_dt.strftime('%m/%d/%Y, ' + hour + ':%M AM PT')
             bigString2 += ('<tr><td class="col1"><img src="/static/images/person.png" alt="icon" width="30" height="30"></td>' +
                            '<td class="col2"><form action="/viewELLA"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton"><b>' + post.get('postTitle') + '</b></button></form></td>' +
                            '<td class="col3"><i>' + post.get('adminName') + '</i></td>' +
@@ -171,99 +171,99 @@ def render_english_learner_forum():
 
 @app.route('/specialeducationforum')
 def render_special_education_forum():
-    connection_string = os.environ["MONGO_CONNECTION_STRING"]
-    db_name = os.environ["MONGO_DBNAME"]
+    connection_string = os.environ['MONGO_CONNECTION_STRING']
+    db_name = os.environ['MONGO_DBNAME']
     client = pymongo.MongoClient(connection_string)
     db = client[db_name]
     collection = db['SEU']
     postList = []
-    bigString1 = ""
-    bigString2 = ""
+    bigString1 = ''
+    bigString2 = ''
     if 'github_token' in session:
         for post in collection.find():
             bigString1 += ('<tr><td class="col1"><img src="/static/images/person.png" alt="icon" width="30" height="30"></td>' +
                            '<td class="col2"><form action="/viewSEU"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton"><b>' + post.get('postTitle') + '</b></button></form></td>' +
                            '<td class="col3"><i>' + post.get('parentName') + ' / ' + post.get('studentNameGrade') + ' / ' + post.get('parentEmail') + '</i></td>' +
                            '<td class="col4"><form action="/deleteSE" method="post" class="inLine"><button type="submit" class="btn btn-danger btn-sm" name="delete" value="' + str(post.get('_id')) + '"><span class="glyphicon glyphicon-trash"></span>Confirm Delete</button></form> ')
-            if(post.get('approved') == "false"):
+            if(post.get('approved') == 'false'):
                 bigString1 += '<form action="/vetSE" method="post" class="inLine"><button type="submit" class="btn btn-warning btn-sm" name="vet" value="' + str(post.get('_id'))+ '">' + '<span class="glyphicon glyphicon-plus"></span>Vet'
             else:
                 bigString1 += '<form action="/unvetSE" method="post" class="inLine"><button type="submit" class="btn btn-warning btn-sm" name="vet" value="' + str(post.get('_id'))+ '">' + '<span class="glyphicon glyphicon-minus"></span>Unvet'
-            utc_dt = datetime(int(post.get('dateTime').strftime("%Y")), int(post.get('dateTime').strftime("%m")), int(post.get('dateTime').strftime("%d")), int(post.get('dateTime').strftime("%H")), int(post.get('dateTime').strftime("%M")), 0, tzinfo=pytz.utc)
+            utc_dt = datetime(int(post.get('dateTime').strftime('%Y')), int(post.get('dateTime').strftime('%m')), int(post.get('dateTime').strftime('%d')), int(post.get('dateTime').strftime('%H')), int(post.get('dateTime').strftime('%M')), 0, tzinfo=pytz.utc)
             loc_dt = utc_dt.astimezone(timezone('America/Los_Angeles'))
-            if int(loc_dt.strftime("%H")) > 12:
-                hour = str(int(loc_dt.strftime("%H")) - 12)
-                loc_dt = loc_dt.strftime("%m/%d/%Y, " + hour + ":%M PM PT")
+            if int(loc_dt.strftime('%H')) > 12:
+                hour = str(int(loc_dt.strftime('%H')) - 12)
+                loc_dt = loc_dt.strftime('%m/%d/%Y, ' + hour + ':%M PM PT')
             else:
-                hour = str(int(loc_dt.strftime("%H")))
-                loc_dt = loc_dt.strftime("%m/%d/%Y, " + hour + ":%M AM PT")
+                hour = str(int(loc_dt.strftime('%H')))
+                loc_dt = loc_dt.strftime('%m/%d/%Y, ' + hour + ':%M AM PT')
             bigString1 += '</button></form><br><i>' + loc_dt + '</i></td></tr>'
             postList.insert(0, bigString1)
-            bigString1 = ""
+            bigString1 = ''
     else:
         for post in collection.find():
-            if(post.get('approved') == "true"):
+            if(post.get('approved') == 'true'):
                 bigString1 += ('<tr><td class="col1"><img src="/static/images/person.png" alt="icon" width="30" height="30"></td>' +
                                '<td class="col2"><form action="/viewSEU"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton"><b>' + post.get('postTitle') + '</b></button></form></td>')
-                if(post.get('anonymous') == "true"):
+                if(post.get('anonymous') == 'true'):
                     bigString1 += '<td class="col3"><i>Anonymous Post</i></td>'
                 else:
                     bigString1 += '<td class="col3"><i>' + post.get('parentName') + '</i></td>'
-                utc_dt = datetime(int(post.get('dateTime').strftime("%Y")), int(post.get('dateTime').strftime("%m")), int(post.get('dateTime').strftime("%d")), int(post.get('dateTime').strftime("%H")), int(post.get('dateTime').strftime("%M")), 0, tzinfo=pytz.utc)
+                utc_dt = datetime(int(post.get('dateTime').strftime('%Y')), int(post.get('dateTime').strftime('%m')), int(post.get('dateTime').strftime('%d')), int(post.get('dateTime').strftime('%H')), int(post.get('dateTime').strftime('%M')), 0, tzinfo=pytz.utc)
                 loc_dt = utc_dt.astimezone(timezone('America/Los_Angeles'))
-                if int(loc_dt.strftime("%H")) > 12:
-                    hour = str(int(loc_dt.strftime("%H")) - 12)
-                    loc_dt = loc_dt.strftime("%m/%d/%Y, " + hour + ":%M PM PT")
+                if int(loc_dt.strftime('%H')) > 12:
+                    hour = str(int(loc_dt.strftime('%H')) - 12)
+                    loc_dt = loc_dt.strftime('%m/%d/%Y, ' + hour + ':%M PM PT')
                 else:
-                    hour = str(int(loc_dt.strftime("%H")))
-                    loc_dt = loc_dt.strftime("%m/%d/%Y, " + hour + ":%M AM PT")
+                    hour = str(int(loc_dt.strftime('%H')))
+                    loc_dt = loc_dt.strftime('%m/%d/%Y, ' + hour + ':%M AM PT')
                 bigString1 += '<td class="col4"><i>' + loc_dt + '</i></td></tr>'
                 postList.insert(0, bigString1)
-                bigString1 = ""
+                bigString1 = ''
     for item in postList:
         bigString1 += item
     postList.clear()
     collection = db['SEA']
     if 'github_token' in session: 
         for post in collection.find():
-            utc_dt = datetime(int(post.get('dateTime').strftime("%Y")), int(post.get('dateTime').strftime("%m")), int(post.get('dateTime').strftime("%d")), int(post.get('dateTime').strftime("%H")), int(post.get('dateTime').strftime("%M")), 0, tzinfo=pytz.utc)
+            utc_dt = datetime(int(post.get('dateTime').strftime('%Y')), int(post.get('dateTime').strftime('%m')), int(post.get('dateTime').strftime('%d')), int(post.get('dateTime').strftime('%H')), int(post.get('dateTime').strftime('%M')), 0, tzinfo=pytz.utc)
             loc_dt = utc_dt.astimezone(timezone('America/Los_Angeles'))
-            if int(loc_dt.strftime("%H")) > 12:
-                hour = str(int(loc_dt.strftime("%H")) - 12)
-                loc_dt = loc_dt.strftime("%m/%d/%Y, " + hour + ":%M PM PT")
+            if int(loc_dt.strftime('%H')) > 12:
+                hour = str(int(loc_dt.strftime('%H')) - 12)
+                loc_dt = loc_dt.strftime('%m/%d/%Y, ' + hour + ':%M PM PT')
             else:
-                hour = str(int(loc_dt.strftime("%H")))
-                loc_dt = loc_dt.strftime("%m/%d/%Y, " + hour + ":%M AM PT")
+                hour = str(int(loc_dt.strftime('%H')))
+                loc_dt = loc_dt.strftime('%m/%d/%Y, ' + hour + ':%M AM PT')
             bigString2 += ('<tr><td class="col1"><img src="/static/images/person.png" alt="icon" width="30" height="30"></td>' +
                            '<td class="col2"><form action="/viewSEA"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton"><b>' + post.get('postTitle') + '</b></button></form></td>' +
                            '<td class="col3"><i>' + post.get('adminName') + '</i></td>' +
                            '<td class="col4"><form action="/deleteSE" method="post" class="inLine"><button type="submit" class="btn btn-danger btn-sm lineUp" name="delete" value="' + str(post.get('_id')) + '"><span class="glyphicon glyphicon-trash"></span>Confirm Delete</button></form><br><i>' + loc_dt + '</i></td></tr>')
             postList.insert(0, bigString2)
-            bigString2 = ""
+            bigString2 = ''
     else:
         for post in collection.find():
-            utc_dt = datetime(int(post.get('dateTime').strftime("%Y")), int(post.get('dateTime').strftime("%m")), int(post.get('dateTime').strftime("%d")), int(post.get('dateTime').strftime("%H")), int(post.get('dateTime').strftime("%M")), 0, tzinfo=pytz.utc)
+            utc_dt = datetime(int(post.get('dateTime').strftime('%Y')), int(post.get('dateTime').strftime('%m')), int(post.get('dateTime').strftime('%d')), int(post.get('dateTime').strftime('%H')), int(post.get('dateTime').strftime('%M')), 0, tzinfo=pytz.utc)
             loc_dt = utc_dt.astimezone(timezone('America/Los_Angeles'))
-            if int(loc_dt.strftime("%H")) > 12:
-                hour = str(int(loc_dt.strftime("%H")) - 12)
-                loc_dt = loc_dt.strftime("%m/%d/%Y, " + hour + ":%M PM PT")
+            if int(loc_dt.strftime('%H')) > 12:
+                hour = str(int(loc_dt.strftime('%H')) - 12)
+                loc_dt = loc_dt.strftime('%m/%d/%Y, ' + hour + ':%M PM PT')
             else:
-                hour = str(int(loc_dt.strftime("%H")))
-                loc_dt = loc_dt.strftime("%m/%d/%Y, " + hour + ":%M AM PT")
+                hour = str(int(loc_dt.strftime('%H')))
+                loc_dt = loc_dt.strftime('%m/%d/%Y, ' + hour + ':%M AM PT')
             bigString2 += ('<tr><td class="col1"><img src="/static/images/person.png" alt="icon" width="30" height="30"></td>' +
                            '<td class="col2"><form action="/viewSEA"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton"><b>' + post.get('postTitle') + '</b></button></form></td>' +
                            '<td class="col3"><i>' + post.get('adminName') + '</i></td>' +
                            '<td class="col4"><i>' + loc_dt + '</i></td></tr>')
             postList.insert(0, bigString2)
-            bigString2 = ""
+            bigString2 = ''
     for item in postList:
         bigString2 += item
     return render_template('specialeducationforum.html', SEUPosts = Markup(bigString1), SEAPosts = Markup(bigString2))
 
 @app.route('/adminLog')
 def render_admin_log():
-    connection_string = os.environ["MONGO_CONNECTION_STRING"]
-    db_name = os.environ["MONGO_DBNAME"]
+    connection_string = os.environ['MONGO_CONNECTION_STRING']
+    db_name = os.environ['MONGO_DBNAME']
     client = pymongo.MongoClient(connection_string)
     db = client[db_name]
     collection = db['LOG']
@@ -271,14 +271,14 @@ def render_admin_log():
     bigString = ''
     logList = []
     for item in cursor:
-        utc_dt = datetime(int(item.get('dateTime').strftime("%Y")), int(item.get('dateTime').strftime("%m")), int(item.get('dateTime').strftime("%d")), int(item.get('dateTime').strftime("%H")), int(item.get('dateTime').strftime("%M")), 0, tzinfo=pytz.utc)
+        utc_dt = datetime(int(post.get('dateTime').strftime('%Y')), int(post.get('dateTime').strftime('%m')), int(post.get('dateTime').strftime('%d')), int(post.get('dateTime').strftime('%H')), int(post.get('dateTime').strftime('%M')), 0, tzinfo=pytz.utc)
         loc_dt = utc_dt.astimezone(timezone('America/Los_Angeles'))
-        if int(loc_dt.strftime("%H")) > 12:
-            hour = str(int(loc_dt.strftime("%H")) - 12)
-            loc_dt = loc_dt.strftime("%m/%d/%Y, " + hour + ":%M PM PT")
+        if int(loc_dt.strftime('%H')) > 12:
+            hour = str(int(loc_dt.strftime('%H')) - 12)
+            loc_dt = loc_dt.strftime('%m/%d/%Y, ' + hour + ':%M PM PT')
         else:
-            hour = str(int(loc_dt.strftime("%H")))
-            loc_dt = loc_dt.strftime("%m/%d/%Y, " + hour + ":%M AM PT")
+            hour = str(int(loc_dt.strftime('%H')))
+            loc_dt = loc_dt.strftime('%m/%d/%Y, ' + hour + ':%M AM PT')
         bigString += '<tr><td class="logContent"><span class="timeColor">' + loc_dt + '</span>: ' + item.get('action') + '<br></td></tr>'
         logList.insert(0, bigString)
         bigString = ''
@@ -287,8 +287,8 @@ def render_admin_log():
     return render_template('adminlog.html', log = Markup(bigString))
 
 def add_admin_log(dateTime, action):
-    connection_string = os.environ["MONGO_CONNECTION_STRING"]
-    db_name = os.environ["MONGO_DBNAME"]
+    connection_string = os.environ['MONGO_CONNECTION_STRING']
+    db_name = os.environ['MONGO_DBNAME']
     client = pymongo.MongoClient(connection_string)
     db = client[db_name]
     collection = db['LOG']
@@ -297,8 +297,8 @@ def add_admin_log(dateTime, action):
 @app.route('/userSubmitPostELL', methods=['GET','POST'])
 def user_submit_post_ELL():
     if request.method == 'POST':
-        connection_string = os.environ["MONGO_CONNECTION_STRING"]
-        db_name = os.environ["MONGO_DBNAME"]
+        connection_string = os.environ['MONGO_CONNECTION_STRING']
+        db_name = os.environ['MONGO_DBNAME']
         client = pymongo.MongoClient(connection_string)
         db = client[db_name]
         collection = db['ELLU']
@@ -310,9 +310,9 @@ def user_submit_post_ELL():
             email = 'Email not provided'
         else:
             email = request.form['userEmail']
-        post = {"postTitle": request.form['userTitle'], "parentName": request.form['userName'], "studentNameGrade": request.form['userStudent'], "parentEmail": email, "anonymous": request.form['anon'], "dateTime": datetime.now(), "postContent": content, "approved": "false"}
+        post = {'postTitle': request.form['userTitle'], 'parentName': request.form['userName'], 'studentNameGrade': request.form['userStudent'], 'parentEmail': email, 'anonymous': request.form['anon'], 'dateTime': datetime.now(), 'postContent': content, 'approved': 'false'}
         collection.insert_one(post)
-        post = collection.find_one({"postTitle": request.form['userTitle'], "parentName": request.form['userName'], "studentNameGrade": request.form['userStudent'], "parentEmail": email, "anonymous": request.form['anon'], "postContent": content})
+        post = collection.find_one({'postTitle': request.form['userTitle'], 'parentName': request.form['userName'], 'studentNameGrade': request.form['userStudent'], 'parentEmail': email, 'anonymous': request.form['anon'], 'postContent': content})
         action = request.form['userName'] + '<span class="createColor"> posted </span><b><a href="https://razzoforumproject.herokuapp.com/viewELLU?thread=' + str(post.get('_id')) + '">' + request.form['userTitle'] + '</a></b> in english language learner forum'
         add_admin_log(datetime.now(), action)
     return render_english_learner_forum()
@@ -320,8 +320,8 @@ def user_submit_post_ELL():
 @app.route('/adminSubmitPostELL', methods=['GET', 'POST']) #Same as above, except no name, student name and grade, no anonymous, etc.
 def admin_submit_post_ELL():
     if request.method == 'POST':
-        connection_string = os.environ["MONGO_CONNECTION_STRING"]
-        db_name = os.environ["MONGO_DBNAME"]
+        connection_string = os.environ['MONGO_CONNECTION_STRING']
+        db_name = os.environ['MONGO_DBNAME']
         client = pymongo.MongoClient(connection_string)
         db = client[db_name]
         collection = db['ELLA']
@@ -329,9 +329,9 @@ def admin_submit_post_ELL():
         content = content.replace('\\"', '')
         content = Markup(content[1:len(content)-1])
         sanitize(content)
-        post = {"postTitle": request.form['adminTitle'], "adminName": request.form['adminName'], "dateTime": datetime.now(), "postContent": content}#put all info here using variables
+        post = {'postTitle': request.form['adminTitle'], 'adminName': request.form['adminName'], 'dateTime': datetime.now(), 'postContent': content}#put all info here using variables
         collection.insert_one(post)
-        post = collection.find_one({"postTitle": request.form['adminTitle'], "adminName": request.form['adminName'], "postContent": content})
+        post = collection.find_one({'postTitle': request.form['adminTitle'], 'adminName': request.form['adminName'], 'postContent': content})
         action = request.form['adminName'] + '<span class="createColor"> posted </span><b><a href="https://razzoforumproject.herokuapp.com/viewELLA?thread=' + str(post.get('_id')) + '">' + request.form['adminTitle'] + '</a></b> in english language learner forum'
         add_admin_log(datetime.now(), action)
     return render_english_learner_forum() #this will also copy the code from def render_english_learner_forum from above.
@@ -339,8 +339,8 @@ def admin_submit_post_ELL():
 @app.route('/userSubmitPostSE', methods=['GET', 'POST'])
 def user_submit_post_SE():
     if request.method == 'POST':
-        connection_string = os.environ["MONGO_CONNECTION_STRING"]
-        db_name = os.environ["MONGO_DBNAME"]
+        connection_string = os.environ['MONGO_CONNECTION_STRING']
+        db_name = os.environ['MONGO_DBNAME']
         client = pymongo.MongoClient(connection_string)
         db = client[db_name]
         collection = db['SEU']
@@ -352,9 +352,9 @@ def user_submit_post_SE():
             email = 'Email not provided'
         else:
             email = request.form['userEmail']
-        post = {"postTitle": request.form['userTitle'], "parentName": request.form['userName'], "studentNameGrade": request.form['userStudent'], "parentEmail": email, "anonymous": request.form['anon'], "dateTime": datetime.now(), "postContent": content, "approved": "false"}
+        post = {'postTitle': request.form['userTitle'], 'parentName': request.form['userName'], 'studentNameGrade': request.form['userStudent'], 'parentEmail': email, 'anonymous': request.form['anon'], 'dateTime': datetime.now(), 'postContent': content, 'approved': 'false'}
         post = collection.insert_one(post)
-        post = collection.find_one({"postTitle": request.form['userTitle'], "parentName": request.form['userName'], "studentNameGrade": request.form['userStudent'], "parentEmail": email, "anonymous": request.form['anon'], "postContent": content})
+        post = collection.find_one({'postTitle': request.form['userTitle'], 'parentName': request.form['userName'], 'studentNameGrade': request.form['userStudent'], 'parentEmail': email, 'anonymous': request.form['anon'], 'postContent': content})
         action = request.form['userName'] + '<span class="createColor"> posted </span><b><a href="https://razzoforumproject.herokuapp.com/viewSEU?thread=' + str(post.get('_id')) + '">' + request.form['userTitle'] + '</a></b> in special education forum'
         add_admin_log(datetime.now(), action)
     return render_special_education_forum()
@@ -362,8 +362,8 @@ def user_submit_post_SE():
 @app.route('/adminSubmitPostSE', methods=['GET', 'POST'])
 def admin_submit_post_SE():
     if request.method == 'POST':
-        connection_string = os.environ["MONGO_CONNECTION_STRING"]
-        db_name = os.environ["MONGO_DBNAME"]
+        connection_string = os.environ['MONGO_CONNECTION_STRING']
+        db_name = os.environ['MONGO_DBNAME']
         client = pymongo.MongoClient(connection_string)
         db = client[db_name]
         collection = db['SEA']
@@ -371,9 +371,9 @@ def admin_submit_post_SE():
         content = content.replace('\\"', '')
         content = Markup(content[1:len(content)-1])
         sanitize(content)
-        post = {"postTitle": request.form['adminTitle'], "adminName": request.form['adminName'], "dateTime": datetime.now(), "postContent": content}#put all info here using variables
+        post = {'postTitle': request.form['adminTitle'], 'adminName': request.form['adminName'], 'dateTime': datetime.now(), 'postContent': content}#put all info here using variables
         post = collection.insert_one(post)
-        post = collection.find_one({"postTitle": request.form['adminTitle'], "adminName": request.form['adminName'], "postContent": content})
+        post = collection.find_one({'postTitle': request.form['adminTitle'], 'adminName': request.form['adminName'], 'postContent': content})
         action = request.form['adminName'] + '<span class="createColor"> posted </span><b><a href="https://razzoforumproject.herokuapp.com/viewSEA?thread=' + str(post.get('_id')) + '">' + request.form['adminTitle'] + '</a></b> in special education forum'
         add_admin_log(datetime.now(), action)
     return render_special_education_forum()
@@ -382,8 +382,8 @@ def admin_submit_post_SE():
 def submit_comment():
     if request.method == 'POST':
         objectIDPost = request.form['ID']
-        connection_string = os.environ["MONGO_CONNECTION_STRING"]
-        db_name = os.environ["MONGO_DBNAME"]
+        connection_string = os.environ['MONGO_CONNECTION_STRING']
+        db_name = os.environ['MONGO_DBNAME']
         client = pymongo.MongoClient(connection_string)
         db = client[db_name]
         collection = db['SEA']
@@ -398,25 +398,25 @@ def submit_comment():
             collection = db['ELLU']
             post = collection.find_one({'_id': ObjectId(objectIDPost)})
         keyList = list(post.keys())
-        if "comment" in keyList[-1]:
+        if 'comment' in keyList[-1]:
             lastNumber = keyList[-1]
             lastNumber = lastNumber.replace('comment', '')
             lastNumber = str(int(lastNumber) + 1)
         else:
-            lastNumber = "0"
+            lastNumber = '0'
         if 'github_token' in session:
             content = request.form['adminMessage']
             content = content.replace('\\"', '')
             content = Markup(content[1:len(content)-1])
             sanitize(content)
-            post["comment" + lastNumber] = {"adminName": request.form['adminName'], "dateTime": datetime.now(), "postContent": content}
+            post['comment' + lastNumber] = {'adminName': request.form['adminName'], 'dateTime': datetime.now(), 'postContent': content}
             collection.replace_one({'_id': ObjectId(objectIDPost)}, post)
         else:
             content = request.form['userMessage']
             content = content.replace('\\"', '')
             content = Markup(content[1:len(content)-1])
             sanitize(content)
-            post["comment" + lastNumber] = {"parentName": request.form['userName'], "studentNameGrade": request.form['userStudent'], "anonymous": request.form['anon'], "dateTime": datetime.now(), "postContent": content, "approved": "false"}
+            post['comment' + lastNumber] = {'parentName': request.form['userName'], 'studentNameGrade': request.form['userStudent'], 'anonymous': request.form['anon'], 'dateTime': datetime.now(), 'postContent': content, 'approved': 'false'}
             collection.replace_one({'_id': ObjectId(objectIDPost)}, post)
     if collection == db['SEA']:
         if 'github_token' in session:
@@ -457,8 +457,8 @@ def delete_comment():
     if request.method == 'POST':
         objectIDPost = request.form['delete']
         comment = request.form['comment']
-        connection_string = os.environ["MONGO_CONNECTION_STRING"]
-        db_name = os.environ["MONGO_DBNAME"]
+        connection_string = os.environ['MONGO_CONNECTION_STRING']
+        db_name = os.environ['MONGO_DBNAME']
         client = pymongo.MongoClient(connection_string)
         db = client[db_name]       
         collection = db['SEU']
@@ -526,8 +526,8 @@ def delete_comment():
 def vet_comment():
     if request.method == 'POST':
         objectIDPost = request.form['vet']
-        connection_string = os.environ["MONGO_CONNECTION_STRING"]
-        db_name = os.environ["MONGO_DBNAME"]
+        connection_string = os.environ['MONGO_CONNECTION_STRING']
+        db_name = os.environ['MONGO_DBNAME']
         client = pymongo.MongoClient(connection_string)
         db = client[db_name]
         collection = db['SEU']
@@ -566,8 +566,8 @@ def vet_comment():
 def unvet_comment():
     if request.method == 'POST':
         objectIDPost = request.form['vet']
-        connection_string = os.environ["MONGO_CONNECTION_STRING"]
-        db_name = os.environ["MONGO_DBNAME"]
+        connection_string = os.environ['MONGO_CONNECTION_STRING']
+        db_name = os.environ['MONGO_DBNAME']
         client = pymongo.MongoClient(connection_string)
         db = client[db_name]
         collection = db['SEU']
@@ -622,329 +622,329 @@ def reroute_view_ELLU():
     return view_ELLU(objectIDPost)
 
 def view_SEA(objectIDPost):
-    connection_string = os.environ["MONGO_CONNECTION_STRING"]
-    db_name = os.environ["MONGO_DBNAME"]
+    connection_string = os.environ['MONGO_CONNECTION_STRING']
+    db_name = os.environ['MONGO_DBNAME']
     client = pymongo.MongoClient(connection_string)
     db = client[db_name]
     collection = db['SEA']
     post = collection.find_one({'_id': ObjectId(objectIDPost)})
     postTitle = post.get('postTitle')
     postContent = post.get('postContent')
-    utc_dt = datetime(int(post.get('dateTime').strftime("%Y")), int(post.get('dateTime').strftime("%m")), int(post.get('dateTime').strftime("%d")), int(post.get('dateTime').strftime("%H")), int(post.get('dateTime').strftime("%M")), 0, tzinfo=pytz.utc)
+    utc_dt = datetime(int(post.get('dateTime').strftime('%Y')), int(post.get('dateTime').strftime('%m')), int(post.get('dateTime').strftime('%d')), int(post.get('dateTime').strftime('%H')), int(post.get('dateTime').strftime('%M')), 0, tzinfo=pytz.utc)
     loc_dt = utc_dt.astimezone(timezone('America/Los_Angeles'))
-    if int(loc_dt.strftime("%H")) > 12:
-        hour = str(int(loc_dt.strftime("%H")) - 12)
-        loc_dt = loc_dt.strftime("%m/%d/%Y, " + hour + ":%M PM PT")
+    if int(loc_dt.strftime('%H')) > 12:
+        hour = str(int(loc_dt.strftime('%H')) - 12)
+        loc_dt = loc_dt.strftime('%m/%d/%Y, ' + hour + ':%M PM PT')
     else:
-        hour = str(int(loc_dt.strftime("%H")))
-        loc_dt = loc_dt.strftime("%m/%d/%Y, " + hour + ":%M AM PT")
+        hour = str(int(loc_dt.strftime('%H')))
+        loc_dt = loc_dt.strftime('%m/%d/%Y, ' + hour + ':%M AM PT')
     displayName = post.get('adminName')
     bigString = ''
     keyList = list(post.keys())
     commentAmount = 0
     for item in keyList:
-        if "comment" in item:
+        if 'comment' in item:
             commentAmount += 1
     bigString = ''
     counter = 0
     i = 0
-    if 'github_token' in session: #if admin is logged in
+    if 'github_token' in session:
         while counter < commentAmount:
-            if("comment" + str(i) in post):
-                utc_dt = datetime(int(post.get("comment" + str(i), {}).get("dateTime").strftime("%Y")), int(post.get("comment" + str(i), {}).get("dateTime").strftime("%m")), int(post.get("comment" + str(i), {}).get("dateTime").strftime("%d")), int(post.get("comment" + str(i), {}).get("dateTime").strftime("%H")), int(post.get("comment" + str(i), {}).get("dateTime").strftime("%M")), 0, tzinfo=pytz.utc)
+            if('comment' + str(i) in post):
+                utc_dt = datetime(int(post.get('comment' + str(i), {}).get('dateTime').strftime('%Y')), int(post.get('comment' + str(i), {}).get('dateTime').strftime('%m')), int(post.get('comment' + str(i), {}).get('dateTime').strftime('%d')), int(post.get('comment' + str(i), {}).get('dateTime').strftime('%H')), int(post.get('comment' + str(i), {}).get('dateTime').strftime('%M')), 0, tzinfo=pytz.utc)
                 loc_dt = utc_dt.astimezone(timezone('America/Los_Angeles'))
-                if int(loc_dt.strftime("%H")) > 12:
-                    hour = str(int(loc_dt.strftime("%H")) - 12)
-                    loc_dt = loc_dt.strftime("%m/%d/%Y, " + hour + ":%M PM PT")
+                if int(loc_dt.strftime('%H')) > 12:
+                    hour = str(int(loc_dt.strftime('%H')) - 12)
+                    loc_dt = loc_dt.strftime('%m/%d/%Y, ' + hour + ':%M PM PT')
                 else:
-                    hour = str(int(loc_dt.strftime("%H")))
-                    loc_dt = loc_dt.strftime("%m/%d/%Y, " + hour + ":%M AM PT")
-                if post.get("comment" + str(i), {}).get("adminName") != None: #checks if it is admin post
-                    bigString += '<tr><td class="comments"><b>' + post.get("comment" + str(i), {}).get("adminName") + ' (Staff)</b><br><i>' + loc_dt + '</i><br><br>' + post.get("comment" + str(i), {}).get("postContent")
+                    hour = str(int(loc_dt.strftime('%H')))
+                    loc_dt = loc_dt.strftime('%m/%d/%Y, ' + hour + ':%M AM PT')
+                if post.get('comment' + str(i), {}).get('adminName') != None: #checks if it is admin post
+                    bigString += '<tr><td class="comments"><b>' + post.get('comment' + str(i), {}).get('adminName') + ' (Staff)</b><br><i>' + loc_dt + '</i><br><br>' + post.get('comment' + str(i), {}).get('postContent')
                 else:
-                    bigString += '<tr><td class="comments"><b>' + post.get("comment" + str(i), {}).get("parentName") + '</b> / ' + post.get("comment" + str(i), {}).get("studentNameGrade") + '<br><i>' + loc_dt + '</i><br><br>' + post.get("comment" + str(i), {}).get("postContent")
-                if post.get("comment" + str(i), {}).get("adminName") == None:
-                    if(post.get("comment" + str(i), {}).get("approved") == "false"):
+                    bigString += '<tr><td class="comments"><b>' + post.get('comment' + str(i), {}).get('parentName') + '</b> / ' + post.get('comment' + str(i), {}).get('studentNameGrade') + '<br><i>' + loc_dt + '</i><br><br>' + post.get('comment' + str(i), {}).get('postContent')
+                if post.get('comment' + str(i), {}).get('adminName') == None:
+                    if(post.get('comment' + str(i), {}).get('approved') == 'false'):
                         bigString += '<form action="/vetComment" method="post" class="inLine"><input name="comment" type="hidden" value="' + 'comment' + str(i) + '"><button type="submit" class="btn btn-warning btn-sm" name="vet" value="' + str(post.get('_id'))+ '">' + '<span class="glyphicon glyphicon-plus"></span>Vet</button></form> '
                     else:
-                        bigString += '<form action="/unvetComment" method="post" class="inLine"><input name="comment" type="hidden" value="' + 'comment' + str(i) + '"><button type="submit" class="btn btn-warning btn-sm" name="vet" value="' + str(post.get('_id'))+ '">' + '<span class="glyphicon glyphicon-minus"></span>Unvet</button></form>'
+                        bigString += '<form action="/unvetComment" method="post" class="inLine"><input name="comment" type="hidden" value="' + 'comment' + str(i) + '"><button type="submit" class="btn btn-warning btn-sm" name="vet" value="' + str(post.get('_id'))+ '">' + '<span class="glyphicon glyphicon-minus"></span>Unvet</button></form> '
                 bigString += '<form action="/deleteComment" method="post" class="inLine"><input name="comment" type="hidden" value="' + 'comment' + str(i) + '"><button type="submit" class="btn btn-danger btn-sm" name="delete" value="' + str(post.get('_id')) + '"><span class="glyphicon glyphicon-trash"></span>Confirm Delete</button></form>'
                 bigString += '</td></tr>'
                 counter += 1
             i += 1
     else:
         while counter < commentAmount:
-            if("comment" + str(i) in post):
-                utc_dt = datetime(int(post.get("comment" + str(i), {}).get("dateTime").strftime("%Y")), int(post.get("comment" + str(i), {}).get("dateTime").strftime("%m")), int(post.get("comment" + str(i), {}).get("dateTime").strftime("%d")), int(post.get("comment" + str(i), {}).get("dateTime").strftime("%H")), int(post.get("comment" + str(i), {}).get("dateTime").strftime("%M")), 0, tzinfo=pytz.utc)
+            if('comment' + str(i) in post):
+                utc_dt = datetime(int(post.get('comment' + str(i), {}).get('dateTime').strftime('%Y')), int(post.get('comment' + str(i), {}).get('dateTime').strftime('%m')), int(post.get('comment' + str(i), {}).get('dateTime').strftime('%d')), int(post.get('comment' + str(i), {}).get('dateTime').strftime('%H')), int(post.get('comment' + str(i), {}).get('dateTime').strftime('%M')), 0, tzinfo=pytz.utc)
                 loc_dt = utc_dt.astimezone(timezone('America/Los_Angeles'))
-                if int(loc_dt.strftime("%H")) > 12:
-                    hour = str(int(loc_dt.strftime("%H")) - 12)
-                    loc_dt = loc_dt.strftime("%m/%d/%Y, " + hour + ":%M PM PT")
+                if int(loc_dt.strftime('%H')) > 12:
+                    hour = str(int(loc_dt.strftime('%H')) - 12)
+                    loc_dt = loc_dt.strftime('%m/%d/%Y, ' + hour + ':%M PM PT')
                 else:
-                    hour = str(int(loc_dt.strftime("%H")))
-                    loc_dt = loc_dt.strftime("%m/%d/%Y, " + hour + ":%M AM PT")
-                if post.get("comment" + str(i), {}).get("adminName") != None:
-                    bigString += '<tr><td class="comments"><b>' + post.get("comment" + str(i), {}).get("adminName") + ' (Staff)</b><br><i>' + loc_dt + '</i><br><br>' + post.get("comment" + str(i), {}).get("postContent") + '</td></tr>'
+                    hour = str(int(loc_dt.strftime('%H')))
+                    loc_dt = loc_dt.strftime('%m/%d/%Y, ' + hour + ':%M AM PT')
+                if post.get('comment' + str(i), {}).get('adminName') != None:
+                    bigString += '<tr><td class="comments"><b>' + post.get('comment' + str(i), {}).get('adminName') + ' (Staff)</b><br><i>' + loc_dt + '</i><br><br>' + post.get('comment' + str(i), {}).get('postContent') + '</td></tr>'
                 else:
-                    if post.get("comment" + str(i), {}).get("approved") == "true":
-                        if post.get("comment" + str(i), {}).get("anonymous") == "true":
-                            bigString += '<tr><td class="comments"><b> Anonymous Comment</b><br><i>' + loc_dt + '</i><br><br>' + post.get("comment" + str(i), {}).get("postContent") + '</td></tr>'
+                    if post.get('comment' + str(i), {}).get('approved') == 'true':
+                        if post.get('comment' + str(i), {}).get('anonymous') == 'true':
+                            bigString += '<tr><td class="comments"><b> Anonymous Comment</b><br><i>' + loc_dt + '</i><br><br>' + post.get('comment' + str(i), {}).get('postContent') + '</td></tr>'
                         else:
-                            bigString += '<tr><td class="comments"><b>' + post.get("comment" + str(i), {}).get("parentName") + '</b><br><i>' + loc_dt + '</i><br><br>' + post.get("comment" + str(i), {}).get("postContent") + '</td></tr>'
+                            bigString += '<tr><td class="comments"><b>' + post.get('comment' + str(i), {}).get('parentName') + '</b><br><i>' + loc_dt + '</i><br><br>' + post.get('comment' + str(i), {}).get('postContent') + '</td></tr>'
                 counter += 1
             i += 1
     return render_template('comments.html', title = postTitle, name = displayName, information = '', time = loc_dt, content = Markup(postContent), _id = objectIDPost, comments = Markup(bigString))
 
 def view_SEU(objectIDPost):
-    connection_string = os.environ["MONGO_CONNECTION_STRING"]
-    db_name = os.environ["MONGO_DBNAME"]
+    connection_string = os.environ['MONGO_CONNECTION_STRING']
+    db_name = os.environ['MONGO_DBNAME']
     client = pymongo.MongoClient(connection_string)
     db = client[db_name]
     collection = db['SEU']
     post = collection.find_one({'_id': ObjectId(objectIDPost)})
     postTitle = post.get('postTitle')
     postContent = post.get('postContent')
-    utc_dt = datetime(int(post.get('dateTime').strftime("%Y")), int(post.get('dateTime').strftime("%m")), int(post.get('dateTime').strftime("%d")), int(post.get('dateTime').strftime("%H")), int(post.get('dateTime').strftime("%M")), 0, tzinfo=pytz.utc)
+    utc_dt = datetime(int(post.get('dateTime').strftime('%Y')), int(post.get('dateTime').strftime('%m')), int(post.get('dateTime').strftime('%d')), int(post.get('dateTime').strftime('%H')), int(post.get('dateTime').strftime('%M')), 0, tzinfo=pytz.utc)
     loc_dt = utc_dt.astimezone(timezone('America/Los_Angeles'))
-    if int(loc_dt.strftime("%H")) > 12:
-        hour = str(int(loc_dt.strftime("%H")) - 12)
-        loc_dt = loc_dt.strftime("%m/%d/%Y, " + hour + ":%M PM PT")
+    if int(loc_dt.strftime('%H')) > 12:
+        hour = str(int(loc_dt.strftime('%H')) - 12)
+        loc_dt = loc_dt.strftime('%m/%d/%Y, ' + hour + ':%M PM PT')
     else:
-        hour = str(int(loc_dt.strftime("%H")))
-        loc_dt = loc_dt.strftime("%m/%d/%Y, " + hour + ":%M AM PT")
+        hour = str(int(loc_dt.strftime('%H')))
+        loc_dt = loc_dt.strftime('%m/%d/%Y, ' + hour + ':%M AM PT')
     if 'github_token' in session:
         parentName = post.get('parentName')
         studentNameGrade = post.get('studentNameGrade')
         parentEmail = post.get('parentEmail')
-        if parentEmail == "":
-            parentEmail = "Email not provided"
+        if parentEmail == '':
+            parentEmail = 'Email not provided'
     else:
-        if post.get('anonymous') == "false":
+        if post.get('anonymous') == 'false':
             parentName = post.get('parentName')
         else:
-            parentName = "Anonymous Post"
-        studentNameGrade = ""
-        parentEmail = ""
-    info = " / " + studentNameGrade + " / " + parentEmail
+            parentName = 'Anonymous Post'
+        studentNameGrade = ''
+        parentEmail = ''
+    info = ' / ' + studentNameGrade + ' / ' + parentEmail
     bigString = ''
     keyList = list(post.keys())
     commentAmount = 0
     for item in keyList:
-        if "comment" in item:
+        if 'comment' in item:
             commentAmount += 1
     bigString = ''
     counter = 0
     i = 0
     if 'github_token' in session: #if admin is logged in
         while counter < commentAmount:
-            if("comment" + str(i) in post):
-                utc_dt = datetime(int(post.get("comment" + str(i), {}).get("dateTime").strftime("%Y")), int(post.get("comment" + str(i), {}).get("dateTime").strftime("%m")), int(post.get("comment" + str(i), {}).get("dateTime").strftime("%d")), int(post.get("comment" + str(i), {}).get("dateTime").strftime("%H")), int(post.get("comment" + str(i), {}).get("dateTime").strftime("%M")), 0, tzinfo=pytz.utc)
+            if('comment' + str(i) in post):
+                utc_dt = datetime(int(post.get('comment' + str(i), {}).get('dateTime').strftime('%Y')), int(post.get('comment' + str(i), {}).get('dateTime').strftime('%m')), int(post.get('comment' + str(i), {}).get('dateTime').strftime('%d')), int(post.get('comment' + str(i), {}).get('dateTime').strftime('%H')), int(post.get('comment' + str(i), {}).get('dateTime').strftime('%M')), 0, tzinfo=pytz.utc)
                 loc_dt = utc_dt.astimezone(timezone('America/Los_Angeles'))
-                if int(loc_dt.strftime("%H")) > 12:
-                    hour = str(int(loc_dt.strftime("%H")) - 12)
-                    loc_dt = loc_dt.strftime("%m/%d/%Y, " + hour + ":%M PM PT")
+                if int(loc_dt.strftime('%H')) > 12:
+                    hour = str(int(loc_dt.strftime('%H')) - 12)
+                    loc_dt = loc_dt.strftime('%m/%d/%Y, ' + hour + ':%M PM PT')
                 else:
-                    hour = str(int(loc_dt.strftime("%H")))
-                    loc_dt = loc_dt.strftime("%m/%d/%Y, " + hour + ":%M AM PT")
-                if post.get("comment" + str(i), {}).get("adminName") != None: #checks if it is admin post
-                    bigString += '<tr><td class="comments"><b>' + post.get("comment" + str(i), {}).get("adminName") + ' (Staff)</b><br><i>' + loc_dt + '</i><br><br>' + post.get("comment" + str(i), {}).get("postContent")
+                    hour = str(int(loc_dt.strftime('%H')))
+                    loc_dt = loc_dt.strftime('%m/%d/%Y, ' + hour + ':%M AM PT')
+                if post.get('comment' + str(i), {}).get('adminName') != None: #checks if it is admin post
+                    bigString += '<tr><td class="comments"><b>' + post.get('comment' + str(i), {}).get('adminName') + ' (Staff)</b><br><i>' + loc_dt + '</i><br><br>' + post.get('comment' + str(i), {}).get('postContent')
                 else:
-                    bigString += '<tr><td class="comments"><b>' + post.get("comment" + str(i), {}).get("parentName") + '</b> / ' + post.get("comment" + str(i), {}).get("studentNameGrade") + '<br><i>' + loc_dt + '</i><br><br>' + post.get("comment" + str(i), {}).get("postContent")
-                if post.get("comment" + str(i), {}).get("adminName") == None:
-                    if(post.get("comment" + str(i), {}).get("approved") == "false"):
+                    bigString += '<tr><td class="comments"><b>' + post.get('comment' + str(i), {}).get('parentName') + '</b> / ' + post.get('comment' + str(i), {}).get('studentNameGrade') + '<br><i>' + loc_dt + '</i><br><br>' + post.get('comment' + str(i), {}).get('postContent')
+                if post.get('comment' + str(i), {}).get('adminName') == None:
+                    if(post.get('comment' + str(i), {}).get('approved') == 'false'):
                         bigString += '<form action="/vetComment" method="post" class="inLine"><input name="comment" type="hidden" value="' + 'comment' + str(i) + '"><button type="submit" class="btn btn-warning btn-sm" name="vet" value="' + str(post.get('_id'))+ '">' + '<span class="glyphicon glyphicon-plus"></span>Vet</button></form> '
                     else:
-                        bigString += '<form action="/unvetComment" method="post" class="inLine"><input name="comment" type="hidden" value="' + 'comment' + str(i) + '"><button type="submit" class="btn btn-warning btn-sm" name="vet" value="' + str(post.get('_id'))+ '">' + '<span class="glyphicon glyphicon-minus"></span>Unvet</button></form>'
+                        bigString += '<form action="/unvetComment" method="post" class="inLine"><input name="comment" type="hidden" value="' + 'comment' + str(i) + '"><button type="submit" class="btn btn-warning btn-sm" name="vet" value="' + str(post.get('_id'))+ '">' + '<span class="glyphicon glyphicon-minus"></span>Unvet</button></form> '
                 bigString += '<form action="/deleteComment" method="post" class="inLine"><input name="comment" type="hidden" value="' + 'comment' + str(i) + '"><button type="submit" class="btn btn-danger btn-sm" name="delete" value="' + str(post.get('_id')) + '"><span class="glyphicon glyphicon-trash"></span>Confirm Delete</button></form>'
                 bigString += '</td></tr>'
                 counter += 1
             i += 1
     else:
         while counter < commentAmount:
-            if("comment" + str(i) in post):
-                utc_dt = datetime(int(post.get("comment" + str(i), {}).get("dateTime").strftime("%Y")), int(post.get("comment" + str(i), {}).get("dateTime").strftime("%m")), int(post.get("comment" + str(i), {}).get("dateTime").strftime("%d")), int(post.get("comment" + str(i), {}).get("dateTime").strftime("%H")), int(post.get("comment" + str(i), {}).get("dateTime").strftime("%M")), 0, tzinfo=pytz.utc)
+            if('comment' + str(i) in post):
+                utc_dt = datetime(int(post.get('comment' + str(i), {}).get('dateTime').strftime('%Y')), int(post.get('comment' + str(i), {}).get('dateTime').strftime('%m')), int(post.get('comment' + str(i), {}).get('dateTime').strftime('%d')), int(post.get('comment' + str(i), {}).get('dateTime').strftime('%H')), int(post.get('comment' + str(i), {}).get('dateTime').strftime('%M')), 0, tzinfo=pytz.utc)
                 loc_dt = utc_dt.astimezone(timezone('America/Los_Angeles'))
-                if int(loc_dt.strftime("%H")) > 12:
-                    hour = str(int(loc_dt.strftime("%H")) - 12)
-                    loc_dt = loc_dt.strftime("%m/%d/%Y, " + hour + ":%M PM PT")
+                if int(loc_dt.strftime('%H')) > 12:
+                    hour = str(int(loc_dt.strftime('%H')) - 12)
+                    loc_dt = loc_dt.strftime('%m/%d/%Y, ' + hour + ':%M PM PT')
                 else:
-                    hour = str(int(loc_dt.strftime("%H")))
-                    loc_dt = loc_dt.strftime("%m/%d/%Y, " + hour + ":%M AM PT")
-                if post.get("comment" + str(i), {}).get("adminName") != None:
-                    bigString += '<tr><td class="comments"><b>' + post.get("comment" + str(i), {}).get("adminName") + ' (Staff)</b><br><i>' + loc_dt + '</i><br><br>' + post.get("comment" + str(i), {}).get("postContent") + '</td></tr>'
+                    hour = str(int(loc_dt.strftime('%H')))
+                    loc_dt = loc_dt.strftime('%m/%d/%Y, ' + hour + ':%M AM PT')
+                if post.get('comment' + str(i), {}).get('adminName') != None:
+                    bigString += '<tr><td class="comments"><b>' + post.get('comment' + str(i), {}).get('adminName') + ' (Staff)</b><br><i>' + loc_dt + '</i><br><br>' + post.get('comment' + str(i), {}).get('postContent') + '</td></tr>'
                 else:
-                    if post.get("comment" + str(i), {}).get("approved") == "true":
-                        if post.get("comment" + str(i), {}).get("anonymous") == "true":
-                            bigString += '<tr><td class="comments"><b> Anonymous Comment</b><br><i>' + loc_dt + '</i><br><br>' + post.get("comment" + str(i), {}).get("postContent") + '</td></tr>'
+                    if post.get('comment' + str(i), {}).get('approved') == 'true':
+                        if post.get('comment' + str(i), {}).get('anonymous') == 'true':
+                            bigString += '<tr><td class="comments"><b> Anonymous Comment</b><br><i>' + loc_dt + '</i><br><br>' + post.get('comment' + str(i), {}).get('postContent') + '</td></tr>'
                         else:
-                            bigString += '<tr><td class="comments"><b>' + post.get("comment" + str(i), {}).get("parentName") + '</b><br><i>' + loc_dt + '</i><br><br>' + post.get("comment" + str(i), {}).get("postContent") + '</td></tr>'
+                            bigString += '<tr><td class="comments"><b>' + post.get('comment' + str(i), {}).get('parentName') + '</b><br><i>' + loc_dt + '</i><br><br>' + post.get('comment' + str(i), {}).get('postContent') + '</td></tr>'
                 counter += 1
             i += 1
     return render_template('comments.html', title = postTitle, name = parentName, information = info, time = loc_dt, content = Markup(postContent), _id = objectIDPost, comments = Markup(bigString))
 
 def view_ELLA(objectIDPost):
-    connection_string = os.environ["MONGO_CONNECTION_STRING"]
-    db_name = os.environ["MONGO_DBNAME"]
+    connection_string = os.environ['MONGO_CONNECTION_STRING']
+    db_name = os.environ['MONGO_DBNAME']
     client = pymongo.MongoClient(connection_string)
     db = client[db_name]
     collection = db['ELLA']
     post = collection.find_one({'_id': ObjectId(objectIDPost)})
     postTitle = post.get('postTitle')
     postContent = post.get('postContent')
-    utc_dt = datetime(int(post.get('dateTime').strftime("%Y")), int(post.get('dateTime').strftime("%m")), int(post.get('dateTime').strftime("%d")), int(post.get('dateTime').strftime("%H")), int(post.get('dateTime').strftime("%M")), 0, tzinfo=pytz.utc)
+    utc_dt = datetime(int(post.get('dateTime').strftime('%Y')), int(post.get('dateTime').strftime('%m')), int(post.get('dateTime').strftime('%d')), int(post.get('dateTime').strftime('%H')), int(post.get('dateTime').strftime('%M')), 0, tzinfo=pytz.utc)
     loc_dt = utc_dt.astimezone(timezone('America/Los_Angeles'))
-    if int(loc_dt.strftime("%H")) > 12:
-        hour = str(int(loc_dt.strftime("%H")) - 12)
-        loc_dt = loc_dt.strftime("%m/%d/%Y, " + hour + ":%M PM PT")
+    if int(loc_dt.strftime('%H')) > 12:
+        hour = str(int(loc_dt.strftime('%H')) - 12)
+        loc_dt = loc_dt.strftime('%m/%d/%Y, ' + hour + ':%M PM PT')
     else:
-        hour = str(int(loc_dt.strftime("%H")))
-        loc_dt = loc_dt.strftime("%m/%d/%Y, " + hour + ":%M AM PT")
+        hour = str(int(loc_dt.strftime('%H')))
+        loc_dt = loc_dt.strftime('%m/%d/%Y, ' + hour + ':%M AM PT')
     displayName = post.get('adminName')
     bigString = ''
     keyList = list(post.keys())
     commentAmount = 0
     for item in keyList:
-        if "comment" in item:
+        if 'comment' in item:
             commentAmount += 1
     bigString = ''
     keyList = list(post.keys())
     commentAmount = 0
     for item in keyList:
-        if "comment" in item:
+        if 'comment' in item:
             commentAmount += 1
     bigString = ''
     counter = 0
     i = 0
     if 'github_token' in session: #if admin is logged in
         while counter < commentAmount:
-            if("comment" + str(i) in post):
-                utc_dt = datetime(int(post.get("comment" + str(i), {}).get("dateTime").strftime("%Y")), int(post.get("comment" + str(i), {}).get("dateTime").strftime("%m")), int(post.get("comment" + str(i), {}).get("dateTime").strftime("%d")), int(post.get("comment" + str(i), {}).get("dateTime").strftime("%H")), int(post.get("comment" + str(i), {}).get("dateTime").strftime("%M")), 0, tzinfo=pytz.utc)
+            if('comment' + str(i) in post):
+                utc_dt = datetime(int(post.get('comment' + str(i), {}).get('dateTime').strftime('%Y')), int(post.get('comment' + str(i), {}).get('dateTime').strftime('%m')), int(post.get('comment' + str(i), {}).get('dateTime').strftime('%d')), int(post.get('comment' + str(i), {}).get('dateTime').strftime('%H')), int(post.get('comment' + str(i), {}).get('dateTime').strftime('%M')), 0, tzinfo=pytz.utc)
                 loc_dt = utc_dt.astimezone(timezone('America/Los_Angeles'))
-                if int(loc_dt.strftime("%H")) > 12:
-                    hour = str(int(loc_dt.strftime("%H")) - 12)
-                    loc_dt = loc_dt.strftime("%m/%d/%Y, " + hour + ":%M PM PT")
+                if int(loc_dt.strftime('%H')) > 12:
+                    hour = str(int(loc_dt.strftime('%H')) - 12)
+                    loc_dt = loc_dt.strftime('%m/%d/%Y, ' + hour + ':%M PM PT')
                 else:
-                    hour = str(int(loc_dt.strftime("%H")))
-                    loc_dt = loc_dt.strftime("%m/%d/%Y, " + hour + ":%M AM PT")
-                if post.get("comment" + str(i), {}).get("adminName") != None: #checks if it is admin post
-                    bigString += '<tr><td class="comments"><b>' + post.get("comment" + str(i), {}).get("adminName") + ' (Staff)</b><br><i>' + loc_dt + '</i><br><br>' + post.get("comment" + str(i), {}).get("postContent")
+                    hour = str(int(loc_dt.strftime('%H')))
+                    loc_dt = loc_dt.strftime('%m/%d/%Y, ' + hour + ':%M AM PT')
+                if post.get('comment' + str(i), {}).get('adminName') != None: #checks if it is admin post
+                    bigString += '<tr><td class="comments"><b>' + post.get('comment' + str(i), {}).get('adminName') + ' (Staff)</b><br><i>' + loc_dt + '</i><br><br>' + post.get('comment' + str(i), {}).get('postContent')
                 else:
-                    bigString += '<tr><td class="comments"><b>' + post.get("comment" + str(i), {}).get("parentName") + '</b> / ' + post.get("comment" + str(i), {}).get("studentNameGrade") + '<br><i>' + loc_dt + '</i><br><br>' + post.get("comment" + str(i), {}).get("postContent")
-                if post.get("comment" + str(i), {}).get("adminName") == None:
-                    if(post.get("comment" + str(i), {}).get("approved") == "false"):
+                    bigString += '<tr><td class="comments"><b>' + post.get('comment' + str(i), {}).get('parentName') + '</b> / ' + post.get('comment' + str(i), {}).get('studentNameGrade') + '<br><i>' + loc_dt + '</i><br><br>' + post.get('comment' + str(i), {}).get('postContent')
+                if post.get('comment' + str(i), {}).get('adminName') == None:
+                    if(post.get('comment' + str(i), {}).get('approved') == 'false'):
                         bigString += '<form action="/vetComment" method="post" class="inLine"><input name="comment" type="hidden" value="' + 'comment' + str(i) + '"><button type="submit" class="btn btn-warning btn-sm" name="vet" value="' + str(post.get('_id'))+ '">' + '<span class="glyphicon glyphicon-plus"></span>Vet</button></form> '
                     else:
-                        bigString += '<form action="/unvetComment" method="post" class="inLine"><input name="comment" type="hidden" value="' + 'comment' + str(i) + '"><button type="submit" class="btn btn-warning btn-sm" name="vet" value="' + str(post.get('_id'))+ '">' + '<span class="glyphicon glyphicon-minus"></span>Unvet</button></form>'
+                        bigString += '<form action="/unvetComment" method="post" class="inLine"><input name="comment" type="hidden" value="' + 'comment' + str(i) + '"><button type="submit" class="btn btn-warning btn-sm" name="vet" value="' + str(post.get('_id'))+ '">' + '<span class="glyphicon glyphicon-minus"></span>Unvet</button></form> '
                 bigString += '<form action="/deleteComment" method="post" class="inLine"><input name="comment" type="hidden" value="' + 'comment' + str(i) + '"><button type="submit" class="btn btn-danger btn-sm" name="delete" value="' + str(post.get('_id')) + '"><span class="glyphicon glyphicon-trash"></span>Confirm Delete</button></form>'
                 bigString += '</td></tr>'
                 counter += 1
             i += 1
     else:
         while counter < commentAmount:
-            if("comment" + str(i) in post):
-                utc_dt = datetime(int(post.get("comment" + str(i), {}).get("dateTime").strftime("%Y")), int(post.get("comment" + str(i), {}).get("dateTime").strftime("%m")), int(post.get("comment" + str(i), {}).get("dateTime").strftime("%d")), int(post.get("comment" + str(i), {}).get("dateTime").strftime("%H")), int(post.get("comment" + str(i), {}).get("dateTime").strftime("%M")), 0, tzinfo=pytz.utc)
+            if('comment' + str(i) in post):
+                utc_dt = datetime(int(post.get('comment' + str(i), {}).get('dateTime').strftime('%Y')), int(post.get('comment' + str(i), {}).get('dateTime').strftime('%m')), int(post.get('comment' + str(i), {}).get('dateTime').strftime('%d')), int(post.get('comment' + str(i), {}).get('dateTime').strftime('%H')), int(post.get('comment' + str(i), {}).get('dateTime').strftime('%M')), 0, tzinfo=pytz.utc)
                 loc_dt = utc_dt.astimezone(timezone('America/Los_Angeles'))
-                if int(loc_dt.strftime("%H")) > 12:
-                    hour = str(int(loc_dt.strftime("%H")) - 12)
-                    loc_dt = loc_dt.strftime("%m/%d/%Y, " + hour + ":%M PM PT")
+                if int(loc_dt.strftime('%H')) > 12:
+                    hour = str(int(loc_dt.strftime('%H')) - 12)
+                    loc_dt = loc_dt.strftime('%m/%d/%Y, ' + hour + ':%M PM PT')
                 else:
-                    hour = str(int(loc_dt.strftime("%H")))
-                    loc_dt = loc_dt.strftime("%m/%d/%Y, " + hour + ":%M AM PT")
-                if post.get("comment" + str(i), {}).get("adminName") != None:
-                    bigString += '<tr><td class="comments"><b>' + post.get("comment" + str(i), {}).get("adminName") + ' (Staff)</b><br><i>' + loc_dt + '</i><br><br>' + post.get("comment" + str(i), {}).get("postContent") + '</td></tr>'
+                    hour = str(int(loc_dt.strftime('%H')))
+                    loc_dt = loc_dt.strftime('%m/%d/%Y, ' + hour + ':%M AM PT')
+                if post.get('comment' + str(i), {}).get('adminName') != None:
+                    bigString += '<tr><td class="comments"><b>' + post.get('comment' + str(i), {}).get('adminName') + ' (Staff)</b><br><i>' + loc_dt + '</i><br><br>' + post.get('comment' + str(i), {}).get('postContent') + '</td></tr>'
                 else:
-                    if post.get("comment" + str(i), {}).get("approved") == "true":
-                        if post.get("comment" + str(i), {}).get("anonymous") == "true":
-                            bigString += '<tr><td class="comments"><b> Anonymous Comment</b><br><i>' + loc_dt + '</i><br><br>' + post.get("comment" + str(i), {}).get("postContent") + '</td></tr>'
+                    if post.get('comment' + str(i), {}).get('approved') == 'true':
+                        if post.get('comment' + str(i), {}).get('anonymous') == 'true':
+                            bigString += '<tr><td class="comments"><b> Anonymous Comment</b><br><i>' + loc_dt + '</i><br><br>' + post.get('comment' + str(i), {}).get('postContent') + '</td></tr>'
                         else:
-                            bigString += '<tr><td class="comments"><b>' + post.get("comment" + str(i), {}).get("parentName") + '</b><br><i>' + loc_dt + '</i><br><br>' + post.get("comment" + str(i), {}).get("postContent") + '</td></tr>'
+                            bigString += '<tr><td class="comments"><b>' + post.get('comment' + str(i), {}).get('parentName') + '</b><br><i>' + loc_dt + '</i><br><br>' + post.get('comment' + str(i), {}).get('postContent') + '</td></tr>'
                 counter += 1
             i += 1
     return render_template('comments.html', title = postTitle, name = displayName, information = '', time = loc_dt, content = Markup(postContent), _id = objectIDPost, comments = Markup(bigString))
 
 def view_ELLU(objectIDPost):
-    connection_string = os.environ["MONGO_CONNECTION_STRING"]
-    db_name = os.environ["MONGO_DBNAME"]
+    connection_string = os.environ['MONGO_CONNECTION_STRING']
+    db_name = os.environ['MONGO_DBNAME']
     client = pymongo.MongoClient(connection_string)
     db = client[db_name]
     collection = db['ELLU']
     post = collection.find_one({'_id': ObjectId(objectIDPost)})
     postTitle = post.get('postTitle')
     postContent = post.get('postContent')
-    utc_dt = datetime(int(post.get('dateTime').strftime("%Y")), int(post.get('dateTime').strftime("%m")), int(post.get('dateTime').strftime("%d")), int(post.get('dateTime').strftime("%H")), int(post.get('dateTime').strftime("%M")), 0, tzinfo=pytz.utc)
+    utc_dt = datetime(int(post.get('dateTime').strftime('%Y')), int(post.get('dateTime').strftime('%m')), int(post.get('dateTime').strftime('%d')), int(post.get('dateTime').strftime('%H')), int(post.get('dateTime').strftime('%M')), 0, tzinfo=pytz.utc)
     loc_dt = utc_dt.astimezone(timezone('America/Los_Angeles'))
-    if int(loc_dt.strftime("%H")) > 12:
-        hour = str(int(loc_dt.strftime("%H")) - 12)
-        loc_dt = loc_dt.strftime("%m/%d/%Y, " + hour + ":%M PM PT")
+    if int(loc_dt.strftime('%H')) > 12:
+        hour = str(int(loc_dt.strftime('%H')) - 12)
+        loc_dt = loc_dt.strftime('%m/%d/%Y, ' + hour + ':%M PM PT')
     else:
-        hour = str(int(loc_dt.strftime("%H")))
-        loc_dt = loc_dt.strftime("%m/%d/%Y, " + hour + ":%M AM PT")
+        hour = str(int(loc_dt.strftime('%H')))
+        loc_dt = loc_dt.strftime('%m/%d/%Y, ' + hour + ':%M AM PT')
     if 'github_token' in session:
         parentName = post.get('parentName')
         studentNameGrade = post.get('studentNameGrade')
         parentEmail = post.get('parentEmail')
-        if parentEmail == "":
-            parentEmail = "Email not provided"
+        if parentEmail == '':
+            parentEmail = 'Email not provided'
     else:
-        if post.get('anonymous') == "false":
+        if post.get('anonymous') == 'false':
             parentName = post.get('parentName')
         else:
-            parentName = "Anonymous Post"
-        studentNameGrade = ""
-        parentEmail = ""
-    info = " / " + studentNameGrade + " / " + parentEmail
+            parentName = 'Anonymous Post'
+        studentNameGrade = ''
+        parentEmail = ''
+    info = ' / ' + studentNameGrade + ' / ' + parentEmail
     bigString = ''
     keyList = list(post.keys())
     commentAmount = 0
     for item in keyList:
-        if "comment" in item:
+        if 'comment' in item:
             commentAmount += 1
     bigString = ''
     counter = 0
     i = 0
     if 'github_token' in session: #if admin is logged in
         while counter < commentAmount:
-            if("comment" + str(i) in post):
-                utc_dt = datetime(int(post.get("comment" + str(i), {}).get("dateTime").strftime("%Y")), int(post.get("comment" + str(i), {}).get("dateTime").strftime("%m")), int(post.get("comment" + str(i), {}).get("dateTime").strftime("%d")), int(post.get("comment" + str(i), {}).get("dateTime").strftime("%H")), int(post.get("comment" + str(i), {}).get("dateTime").strftime("%M")), 0, tzinfo=pytz.utc)
+            if('comment' + str(i) in post):
+                utc_dt = datetime(int(post.get('comment' + str(i), {}).get('dateTime').strftime('%Y')), int(post.get('comment' + str(i), {}).get('dateTime').strftime('%m')), int(post.get('comment' + str(i), {}).get('dateTime').strftime('%d')), int(post.get('comment' + str(i), {}).get('dateTime').strftime('%H')), int(post.get('comment' + str(i), {}).get('dateTime').strftime('%M')), 0, tzinfo=pytz.utc)
                 loc_dt = utc_dt.astimezone(timezone('America/Los_Angeles'))
-                if int(loc_dt.strftime("%H")) > 12:
-                    hour = str(int(loc_dt.strftime("%H")) - 12)
-                    loc_dt = loc_dt.strftime("%m/%d/%Y, " + hour + ":%M PM PT")
+                if int(loc_dt.strftime('%H')) > 12:
+                    hour = str(int(loc_dt.strftime('%H')) - 12)
+                    loc_dt = loc_dt.strftime('%m/%d/%Y, ' + hour + ':%M PM PT')
                 else:
-                    hour = str(int(loc_dt.strftime("%H")))
-                    loc_dt = loc_dt.strftime("%m/%d/%Y, " + hour + ":%M AM PT")
-                if post.get("comment" + str(i), {}).get("adminName") != None: #checks if it is admin post
-                    bigString += '<tr><td class="comments"><b>' + post.get("comment" + str(i), {}).get("adminName") + ' (Staff)</b><br><i>' + loc_dt + '</i><br><br>' + post.get("comment" + str(i), {}).get("postContent")
+                    hour = str(int(loc_dt.strftime('%H')))
+                    loc_dt = loc_dt.strftime('%m/%d/%Y, ' + hour + ':%M AM PT')
+                if post.get('comment' + str(i), {}).get('adminName') != None: #checks if it is admin post
+                    bigString += '<tr><td class="comments"><b>' + post.get('comment' + str(i), {}).get('adminName') + ' (Staff)</b><br><i>' + loc_dt + '</i><br><br>' + post.get('comment' + str(i), {}).get('postContent')
                 else:
-                    bigString += '<tr><td class="comments"><b>' + post.get("comment" + str(i), {}).get("parentName") + '</b> / ' + post.get("comment" + str(i), {}).get("studentNameGrade") + '<br><i>' + loc_dt + '</i><br><br>' + post.get("comment" + str(i), {}).get("postContent")
-                if post.get("comment" + str(i), {}).get("adminName") == None:
-                    if(post.get("comment" + str(i), {}).get("approved") == "false"):
+                    bigString += '<tr><td class="comments"><b>' + post.get('comment' + str(i), {}).get('parentName') + '</b> / ' + post.get('comment' + str(i), {}).get('studentNameGrade') + '<br><i>' + loc_dt + '</i><br><br>' + post.get('comment' + str(i), {}).get('postContent')
+                if post.get('comment' + str(i), {}).get('adminName') == None:
+                    if(post.get('comment' + str(i), {}).get('approved') == 'false'):
                         bigString += '<form action="/vetComment" method="post" class="inLine"><input name="comment" type="hidden" value="' + 'comment' + str(i) + '"><button type="submit" class="btn btn-warning btn-sm" name="vet" value="' + str(post.get('_id'))+ '">' + '<span class="glyphicon glyphicon-plus"></span>Vet</button></form> '
                     else:
-                        bigString += '<form action="/unvetComment" method="post" class="inLine"><input name="comment" type="hidden" value="' + 'comment' + str(i) + '"><button type="submit" class="btn btn-warning btn-sm" name="vet" value="' + str(post.get('_id'))+ '">' + '<span class="glyphicon glyphicon-minus"></span>Unvet</button></form>'
+                        bigString += '<form action="/unvetComment" method="post" class="inLine"><input name="comment" type="hidden" value="' + 'comment' + str(i) + '"><button type="submit" class="btn btn-warning btn-sm" name="vet" value="' + str(post.get('_id'))+ '">' + '<span class="glyphicon glyphicon-minus"></span>Unvet</button></form> '
                 bigString += '<form action="/deleteComment" method="post" class="inLine"><input name="comment" type="hidden" value="' + 'comment' + str(i) + '"><button type="submit" class="btn btn-danger btn-sm" name="delete" value="' + str(post.get('_id')) + '"><span class="glyphicon glyphicon-trash"></span>Confirm Delete</button></form>'
                 bigString += '</td></tr>'
                 counter += 1
             i += 1
     else:
         while counter < commentAmount:
-            if("comment" + str(i) in post):
-                utc_dt = datetime(int(post.get("comment" + str(i), {}).get("dateTime").strftime("%Y")), int(post.get("comment" + str(i), {}).get("dateTime").strftime("%m")), int(post.get("comment" + str(i), {}).get("dateTime").strftime("%d")), int(post.get("comment" + str(i), {}).get("dateTime").strftime("%H")), int(post.get("comment" + str(i), {}).get("dateTime").strftime("%M")), 0, tzinfo=pytz.utc)
+            if('comment' + str(i) in post):
+                utc_dt = datetime(int(post.get('comment' + str(i), {}).get('dateTime').strftime('%Y')), int(post.get('comment' + str(i), {}).get('dateTime').strftime('%m')), int(post.get('comment' + str(i), {}).get('dateTime').strftime('%d')), int(post.get('comment' + str(i), {}).get('dateTime').strftime('%H')), int(post.get('comment' + str(i), {}).get('dateTime').strftime('%M')), 0, tzinfo=pytz.utc)
                 loc_dt = utc_dt.astimezone(timezone('America/Los_Angeles'))
-                if int(loc_dt.strftime("%H")) > 12:
-                    hour = str(int(loc_dt.strftime("%H")) - 12)
-                    loc_dt = loc_dt.strftime("%m/%d/%Y, " + hour + ":%M PM PT")
+                if int(loc_dt.strftime('%H')) > 12:
+                    hour = str(int(loc_dt.strftime('%H')) - 12)
+                    loc_dt = loc_dt.strftime('%m/%d/%Y, ' + hour + ':%M PM PT')
                 else:
-                    hour = str(int(loc_dt.strftime("%H")))
-                    loc_dt = loc_dt.strftime("%m/%d/%Y, " + hour + ":%M AM PT")
-                if post.get("comment" + str(i), {}).get("adminName") != None:
-                    bigString += '<tr><td class="comments"><b>' + post.get("comment" + str(i), {}).get("adminName") + ' (Staff)</b><br><i>' + loc_dt + '</i><br><br>' + post.get("comment" + str(i), {}).get("postContent") + '</td></tr>'
+                    hour = str(int(loc_dt.strftime('%H')))
+                    loc_dt = loc_dt.strftime('%m/%d/%Y, ' + hour + ':%M AM PT')
+                if post.get('comment' + str(i), {}).get('adminName') != None:
+                    bigString += '<tr><td class="comments"><b>' + post.get('comment' + str(i), {}).get('adminName') + ' (Staff)</b><br><i>' + loc_dt + '</i><br><br>' + post.get('comment' + str(i), {}).get('postContent') + '</td></tr>'
                 else:
-                    if post.get("comment" + str(i), {}).get("approved") == "true":
-                        if post.get("comment" + str(i), {}).get("anonymous") == "true":
-                            bigString += '<tr><td class="comments"><b> Anonymous Comment</b><br><i>' + loc_dt + '</i><br><br>' + post.get("comment" + str(i), {}).get("postContent") + '</td></tr>'
+                    if post.get('comment' + str(i), {}).get('approved') == 'true':
+                        if post.get('comment' + str(i), {}).get('anonymous') == 'true':
+                            bigString += '<tr><td class="comments"><b> Anonymous Comment</b><br><i>' + loc_dt + '</i><br><br>' + post.get('comment' + str(i), {}).get('postContent') + '</td></tr>'
                         else:
-                            bigString += '<tr><td class="comments"><b>' + post.get("comment" + str(i), {}).get("parentName") + '</b><br><i>' + loc_dt + '</i><br><br>' + post.get("comment" + str(i), {}).get("postContent") + '</td></tr>'
+                            bigString += '<tr><td class="comments"><b>' + post.get('comment' + str(i), {}).get('parentName') + '</b><br><i>' + loc_dt + '</i><br><br>' + post.get('comment' + str(i), {}).get('postContent') + '</td></tr>'
                 counter += 1
             i += 1
     return render_template('comments.html', title = postTitle, name = parentName, information = info, time = loc_dt, content = Markup(postContent), _id = objectIDPost, comments = Markup(bigString))
@@ -953,8 +953,8 @@ def view_ELLU(objectIDPost):
 def delete_SE():
     if request.method == 'POST':
         objectIDPost = request.form['delete'] #delete post
-        connection_string = os.environ["MONGO_CONNECTION_STRING"]
-        db_name = os.environ["MONGO_DBNAME"]
+        connection_string = os.environ['MONGO_CONNECTION_STRING']
+        db_name = os.environ['MONGO_DBNAME']
         client = pymongo.MongoClient(connection_string)
         db = client[db_name]
         collection = db['SEA']
@@ -974,8 +974,8 @@ def delete_SE():
 def delete_ELL():
     if request.method == 'POST':
         objectIDPost = request.form['delete'] #delete post
-        connection_string = os.environ["MONGO_CONNECTION_STRING"]
-        db_name = os.environ["MONGO_DBNAME"]
+        connection_string = os.environ['MONGO_CONNECTION_STRING']
+        db_name = os.environ['MONGO_DBNAME']
         client = pymongo.MongoClient(connection_string)
         db = client[db_name]
         collection = db['ELLA']
@@ -995,13 +995,13 @@ def delete_ELL():
 def vet_ELL():
     if request.method == 'POST':
         objectIDPost = request.form['vet'] #vet and unvet posts
-        connection_string = os.environ["MONGO_CONNECTION_STRING"]
-        db_name = os.environ["MONGO_DBNAME"]
+        connection_string = os.environ['MONGO_CONNECTION_STRING']
+        db_name = os.environ['MONGO_DBNAME']
         client = pymongo.MongoClient(connection_string)
         db = client[db_name]
         collection = db['ELLU']
-        collection.find_one_and_update({"_id": ObjectId(objectIDPost)},
-                                       {"$set": {"approved": "true"}})
+        collection.find_one_and_update({'_id': ObjectId(objectIDPost)},
+                                       {'$set': {'approved': 'true'}})
         post = collection.find_one({'_id': ObjectId(objectIDPost)})
         action = session['user_data']['login'] + '<span class="vettingColor"> vetted </span><b><a href="https://razzoforumproject.herokuapp.com/viewELLU?thread=' + objectIDPost + '">' + post.get('postTitle') + '</a></b> in english language learner forum'
         add_admin_log(datetime.now(), action)
@@ -1011,13 +1011,13 @@ def vet_ELL():
 def unvet_ELL():
     if request.method == 'POST':
         objectIDPost = request.form['vet'] #vet and unvet posts
-        connection_string = os.environ["MONGO_CONNECTION_STRING"]
-        db_name = os.environ["MONGO_DBNAME"]
+        connection_string = os.environ['MONGO_CONNECTION_STRING']
+        db_name = os.environ['MONGO_DBNAME']
         client = pymongo.MongoClient(connection_string)
         db = client[db_name]
         collection = db['ELLU']
-        collection.find_one_and_update({"_id": ObjectId(objectIDPost)},
-                                       {"$set": {"approved": "false"}})
+        collection.find_one_and_update({'_id': ObjectId(objectIDPost)},
+                                       {'$set': {'approved': 'false'}})
         post = collection.find_one({'_id': ObjectId(objectIDPost)})
         action = session['user_data']['login'] + '<span class="vettingColor"> unvetted </span><b><a href="https://razzoforumproject.herokuapp.com/viewELLU?thread=' + objectIDPost + '">' + post.get('postTitle') + '</a></b> in english language learner forum'
         add_admin_log(datetime.now(), action)
@@ -1027,13 +1027,13 @@ def unvet_ELL():
 def vet_SE():
     if request.method == 'POST':
         objectIDPost = request.form['vet'] #vet and unvet posts
-        connection_string = os.environ["MONGO_CONNECTION_STRING"]
-        db_name = os.environ["MONGO_DBNAME"]
+        connection_string = os.environ['MONGO_CONNECTION_STRING']
+        db_name = os.environ['MONGO_DBNAME']
         client = pymongo.MongoClient(connection_string)
         db = client[db_name]       
         collection = db['SEU']
-        collection.find_one_and_update({"_id": ObjectId(objectIDPost)},
-                                       {"$set": {"approved": "true"}})
+        collection.find_one_and_update({'_id': ObjectId(objectIDPost)},
+                                       {'$set': {'approved': 'true'}})
         post = collection.find_one({'_id': ObjectId(objectIDPost)})
         action = session['user_data']['login'] + '<span class="vettingColor"> vetted </span><b><a href="https://razzoforumproject.herokuapp.com/viewSEU?thread=' + objectIDPost + '">' + post.get('postTitle') + '</a></b> in special education forum'
         add_admin_log(datetime.now(), action)
@@ -1043,13 +1043,13 @@ def vet_SE():
 def unvet_SE():
     if request.method == 'POST':
         objectIDPost = request.form['vet'] #vet and unvet posts
-        connection_string = os.environ["MONGO_CONNECTION_STRING"]
-        db_name = os.environ["MONGO_DBNAME"]
+        connection_string = os.environ['MONGO_CONNECTION_STRING']
+        db_name = os.environ['MONGO_DBNAME']
         client = pymongo.MongoClient(connection_string)
         db = client[db_name]
         collection = db['SEU']
-        collection.find_one_and_update({"_id": ObjectId(objectIDPost)},
-                                       {"$set": {"approved": "false"}})
+        collection.find_one_and_update({'_id': ObjectId(objectIDPost)},
+                                       {'$set': {'approved': 'false'}})
         post = collection.find_one({'_id': ObjectId(objectIDPost)})
         action = session['user_data']['login'] + '<span class="vettingColor"> unvetted </span><b><a href="https://razzoforumproject.herokuapp.com/viewSEU?thread=' + objectIDPost + '">' + post.get('postTitle') + '</a></b> in special education forum'
         add_admin_log(datetime.now(), action)
