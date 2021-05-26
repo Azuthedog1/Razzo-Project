@@ -1,16 +1,16 @@
 $(document).ready(function() { 
-  $('.cancel').hide();
-  $('.confirm').hide();
-  $('.delete').on('click', function(){
-    $('.delete').siblings('.cancel').show();
-    $('.delete').siblings('.confirm').show();
-    $(this).hide();
-  });
-  $('.cancel').on('click', function(){
-    $('.cancel').siblings('.confirm').hide();
-    $('.cancel').siblings('.delete').show();
-    $(this).hide();
-  });
+  //$('.cancel').hide();
+  //$('.confirm').hide();
+  //$('.delete').on('click', function(){
+    //$('.delete').siblings('.cancel').show();
+    //$('.delete').siblings('.confirm').show();
+    //$(this).hide();
+  //});
+  //$('.cancel').on('click', function(){
+    //$('.cancel').siblings('.confirm').hide();
+    //$('.cancel').siblings('.delete').show();
+    //$(this).hide();
+  //});
   var form = document.querySelector('#adminform'); 
   form.onsubmit = function() { 
     var about = document.querySelector('input[name=adminMessage]'); 
