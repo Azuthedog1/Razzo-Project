@@ -1,5 +1,5 @@
 $(document).ready(function() { 
-  $('.delete').siblings('.confirm', '.delete').css('background", "yellow');
+  $('.delete').siblings('.confirm', '.delete').css('diplay", "inline-block');
   var form = document.querySelector('#adminform'); 
   form.onsubmit = function() { 
     var about = document.querySelector('input[name=adminMessage]'); 
