@@ -549,7 +549,6 @@ def vet_comment():
         elif collection == db['ELLU']:
             action = session['user_data']['login'] + '<span class="vettingColor"> vetted </span>a comment by ' + post.get(request.form['comment'], {}).get('parentName') + ' in the post <b><a href="https://razzoforumproject.herokuapp.com/viewELLU?thread=' + objectIDPost + '">' + post.get('postTitle') + '</a></b> in english language learner forum<br>'
             add_admin_log(datetime.now(), action)
-            return view_SEU(objectIDPost)
             return view_ELLU(objectIDPost)
     return render_template('information.html')
         
@@ -590,7 +589,6 @@ def unvet_comment():
         elif collection == db['ELLU']:
             action = session['user_data']['login'] + '<span class="vettingColor"> unvetted </span>a comment by ' + post.get(request.form['comment'], {}).get('parentName') + ' in the post <b><a href="https://razzoforumproject.herokuapp.com/viewELLU?thread=' + objectIDPost + '">' + post.get('postTitle') + '</a></b> in english language learner forum<br>'
             add_admin_log(datetime.now(), action)
-            return view_SEU(objectIDPost)
             return view_ELLU(objectIDPost)
     return render_template('information.html')
 
