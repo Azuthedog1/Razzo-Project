@@ -169,6 +169,9 @@ tr {
   color: #50C878;
 }
 
+.inLine {
+  display: inline-block;
+
 .navbar-default {
   background-color: #ffffff;
   border: none;
