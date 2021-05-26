@@ -302,7 +302,7 @@ def user_submit_post_ELL():
         post = {"postTitle": request.form['userTitle'], "parentName": request.form['userName'], "studentNameGrade": request.form['userStudent'], "parentEmail": email, "anonymous": request.form['anon'], "dateTime": datetime.now(), "postContent": content, "approved": "false"}
         collection.insert_one(post)
         post = collection.find_one({"postTitle": request.form['userTitle'], "parentName": request.form['userName'], "studentNameGrade": request.form['userStudent'], "parentEmail": email, "anonymous": request.form['anon'], "postContent": content})
-        action = request.form['userName'] + ' posted <b><a href="https://razzoforumproject.herokuapp.com/viewELLU?thread=' + str(post.get('_id')) + '">' + request.form['userTitle'] + '</a></b> in english language learner forum'
+        action = request.form['userName'] + '<span class="createColor"> posted </span><b><a href="https://razzoforumproject.herokuapp.com/viewELLU?thread=' + str(post.get('_id')) + '">' + request.form['userTitle'] + '</a></b> in english language learner forum'
         add_admin_log(datetime.now(), action)
     return render_english_learner_forum()
 
@@ -320,7 +320,7 @@ def admin_submit_post_ELL():
         post = {"postTitle": request.form['adminTitle'], "adminName": request.form['adminName'], "dateTime": datetime.now(), "postContent": content}#put all info here using variables
         collection.insert_one(post)
         post = collection.find_one({"postTitle": request.form['adminTitle'], "adminName": request.form['adminName'], "postContent": content})
-        action = request.form['adminName'] + ' posted <b><a href="https://razzoforumproject.herokuapp.com/viewELLA?thread=' + str(post.get('_id')) + '">' + request.form['adminTitle'] + '</a></b> in english language learner forum'
+        action = request.form['adminName'] + '<span class="createColor"> posted </span><b><a href="https://razzoforumproject.herokuapp.com/viewELLA?thread=' + str(post.get('_id')) + '">' + request.form['adminTitle'] + '</a></b> in english language learner forum'
         add_admin_log(datetime.now(), action)
     return render_english_learner_forum() #this will also copy the code from def render_english_learner_forum from above.
     
@@ -342,7 +342,7 @@ def user_submit_post_SE():
         post = {"postTitle": request.form['userTitle'], "parentName": request.form['userName'], "studentNameGrade": request.form['userStudent'], "parentEmail": email, "anonymous": request.form['anon'], "dateTime": datetime.now(), "postContent": content, "approved": "false"}
         post = collection.insert_one(post)
         post = collection.find_one({"postTitle": request.form['userTitle'], "parentName": request.form['userName'], "studentNameGrade": request.form['userStudent'], "parentEmail": email, "anonymous": request.form['anon'], "postContent": content})
-        action = request.form['userName'] + ' posted <b><a href="https://razzoforumproject.herokuapp.com/viewSEU?thread=' + str(post.get('_id')) + '">' + request.form['userTitle'] + '</a></b> in special education forum'
+        action = request.form['userName'] + '<span class="createColor"> posted </span><b><a href="https://razzoforumproject.herokuapp.com/viewSEU?thread=' + str(post.get('_id')) + '">' + request.form['userTitle'] + '</a></b> in special education forum'
         add_admin_log(datetime.now(), action)
     return render_special_education_forum()
 
@@ -360,7 +360,7 @@ def admin_submit_post_SE():
         post = {"postTitle": request.form['adminTitle'], "adminName": request.form['adminName'], "dateTime": datetime.now(), "postContent": content}#put all info here using variables
         post = collection.insert_one(post)
         post = collection.find_one({"postTitle": request.form['adminTitle'], "adminName": request.form['adminName'], "postContent": content})
-        action = request.form['adminName'] + ' posted <b><a href="https://razzoforumproject.herokuapp.com/viewSEA?thread=' + str(post.get('_id')) + '">' + request.form['adminTitle'] + '</a></b> in special education forum'
+        action = request.form['adminName'] + '<span class="createColor"> posted </span><b><a href="https://razzoforumproject.herokuapp.com/viewSEA?thread=' + str(post.get('_id')) + '">' + request.form['adminTitle'] + '</a></b> in special education forum'
         add_admin_log(datetime.now(), action)
     return render_special_education_forum()
 
@@ -406,34 +406,34 @@ def submit_comment():
             collection.insert_one(post)
     if collection == db['SEA']:
         if 'github_token' in session:
-            action = request.form['adminName'] + ' commented on <b><a href="https://razzoforumproject.herokuapp.com/viewSEA?thread=' + objectIDPost + '">' + post.get('postTitle') + '</a></b> in special education forum'
+            action = request.form['adminName'] + '<span class="createColor"> commented </span>on <b><a href="https://razzoforumproject.herokuapp.com/viewSEA?thread=' + objectIDPost + '">' + post.get('postTitle') + '</a></b> in special education forum'
             add_admin_log(datetime.now(), action)
         else:
-            action = request.form['userName'] + ' commented on <b><a href="https://razzoforumproject.herokuapp.com/viewSEA?thread=' + objectIDPost + '">' + post.get('postTitle') + '</a></b> in special education forum'
+            action = request.form['userName'] + '<span class="createColor"> commented </span>on <b><a href="https://razzoforumproject.herokuapp.com/viewSEA?thread=' + objectIDPost + '">' + post.get('postTitle') + '</a></b> in special education forum'
             add_admin_log(datetime.now(), action)
         return view_SEA(objectIDPost)
     elif collection == db['SEU']:
         if 'github_token' in session:
-            action = request.form['adminName'] + ' commented on <b><a href="https://razzoforumproject.herokuapp.com/viewSEU?thread=' + objectIDPost + '">' + post.get('postTitle') + '</a></b> in special education forum'
+            action = request.form['adminName'] + '<span class="createColor"> commented </span>on <b><a href="https://razzoforumproject.herokuapp.com/viewSEU?thread=' + objectIDPost + '">' + post.get('postTitle') + '</a></b> in special education forum'
             add_admin_log(datetime.now(), action)
         else:
-            action = request.form['userName'] + ' commented on <b><a href="https://razzoforumproject.herokuapp.com/viewSEU?thread=' + objectIDPost + '">' + post.get('postTitle') + '</a></b> in special education forum'
+            action = request.form['userName'] + '<span class="createColor"> commented </span>on <b><a href="https://razzoforumproject.herokuapp.com/viewSEU?thread=' + objectIDPost + '">' + post.get('postTitle') + '</a></b> in special education forum'
             add_admin_log(datetime.now(), action)
         return view_SEU(objectIDPost)
     elif collection == db['ELLA']:
         if 'github_token' in session:
-            action = request.form['adminName'] + ' commented on <b><a href="https://razzoforumproject.herokuapp.com/viewELLA?thread=' + objectIDPost + '">' + post.get('postTitle') + '</a></b> in english language learner forum'
+            action = request.form['adminName'] + '<span class="createColor"> commented </span>on <b><a href="https://razzoforumproject.herokuapp.com/viewELLA?thread=' + objectIDPost + '">' + post.get('postTitle') + '</a></b> in english language learner forum'
             add_admin_log(datetime.now(), action)
         else:
-            action = request.form['userName'] + ' commented on <b><a href="https://razzoforumproject.herokuapp.com/viewELLA?thread=' + objectIDPost + '">' + post.get('postTitle') + '</a></b> in english language learner forum'
+            action = request.form['userName'] + '<span class="createColor"> commented </span>on <b><a href="https://razzoforumproject.herokuapp.com/viewELLA?thread=' + objectIDPost + '">' + post.get('postTitle') + '</a></b> in english language learner forum'
             add_admin_log(datetime.now(), action)
         return view_ELLA(objectIDPost)
     elif collection == db['ELLU']:
         if 'github_token' in session:
-            action = request.form['adminName'] + ' commented on <b><a href="https://razzoforumproject.herokuapp.com/viewELLU?thread=' + objectIDPost + '">' + post.get('postTitle') + '</a></b> in english language learner forum'
+            action = request.form['adminName'] + '<span class="createColor"> commented </span>on <b><a href="https://razzoforumproject.herokuapp.com/viewELLU?thread=' + objectIDPost + '">' + post.get('postTitle') + '</a></b> in english language learner forum'
             add_admin_log(datetime.now(), action)
         else:
-            action = request.form['userName'] + ' commented on <b><a href="https://razzoforumproject.herokuapp.com/viewELLU?thread=' + objectIDPost + '">' + post.get('postTitle') + '</a></b> in english language learner forum'
+            action = request.form['userName'] + '<span class="createColor"> commented </span>on <b><a href="https://razzoforumproject.herokuapp.com/viewELLU?thread=' + objectIDPost + '">' + post.get('postTitle') + '</a></b> in english language learner forum'
             add_admin_log(datetime.now(), action)
         return view_ELLU(objectIDPost)
     return render_template('information.html')
@@ -806,7 +806,7 @@ def delete_SE():
         else:
             name = post.get('adminName')
         collection.delete_one({'_id': ObjectId(objectIDPost)})
-        action = session['user_data']['login'] + ' deleted <b>' + post.get('postTitle') + '</b> by ' + name + ' in english language learner forum<br>' + post.get('postContent')
+        action = session['user_data']['login'] + '<span class="deleteColor"> deleted </span><b>' + post.get('postTitle') + '</b> by ' + name + ' in english language learner forum<br>' + post.get('postContent')
         add_admin_log(datetime.now(), action)
     return render_special_education_forum()
 
@@ -827,7 +827,7 @@ def delete_ELL():
         else:
             name = post.get('adminName')
         collection.delete_one({'_id': ObjectId(objectIDPost)})
-        action = session['user_data']['login'] + ' deleted <b>' + post.get('postTitle') + '</b> by ' + name + ' in english language learner forum<br>' + post.get('postContent')
+        action = session['user_data']['login'] + '<span class="deleteColor"> deleted </span><b>' + post.get('postTitle') + '</b> by ' + name + ' in english language learner forum<br>' + post.get('postContent')
         add_admin_log(datetime.now(), action)
     return render_english_learner_forum()
 
@@ -843,7 +843,7 @@ def vet_ELL():
         collection.find_one_and_update({"_id": ObjectId(objectIDPost)},
                                        {"$set": {"approved": "true"}})
         post = collection.find_one({'_id': ObjectId(objectIDPost)})
-        action = session['user_data']['login'] + ' vetted <b><a href="https://razzoforumproject.herokuapp.com/viewELLU?thread=' + objectIDPost + '">' + post.get('postTitle') + '</a></b> in english language learner forum'
+        action = session['user_data']['login'] + '<span class="vettingColor"> vetted </span><b><a href="https://razzoforumproject.herokuapp.com/viewELLU?thread=' + objectIDPost + '">' + post.get('postTitle') + '</a></b> in english language learner forum'
         add_admin_log(datetime.now(), action)
     return render_english_learner_forum()
                                              
@@ -859,7 +859,7 @@ def unvet_ELL():
         collection.find_one_and_update({"_id": ObjectId(objectIDPost)},
                                        {"$set": {"approved": "false"}})
         post = collection.find_one({'_id': ObjectId(objectIDPost)})
-        action = session['user_data']['login'] + ' unvetted <b><a href="https://razzoforumproject.herokuapp.com/viewELLU?thread=' + objectIDPost + '">' + post.get('postTitle') + '</a></b> in english language learner forum'
+        action = session['user_data']['login'] + '<span class="vettingColor"> unvetted </span><b><a href="https://razzoforumproject.herokuapp.com/viewELLU?thread=' + objectIDPost + '">' + post.get('postTitle') + '</a></b> in english language learner forum'
         add_admin_log(datetime.now(), action)
     return render_english_learner_forum()
                                              
@@ -875,7 +875,7 @@ def vet_SE():
         collection.find_one_and_update({"_id": ObjectId(objectIDPost)},
                                        {"$set": {"approved": "true"}})
         post = collection.find_one({'_id': ObjectId(objectIDPost)})
-        action = session['user_data']['login'] + ' vetted <b><a href="https://razzoforumproject.herokuapp.com/viewSEU?thread=' + objectIDPost + '">' + post.get('postTitle') + '</a></b> in special education forum'
+        action = session['user_data']['login'] + '<span class="vettingColor"> vetted </span><b><a href="https://razzoforumproject.herokuapp.com/viewSEU?thread=' + objectIDPost + '">' + post.get('postTitle') + '</a></b> in special education forum'
         add_admin_log(datetime.now(), action)
     return render_special_education_forum()
                                              
@@ -891,7 +891,7 @@ def unvet_SE():
         collection.find_one_and_update({"_id": ObjectId(objectIDPost)},
                                        {"$set": {"approved": "false"}})
         post = collection.find_one({'_id': ObjectId(objectIDPost)})
-        action = session['user_data']['login'] + ' vetted <b><a href="https://razzoforumproject.herokuapp.com/viewSEU?thread=' + objectIDPost + '">' + post.get('postTitle') + '</a></b> in special education forum'
+        action = session['user_data']['login'] + '<span class="vettingColor"> unvetted </span><b><a href="https://razzoforumproject.herokuapp.com/viewSEU?thread=' + objectIDPost + '">' + post.get('postTitle') + '</a></b> in special education forum'
         add_admin_log(datetime.now(), action)
     return render_special_education_forum()
 
