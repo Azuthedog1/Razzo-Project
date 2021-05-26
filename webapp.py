@@ -93,7 +93,7 @@ def render_english_learner_forum():
             bigString1 += ('<tr><td class="col1"><img src="/static/images/person.png" alt="icon" width="30" height="30"></td>' +
                            '<td class="col2"><form action="/viewELLU"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton"><b>' + post.get('postTitle') + '</b></button></form></td>' +
                            '<td class="col3"><i>' + post.get('parentName') + ' / ' + post.get('studentNameGrade') + ' / ' + post.get('parentEmail') + '</i></td>' +
-                           '<td class="col4"><form action="/deleteELL" method="post" class="inLine"><button type="submit" class="btn btn-danger btn-sm" name="delete" value="' + str(post.get('_id')) + '"><span class="glyphicon glyphicon-trash"></span>Confirm Delete</button></form>')
+                           '<td class="col4"><form action="/deleteELL" method="post" class="inLine"><button type="submit" class="btn btn-danger btn-sm" name="delete" value="' + str(post.get('_id')) + '"><span class="glyphicon glyphicon-trash"></span>Confirm Delete</button></form> ')
             if(post.get('approved') == "false"):
                 bigString1 += '<form action="/vetELL" method="post" class="inLine"><button type="submit" class="btn btn-warning btn-sm" name="vet" value="' + str(post.get('_id'))+ '">' + '<span class="glyphicon glyphicon-plus"></span>Vet'
             else:
@@ -105,7 +105,7 @@ def render_english_learner_forum():
                 loc_dt = loc_dt.strftime("%m/%d/%Y, " + hour + ":%M PM PT")
             else:
                 loc_dt = loc_dt.strftime("%m/%d/%Y, %H:%M AM PT")
-            bigString1 += '</button></form><i>' + loc_dt + '</i></td></tr>'
+            bigString1 += '</button></form><br><i>' + loc_dt + '</i></td></tr>'
             postList.insert(0, bigString1)
             bigString1 = ""
     else:
@@ -143,7 +143,7 @@ def render_english_learner_forum():
             bigString2 += ('<tr><td class="col1"><img src="/static/images/person.png" alt="icon" width="30" height="30"></td>' +
                            '<td class="col2"><form action="/viewELLA"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton"><b>' + post.get('postTitle') + '</b></button></form></td>' +
                            '<td class="col3"><i>' + post.get('adminName') + '</i></td>' +
-                           '<td class="col4"><form action="/deleteELL" method="post" class="inLine"><button type="submit" class="btn btn-danger btn-sm lineUp" name="delete" value="' + str(post.get('_id')) + '"><span class="glyphicon glyphicon-trash"></span>Confirm Delete</button></form><i>' + loc_dt + '</i></td></tr>')
+                           '<td class="col4"><form action="/deleteELL" method="post" class="inLine"><button type="submit" class="btn btn-danger btn-sm lineUp" name="delete" value="' + str(post.get('_id')) + '"><span class="glyphicon glyphicon-trash"></span>Confirm Delete</button></form><br><i>' + loc_dt + '</i></td></tr>')
             postList.insert(0, bigString2)
             bigString2 = ""
     else:
@@ -160,7 +160,7 @@ def render_english_learner_forum():
                            '<td class="col3"><i>' + post.get('adminName') + '</i></td>' +
                            '<td class="col4"><i>' + loc_dt + '</i></td></tr>')
             postList.insert(0, bigString2)
-            bigString2 = ""
+            bigString2 = ''
     for item in postList:
         bigString2 += item
     return render_template('englishlearnerforum.html', ELLUPosts = Markup(bigString1), ELLAPosts = Markup(bigString2))
@@ -180,7 +180,7 @@ def render_special_education_forum():
             bigString1 += ('<tr><td class="col1"><img src="/static/images/person.png" alt="icon" width="30" height="30"></td>' +
                            '<td class="col2"><form action="/viewSEU"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton"><b>' + post.get('postTitle') + '</b></button></form></td>' +
                            '<td class="col3"><i>' + post.get('parentName') + ' / ' + post.get('studentNameGrade') + ' / ' + post.get('parentEmail') + '</i></td>' +
-                           '<td class="col4"><form action="/deleteSE" method="post" class="inLine"><button type="submit" class="btn btn-danger btn-sm" name="delete" value="' + str(post.get('_id')) + '"><span class="glyphicon glyphicon-trash"></span>Confirm Delete</button></form>')
+                           '<td class="col4"><form action="/deleteSE" method="post" class="inLine"><button type="submit" class="btn btn-danger btn-sm" name="delete" value="' + str(post.get('_id')) + '"><span class="glyphicon glyphicon-trash"></span>Confirm Delete</button></form> ')
             if(post.get('approved') == "false"):
                 bigString1 += '<form action="/vetSE" method="post" class="inLine"><button type="submit" class="btn btn-warning btn-sm" name="vet" value="' + str(post.get('_id'))+ '">' + '<span class="glyphicon glyphicon-plus"></span>Vet'
             else:
@@ -192,7 +192,7 @@ def render_special_education_forum():
                 loc_dt = loc_dt.strftime("%m/%d/%Y, " + hour + ":%M PM PT")
             else:
                 loc_dt = loc_dt.strftime("%m/%d/%Y, %H:%M AM PT")
-            bigString1 += '</button></form><i>' + loc_dt + '</i></td></tr>'
+            bigString1 += '</button></form><br><i>' + loc_dt + '</i></td></tr>'
             postList.insert(0, bigString1)
             bigString1 = ""
     else:
@@ -230,7 +230,7 @@ def render_special_education_forum():
             bigString2 += ('<tr><td class="col1"><img src="/static/images/person.png" alt="icon" width="30" height="30"></td>' +
                            '<td class="col2"><form action="/viewSEA"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton"><b>' + post.get('postTitle') + '</b></button></form></td>' +
                            '<td class="col3"><i>' + post.get('adminName') + '</i></td>' +
-                           '<td class="col4"><form action="/deleteSE" method="post" class="inLine"><button type="submit" class="btn btn-danger btn-sm lineUp" name="delete" value="' + str(post.get('_id')) + '"><span class="glyphicon glyphicon-trash"></span>Confirm Delete</button></form><i>' + loc_dt + '</i></td></tr>')
+                           '<td class="col4"><form action="/deleteSE" method="post" class="inLine"><button type="submit" class="btn btn-danger btn-sm lineUp" name="delete" value="' + str(post.get('_id')) + '"><span class="glyphicon glyphicon-trash"></span>Confirm Delete</button></form><br><i>' + loc_dt + '</i></td></tr>')
             postList.insert(0, bigString2)
             bigString2 = ""
     else:
