@@ -286,6 +286,7 @@ def user_submit_post_ELL():
         content = request.form['userMessage']
         content = content.replace('\\"', '')
         content = Markup(content[1:len(content)-1])
+        content = '<div>' + content + '</div>'
         sanitize(content)
         if request.form['userEmail'] == '':
             email = 'Email not provided'
@@ -309,6 +310,7 @@ def admin_submit_post_ELL():
         content = request.form['adminMessage']
         content = content.replace('\\"', '')
         content = Markup(content[1:len(content)-1])
+        content = '<div>' + content + '</div>'
         sanitize(content)
         post = {'postTitle': request.form['adminTitle'], 'adminName': request.form['adminName'], 'dateTime': datetime.now(), 'postContent': content}#put all info here using variables
         collection.insert_one(post)
@@ -328,6 +330,7 @@ def user_submit_post_SE():
         content = request.form['userMessage']
         content = content.replace('\\"', '')
         content = Markup(content[1:len(content)-1])
+        content = '<div>' + content + '</div>'
         sanitize(content)
         if request.form['userEmail'] == '':
             email = 'Email not provided'
@@ -351,6 +354,7 @@ def admin_submit_post_SE():
         content = request.form['adminMessage']
         content = content.replace('\\"', '')
         content = Markup(content[1:len(content)-1])
+        content = '<div>' + content + '</div>'
         sanitize(content)
         post = {'postTitle': request.form['adminTitle'], 'adminName': request.form['adminName'], 'dateTime': datetime.now(), 'postContent': content}#put all info here using variables
         post = collection.insert_one(post)
@@ -389,6 +393,7 @@ def submit_comment():
             content = request.form['adminMessage']
             content = content.replace('\\"', '')
             content = Markup(content[1:len(content)-1])
+            content = '<div>' + content + '</div>'
             sanitize(content)
             post['comment' + lastNumber] = {'adminName': request.form['adminName'], 'dateTime': datetime.now(), 'postContent': content}
             collection.replace_one({'_id': ObjectId(objectIDPost)}, post)
@@ -396,6 +401,7 @@ def submit_comment():
             content = request.form['userMessage']
             content = content.replace('\\"', '')
             content = Markup(content[1:len(content)-1])
+            content = '<div>' + content + '</div>'
             sanitize(content)
             post['comment' + lastNumber] = {'parentName': request.form['userName'], 'studentNameGrade': request.form['userStudent'], 'anonymous': request.form['anon'], 'dateTime': datetime.now(), 'postContent': content, 'approved': 'false'}
             collection.replace_one({'_id': ObjectId(objectIDPost)}, post)
