@@ -51,6 +51,7 @@ footer {
   min-height: 660px;
   height: auto;
 }
+
 .back {
   width: 90%;
   margin: auto;
@@ -71,7 +72,7 @@ footer {
 
 .logScroll {
   overflow-y: scroll;
-  height: 400px;
+  height: 500px;
   display: block;
 }
 
