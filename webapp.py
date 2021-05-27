@@ -12,12 +12,16 @@ import pymongo
 from datetime import datetime, timedelta
 from pytz import timezone
 import pytz
+import smtplib
 
 app = Flask(__name__)
 
 app.secret_key = os.environ['SECRET_KEY'] #used to sign session cookies
 oauth = OAuth(app)
 oauth.init_app(app) #initialize the app to be able to make requests for user information
+
+gmail_user = 'sbhsparentboard@gmail.com'
+gmail_password = 'PBh5inLgFKvD'
 
 admin1='Azuthedog1'
 admin2='DanaLearnsToCode'
