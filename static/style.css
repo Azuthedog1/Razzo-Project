@@ -1,5 +1,8 @@
 body {
   background-image: url('/static/images/wp5557961.jpg');
+  background-repeat: no-repeat;
+  background-attachment: fixed; 
+  background-size: cover;
 }
 
 .top {
