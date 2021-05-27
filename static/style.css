@@ -36,6 +36,10 @@ body {
   margin-top: 20px;
 }
 
+table {
+  width: 100%;
+}
+
 .postBox, .postBox2 {
   background-color: #ffffff;
   margin-bottom: 20px;
