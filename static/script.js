@@ -22,9 +22,9 @@ $(document).ready(function(){
     about2.value = JSON.stringify(quill2.root.innerHTML);
   }; 
   const limit = 5000;
-  quill.on('text-change', function (delta, old, source) {
-    if (quill.getLength() > limit) {
-      quill.deleteText(limit, quill.getLength());
+  quill2.on('text-change', function (delta, old, source) {
+    if (quill2.getLength() > limit) {
+      quill2.deleteText(limit, quill2.getLength());
     }
   });
 });
