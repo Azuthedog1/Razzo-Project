@@ -21,7 +21,7 @@ $(document).ready(function(){
     var about2 = document.querySelector('input[name=userMessage]'); 
     about2.value = JSON.stringify(quill2.root.innerHTML);
   }; 
-  const limit = 5000;
+  const limit = 12000;
   quill2.on('text-change', function (delta, old, source) {
     if (quill2.getLength() > limit) {
       quill2.deleteText(limit, quill2.getLength());
