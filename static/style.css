@@ -17,6 +17,10 @@ body {
   padding-right: 5px;
 }
 
+div {
+  word-wrap: break-word;
+}
+
 .scroll {
   overflow-y: scroll;
   height: 250px;
