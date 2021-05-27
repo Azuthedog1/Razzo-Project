@@ -201,6 +201,10 @@ tr {
   text-align: right;
 }
 
+.staff {
+  color: #e6da05;
+}
+
 .navbar-default {
   background-color: #ffffff;
   border: none;
