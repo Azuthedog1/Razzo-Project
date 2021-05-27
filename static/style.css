@@ -18,7 +18,8 @@ body {
 }
 
 .comments, .in {
-  word-wrap: break-word;
+  word-break: break-all;
+  width: 100%
 }
 
 .scroll {
