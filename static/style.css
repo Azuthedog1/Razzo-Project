@@ -1,6 +1,7 @@
 body {
   background-image: url('/static/images/pattern.jpg');
 }
+
 .top {
   background-color: #0a5c0d;
   padding: 10px;
@@ -33,8 +34,7 @@ body {
 }
 
 .postBox, .postBox2 {
-  /*width: 49%;*/
-  /*height: 700px;*/
+  background-color: #ffffff;
   margin-bottom: 20px;
   border: 2px solid Black;
 }
