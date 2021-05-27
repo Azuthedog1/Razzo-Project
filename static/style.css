@@ -41,6 +41,7 @@ body {
 
 .discussionBox, .logBox {
   border: 2px solid Black;
+  background-color: #ffffff;
 }
 
 .logScroll {
