@@ -231,8 +231,8 @@ def render_special_education_forum():
                 loc_dt = loc_dt.strftime('%m/%d/%Y, ' + hour + ':%M PM PT')
             else:
                 hour = str(int(loc_dt.strftime('%H')))
-                #if hour == '0':
-                    #hour = '1'
+                if hour == '0':
+                    hour = '1'
                 loc_dt = loc_dt.strftime('%m/%d/%Y, ' + hour + ':%M AM PT')
             bigString2 += ('<tr><td class="col1"><img src="/static/images/person.png" alt="icon" width="30" height="30"></td>' +
                            '<td class="col2"><form action="/viewSEA"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton"><b>' + post.get('postTitle') + '</b></button></form></td>' +
