@@ -86,11 +86,11 @@ def render_english_learner_forum():
     client = pymongo.MongoClient(connection_string)
     db = client[db_name]
     collection = db['ELLU']
-    postList = []
+    cursor = collection.find({}).sort('_id', -1)
     bigString1 = ''
     bigString2 = ''
     if 'github_token' in session:
-        for post in collection.find():
+        for post in cursor:
             bigString1 += ('<tr><td class="col1"><img src="/static/images/person.png" alt="icon" width="30" height="30"></td>' +
                            '<td class="col2"><form action="/viewELLU"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton"><b>' + post.get('postTitle') + '</b></button></form></td>' +
                            '<td class="col3"><i>' + post.get('parentName') + ' / ' + post.get('studentNameGrade') + ' / ' + post.get('parentEmail') + '</i></td>')
@@ -108,10 +108,8 @@ def render_english_learner_forum():
                 hour = str(int(loc_dt.strftime('%H')))
                 loc_dt = loc_dt.strftime('%m/%d/%Y, ' + hour + ':%M AM PT')
             bigString1 += '<br><i>' + loc_dt + '</i></td></tr>'
-            postList.insert(0, bigString1)
-            bigString1 = ''
     else:
-        for post in collection.find():
+        for post in cursor:
             if(post.get('approved') == 'true'):
                 bigString1 += ('<tr><td class="col1"><img src="/static/images/person.png" alt="icon" width="30" height="30"></td>' +
                                '<td class="col2"><form action="/viewELLU"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton"><b>' + post.get('postTitle') + '</b></button></form></td>')
@@ -128,14 +126,10 @@ def render_english_learner_forum():
                     hour = str(int(loc_dt.strftime('%H')))
                     loc_dt = loc_dt.strftime('%m/%d/%Y, ' + hour + ':%M AM PT')
                 bigString1 += '<td class="col4"><i>' + loc_dt + '</i></td></tr>'
-                postList.insert(0, bigString1)
-                bigString1 = ''
-    for item in postList:
-        bigString1 += item
-    postList.clear()
     collection = db['ELLA']
+    cursor = collection.find({}).sort('_id', -1)
     if 'github_token' in session: 
-        for post in collection.find():
+        for post in cursor:
             utc_dt = datetime(int(post.get('dateTime').strftime('%Y')), int(post.get('dateTime').strftime('%m')), int(post.get('dateTime').strftime('%d')), int(post.get('dateTime').strftime('%H')), int(post.get('dateTime').strftime('%M')), 0, tzinfo=pytz.utc)
             loc_dt = utc_dt.astimezone(timezone('America/Los_Angeles'))
             if int(loc_dt.strftime('%H')) > 12:
@@ -148,10 +142,8 @@ def render_english_learner_forum():
                            '<td class="col2"><form action="/viewELLA"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton"><b>' + post.get('postTitle') + '</b></button></form></td>' +
                            '<td class="col3"><i>' + post.get('adminName') + '</i></td>' +
                            '<td class="col4"><button type="button" class="btn btn-danger btn-sm delete"><span class="glyphicon glyphicon-trash"></span> Delete</button><button type="button" class="btn btn-danger btn-sm cancel inLine">Cancel</button> <form action="/deleteELL" method="post" class="inLine confirm"><button type="submit" class="btn btn-danger btn-sm" name="delete" value="' + str(post.get('_id')) + '"><span class="glyphicon glyphicon-trash"></span>Confirm Delete</button></form><br><i>' + loc_dt + '</i></td></tr>')
-            postList.insert(0, bigString2)
-            bigString2 = ''
     else:
-        for post in collection.find():
+        for post in cursor:
             utc_dt = datetime(int(post.get('dateTime').strftime('%Y')), int(post.get('dateTime').strftime('%m')), int(post.get('dateTime').strftime('%d')), int(post.get('dateTime').strftime('%H')), int(post.get('dateTime').strftime('%M')), 0, tzinfo=pytz.utc)
             loc_dt = utc_dt.astimezone(timezone('America/Los_Angeles'))
             if int(loc_dt.strftime('%H')) > 12:
@@ -164,10 +156,6 @@ def render_english_learner_forum():
                            '<td class="col2"><form action="/viewELLA"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton"><b>' + post.get('postTitle') + '</b></button></form></td>' +
                            '<td class="col3"><i>' + post.get('adminName') + '</i></td>' +
                            '<td class="col4"><i>' + loc_dt + '</i></td></tr>')
-            postList.insert(0, bigString2)
-            bigString2 = ''
-    for item in postList:
-        bigString2 += item
     return render_template('englishlearnerforum.html', ELLUPosts = Markup(bigString1), ELLAPosts = Markup(bigString2))
 
 @app.route('/specialeducationforum')
@@ -177,11 +165,11 @@ def render_special_education_forum():
     client = pymongo.MongoClient(connection_string)
     db = client[db_name]
     collection = db['SEU']
-    postList = []
+    cursor = collection.find({}).sort('_id', -1)
     bigString1 = ''
     bigString2 = ''
     if 'github_token' in session:
-        for post in collection.find():
+        for post in cursor:
             bigString1 += ('<tr><td class="col1"><img src="/static/images/person.png" alt="icon" width="30" height="30"></td>' +
                            '<td class="col2"><form action="/viewSEU"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton"><b>' + post.get('postTitle') + '</b></button></form></td>' +
                            '<td class="col3"><i>' + post.get('parentName') + ' / ' + post.get('studentNameGrade') + ' / ' + post.get('parentEmail') + '</i></td>')
@@ -199,10 +187,8 @@ def render_special_education_forum():
                 hour = str(int(loc_dt.strftime('%H')))
                 loc_dt = loc_dt.strftime('%m/%d/%Y, ' + hour + ':%M AM PT')
             bigString1 += '</button></form><br><i>' + loc_dt + '</i></td></tr>'
-            postList.insert(0, bigString1)
-            bigString1 = ''
     else:
-        for post in collection.find():
+        for post in cursor:
             if(post.get('approved') == 'true'):
                 bigString1 += ('<tr><td class="col1"><img src="/static/images/person.png" alt="icon" width="30" height="30"></td>' +
                                '<td class="col2"><form action="/viewSEU"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton"><b>' + post.get('postTitle') + '</b></button></form></td>')
@@ -219,14 +205,10 @@ def render_special_education_forum():
                     hour = str(int(loc_dt.strftime('%H')))
                     loc_dt = loc_dt.strftime('%m/%d/%Y, ' + hour + ':%M AM PT')
                 bigString1 += '<td class="col4"><i>' + loc_dt + '</i></td></tr>'
-                postList.insert(0, bigString1)
-                bigString1 = ''
-    for item in postList:
-        bigString1 += item
-    postList.clear()
     collection = db['SEA']
+    cursor = collection.find({}).sort('_id', -1)
     if 'github_token' in session: 
-        for post in collection.find():
+        for post in cursor:
             utc_dt = datetime(int(post.get('dateTime').strftime('%Y')), int(post.get('dateTime').strftime('%m')), int(post.get('dateTime').strftime('%d')), int(post.get('dateTime').strftime('%H')), int(post.get('dateTime').strftime('%M')), 0, tzinfo=pytz.utc)
             loc_dt = utc_dt.astimezone(timezone('America/Los_Angeles'))
             if int(loc_dt.strftime('%H')) > 12:
@@ -239,10 +221,8 @@ def render_special_education_forum():
                            '<td class="col2"><form action="/viewSEA"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton"><b>' + post.get('postTitle') + '</b></button></form></td>' +
                            '<td class="col3"><i>' + post.get('adminName') + '</i></td>' +
                            '<td class="col4"><button type="button" class="btn btn-danger btn-sm delete"><span class="glyphicon glyphicon-trash"></span> Delete</button><button type="button" class="btn btn-danger btn-sm cancel inLine">Cancel</button> <form action="/deleteSE" method="post" class="inLine confirm"><button type="submit" class="btn btn-danger btn-sm" name="delete" value="' + str(post.get('_id')) + '"><span class="glyphicon glyphicon-trash"></span> Confirm Delete</button></form><br><i>' + loc_dt + '</i></td></tr>')
-            postList.insert(0, bigString2)
-            bigString2 = ''
     else:
-        for post in collection.find():
+        for post in cursor:
             utc_dt = datetime(int(post.get('dateTime').strftime('%Y')), int(post.get('dateTime').strftime('%m')), int(post.get('dateTime').strftime('%d')), int(post.get('dateTime').strftime('%H')), int(post.get('dateTime').strftime('%M')), 0, tzinfo=pytz.utc)
             loc_dt = utc_dt.astimezone(timezone('America/Los_Angeles'))
             if int(loc_dt.strftime('%H')) > 12:
@@ -255,10 +235,6 @@ def render_special_education_forum():
                            '<td class="col2"><form action="/viewSEA"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton"><b>' + post.get('postTitle') + '</b></button></form></td>' +
                            '<td class="col3"><i>' + post.get('adminName') + '</i></td>' +
                            '<td class="col4"><i>' + loc_dt + '</i></td></tr>')
-            postList.insert(0, bigString2)
-            bigString2 = ''
-    for item in postList:
-        bigString2 += item
     return render_template('specialeducationforum.html', SEUPosts = Markup(bigString1), SEAPosts = Markup(bigString2))
 
 @app.route('/adminLog')
