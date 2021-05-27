@@ -86,21 +86,19 @@ def send_email():#(email, title, name, link):
     to = ['ponmorw@gmail.com']
     subject = 'SBHS Parent Board Notification'
     body = 'Hello ' + 'name' '. A staff member at Santa Barbara High School has commented on your post ' + 'title' + '. ' + 'link'
-
     email_text = """\
     From: %s
     To: %s
     Subject: %s
-
     %s
     """ % (sent_from, ", ".join(to), subject, body)
-    
     try:
         server_ssl = smtplib.SMTP_SSL('smtp.gmail.com', 465)
         server_ssl.ehlo()
         server.login(gmail_user, gmail_password)
         server.sendmail(sent_from, to, email_text)
         server.close()
+    return
 
 @app.route('/englishlearnerforum')
 def render_english_learner_forum():
