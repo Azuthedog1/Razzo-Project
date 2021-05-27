@@ -131,7 +131,7 @@ def render_english_learner_forum():
                 else:
                     hour = str(int(loc_dt.strftime('%H')))
                     if int(hour) == 0:
-                    hour = '1'
+                        hour = '1'
                     loc_dt = loc_dt.strftime('%m/%d/%Y, ' + hour + ':%M AM PT')
                 bigString1 += '<td class="col4"><i>' + loc_dt + '</i></td></tr>'
     collection = db['ELLA']
