@@ -24,5 +24,5 @@ $(document).ready(function(){
   quill2.on('text-change', function() {
     if (quill2.getLength() > 5000) {
         quill2.deleteText(5000, quill2.getLength());
-  });
+  };
 });
