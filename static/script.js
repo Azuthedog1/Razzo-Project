@@ -21,11 +21,8 @@ $(document).ready(function(){
     var about2 = document.querySelector('input[name=userMessage]'); 
     about2.value = JSON.stringify(quill2.root.innerHTML);
   }; 
-  Quill.register('modules/counter', function(quill2) {
-    quill2.on('text-change', function() {
-      if (quill2.getLength() > 5000) {
-        quill2.deleteText(5000, quill2.getLength());
-      }
-    });
-  });
+  quill2.on('text-change', function() {
+    if (quill2.getLength() > 5000) {
+      quill2.deleteText(5000, quill2.getLength());
+  };
 });
