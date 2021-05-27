@@ -11,14 +11,6 @@ $(document).ready(function(){
     $(this).siblings('.delete').show();
     $(this).hide();
   });
-  quill.on('text-change', function(delta, old, source) {
-    if (quill.getLength() > 5000) {
-        quill.deleteText(5000, quill.getLength());
-  };
-  quill2.on('text-change', function(delta, old, source) {
-    if (quill2.getLength() > 5000) {
-        quill2.deleteText(5000, quill2.getLength());
-  };
   var form = document.querySelector('#adminform'); 
   form.onsubmit = function() { 
     var about = document.querySelector('input[name=adminMessage]'); 
