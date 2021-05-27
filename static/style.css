@@ -48,6 +48,7 @@ footer {
   width: 90%;
   margin: auto;
   margin-top: 20px;
+  min-height: 680px;
   height: auto;
 }
 .back {
