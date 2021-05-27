@@ -26,13 +26,6 @@ $(document).ready(function(){
       if (quill2.getLength() > 5000) {
         quill2.deleteText(5000, quill2.getLength();
       }
-    #quill2.on('text-change', function() {
-    #  var text = quill.getText();
-    #  if (options.unit === 'word') {
-    #    container.innerText = text.split(/\s+/).length + ' words';
-    #  } else {
-    #    container.innerText = text.length + ' characters';
-    #  }
     });
   });
 });
