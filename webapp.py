@@ -662,7 +662,7 @@ def view_SEA(objectIDPost):
                         hour = '12'
                     loc_dt = loc_dt.strftime('%m/%d/%Y, ' + hour + ':%M AM PT')
                 if post.get('comment' + str(i), {}).get('adminName') != None: #checks if it is admin post
-                    bigString += '<tr><td class="comments"><b>' + post.get('comment' + str(i), {}).get('adminName') + ' (Staff)</b><br><i>' + loc_dt + '</i><br><br>' + post.get('comment' + str(i), {}).get('postContent')
+                    bigString += '<tr><td class="comments"><b>' + post.get('comment' + str(i), {}).get('adminName') + '<span class="staff"> (Staff)</span></b><br><i>' + loc_dt + '</i><br><br>' + post.get('comment' + str(i), {}).get('postContent')
                 else:
                     bigString += '<tr><td class="comments"><b>' + post.get('comment' + str(i), {}).get('parentName') + '</b> / ' + post.get('comment' + str(i), {}).get('studentNameGrade') + '<br><i>' + loc_dt + '</i><br><br>' + post.get('comment' + str(i), {}).get('postContent')
                 bigString += '<div class="rightAlign">'
@@ -689,7 +689,7 @@ def view_SEA(objectIDPost):
                         hour = '12'
                     loc_dt = loc_dt.strftime('%m/%d/%Y, ' + hour + ':%M AM PT')
                 if post.get('comment' + str(i), {}).get('adminName') != None:
-                    bigString += '<tr><td class="comments"><b>' + post.get('comment' + str(i), {}).get('adminName') + ' (Staff)</b><br><i>' + loc_dt + '</i><br><br>' + post.get('comment' + str(i), {}).get('postContent') + '</td></tr>'
+                    bigString += '<tr><td class="comments"><b>' + post.get('comment' + str(i), {}).get('adminName') + '<span class="staff"> (Staff)</span></b><br><i>' + loc_dt + '</i><br><br>' + post.get('comment' + str(i), {}).get('postContent') + '</td></tr>'
                 else:
                     if post.get('comment' + str(i), {}).get('approved') == 'true':
                         if post.get('comment' + str(i), {}).get('anonymous') == 'true':
@@ -756,7 +756,7 @@ def view_SEU(objectIDPost):
                         hour = '12'
                     loc_dt = loc_dt.strftime('%m/%d/%Y, ' + hour + ':%M AM PT')
                 if post.get('comment' + str(i), {}).get('adminName') != None: #checks if it is admin post
-                    bigString += '<tr><td class="comments"><b>' + post.get('comment' + str(i), {}).get('adminName') + ' (Staff)</b><br><i>' + loc_dt + '</i><br><br>' + post.get('comment' + str(i), {}).get('postContent')
+                    bigString += '<tr><td class="comments"><b>' + post.get('comment' + str(i), {}).get('adminName') + '<span class="staff"> (Staff)</span></b><br><i>' + loc_dt + '</i><br><br>' + post.get('comment' + str(i), {}).get('postContent')
                 else:
                     bigString += '<tr><td class="comments"><b>' + post.get('comment' + str(i), {}).get('parentName') + '</b> / ' + post.get('comment' + str(i), {}).get('studentNameGrade') + '<br><i>' + loc_dt + '</i><br><br>' + post.get('comment' + str(i), {}).get('postContent')
                 bigString += '<div class="rightAlign">'
@@ -783,7 +783,7 @@ def view_SEU(objectIDPost):
                         hour = '12'
                     loc_dt = loc_dt.strftime('%m/%d/%Y, ' + hour + ':%M AM PT')
                 if post.get('comment' + str(i), {}).get('adminName') != None:
-                    bigString += '<tr><td class="comments"><b>' + post.get('comment' + str(i), {}).get('adminName') + ' (Staff)</b><br><i>' + loc_dt + '</i><br><br>' + post.get('comment' + str(i), {}).get('postContent') + '</td></tr>'
+                    bigString += '<tr><td class="comments"><b>' + post.get('comment' + str(i), {}).get('adminName') + '<span class="staff"> (Staff)</span></b><br><i>' + loc_dt + '</i><br><br>' + post.get('comment' + str(i), {}).get('postContent') + '</td></tr>'
                 else:
                     if post.get('comment' + str(i), {}).get('approved') == 'true':
                         if post.get('comment' + str(i), {}).get('anonymous') == 'true':
@@ -843,7 +843,7 @@ def view_ELLA(objectIDPost):
                         hour = '12'
                     loc_dt = loc_dt.strftime('%m/%d/%Y, ' + hour + ':%M AM PT')
                 if post.get('comment' + str(i), {}).get('adminName') != None: #checks if it is admin post
-                    bigString += '<tr><td class="comments"><b>' + post.get('comment' + str(i), {}).get('adminName') + ' (Staff)</b><br><i>' + loc_dt + '</i><br><br>' + post.get('comment' + str(i), {}).get('postContent')
+                    bigString += '<tr><td class="comments"><b>' + post.get('comment' + str(i), {}).get('adminName') + '<span class="staff"> (Staff)</span></b><br><i>' + loc_dt + '</i><br><br>' + post.get('comment' + str(i), {}).get('postContent')
                 else:
                     bigString += '<tr><td class="comments"><b>' + post.get('comment' + str(i), {}).get('parentName') + '</b> / ' + post.get('comment' + str(i), {}).get('studentNameGrade') + '<br><i>' + loc_dt + '</i><br><br>' + post.get('comment' + str(i), {}).get('postContent')
                 bigString += '<div class="rightAlign">'
@@ -870,7 +870,7 @@ def view_ELLA(objectIDPost):
                         hour = '12'
                     loc_dt = loc_dt.strftime('%m/%d/%Y, ' + hour + ':%M AM PT')
                 if post.get('comment' + str(i), {}).get('adminName') != None:
-                    bigString += '<tr><td class="comments"><b>' + post.get('comment' + str(i), {}).get('adminName') + ' (Staff)</b><br><i>' + loc_dt + '</i><br><br>' + post.get('comment' + str(i), {}).get('postContent') + '</td></tr>'
+                    bigString += '<tr><td class="comments"><b>' + post.get('comment' + str(i), {}).get('adminName') + '<span class="staff"> (Staff)</span></b><br><i>' + loc_dt + '</i><br><br>' + post.get('comment' + str(i), {}).get('postContent') + '</td></tr>'
                 else:
                     if post.get('comment' + str(i), {}).get('approved') == 'true':
                         if post.get('comment' + str(i), {}).get('anonymous') == 'true':
