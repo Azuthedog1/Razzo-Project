@@ -17,7 +17,7 @@ body {
   padding-right: 5px;
 }
 
-.comments .in {
+.comments, .in {
   word-wrap: break-word;
 }
 
