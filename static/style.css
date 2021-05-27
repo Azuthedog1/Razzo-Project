@@ -5,6 +5,10 @@ body {
   background-size: cover;*/
 }
 
+.content {
+  height: 80%;
+  width: 100%;
+}
 footer {
   width: 100%;
   height: 100px;
