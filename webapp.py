@@ -268,7 +268,7 @@ def render_admin_log():
     client = pymongo.MongoClient(connection_string)
     db = client[db_name]
     collection = db['LOG']
-    cursor = collection.find({}).sort('_id', -1).limit(10)
+    cursor = collection.find({}).sort('_id', -1).limit(1000)
     bigString = ''
     logList = []
     for item in cursor:
