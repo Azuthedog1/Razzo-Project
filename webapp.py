@@ -259,7 +259,7 @@ def render_admin_log():
         bigString += '<tr><td class="logContent"><span class="timeColor">' + loc_dt + '</span>: ' + item.get('action')
         if item.get('content') != 'none':
             counter += 1
-            bigString += ' <button class="btn btn-default btn-sm" type="button" data-toggle="collapse" data-target="#collapse' + str(counter) + '" aria-expanded="false" aria-controls="collapseExample">View <span class="glyphicon glyphicon-circle-arrow-down"></span></button><div class="collapse" id="collapse' + str(counter) + '"><div class="card card-body">' + item.get('content') + '</div></div>'
+            bigString += ' <button class="btn btn-default btn-sm" type="button" data-toggle="collapse" data-target="#collapse' + str(counter) + '" aria-expanded="false" aria-controls="collapseExample">View <span class="glyphicon glyphicon-triangle-bottom"></span></button><div class="collapse" id="collapse' + str(counter) + '"><div class="card card-body">' + item.get('content') + '</div></div>'
         bigString += '<br></td></tr>'
     return render_template('adminlog.html', log = Markup(bigString))
 
