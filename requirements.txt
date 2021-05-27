@@ -26,4 +26,3 @@ pymongo
 dnspython
 pytz
 MongoSanitizer
-smtplib
