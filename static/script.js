@@ -21,4 +21,10 @@ $(document).ready(function(){
     var about2 = document.querySelector('input[name=userMessage]'); 
     about2.value = JSON.stringify(quill2.root.innerHTML);
   }; 
+  const limit = 5000;
+  quill.on('text-change', function (delta, old, source) {
+    if (quill.getLength() > limit) {
+      quill.deleteText(limit, quill.getLength());
+    }
+  });
 });
