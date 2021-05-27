@@ -246,16 +246,21 @@ def render_admin_log():
     collection = db['LOG']
     cursor = collection.find({}).sort('_id', -1).limit(1000)
     bigString = ''
+    counter = 0
     for item in cursor:
-        utc_dt = datetime(int(item.get('dateTime').strftime("%Y")), int(item.get('dateTime').strftime("%m")), int(item.get('dateTime').strftime("%d")), int(item.get('dateTime').strftime("%H")), int(item.get('dateTime').strftime("%M")), 0, tzinfo=pytz.utc)
+        utc_dt = datetime(int(item.get('dateTime').strftime('%Y')), int(item.get('dateTime').strftime('%m')), int(item.get('dateTime').strftime('%d')), int(item.get('dateTime').strftime('%H')), int(item.get('dateTime').strftime('%M')), 0, tzinfo=pytz.utc)
         loc_dt = utc_dt.astimezone(timezone('America/Los_Angeles'))
-        if int(loc_dt.strftime("%H")) > 12:
-            hour = str(int(loc_dt.strftime("%H")) - 12)
-            loc_dt = loc_dt.strftime("%m/%d/%Y, " + hour + ":%M PM PT")
+        if int(loc_dt.strftime('%H')) > 12:
+            hour = str(int(loc_dt.strftime('%H')) - 12)
+            loc_dt = loc_dt.strftime('%m/%d/%Y, ' + hour + ':%M PM PT')
         else:
             hour = str(int(loc_dt.strftime("%H")))
-            loc_dt = loc_dt.strftime("%m/%d/%Y, " + hour + ":%M AM PT")
-        bigString += '<tr><td class="logContent"><span class="timeColor">' + loc_dt + '</span>: ' + item.get('action') + '<br></td></tr>'
+            loc_dt = loc_dt.strftime('%m/%d/%Y, ' + hour + ':%M AM PT')
+        bigString += '<tr><td class="logContent"><span class="timeColor">' + loc_dt + '</span>: ' + item.get('action')
+        if item.get('content') != 'none':
+            counter += 1
+            bigString += '<button class="btn btn-default btn-sm" type="button" data-toggle="collapse" data-target="#collapse' + str(counter) + '" aria-expanded="false" aria-controls="collapseExample">View <span class="glyphicon glyphicon-circle-arrow-down"></span></button><div class="collapse" id="collapse' + str(counter) + '"><div class="card card-body">' + item.get('content') + '</div></div>'
+        bigString += '<br></td></tr>'
     return render_template('adminlog.html', log = Markup(bigString))
 
 def add_admin_log(dateTime, action, content):
