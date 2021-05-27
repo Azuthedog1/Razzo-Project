@@ -1,4 +1,4 @@
-#sanitize all other shtuff
+#sanitize all other shtuff, delete those extra code lines.
 from flask import Flask, redirect, Markup, url_for, session, request, jsonify
 from flask_oauthlib.client import OAuth
 from flask import render_template
