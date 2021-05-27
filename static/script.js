@@ -24,7 +24,7 @@ $(document).ready(function(){
   Quill.register('modules/counter', function(quill2) {
     quill2.on('text-change', function() {
       if (quill2.getLength() > 5000) {
-        quill2.deleteText(5000, quill2.getLength();
+        quill2.deleteText(5000, quill2.getLength());
       }
     });
   });
