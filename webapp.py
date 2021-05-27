@@ -293,7 +293,7 @@ def add_admin_log(dateTime, action, content):
     client = pymongo.MongoClient(connection_string)
     db = client[db_name]
     collection = db['LOG']
-    collection.insert_one({'dateTime': dateTime, 'action': action, 'content', content})
+    collection.insert_one({'dateTime': dateTime, 'action': action, 'content': content})
 
 @app.route('/userSubmitPostELL', methods=['GET','POST'])
 def user_submit_post_ELL():
