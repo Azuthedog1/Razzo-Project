@@ -452,50 +452,50 @@ def delete_comment():
         if collection == db['SEA']:
             if post.get(comment, {}).get('adminName') != None:
                 action = session['user_data']['login'] + '<span class="deleteColor"> deleted </span>a comment by ' + post.get(comment, {}).get('adminName') + ' in the post <b><a href="https://razzoforumproject.herokuapp.com/viewSEA?thread=' + objectIDPost + '">' + post.get('postTitle') + '</a></b> in special education forum'
+                add_admin_log(datetime.now(), action, post.get(comment, {}).get('postContent'))
                 post.pop(comment, None)
                 collection.replace_one({'_id': ObjectId(objectIDPost)}, post)
-                add_admin_log(datetime.now(), action, post.get(comment, {}).get('postContent'))
             else:
                 action = session['user_data']['login'] + '<span class="deleteColor"> deleted </span>a comment by ' + post.get(comment, {}).get('parentName') + ' / ' + post.get(comment, {}).get('studentNameGrade') + ' in the post <b><a href="https://razzoforumproject.herokuapp.com/viewSEA?thread=' + objectIDPost + '">' + post.get('postTitle') + '</a></b> in special education forum'
+                add_admin_log(datetime.now(), action, post.get(comment, {}).get('postContent'))
                 post.pop(comment, None)
                 collection.replace_one({'_id': ObjectId(objectIDPost)}, post)
-                add_admin_log(datetime.now(), action, post.get(comment, {}).get('postContent'))
             return view_SEA(objectIDPost)
         elif collection == db['SEU']:
             if post.get(comment, {}).get('adminName') != None:
                 action = session['user_data']['login'] + '<span class="deleteColor"> deleted </span>a comment by ' + post.get(comment, {}).get('adminName') + ' in the post <b><a href="https://razzoforumproject.herokuapp.com/viewSEU?thread=' + objectIDPost + '">' + post.get('postTitle') + '</a></b> in special education forum'
+                add_admin_log(datetime.now(), action, post.get(comment, {}).get('postContent'))
                 post.pop(comment, None)
                 collection.replace_one({'_id': ObjectId(objectIDPost)}, post)
-                add_admin_log(datetime.now(), action, post.get(comment, {}).get('postContent'))
             else:
                 action = session['user_data']['login'] + '<span class="deleteColor"> deleted </span>a comment by ' + post.get(comment, {}).get('parentName') + ' / ' + post.get(comment, {}).get('studentNameGrade') + ' in the post <b><a href="https://razzoforumproject.herokuapp.com/viewSEU?thread=' + objectIDPost + '">' + post.get('postTitle') + '</a></b> in special education forum'
+                add_admin_log(datetime.now(), action, post.get(comment, {}).get('postContent'))
                 post.pop(comment, None)
                 collection.replace_one({'_id': ObjectId(objectIDPost)}, post)
-                add_admin_log(datetime.now(), action, post.get(comment, {}).get('postContent'))
             return view_SEU(objectIDPost)
         elif collection == db['ELLA']:
             if post.get(comment, {}).get('adminName') != None:
                 action = session['user_data']['login'] + '<span class="deleteColor"> deleted </span>a comment by ' + post.get(comment, {}).get('adminName') + ' in the post <b><a href="https://razzoforumproject.herokuapp.com/viewELLA?thread=' + objectIDPost + '">' + post.get('postTitle') + '</a></b> in english language learner forum'
+                add_admin_log(datetime.now(), action, post.get(comment, {}).get('postContent'))
                 post.pop(comment, None)
                 collection.replace_one({'_id': ObjectId(objectIDPost)}, post)
-                add_admin_log(datetime.now(), action, post.get(comment, {}).get('postContent'))
             else:
                 action = session['user_data']['login'] + '<span class="deleteColor"> deleted </span>a comment by ' + post.get(comment, {}).get('parentName') + ' / ' + post.get(comment, {}).get('studentNameGrade') + ' in the post <b><a href="https://razzoforumproject.herokuapp.com/viewELLA?thread=' + objectIDPost + '">' + post.get('postTitle') + '</a></b> in english language learner forum'
+                add_admin_log(datetime.now(), action, post.get(comment, {}).get('postContent'))
                 post.pop(comment, None)
                 collection.replace_one({'_id': ObjectId(objectIDPost)}, post)
-                add_admin_log(datetime.now(), action, post.get(comment, {}).get('postContent'))
             return view_ELLA(objectIDPost)
         elif collection == db['ELLU']:
             if post.get(comment, {}).get('adminName') != None:
                 action = session['user_data']['login'] + '<span class="deleteColor"> deleted </span>a comment by ' + post.get(comment, {}).get('adminName') + ' in the post <b><a href="https://razzoforumproject.herokuapp.com/viewELLU?thread=' + objectIDPost + '">' + post.get('postTitle') + '</a></b> in english language learner forum'
+                add_admin_log(datetime.now(), action, post.get(comment, {}).get('postContent'))
                 post.pop(comment, None)
                 collection.replace_one({'_id': ObjectId(objectIDPost)}, post)
-                add_admin_log(datetime.now(), action, post.get(comment, {}).get('postContent'))
             else:
                 action = session['user_data']['login'] + '<span class="deleteColor"> deleted </span>a comment by ' + post.get(comment, {}).get('parentName') + ' / ' + post.get(comment, {}).get('studentNameGrade') + ' in the post <b><a href="https://razzoforumproject.herokuapp.com/viewELLU?thread=' + objectIDPost + '">' + post.get('postTitle') + '</a></b> in english language learner forum'
+                add_admin_log(datetime.now(), action, post.get(comment, {}).get('postContent'))
                 post.pop(comment, None)
                 collection.replace_one({'_id': ObjectId(objectIDPost)}, post)
-                add_admin_log(datetime.now(), action, post.get(comment, {}).get('postContent'))
             return view_ELLU(objectIDPost)
     return render_template('information.html')
 
