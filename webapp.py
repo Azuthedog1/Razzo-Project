@@ -270,7 +270,6 @@ def render_admin_log():
     collection = db['LOG']
     cursor = collection.find({}).sort('_id', -1).limit(1000)
     bigString = ''
-    logList = []
     for item in cursor:
         utc_dt = datetime(int(item.get('dateTime').strftime("%Y")), int(item.get('dateTime').strftime("%m")), int(item.get('dateTime').strftime("%d")), int(item.get('dateTime').strftime("%H")), int(item.get('dateTime').strftime("%M")), 0, tzinfo=pytz.utc)
         loc_dt = utc_dt.astimezone(timezone('America/Los_Angeles'))
@@ -281,10 +280,6 @@ def render_admin_log():
             hour = str(int(loc_dt.strftime("%H")))
             loc_dt = loc_dt.strftime("%m/%d/%Y, " + hour + ":%M AM PT")
         bigString += '<tr><td class="logContent"><span class="timeColor">' + loc_dt + '</span>: ' + item.get('action') + '<br></td></tr>'
-        logList.insert(0, bigString)
-        bigString = ''
-    for item in logList:
-        bigString += item
     return render_template('adminlog.html', log = Markup(bigString))
 
 def add_admin_log(dateTime, action, content):
