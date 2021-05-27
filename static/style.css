@@ -44,6 +44,11 @@ footer {
   z-index: 1000; 
 }
 
+#commentBack {
+  width: 90%;
+  margin: auto;
+  margin-top: 20px;
+}
 .back {
   width: 90%;
   margin: auto;
