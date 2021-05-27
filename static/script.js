@@ -15,14 +15,14 @@ $(document).ready(function(){
   form.onsubmit = function() { 
     var about = document.querySelector('input[name=adminMessage]'); 
     about.value = JSON.stringify(quill.root.innerHTML);
-  }; 
-  quill2.on('text-change', function() {
-    if (quill2.getLength() > 5000) {
-        quill2.deleteText(limit, quill2.getLength());
   };
   var form2 = document.querySelector('#userform'); 
   form2.onsubmit = function() { 
     var about2 = document.querySelector('input[name=userMessage]'); 
     about2.value = JSON.stringify(quill2.root.innerHTML);
   }; 
+  quill2.on('text-change', function() {
+    if (quill2.getLength() > 5000) {
+        quill2.deleteText(limit, quill2.getLength());
+  };
 });
