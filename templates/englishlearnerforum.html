@@ -131,11 +131,11 @@ function myFunction2() {
         <form action="/userSubmitPostELL" method="POST" id="userform"> <!-- Replace most of this form with a jinja variable. An admin posting a comment or post on the user forum should not have to answer certain questions. -->
           <div class="form-group">
             <label for="title">Title:</label>
-            <textarea class="form-control" rows="1" name="userTitle" required></textarea>
+            <textarea class="form-control" rows="1" name="userTitle"  maxlength="120" required></textarea>
           </div>
           <div class="form-group">
             <label for="userMessage">Message:</label>
-            <input name="userMessage" type="hidden">
+            <input name="userMessage" type="hidden" maxlength="5000">
             <div id="editor2">
               <p></p>
             </div>
@@ -146,7 +146,7 @@ function myFunction2() {
             </script>
           </div>
           <small id="editingNote" class="form-text text-muted">
-            You will not be able to edit your post after submission.
+            *5000 character limit
           </small>
           <!--<div class="form-group">
             <label for="comment">Message:</label>
@@ -164,15 +164,15 @@ function myFunction2() {
           <br><br>
           <div class="form-group">
             <label for="user">Full Name:</label>
-            <input type="text" class="form-control" name="userName" required>
+            <input type="text" class="form-control" name="userName" maxlength="70" required>
           </div>
           <div class="form-group">
             <label for="student">Student Name and Grade:</label>
-            <input type="text" class="form-control" name="userStudent" required>
+            <input type="text" class="form-control" name="userStudent" maxlength="70" required>
           </div>
           <div class="form-group">
             <label for="email">Email Address (optional):</label>
-            <input type="email" class="form-control" name="userEmail">
+            <input type="email" class="form-control" name="userEmail" maxlength="254">
           </div>
           <small id="emailHelpBlock" class="form-text text-muted">
             An email will be sent to this address when there are replies to your post.
@@ -190,7 +190,7 @@ function myFunction2() {
           <br>
           <button type="submit" class="btn btn-primary">Submit</button>
           <small id="generalVet" class="form-text text-muted">
-            Your post will not show on the forum until an admin approves it.
+            Your post will not show on the forum until an admin approves it and you will not be able to edit your post.
           </small>
         </form>
       </div>
