@@ -110,7 +110,7 @@ def render_english_learner_forum():
                 loc_dt = loc_dt.strftime('%m/%d/%Y, ' + hour + ':%M PM PT')
             else:
                 hour = str(int(loc_dt.strftime('%H')))
-                if hour == '0':
+                f
                     hour = '1'
                 loc_dt = loc_dt.strftime('%m/%d/%Y, ' + hour + ':%M AM PT')
             bigString1 += '<br><i>' + loc_dt + '</i></td></tr>'
@@ -130,8 +130,8 @@ def render_english_learner_forum():
                     loc_dt = loc_dt.strftime('%m/%d/%Y, ' + hour + ':%M PM PT')
                 else:
                     hour = str(int(loc_dt.strftime('%H')))
-                    if hour == '0':
-                        hour = '1'
+                    #if hour == '0':
+                        #hour = '1'
                     loc_dt = loc_dt.strftime('%m/%d/%Y, ' + hour + ':%M AM PT')
                 bigString1 += '<td class="col4"><i>' + loc_dt + '</i></td></tr>'
     collection = db['ELLA']
@@ -145,8 +145,8 @@ def render_english_learner_forum():
                 loc_dt = loc_dt.strftime('%m/%d/%Y, ' + hour + ':%M PM PT')
             else:
                 hour = str(int(loc_dt.strftime('%H')))
-                if hour == '0':
-                    hour = '1'
+                #if hour == '0':
+                    #hour = '1'
                 loc_dt = loc_dt.strftime('%m/%d/%Y, ' + hour + ':%M AM PT')
             bigString2 += ('<tr><td class="col1"><img src="/static/images/person.png" alt="icon" width="30" height="30"></td>' +
                            '<td class="col2"><form action="/viewELLA"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton"><b>' + post.get('postTitle') + '</b></button></form></td>' +
@@ -161,8 +161,8 @@ def render_english_learner_forum():
                 loc_dt = loc_dt.strftime('%m/%d/%Y, ' + hour + ':%M PM PT')
             else:
                 hour = str(int(loc_dt.strftime('%H')))
-                if hour == '0':
-                    hour = '1'
+                #if hour == '0':
+                    #hour = '1'
                 loc_dt = loc_dt.strftime('%m/%d/%Y, ' + hour + ':%M AM PT')
             bigString2 += ('<tr><td class="col1"><img src="/static/images/person.png" alt="icon" width="30" height="30"></td>' +
                            '<td class="col2"><form action="/viewELLA"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton"><b>' + post.get('postTitle') + '</b></button></form></td>' +
@@ -197,8 +197,8 @@ def render_special_education_forum():
                 loc_dt = loc_dt.strftime('%m/%d/%Y, ' + hour + ':%M PM PT')
             else:
                 hour = str(int(loc_dt.strftime('%H')))
-                if hour == '0':
-                    hour = '1'
+                #if hour == '0':
+                    #hour = '1'
                 loc_dt = loc_dt.strftime('%m/%d/%Y, ' + hour + ':%M AM PT')
             bigString1 += '</button></form><br><i>' + loc_dt + '</i></td></tr>'
     else:
@@ -217,8 +217,8 @@ def render_special_education_forum():
                     loc_dt = loc_dt.strftime('%m/%d/%Y, ' + hour + ':%M PM PT')
                 else:
                     hour = str(int(loc_dt.strftime('%H')))
-                    if hour == '0':
-                        hour = '1'
+                    #if hour == '0':
+                        #hour = '1'
                     loc_dt = loc_dt.strftime('%m/%d/%Y, ' + hour + ':%M AM PT')
                 bigString1 += '<td class="col4"><i>' + loc_dt + '</i></td></tr>'
     collection = db['SEA']
@@ -232,8 +232,8 @@ def render_special_education_forum():
                 loc_dt = loc_dt.strftime('%m/%d/%Y, ' + hour + ':%M PM PT')
             else:
                 hour = str(int(loc_dt.strftime('%H')))
-                if hour == '0':
-                    hour = '1'
+                #if hour == '0':
+                    #hour = '1'
                 loc_dt = loc_dt.strftime('%m/%d/%Y, ' + hour + ':%M AM PT')
             bigString2 += ('<tr><td class="col1"><img src="/static/images/person.png" alt="icon" width="30" height="30"></td>' +
                            '<td class="col2"><form action="/viewSEA"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton"><b>' + post.get('postTitle') + '</b></button></form></td>' +
@@ -248,8 +248,8 @@ def render_special_education_forum():
                 loc_dt = loc_dt.strftime('%m/%d/%Y, ' + hour + ':%M PM PT')
             else:
                 hour = str(int(loc_dt.strftime('%H')))
-                if hour == '0':
-                    hour = '1'
+                #if hour == '0':
+                    #hour = '1'
                 loc_dt = loc_dt.strftime('%m/%d/%Y, ' + hour + ':%M AM PT')
             bigString2 += ('<tr><td class="col1"><img src="/static/images/person.png" alt="icon" width="30" height="30"></td>' +
                            '<td class="col2"><form action="/viewSEA"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton"><b>' + post.get('postTitle') + '</b></button></form></td>' +
@@ -275,8 +275,8 @@ def render_admin_log():
             loc_dt = loc_dt.strftime('%m/%d/%Y, ' + hour + ':%M PM PT')
         else:
             hour = str(int(loc_dt.strftime("%H")))
-            if hour == '0':
-                hour = '1'
+            #if hour == '0':
+                #hour = '1'
             loc_dt = loc_dt.strftime('%m/%d/%Y, ' + hour + ':%M AM PT')
         bigString += '<tr><td class="logContent"><span class="timeColor">' + loc_dt + '</span>: ' + item.get('action')
         if item.get('content') != 'none':
@@ -636,8 +636,8 @@ def view_SEA(objectIDPost):
         loc_dt = loc_dt.strftime('%m/%d/%Y, ' + hour + ':%M PM PT')
     else:
         hour = str(int(loc_dt.strftime('%H')))
-        if hour == '0':
-            hour = '1'
+        #if hour == '0':
+            #hour = '1'
         loc_dt = loc_dt.strftime('%m/%d/%Y, ' + hour + ':%M AM PT')
     displayName = post.get('adminName')
     bigString = ''
@@ -659,8 +659,8 @@ def view_SEA(objectIDPost):
                     loc_dt = loc_dt.strftime('%m/%d/%Y, ' + hour + ':%M PM PT')
                 else:
                     hour = str(int(loc_dt.strftime('%H')))
-                    if hour == '0':
-                        hour = '1'
+                    #if hour == '0':
+                        #hour = '1'
                     loc_dt = loc_dt.strftime('%m/%d/%Y, ' + hour + ':%M AM PT')
                 if post.get('comment' + str(i), {}).get('adminName') != None: #checks if it is admin post
                     bigString += '<tr><td class="comments"><b>' + post.get('comment' + str(i), {}).get('adminName') + ' (Staff)</b><br><i>' + loc_dt + '</i><br><br>' + post.get('comment' + str(i), {}).get('postContent')
@@ -686,8 +686,8 @@ def view_SEA(objectIDPost):
                     loc_dt = loc_dt.strftime('%m/%d/%Y, ' + hour + ':%M PM PT')
                 else:
                     hour = str(int(loc_dt.strftime('%H')))
-                    if hour == '0':
-                        hour = '1'
+                    #if hour == '0':
+                        #hour = '1'
                     loc_dt = loc_dt.strftime('%m/%d/%Y, ' + hour + ':%M AM PT')
                 if post.get('comment' + str(i), {}).get('adminName') != None:
                     bigString += '<tr><td class="comments"><b>' + post.get('comment' + str(i), {}).get('adminName') + ' (Staff)</b><br><i>' + loc_dt + '</i><br><br>' + post.get('comment' + str(i), {}).get('postContent') + '</td></tr>'
@@ -717,8 +717,8 @@ def view_SEU(objectIDPost):
         loc_dt = loc_dt.strftime('%m/%d/%Y, ' + hour + ':%M PM PT')
     else:
         hour = str(int(loc_dt.strftime('%H')))
-        if hour == '0':
-            hour = '1'
+        #if hour == '0':
+            #hour = '1'
         loc_dt = loc_dt.strftime('%m/%d/%Y, ' + hour + ':%M AM PT')
     if 'github_token' in session:
         parentName = post.get('parentName')
@@ -753,8 +753,8 @@ def view_SEU(objectIDPost):
                     loc_dt = loc_dt.strftime('%m/%d/%Y, ' + hour + ':%M PM PT')
                 else:
                     hour = str(int(loc_dt.strftime('%H')))
-                    if hour == '0':
-                        hour = '1'
+                    #if hour == '0':
+                        #hour = '1'
                     loc_dt = loc_dt.strftime('%m/%d/%Y, ' + hour + ':%M AM PT')
                 if post.get('comment' + str(i), {}).get('adminName') != None: #checks if it is admin post
                     bigString += '<tr><td class="comments"><b>' + post.get('comment' + str(i), {}).get('adminName') + ' (Staff)</b><br><i>' + loc_dt + '</i><br><br>' + post.get('comment' + str(i), {}).get('postContent')
@@ -780,8 +780,8 @@ def view_SEU(objectIDPost):
                     loc_dt = loc_dt.strftime('%m/%d/%Y, ' + hour + ':%M PM PT')
                 else:
                     hour = str(int(loc_dt.strftime('%H')))
-                    if hour == '0':
-                        hour = '1'
+                    #if hour == '0':
+                        #hour = '1'
                     loc_dt = loc_dt.strftime('%m/%d/%Y, ' + hour + ':%M AM PT')
                 if post.get('comment' + str(i), {}).get('adminName') != None:
                     bigString += '<tr><td class="comments"><b>' + post.get('comment' + str(i), {}).get('adminName') + ' (Staff)</b><br><i>' + loc_dt + '</i><br><br>' + post.get('comment' + str(i), {}).get('postContent') + '</td></tr>'
@@ -811,8 +811,8 @@ def view_ELLA(objectIDPost):
         loc_dt = loc_dt.strftime('%m/%d/%Y, ' + hour + ':%M PM PT')
     else:
         hour = str(int(loc_dt.strftime('%H')))
-        if hour == '0':
-            hour = '1'
+        #if hour == '0':
+            #hour = '1'
         loc_dt = loc_dt.strftime('%m/%d/%Y, ' + hour + ':%M AM PT')
     displayName = post.get('adminName')
     bigString = ''
@@ -840,8 +840,8 @@ def view_ELLA(objectIDPost):
                     loc_dt = loc_dt.strftime('%m/%d/%Y, ' + hour + ':%M PM PT')
                 else:
                     hour = str(int(loc_dt.strftime('%H')))
-                    if hour == '0':
-                        hour = '1'
+                    #if hour == '0':
+                        #hour = '1'
                     loc_dt = loc_dt.strftime('%m/%d/%Y, ' + hour + ':%M AM PT')
                 if post.get('comment' + str(i), {}).get('adminName') != None: #checks if it is admin post
                     bigString += '<tr><td class="comments"><b>' + post.get('comment' + str(i), {}).get('adminName') + ' (Staff)</b><br><i>' + loc_dt + '</i><br><br>' + post.get('comment' + str(i), {}).get('postContent')
@@ -867,8 +867,8 @@ def view_ELLA(objectIDPost):
                     loc_dt = loc_dt.strftime('%m/%d/%Y, ' + hour + ':%M PM PT')
                 else:
                     hour = str(int(loc_dt.strftime('%H')))
-                    if hour == '0':
-                        hour = '1'
+                    #if hour == '0':
+                        #hour = '1'
                     loc_dt = loc_dt.strftime('%m/%d/%Y, ' + hour + ':%M AM PT')
                 if post.get('comment' + str(i), {}).get('adminName') != None:
                     bigString += '<tr><td class="comments"><b>' + post.get('comment' + str(i), {}).get('adminName') + ' (Staff)</b><br><i>' + loc_dt + '</i><br><br>' + post.get('comment' + str(i), {}).get('postContent') + '</td></tr>'
@@ -898,8 +898,8 @@ def view_ELLU(objectIDPost):
         loc_dt = loc_dt.strftime('%m/%d/%Y, ' + hour + ':%M PM PT')
     else:
         hour = str(int(loc_dt.strftime('%H')))
-        if hour == '0':
-            hour = '1'
+        #if hour == '0':
+            #hour = '1'
         loc_dt = loc_dt.strftime('%m/%d/%Y, ' + hour + ':%M AM PT')
     if 'github_token' in session:
         parentName = post.get('parentName')
@@ -934,8 +934,8 @@ def view_ELLU(objectIDPost):
                     loc_dt = loc_dt.strftime('%m/%d/%Y, ' + hour + ':%M PM PT')
                 else:
                     hour = str(int(loc_dt.strftime('%H')))
-                    if hour == '0':
-                        hour = '1'
+                    #if hour == '0':
+                        #hour = '1'
                     loc_dt = loc_dt.strftime('%m/%d/%Y, ' + hour + ':%M AM PT')
                 if post.get('comment' + str(i), {}).get('adminName') != None: #checks if it is admin post
                     bigString += '<tr><td class="comments"><b>' + post.get('comment' + str(i), {}).get('adminName') + ' (Staff)</b><br><i>' + loc_dt + '</i><br><br>' + post.get('comment' + str(i), {}).get('postContent')
@@ -961,8 +961,8 @@ def view_ELLU(objectIDPost):
                     loc_dt = loc_dt.strftime('%m/%d/%Y, ' + hour + ':%M PM PT')
                 else:
                     hour = str(int(loc_dt.strftime('%H')))
-                    if hour == '0':
-                        hour = '1'
+                    #if hour == '0':
+                        #hour = '1'
                     loc_dt = loc_dt.strftime('%m/%d/%Y, ' + hour + ':%M AM PT')
                 if post.get('comment' + str(i), {}).get('adminName') != None:
                     bigString += '<tr><td class="comments"><b>' + post.get('comment' + str(i), {}).get('adminName') + ' (Staff)</b><br><i>' + loc_dt + '</i><br><br>' + post.get('comment' + str(i), {}).get('postContent') + '</td></tr>'
