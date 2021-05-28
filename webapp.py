@@ -1123,6 +1123,11 @@ def bump_post():
             post = collection.find_one({'_id': ObjectId(objectIDPost)})
         collection.delete_one({'_id': ObjectId(objectIDPost)})
         collection.insert_one(post)
+        if collection == db['SEU'] or collection == db['SEA']:
+            return render_english_learner_forum()
+        if collection == db['ELLA'] or collection == db['ELLU']:
+            return render_special_education_forum()
+    return render_template('information.html')
 
 #make sure the jinja variables use Markup 
 @github.tokengetter
