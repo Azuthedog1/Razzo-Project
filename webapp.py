@@ -1123,6 +1123,7 @@ def bump_post():
             collection = db['ELLU']
             post = collection.find_one({'_id': ObjectId(objectIDPost)})
         collection.delete_one({'_id': ObjectId(objectIDPost)})
+        post.pop('_id', None)
         collection.insert_one(post)
         if collection == db['SEU'] or collection == db['SEA']:
             return render_special_education_forum()
