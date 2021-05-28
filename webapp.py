@@ -104,7 +104,7 @@ def send_email():#(email, title, name, link):
 
 @app.route('/englishlearnerforum')
 def render_english_learner_forum():
-    send_email():
+    send_email()
     connection_string = os.environ['MONGO_CONNECTION_STRING']
     db_name = os.environ['MONGO_DBNAME']
     client = pymongo.MongoClient(connection_string)
