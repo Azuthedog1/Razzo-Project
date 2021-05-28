@@ -98,9 +98,7 @@ def send_email():#(email, title, name, link):
         server.login(gmail_user, gmail_password)
         server.sendmail(sent_from, to, email_text)
         server.close()
-        print ('it worked')
     except:
-        print ('it did not work')
         return None
     return None
 
