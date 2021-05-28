@@ -101,6 +101,7 @@ def send_email():#(email, title, name, link):
     except:
         return None
     return None
+    #not working so maybe we won't have time to implement this.
 
 @app.route('/englishlearnerforum')
 def render_english_learner_forum():
@@ -1124,9 +1125,9 @@ def bump_post():
         collection.delete_one({'_id': ObjectId(objectIDPost)})
         collection.insert_one(post)
         if collection == db['SEU'] or collection == db['SEA']:
-            return render_english_learner_forum()
-        if collection == db['ELLA'] or collection == db['ELLU']:
             return render_special_education_forum()
+        if collection == db['ELLA'] or collection == db['ELLU']:
+            return render_english_learner_forum()
     return render_template('information.html')
 
 #make sure the jinja variables use Markup 
