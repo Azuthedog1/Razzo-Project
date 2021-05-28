@@ -66,7 +66,7 @@
       <div class="modal-body">
         <form action="/submitComment" method="POST" id="userform"> <!-- Replace most of this form with a jinja variable. An admin posting a comment or post on the user forum should not have to answer certain questions. -->
           <div class="form-group">
-            <label for="userMessage">Message (12,000 character limit):</label>
+            <label for="userMessage">Message:</label>
             <input name="userMessage" type="hidden">
             <div id="editor2">
               <p></p>
@@ -77,7 +77,7 @@
               });
             </script>
           </div>
-          <br><br>
+          <br>
           <div class="form-group">
             <label for="user">Full Name:</label>
             <input type="text" class="form-control" name="userName" maxlength="70" required>
