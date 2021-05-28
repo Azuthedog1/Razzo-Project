@@ -79,30 +79,30 @@ def authorized():
     session['username'] = 'admin'
     return render_template('login.html', message = message)
 
-#def send_email():#(email, title, name, link):
-    #gmail_user = 'sbhsparentboard@gmail.com'
-    #gmail_password = 'PBh5inLgFKvD'
-    #sent_from = gmail_user
-    #to = ['ponmorw@gmail.com']
-    #subject = 'SBHS Parent Board Notification'
-    #body = 'Hello ' + 'name' '. A staff member at Santa Barbara High School has commented on your post ' + 'title' + '. ' + 'link'
-    #email_text = """\
-    #From: %s
-    #To: %s
-    #Subject: %s
-    #%s
-    #""" % (sent_from, ", ".join(to), subject, body)
-    #try:
-    #    server_ssl = smtplib.SMTP_SSL('smtp.gmail.com', 465)
-    #    server_ssl.ehlo()
-    #    server.login(gmail_user, gmail_password)
-    #    server.sendmail(sent_from, to, email_text)
-    #    server.close()
-    #return
+def send_email():#(email, title, name, link):
+    gmail_user = 'sbhsparentboard@gmail.com'
+    gmail_password = 'PBh5inLgFKvD'
+    sent_from = gmail_user
+    to = ['ponmorw@gmail.com']
+    subject = 'SBHS Parent Board Notification'
+    body = 'Hello ' + 'name' + '. A staff member at Santa Barbara High School has commented on your post ' + 'title' + '. ' + 'link'
+    email_text = """\
+    From: %s
+    To: %s
+    Subject: %s
+    %s
+    """ % (sent_from, ", ".join(to), subject, body)
+    try:
+        server_ssl = smtplib.SMTP_SSL('smtp.gmail.com', 465)
+        server_ssl.ehlo()
+        server.login(gmail_user, gmail_password)
+        server.sendmail(sent_from, to, email_text)
+        server.close()
+    return
 
 @app.route('/englishlearnerforum')
 def render_english_learner_forum():
-    #send_email():
+    send_email():
     connection_string = os.environ['MONGO_CONNECTION_STRING']
     db_name = os.environ['MONGO_DBNAME']
     client = pymongo.MongoClient(connection_string)
