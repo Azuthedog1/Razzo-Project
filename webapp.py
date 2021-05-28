@@ -98,6 +98,9 @@ def send_email():#(email, title, name, link):
         server.login(gmail_user, gmail_password)
         server.sendmail(sent_from, to, email_text)
         server.close()
+    except:
+        return None
+    return None
 
 @app.route('/englishlearnerforum')
 def render_english_learner_forum():
