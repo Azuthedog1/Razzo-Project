@@ -134,7 +134,7 @@ function myFunction2() {
             <textarea class="form-control" rows="1" name="userTitle" maxlength="120" required></textarea>
           </div>
           <div class="form-group">
-            <label for="userMessage">Message (12,000 character limit):</label>
+            <label for="userMessage">Message:*</label>
             <input name="userMessage" type="hidden">
             <div id="editor2">
               <p></p>
@@ -145,6 +145,9 @@ function myFunction2() {
               });
             </script>
           </div>
+          <small id="characterLimit" class="form-text text-muted">
+            *12,000 character limit
+          </small>
           <br><br>
           <div class="form-group">
             <label for="user">Full Name:</label>
