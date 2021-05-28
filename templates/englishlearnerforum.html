@@ -134,7 +134,7 @@ function myFunction2() {
             <textarea class="form-control" rows="1" name="userTitle"  maxlength="120" required></textarea>
           </div>
           <div class="form-group">
-            <label for="userMessage">Message:</label>
+            <label for="userMessage">Message (12,000 character limit):</label>
             <input name="userMessage" type="hidden">
             <div id="editor2">
               <p></p>
@@ -145,9 +145,6 @@ function myFunction2() {
               });
             </script>
           </div>
-          <small id="editingNote" class="form-text text-muted">
-            12000 character limit
-          </small>
           <!--<div class="form-group">
             <label for="comment">Message:</label>
             <textarea class="form-control" rows="5" name="userComment" required></textarea>
@@ -175,7 +172,7 @@ function myFunction2() {
             <input type="email" class="form-control" name="userEmail" maxlength="254">
           </div>
           <small id="emailHelpBlock" class="form-text text-muted">
-            An email will be sent to this address when there are replies to your post.
+            An email will be sent to you when a staff member responds to your post.
           </small>
           <br>
           <div class="checkbox">
