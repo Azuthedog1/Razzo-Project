@@ -93,7 +93,7 @@ def send_email():#(email, title, name, link):
     %s
     """ % (sent_from, ", ".join(to), subject, body)
     try:
-        server_ssl = smtplib.SMTP_SSL('smtp.gmail.com', 465)
+        server_ssl = smtplib.SMTP_SSL('localhost', 465)
         server_ssl.ehlo()
         server.login(gmail_user, gmail_password)
         server.sendmail(sent_from, to, email_text)
