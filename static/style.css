@@ -272,6 +272,12 @@ tr {
 {
   border: 2px solid #000000;
 }
+#SSEPAC_Section
+{
+  border: 2px solid #000000;
+}
+
+
 
 /*@media (max-width: 767px) {
   .navbar-default .navbar-nav .open .dropdown-menu > li > a {
