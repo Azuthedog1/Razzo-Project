@@ -205,6 +205,11 @@ tr {
   color: #d4af37;
 }
 
+.indent {
+  margin-left 10px;
+  border-left: 1px solid Grey;
+}
+
 .navbar-default {
   background-color: #ffffff;
   border: none;
