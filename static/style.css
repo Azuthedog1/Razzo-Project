@@ -39,7 +39,7 @@ footer {
 
 #google_translate_element {
   right: 5px;
-  top: 8px;
+  top: 5px;
   position: absolute;
   z-index: 1000; 
 }
