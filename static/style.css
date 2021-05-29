@@ -203,6 +203,10 @@ tr {
   color: #d4af37;
 }
 
+.image {
+  width: 100%;
+}
+
 .indent {
   margin-left: 5px;
   border-left: 1px solid Grey;
