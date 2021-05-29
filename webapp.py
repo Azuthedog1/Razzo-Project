@@ -386,7 +386,7 @@ def user_submit_post_SE():
         content = request.form['userMessage']
         content = content.replace('\\"', '')
         content = Markup(content[1:len(content)-1])
-        sanitize(content)
+        content = sanitize(content)
         title = sanitize(request.form['userTitle'])
         name = sanitize(request.form['userName'])
         student = sanitize(request.form['userStudent'])
