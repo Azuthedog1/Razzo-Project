@@ -139,24 +139,18 @@ tr {
 
 .col1 {
   /*width: 7.5%;*/
-  width: 30%;
+  width: 60%;
   padding: 5px;
   padding-left: 10px;
 }
 
 .col2 {
   /*width: 10%;*/
-  width: 30%;
-  padding: 5px;
-}
-
-.col3 {
-  /*width: 10%;*/
   width: 10%;
   padding: 5px;
 }
 
-.col4 {
+.col3 {
   text-align: right;
   width: 30%;
   /*width: 22.5%;*/
