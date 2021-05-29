@@ -3,7 +3,6 @@ from flask_oauthlib.client import OAuth
 from flask import render_template
 from bson.objectid import ObjectId
 from mongosanitizer.sanitizer import sanitize
-from sanitize import HTML
 
 import pprint
 import os
