@@ -27,3 +27,4 @@ dnspython
 pytz
 MongoSanitizer
 sanitize
+sgmllib
