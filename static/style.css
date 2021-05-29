@@ -17,6 +17,7 @@ footer {
 .top {
   background-color: #0a5c0d;
   padding: 10px;
+  height: 95px;
 }
 
 .heading {
@@ -39,7 +40,7 @@ footer {
 
 #google_translate_element {
   right: 5px;
-  top: 5px;
+  bottom: 5px;
   position: absolute;
   z-index: 1000; 
 }
