@@ -134,7 +134,7 @@ def render_english_learner_forum():
     bigString2 = ''
     if 'github_token' in session:
         for post in cursor:
-            bigString1 += ('<tr><td class="col1">  <form action="/viewELLU" class="inLine"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton"><b>' + post.get('postTitle') + '</b></button></form><br><i>' + post.get('parentName') + ' / ' + post.get('studentNameGrade') + ' / ' + post.get('parentEmail') + '</i></td>' +
+            bigString1 += ('<tr><td class="col1"><form action="/viewELLU" class="inLine"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton"><b>' + post.get('postTitle') + '</b></button></form><br><i>' + post.get('parentName') + ' / ' + post.get('studentNameGrade') + ' / ' + post.get('parentEmail') + '</i></td>' +
                            '<td class="col2"><span class="glyphicon glyphicon-comment"></span> ' + str(post.get('amount')) + '</td>')
             if(post.get('approved') == 'false'):
                 bigString1 += '<td class="col3"><form action="/vetELL" method="post" class="inLine"><button type="submit" class="btn btn-warning btn-sm" name="vet" value="' + str(post.get('_id'))+ '">' + '<span class="glyphicon glyphicon-plus"></span> Vet</button></form> '
@@ -155,7 +155,7 @@ def render_english_learner_forum():
     else:
         for post in cursor:
             if(post.get('approved') == 'true'):
-                bigString1 += '<tr><td class="col1">  <form action="/viewELLU" class="inLine"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton"><b>' + post.get('postTitle') + '</b></button></form><br>'
+                bigString1 += '<tr><td class="col1"><form action="/viewELLU" class="inLine"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton"><b>' + post.get('postTitle') + '</b></button></form><br>'
                 if(post.get('anonymous') == 'true'):
                     bigString1 += '<i>Anonymous Post</i></td>'
                 else:
@@ -218,7 +218,7 @@ def render_special_education_forum():
     bigString2 = ''
     if 'github_token' in session:
         for post in cursor:
-            bigString1 += ('<tr><td class="col1">  <form action="/viewSEU" class="inLine"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton"><b>' + post.get('postTitle') + '</b></button></form><br><i>' + post.get('parentName') + ' / ' + post.get('studentNameGrade') + ' / ' + post.get('parentEmail') + '</i></td>' +
+            bigString1 += ('<tr><td class="col1"><form action="/viewSEU" class="inLine"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton"><b>' + post.get('postTitle') + '</b></button></form><br><i>' + post.get('parentName') + ' / ' + post.get('studentNameGrade') + ' / ' + post.get('parentEmail') + '</i></td>' +
                            '<td class="col2"><span class="glyphicon glyphicon-comment"></span> ' + str(post.get('amount')) + '</td>')
             if(post.get('approved') == 'false'):
                 bigString1 += '<td class="col3"><form action="/vetSE" method="post" class="inLine"><button type="submit" class="btn btn-warning btn-sm" name="vet" value="' + str(post.get('_id'))+ '">' + '<span class="glyphicon glyphicon-plus"></span> Vet</button></form> '
@@ -239,7 +239,7 @@ def render_special_education_forum():
     else:
         for post in cursor:
             if(post.get('approved') == 'true'):
-                bigString1 += '<tr><td class="col1">  <form action="/viewSEU" class="inLine"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton"><b>' + post.get('postTitle') + '</b></button></form><br>'
+                bigString1 += '<tr><td class="col1"><form action="/viewSEU" class="inLine"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton"><b>' + post.get('postTitle') + '</b></button></form><br>'
                 if(post.get('anonymous') == 'true'):
                     bigString1 += '<i>Anonymous Post</i></td>'
                 else:
