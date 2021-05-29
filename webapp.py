@@ -104,9 +104,11 @@ def send_email():
             <p><b>Hi, name.</b><br>
             Your post title has recieved a response from a staff member.<br>
             <a href="http://www.realpython.com">Link to Post</a></p><br><br>
+            -----------------------------------------------------------------------------------
             <b>Hola, name.</b><br>
             Tu publicación title ha recibido una respuesta de un miembro del personal.<br>
-            <a href="http://www.realpython.com">Enlace a la publicación</a><br>
+            <a href="http://www.realpython.com">Enlace a la publicación</a><br><br>
+            -----------------------------------------------------------------------------------
             <small>*Please do not response to this email / Por favor, no responda a este correo electrónico.</small>
             </p>
         </body>
