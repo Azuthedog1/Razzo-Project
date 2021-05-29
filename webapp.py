@@ -1145,7 +1145,7 @@ def bump_post():
             post = collection.find_one({'_id': ObjectId(objectIDPost)})
         collection.delete_one({'_id': ObjectId(objectIDPost)})
         generate = ObjectId()
-        post.pop('_id', ObjectId())
+        post.pop('_id', generate)
         collection.insert_one(post)
         if collection == db['SEU']:
             action = session['user_data']['login'] + '<span class="vettingColor"> bumped </span><b><a href="https://razzoforumproject.herokuapp.com/viewSEU?thread=' + str(generate) + '">' + post.get('postTitle') + '</a></b> in special education forum'
