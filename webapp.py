@@ -101,12 +101,11 @@ def send_email(receiver_email, title, name, link):
     <html>
         <body>
             <p><b>Hi, """ + name + """.</b><br>
-            Your post """ + title + """ has recieved a response from a staff member.<br>
+            Your post <a href='""" + link + """'>""" + title + """</a> has recieved a response from a staff member.<br>
             <a href='""" + link + """'>Link to Post</a><br>
             --------------------------------------------------------------------------------------------------------<br>
             <b>Hola, """ + name + """. </b><br>
-            Tu publicación """ + title + """ ha recibido una respuesta de un miembro del personal.<br>
-            <a href='""" + link + """'>Enlace a la publicación</a><br>
+            Tu publicación <a href='""" + link + """'>""" + title + """</a> ha recibido una respuesta de un miembro del personal.<br>
             --------------------------------------------------------------------------------------------------------<br>
             <small>*Please do not response to this email / Por favor, no responda a este correo electrónico.</small>
             </p>
