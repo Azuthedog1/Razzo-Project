@@ -141,29 +141,25 @@ tr {
   width: 30%;
   padding: 5px;
   padding-left: 10px;
-  min-height: 60px;
 }
 
 .col2 {
   /*width: 10%;*/
   width: 30%;
   padding: 5px;
-  min-height: 60px;
 }
 
 .col3 {
   /*width: 10%;*/
-  width: 5%;
+  width: 10%;
   padding: 5px;
-  min-height: 60px;
 }
 
 .col4 {
   text-align: right;
-  width: 35%;
+  width: 30%;
   /*width: 22.5%;*/
   padding: 5px;
-  min-height: 60px;
 }
 
 .commentButton {
