@@ -143,7 +143,7 @@ def render_english_learner_forum():
                     bigString1 += '<td class="col2">Anonymous Post</td>'
                 else:
                     bigString1 += '<td class="col2">' + post.get('parentName') + '</td>'
-                bigString += '<td class="col3"><span class="glyphicon glyphicon-comment"></span> ' + str(post.get('amount')) + '</td>'
+                bigString1 += '<td class="col3"><span class="glyphicon glyphicon-comment"></span> ' + str(post.get('amount')) + '</td>'
                 utc_dt = datetime(int(post.get('dateTime').strftime('%Y')), int(post.get('dateTime').strftime('%m')), int(post.get('dateTime').strftime('%d')), int(post.get('dateTime').strftime('%H')), int(post.get('dateTime').strftime('%M')), 0, tzinfo=pytz.utc)
                 loc_dt = utc_dt.astimezone(timezone('America/Los_Angeles'))
                 if int(loc_dt.strftime('%H')) > 12:
@@ -230,7 +230,7 @@ def render_special_education_forum():
                     bigString1 += '<td class="col2">Anonymous Post</td>'
                 else:
                     bigString1 += '<td class="col2">' + post.get('parentName') + '</td>'
-                bigString += '<td class="col3"><span class="glyphicon glyphicon-comment"></span> ' + str(post.get('amount')) + '</td>'
+                bigString1 += '<td class="col3"><span class="glyphicon glyphicon-comment"></span> ' + str(post.get('amount')) + '</td>'
                 utc_dt = datetime(int(post.get('dateTime').strftime('%Y')), int(post.get('dateTime').strftime('%m')), int(post.get('dateTime').strftime('%d')), int(post.get('dateTime').strftime('%H')), int(post.get('dateTime').strftime('%M')), 0, tzinfo=pytz.utc)
                 loc_dt = utc_dt.astimezone(timezone('America/Los_Angeles'))
                 if int(loc_dt.strftime('%H')) > 12:
