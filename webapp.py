@@ -337,14 +337,14 @@ def user_submit_post_ELL():
         content = request.form['userMessage']
         content = content.replace('\\"', '')
         content = Markup(content[1:len(content)-1])
-        content = sanitize.HTML(content)
-        title = sanitize.HTML(request.form['userTitle'])
-        name = sanitize.HTML(request.form['userName'])
-        student = sanitize.HTML(request.form['userStudent'])
+        content = HTML(content)
+        title = HTML(request.form['userTitle'])
+        name = HTML(request.form['userName'])
+        student = HTML(request.form['userStudent'])
         if request.form['userEmail'] == '':
             email = 'Email not provided'
         else:
-            email = sanitize.HTML(request.form['userEmail'])
+            email = HTML(request.form['userEmail'])
         post = {'postTitle': title, 'parentName': name, 'studentNameGrade': student, 'parentEmail': email, 'anonymous': request.form['anon'], 'dateTime': datetime.now(), 'postContent': content, 'approved': 'false', 'amount': 0}
         collection.insert_one(post)
         post = collection.find_one({'postTitle': title, 'parentName': name, 'studentNameGrade': student, 'parentEmail': email, 'anonymous': request.form['anon'], 'postContent': content})
@@ -363,9 +363,9 @@ def admin_submit_post_ELL():
         content = request.form['adminMessage']
         content = content.replace('\\"', '')
         content = Markup(content[1:len(content)-1])
-        content = sanitize.HTML(content)
-        title = sanitize.HTML(request.form['adminTitle'])
-        name = sanitize.HTML(request.form['adminName'])
+        content = HTML(content)
+        title = HTML(request.form['adminTitle'])
+        name = HTML(request.form['adminName'])
         post = {'postTitle': title, 'adminName': name, 'dateTime': datetime.now(), 'postContent': content, 'amount': 0}
         collection.insert_one(post)
         post = collection.find_one({'postTitle': title, 'adminName': name, 'postContent': content})
@@ -384,10 +384,10 @@ def user_submit_post_SE():
         content = request.form['userMessage']
         content = content.replace('\\"', '')
         content = Markup(content[1:len(content)-1])
-        content = sanitize.HTML(content)
-        title = sanitize.HTML(request.form['userTitle'])
-        name = sanitize.HTML(request.form['userName'])
-        student = sanitize.HTML(request.form['userStudent'])
+        content = HTML(content)
+        title = HTML(request.form['userTitle'])
+        name = HTML(request.form['userName'])
+        student = HTML(request.form['userStudent'])
         if request.form['userEmail'] == '':
             email = 'Email not provided'
         else:
@@ -410,9 +410,9 @@ def admin_submit_post_SE():
         content = request.form['adminMessage']
         content = content.replace('\\"', '')
         content = Markup(content[1:len(content)-1])
-        content = sanitize.HTML(content)
-        title = sanitize.HTML(request.form['adminTitle'])
-        name = sanitize.HTML(request.form['adminName'])
+        content = HTML(content)
+        title = HTML(request.form['adminTitle'])
+        name = HTML(request.form['adminName'])
         post = {'postTitle': title, 'adminName': name, 'dateTime': datetime.now(), 'postContent': content, 'amount': 0}
         post = collection.insert_one(post)
         post = collection.find_one({'postTitle': title, 'adminName': name, 'postContent': content})
@@ -450,8 +450,8 @@ def submit_comment():
             content = request.form['adminMessage']
             content = content.replace('\\"', '')
             content = Markup(content[1:len(content)-1])
-            content = sanitize.HTML(content)
-            name = sanitize.HTML(request.form['adminName'])
+            content = HTML(content)
+            name = HTML(request.form['adminName'])
             post['comment' + lastNumber] = {'adminName': name, 'dateTime': datetime.now(), 'postContent': content}
             post['amount'] = post.get('amount') + 1
             collection.replace_one({'_id': ObjectId(objectIDPost)}, post)
@@ -459,52 +459,52 @@ def submit_comment():
             content = request.form['userMessage']
             content = content.replace('\\"', '')
             content = Markup(content[1:len(content)-1])
-            content = sanitize.HTML(content)
-            name = sanitize.HTML(request.form['userName'])
-            student = sanitize.HTML(request.form['userStudent'])
+            content = HTML(content)
+            name = HTML(request.form['userName'])
+            student = HTML(request.form['userStudent'])
             post['comment' + lastNumber] = {'parentName': name, 'studentNameGrade': student, 'anonymous': request.form['anon'], 'dateTime': datetime.now(), 'postContent': content, 'approved': 'false'}
             collection.replace_one({'_id': ObjectId(objectIDPost)}, post)
     if collection == db['SEA']:
         if 'github_token' in session:
-            name = sanitize.HTML(request.form['adminName'])
+            name = HTML(request.form['adminName'])
             action = name + '<span class="createColor"> commented </span>on <b><a href="https://razzoforumproject.herokuapp.com/viewSEA?thread=' + objectIDPost + '">' + post.get('postTitle') + '</a></b> in special education forum'
             add_admin_log(datetime.now(), action, 'none')
         else:
-            name = sanitize.HTML(request.form['userName'])
+            name = HTML(request.form['userName'])
             action = name + '<span class="createColor"> commented </span>on <b><a href="https://razzoforumproject.herokuapp.com/viewSEA?thread=' + objectIDPost + '">' + post.get('postTitle') + '</a></b> in special education forum'
             add_admin_log(datetime.now(), action, 'none')
         return view_SEA(objectIDPost)
     elif collection == db['SEU']:
         if 'github_token' in session:
-            name = sanitize.HTML(request.form['adminName'])
+            name = HTML(request.form['adminName'])
             action = name + '<span class="createColor"> commented </span>on <b><a href="https://razzoforumproject.herokuapp.com/viewSEU?thread=' + objectIDPost + '">' + post.get('postTitle') + '</a></b> in special education forum'
             add_admin_log(datetime.now(), action, 'none')
             if post.get('parentEmail') != 'Email not provided':
                 send_email(post.get('parentEmail'), post.get('postTitle'), post.get('parentName'))
         else:
-            name = sanitize.HTML(request.form['userName'])
+            name = HTML(request.form['userName'])
             action = name + '<span class="createColor"> commented </span>on <b><a href="https://razzoforumproject.herokuapp.com/viewSEU?thread=' + objectIDPost + '">' + post.get('postTitle') + '</a></b> in special education forum'
             add_admin_log(datetime.now(), action, 'none')
         return view_SEU(objectIDPost)
     elif collection == db['ELLA']:
         if 'github_token' in session:
-            name = sanitize.HTML(request.form['adminName'])
+            name = HTML(request.form['adminName'])
             action = name + '<span class="createColor"> commented </span>on <b><a href="https://razzoforumproject.herokuapp.com/viewELLA?thread=' + objectIDPost + '">' + post.get('postTitle') + '</a></b> in english language learner forum'
             add_admin_log(datetime.now(), action, 'none')
         else:
-            name = sanitize.HTML(request.form['userName'])
+            name = HTML(request.form['userName'])
             action = name + '<span class="createColor"> commented </span>on <b><a href="https://razzoforumproject.herokuapp.com/viewELLA?thread=' + objectIDPost + '">' + post.get('postTitle') + '</a></b> in english language learner forum'
             add_admin_log(datetime.now(), action, 'none')
         return view_ELLA(objectIDPost)
     elif collection == db['ELLU']:
         if 'github_token' in session:
-            name = sanitize.HTML(request.form['adminName'])
+            name = HTML(request.form['adminName'])
             action = name + '<span class="createColor"> commented </span>on <b><a href="https://razzoforumproject.herokuapp.com/viewELLU?thread=' + objectIDPost + '">' + post.get('postTitle') + '</a></b> in english language learner forum'
             add_admin_log(datetime.now(), action, 'none')
             if post.get('parentEmail') != 'Email not provided':
                 send_email(post.get('parentEmail'), post.get('postTitle'), post.get('parentName'))
         else:
-            name = sanitize.HTML(request.form['userName'])
+            name = HTML(request.form['userName'])
             action = name + '<span class="createColor"> commented </span>on <b><a href="https://razzoforumproject.herokuapp.com/viewELLU?thread=' + objectIDPost + '">' + post.get('postTitle') + '</a></b> in english language learner forum'
             add_admin_log(datetime.now(), action, 'none')
         return view_ELLU(objectIDPost)
