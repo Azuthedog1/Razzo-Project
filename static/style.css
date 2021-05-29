@@ -29,6 +29,9 @@ footer {
   color: #ffffff;
 }
 
+.noBorder {
+  border-bottom: 0px;
+}
 .top {
   background-color: #0a5c0d;
   padding: 10px;
