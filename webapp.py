@@ -1148,19 +1148,19 @@ def bump_post():
         post.pop('_id', ObjectId())
         collection.insert_one(post)
         if collection == db['SEU']:
-            action = session['user_data']['login'] + '<span class="vettingColor"> bumped </span><b><a href="https://razzoforumproject.herokuapp.com/viewSEU?thread=' + str(ObjectId()) + '">' + post.get('postTitle') + '</a></b> in special education forum'
+            action = session['user_data']['login'] + '<span class="vettingColor"> bumped </span><b><a href="https://razzoforumproject.herokuapp.com/viewSEU?thread=' + str(generate) + '">' + post.get('postTitle') + '</a></b> in special education forum'
             add_admin_log(datetime.now(), action, 'none')
             return render_special_education_forum()
         if collection == db['SEA']:
-            action = session['user_data']['login'] + '<span class="vettingColor"> bumped </span><b><a href="https://razzoforumproject.herokuapp.com/viewSEA?thread=' + str(ObjectId()) + '">' + post.get('postTitle') + '</a></b> in special education forum'
+            action = session['user_data']['login'] + '<span class="vettingColor"> bumped </span><b><a href="https://razzoforumproject.herokuapp.com/viewSEA?thread=' + str(generate) + '">' + post.get('postTitle') + '</a></b> in special education forum'
             add_admin_log(datetime.now(), action, 'none')
             return render_special_education_forum()
         if collection == db['ELLA']:
-            action = session['user_data']['login'] + '<span class="vettingColor"> bumped </span><b><a href="https://razzoforumproject.herokuapp.com/viewELLA?thread=' + str(ObjectId()) + '">' + post.get('postTitle') + '</a></b> in english language learner forum'
+            action = session['user_data']['login'] + '<span class="vettingColor"> bumped </span><b><a href="https://razzoforumproject.herokuapp.com/viewELLA?thread=' + str(generate) + '">' + post.get('postTitle') + '</a></b> in english language learner forum'
             add_admin_log(datetime.now(), action, 'none')
             return render_english_learner_forum()
         if collection == db['ELLU']:
-            action = session['user_data']['login'] + '<span class="vettingColor"> bumped </span><b><a href="https://razzoforumproject.herokuapp.com/viewELLU?thread=' + str(ObjectId()) + '">' + post.get('postTitle') + '</a></b> in special education forum'
+            action = session['user_data']['login'] + '<span class="vettingColor"> bumped </span><b><a href="https://razzoforumproject.herokuapp.com/viewELLU?thread=' + str(generate) + '">' + post.get('postTitle') + '</a></b> in special education forum'
             add_admin_log(datetime.now(), action, 'none')
             return render_english_learner_forum()
     return render_template('information.html')
