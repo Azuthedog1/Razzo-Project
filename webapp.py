@@ -12,6 +12,8 @@ from datetime import datetime, timedelta
 from pytz import timezone
 import pytz
 import smtplib, ssl
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
 
 app = Flask(__name__)
 
@@ -85,10 +87,35 @@ def send_email():
     sender_email = 'sbhsparentboard@gmail.com'
     receiver_email = 'ponmorw@gmail.com'
     password = 'PBh5inLgFKvD'
-    message = """\
-    Subject: Hi there
-
-    This message is sent from Python."""
+    message = MIMEMultipart('alternative')
+    message['Subject'] = 'SBHS Parent Board Notification'
+    message['From'] = sender_email
+    message['To'] = receiver_email
+    text = """\
+    Hello <name>,
+    Your post <title> has recieved a response from a staff member.
+    <link>
+    
+    Hola <name>,
+    Tu publicación <title> ha recibido una respuesta de un miembro del personal.
+    <link>"""
+    html = """\
+    <html>
+        <body>
+            <h2>Hi, <name></h2><br>
+            <p>Your post <title> has recieved a response from a staff member<br>
+            <a href="http://www.realpython.com">Link to Post</a></p><br><br>
+            <h2>Hola, <name></h2><br>
+            <p>Tu publicación <title> ha recibido una respuesta de un miembro del personal.<br>
+            <a href="http://www.realpython.com">Enlace a la publicación</a><br>
+            </p>
+        </body>
+    </html>
+    """
+    part1 = MIMEText(text, "plain")
+    part2 = MIMEText(html, "html")
+    message.attach(part1)
+    message.attach(part2)
     context = ssl.create_default_context()
     with smtplib.SMTP_SSL(smtp_server, port, context=context) as server:
         server.login(sender_email, password)
