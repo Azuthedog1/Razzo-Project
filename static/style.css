@@ -14,9 +14,14 @@ footer {
   border-top: 1px solid Grey;
 }
 
+p, h1, h2, h3, li {
+  white-space: pre;
+}
+
 .footerIm {
   width: 100px; 
 }
+
 .footerBox {
   margin: auto;
   border-bottom: 0px;
