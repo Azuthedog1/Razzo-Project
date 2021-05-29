@@ -21,7 +21,12 @@ footer {
   margin: auto;
   width: 70%;
   margin-top: 15px;
-  color: #ffffff;
+}
+
+.footerText {
+  margin-left: 20px;
+  margin-top: 5px;
+    color: #ffffff;
 }
 
 .top {
