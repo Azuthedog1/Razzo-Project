@@ -79,7 +79,7 @@ def authorized():
     session['username'] = 'admin'
     return render_template('login.html', message = message)
 
-def send_email():#(email, title, name, link):
+def send_email():
     gmail_user = 'sbhsparentboard@gmail.com'
     gmail_password = 'PBh5inLgFKvD'
     sent_from = gmail_user
@@ -105,7 +105,6 @@ def send_email():#(email, title, name, link):
 
 @app.route('/englishlearnerforum')
 def render_english_learner_forum():
-    send_email()
     connection_string = os.environ['MONGO_CONNECTION_STRING']
     db_name = os.environ['MONGO_DBNAME']
     client = pymongo.MongoClient(connection_string)
@@ -1131,6 +1130,7 @@ def unvet_SE():
 
 @app.route('/bumpPost', methods=['GET', 'POST'])
 def bump_post():
+    send_email()
     if request.method == 'POST':
         objectIDPost = request.form['bump']
         connection_string = os.environ['MONGO_CONNECTION_STRING']
