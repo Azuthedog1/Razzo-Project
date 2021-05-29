@@ -116,13 +116,12 @@ def render_english_learner_forum():
     bigString2 = ''
     if 'github_token' in session:
         for post in cursor:
-            bigString1 += ('<tr><td class="col1">  <form action="/viewELLU" class="inLine"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton"><b>' + post.get('postTitle') + '</b></button></form></td>' +
-                           '<td class="col2">' + post.get('parentName') + ' / ' + post.get('studentNameGrade') + ' / ' + post.get('parentEmail') + '</td>' +
-                           '<td class="col3"><span class="glyphicon glyphicon-comment"></span> ' + str(post.get('amount')) + '</td>')
+            bigString1 += ('<tr><td class="col1">  <form action="/viewELLU" class="inLine"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton"><b>' + post.get('postTitle') + '</b></button></form><br><i>' + post.get('parentName') + ' / ' + post.get('studentNameGrade') + ' / ' + post.get('parentEmail') + '</i></td>' +
+                           '<td class="col2"><span class="glyphicon glyphicon-comment"></span> ' + str(post.get('amount')) + '</td>')
             if(post.get('approved') == 'false'):
-                bigString1 += '<td class="col4"><form action="/vetELL" method="post" class="inLine"><button type="submit" class="btn btn-warning btn-sm" name="vet" value="' + str(post.get('_id'))+ '">' + '<span class="glyphicon glyphicon-plus"></span> Vet</button></form> '
+                bigString1 += '<td class="col3"><form action="/vetELL" method="post" class="inLine"><button type="submit" class="btn btn-warning btn-sm" name="vet" value="' + str(post.get('_id'))+ '">' + '<span class="glyphicon glyphicon-plus"></span> Vet</button></form> '
             else:
-                bigString1 += '<td class="col4"><form action="/unvetELL" method="post" class="inLine"><button type="submit" class="btn btn-warning btn-sm" name="vet" value="' + str(post.get('_id'))+ '">' + '<span class="glyphicon glyphicon-minus"></span> Unvet</button></form> '
+                bigString1 += '<td class="col3"><form action="/unvetELL" method="post" class="inLine"><button type="submit" class="btn btn-warning btn-sm" name="vet" value="' + str(post.get('_id'))+ '">' + '<span class="glyphicon glyphicon-minus"></span> Unvet</button></form> '
             bigString1 += '<form action="/bumpPost" method="post" class="inLine"><button type="submit" class="btn btn-info btn-sm" name="bump" value="' + str(post.get('_id'))+ '">' + '<span class="glyphicon glyphicon-arrow-up"></span> Bump</button></form> <button type="button" class="btn btn-danger btn-sm delete"><span class="glyphicon glyphicon-trash"></span> Delete</button><button type="button" class="btn btn-danger btn-sm cancel inLine">Cancel</button> <form action="/deleteELL" method="post" class="inLine confirm"><button type="submit" class="btn btn-danger btn-sm" name="delete" value="' + str(post.get('_id')) + '"><span class="glyphicon glyphicon-trash"></span> Confirm Delete</button></form>'
             utc_dt = datetime(int(post.get('dateTime').strftime('%Y')), int(post.get('dateTime').strftime('%m')), int(post.get('dateTime').strftime('%d')), int(post.get('dateTime').strftime('%H')), int(post.get('dateTime').strftime('%M')), 0, tzinfo=pytz.utc)
             loc_dt = utc_dt.astimezone(timezone('America/Los_Angeles'))
@@ -138,12 +137,12 @@ def render_english_learner_forum():
     else:
         for post in cursor:
             if(post.get('approved') == 'true'):
-                bigString1 += '<tr><td class="col1">  <form action="/viewELLU" class="inLine"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton"><b>' + post.get('postTitle') + '</b></button></form></td>'
+                bigString1 += '<tr><td class="col1">  <form action="/viewELLU" class="inLine"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton"><b>' + post.get('postTitle') + '</b></button></form><br>'
                 if(post.get('anonymous') == 'true'):
-                    bigString1 += '<td class="col2">Anonymous Post</td>'
+                    bigString1 += '<i>Anonymous Post</i></td>'
                 else:
-                    bigString1 += '<td class="col2">' + post.get('parentName') + '</td>'
-                bigString1 += '<td class="col3"><span class="glyphicon glyphicon-comment"></span> ' + str(post.get('amount')) + '</td>'
+                    bigString1 += '<i>' + post.get('parentName') + '</i></td>'
+                bigString1 += '<td class="col2"><span class="glyphicon glyphicon-comment"></span> ' + str(post.get('amount')) + '</td>'
                 utc_dt = datetime(int(post.get('dateTime').strftime('%Y')), int(post.get('dateTime').strftime('%m')), int(post.get('dateTime').strftime('%d')), int(post.get('dateTime').strftime('%H')), int(post.get('dateTime').strftime('%M')), 0, tzinfo=pytz.utc)
                 loc_dt = utc_dt.astimezone(timezone('America/Los_Angeles'))
                 if int(loc_dt.strftime('%H')) > 12:
@@ -154,7 +153,7 @@ def render_english_learner_forum():
                     if hour == '0':
                         hour = '12'
                     loc_dt = loc_dt.strftime('%m/%d/%Y, ' + hour + ':%M AM PT')
-                bigString1 += '<td class="col4"><i>' + loc_dt + '</i></td></tr>'
+                bigString1 += '<td class="col3"><i>' + loc_dt + '</i></td></tr>'
     collection = db['ELLA']
     cursor = collection.find({}).sort('_id', -1).limit(1000)
     if 'github_token' in session: 
@@ -169,10 +168,9 @@ def render_english_learner_forum():
                 if hour == '0':
                     hour = '12'
                 loc_dt = loc_dt.strftime('%m/%d/%Y, ' + hour + ':%M AM PT')
-            bigString2 += ('<tr><td class="col1">  <form action="/viewELLA" class="inLine"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton"><b>' + post.get('postTitle') + '</b></button></form></td>' +
-                           '<td class="col2">' + post.get('adminName') + '</td>' +
-                           '<td class="col3"><span class="glyphicon glyphicon-comment"></span> ' + str(post.get('amount')) + '</td>' +
-                           '<td class="col4"><form action="/bumpPost" method="post" class="inLine"><button type="submit" class="btn btn-info btn-sm" name="bump" value="' + str(post.get('_id'))+ '">' + '<span class="glyphicon glyphicon-arrow-up"></span> Bump</button></form> <button type="button" class="btn btn-danger btn-sm delete"><span class="glyphicon glyphicon-trash"></span> Delete</button><button type="button" class="btn btn-danger btn-sm cancel inLine">Cancel</button> <form action="/deleteELL" method="post" class="inLine confirm"><button type="submit" class="btn btn-danger btn-sm" name="delete" value="' + str(post.get('_id')) + '"><span class="glyphicon glyphicon-trash"></span>Confirm Delete</button></form><br><i>' + loc_dt + '</i></td></tr>')
+            bigString2 += ('<tr><td class="col1">  <form action="/viewELLA" class="inLine"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton"><b>' + post.get('postTitle') + '</b></button></form><br><i>' + post.get('adminName') + '</i></td>' +
+                           '<td class="col2"><span class="glyphicon glyphicon-comment"></span> ' + str(post.get('amount')) + '</td>' +
+                           '<td class="col3"><form action="/bumpPost" method="post" class="inLine"><button type="submit" class="btn btn-info btn-sm" name="bump" value="' + str(post.get('_id'))+ '">' + '<span class="glyphicon glyphicon-arrow-up"></span> Bump</button></form> <button type="button" class="btn btn-danger btn-sm delete"><span class="glyphicon glyphicon-trash"></span> Delete</button><button type="button" class="btn btn-danger btn-sm cancel inLine">Cancel</button> <form action="/deleteELL" method="post" class="inLine confirm"><button type="submit" class="btn btn-danger btn-sm" name="delete" value="' + str(post.get('_id')) + '"><span class="glyphicon glyphicon-trash"></span>Confirm Delete</button></form><br><i>' + loc_dt + '</i></td></tr>')
     else:
         for post in cursor:
             utc_dt = datetime(int(post.get('dateTime').strftime('%Y')), int(post.get('dateTime').strftime('%m')), int(post.get('dateTime').strftime('%d')), int(post.get('dateTime').strftime('%H')), int(post.get('dateTime').strftime('%M')), 0, tzinfo=pytz.utc)
@@ -185,8 +183,7 @@ def render_english_learner_forum():
                 if hour == '0':
                     hour = '12'
                 loc_dt = loc_dt.strftime('%m/%d/%Y, ' + hour + ':%M AM PT')
-            bigString2 += ('<tr><td class="col1">  <form action="/viewELLA" class="inLine"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton"><b>' + post.get('postTitle') + '</b></button></form></td>' +
-                           '<td class="col2">' + post.get('adminName') + '</td>' +
+            bigString2 += ('<tr><td class="col1">  <form action="/viewELLA" class="inLine"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton"><b>' + post.get('postTitle') + '</b></button></form><br><i>' + post.get('adminName') + '</i></td>' +
                            '<td class="col3"><span class="glyphicon glyphicon-comment"></span> ' + str(post.get('amount')) + '</td>' +
                            '<td class="col4"><i>' + loc_dt + '</i></td></tr>')
     return render_template('englishlearnerforum.html', ELLUPosts = Markup(bigString1), ELLAPosts = Markup(bigString2))
@@ -203,13 +200,12 @@ def render_special_education_forum():
     bigString2 = ''
     if 'github_token' in session:
         for post in cursor:
-            bigString1 += ('<tr><td class="col1">  <form action="/viewSEU" class="inLine"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton"><b>' + post.get('postTitle') + '</b></button></form></td>' +
-                           '<td class="col2">' + post.get('parentName') + ' / ' + post.get('studentNameGrade') + ' / ' + post.get('parentEmail') + '</td>' +
-                           '<td class="col3"><span class="glyphicon glyphicon-comment"></span> ' + str(post.get('amount')) + '</td>')
+            bigString1 += ('<tr><td class="col1">  <form action="/viewSEU" class="inLine"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton"><b>' + post.get('postTitle') + '</b></button></form><br><i>' + post.get('parentName') + ' / ' + post.get('studentNameGrade') + ' / ' + post.get('parentEmail') + '</i></td>' +
+                           '<td class="col2"><span class="glyphicon glyphicon-comment"></span> ' + str(post.get('amount')) + '</td>')
             if(post.get('approved') == 'false'):
-                bigString1 += '<td class="col4"><form action="/vetSE" method="post" class="inLine"><button type="submit" class="btn btn-warning btn-sm" name="vet" value="' + str(post.get('_id'))+ '">' + '<span class="glyphicon glyphicon-plus"></span> Vet</button></form> '
+                bigString1 += '<td class="col3"><form action="/vetSE" method="post" class="inLine"><button type="submit" class="btn btn-warning btn-sm" name="vet" value="' + str(post.get('_id'))+ '">' + '<span class="glyphicon glyphicon-plus"></span> Vet</button></form> '
             else:
-                bigString1 += '<td class="col4"><form action="/unvetSE" method="post" class="inLine"><button type="submit" class="btn btn-warning btn-sm" name="vet" value="' + str(post.get('_id'))+ '">' + '<span class="glyphicon glyphicon-minus"></span> Unvet</button></form> '
+                bigString1 += '<td class="col3"><form action="/unvetSE" method="post" class="inLine"><button type="submit" class="btn btn-warning btn-sm" name="vet" value="' + str(post.get('_id'))+ '">' + '<span class="glyphicon glyphicon-minus"></span> Unvet</button></form> '
             bigString1 += '<form action="/bumpPost" method="post" class="inLine"><button type="submit" class="btn btn-info btn-sm" name="bump" value="' + str(post.get('_id'))+ '">' + '<span class="glyphicon glyphicon-arrow-up"></span> Bump</button></form> <button type="button" class="btn btn-danger btn-sm delete"><span class="glyphicon glyphicon-trash"></span> Delete</button><button type="button" class="btn btn-danger btn-sm cancel inLine">Cancel</button> <form action="/deleteSE" method="post" class="inLine confirm"><button type="submit" class="btn btn-danger btn-sm" name="delete" value="' + str(post.get('_id')) + '"><span class="glyphicon glyphicon-trash"></span> Confirm Delete</button></form>'
             utc_dt = datetime(int(post.get('dateTime').strftime('%Y')), int(post.get('dateTime').strftime('%m')), int(post.get('dateTime').strftime('%d')), int(post.get('dateTime').strftime('%H')), int(post.get('dateTime').strftime('%M')), 0, tzinfo=pytz.utc)
             loc_dt = utc_dt.astimezone(timezone('America/Los_Angeles'))
@@ -225,12 +221,12 @@ def render_special_education_forum():
     else:
         for post in cursor:
             if(post.get('approved') == 'true'):
-                bigString1 += '<tr><td class="col1">  <form action="/viewSEU" class="inLine"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton"><b>' + post.get('postTitle') + '</b></button></form></td>'
+                bigString1 += '<tr><td class="col1">  <form action="/viewSEU" class="inLine"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton"><b>' + post.get('postTitle') + '</b></button></form><br>'
                 if(post.get('anonymous') == 'true'):
-                    bigString1 += '<td class="col2">Anonymous Post</td>'
+                    bigString1 += '<i>Anonymous Post</i></td>'
                 else:
-                    bigString1 += '<td class="col2">' + post.get('parentName') + '</td>'
-                bigString1 += '<td class="col3"><span class="glyphicon glyphicon-comment"></span> ' + str(post.get('amount')) + '</td>'
+                    bigString1 += '<i>' + post.get('parentName') + '</i></td>'
+                bigString1 += '<td class="col2"><span class="glyphicon glyphicon-comment"></span> ' + str(post.get('amount')) + '</td>'
                 utc_dt = datetime(int(post.get('dateTime').strftime('%Y')), int(post.get('dateTime').strftime('%m')), int(post.get('dateTime').strftime('%d')), int(post.get('dateTime').strftime('%H')), int(post.get('dateTime').strftime('%M')), 0, tzinfo=pytz.utc)
                 loc_dt = utc_dt.astimezone(timezone('America/Los_Angeles'))
                 if int(loc_dt.strftime('%H')) > 12:
@@ -241,7 +237,7 @@ def render_special_education_forum():
                     if hour == '0':
                         hour = '12'
                     loc_dt = loc_dt.strftime('%m/%d/%Y, ' + hour + ':%M AM PT')
-                bigString1 += '<td class="col4"><i>' + loc_dt + '</i></td></tr>'
+                bigString1 += '<td class="col3"><i>' + loc_dt + '</i></td></tr>'
     collection = db['SEA']
     cursor = collection.find({}).sort('_id', -1).limit(1000)
     if 'github_token' in session: 
@@ -256,10 +252,9 @@ def render_special_education_forum():
                 if hour == '0':
                     hour = '12'
                 loc_dt = loc_dt.strftime('%m/%d/%Y, ' + hour + ':%M AM PT')
-            bigString2 += ('<tr><td class="col1">  <form action="/viewSEA" class="inLine"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton"><b>' + post.get('postTitle') + '</b></button></form></td>' +
-                           '<td class="col2">' + post.get('adminName') + '</td>' +
-                           '<td class="col3"><span class="glyphicon glyphicon-comment"></span> ' + str(post.get('amount')) + '</td>' +
-                           '<td class="col4"><form action="/bumpPost" method="post" class="inLine"><button type="submit" class="btn btn-info btn-sm" name="bump" value="' + str(post.get('_id'))+ '">' + '<span class="glyphicon glyphicon-arrow-up"></span> Bump</button></form> <button type="button" class="btn btn-danger btn-sm delete"><span class="glyphicon glyphicon-trash"></span> Delete</button><button type="button" class="btn btn-danger btn-sm cancel inLine">Cancel</button> <form action="/deleteSE" method="post" class="inLine confirm"><button type="submit" class="btn btn-danger btn-sm" name="delete" value="' + str(post.get('_id')) + '"><span class="glyphicon glyphicon-trash"></span> Confirm Delete</button></form><br><i>' + loc_dt + '</i></td></tr>')
+            bigString2 += ('<tr><td class="col1">  <form action="/viewSEA" class="inLine"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton"><b>' + post.get('postTitle') + '</b></button></form><br><i>' + post.get('adminName') + '</i></td>' +
+                           '<td class="col2"><span class="glyphicon glyphicon-comment"></span> ' + str(post.get('amount')) + '</td>' +
+                           '<td class="col3"><form action="/bumpPost" method="post" class="inLine"><button type="submit" class="btn btn-info btn-sm" name="bump" value="' + str(post.get('_id'))+ '">' + '<span class="glyphicon glyphicon-arrow-up"></span> Bump</button></form> <button type="button" class="btn btn-danger btn-sm delete"><span class="glyphicon glyphicon-trash"></span> Delete</button><button type="button" class="btn btn-danger btn-sm cancel inLine">Cancel</button> <form action="/deleteSE" method="post" class="inLine confirm"><button type="submit" class="btn btn-danger btn-sm" name="delete" value="' + str(post.get('_id')) + '"><span class="glyphicon glyphicon-trash"></span> Confirm Delete</button></form><br><i>' + loc_dt + '</i></td></tr>')
     else:
         for post in cursor:
             utc_dt = datetime(int(post.get('dateTime').strftime('%Y')), int(post.get('dateTime').strftime('%m')), int(post.get('dateTime').strftime('%d')), int(post.get('dateTime').strftime('%H')), int(post.get('dateTime').strftime('%M')), 0, tzinfo=pytz.utc)
@@ -272,10 +267,9 @@ def render_special_education_forum():
                 if hour == '0':
                     hour = '12'
                 loc_dt = loc_dt.strftime('%m/%d/%Y, ' + hour + ':%M AM PT')
-            bigString2 += ('<tr><td class="col1">  <form action="/viewSEA" class="inLine"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton"><b>' + post.get('postTitle') + '</b></button></form></td>' +
-                           '<td class="col2">' + post.get('adminName') + '</td>' +
-                           '<td class="col3"><span class="glyphicon glyphicon-comment"></span> ' + str(post.get('amount')) + '</td>' +
-                           '<td class="col4"><i>' + loc_dt + '</i></td></tr>')
+            bigString2 += ('<tr><td class="col1">  <form action="/viewSEA" class="inLine"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton"><b>' + post.get('postTitle') + '</b></button></form><br><i>' + post.get('adminName') + '</i></td>' +
+                           '<td class="col2"><span class="glyphicon glyphicon-comment"></span> ' + str(post.get('amount')) + '</td>' +
+                           '<td class="col3"><i>' + loc_dt + '</i></td></tr>')
     return render_template('specialeducationforum.html', SEUPosts = Markup(bigString1), SEAPosts = Markup(bigString2))
 
 @app.route('/adminLog')
