@@ -115,10 +115,6 @@ tr {
   border-bottom: 1px solid #999999;
 }
 
-td {
-  min-height: 60px;
-}
-
 .toprow {
   width: 100%;
   background-color: #e0e0e0;
@@ -145,18 +141,21 @@ td {
   width: 30%;
   padding: 5px;
   padding-left: 10px;
+  min-height: 60px;
 }
 
 .col2 {
   /*width: 10%;*/
   width: 30%;
   padding: 5px;
+  min-height: 60px;
 }
 
 .col3 {
   /*width: 10%;*/
   width: 5%;
   padding: 5px;
+  min-height: 60px;
 }
 
 .col4 {
@@ -164,6 +163,7 @@ td {
   width: 35%;
   /*width: 22.5%;*/
   padding: 5px;
+  min-height: 60px;
 }
 
 .commentButton {
