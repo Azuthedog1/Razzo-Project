@@ -81,7 +81,7 @@ def authorized():
     session['username'] = 'admin'
     return render_template('login.html', message = message)
 
-def send_email(reciever_email, title, name):
+def send_email(receiver_email, title, name):
     smtp_server = 'smtp.gmail.com'
     sender_email = 'sbhsparentboard@gmail.com'
     password = 'PBh5inLgFKvD'
