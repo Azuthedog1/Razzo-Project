@@ -102,7 +102,6 @@ def send_email(receiver_email, title, name, link):
         <body>
             <p><b>Hi, """ + name + """.</b><br>
             Your post <a href='""" + link + """'>""" + title + """</a> has recieved a response from a staff member.<br>
-            <a href='""" + link + """'>Link to Post</a><br>
             --------------------------------------------------------------------------------------------------------<br>
             <b>Hola, """ + name + """. </b><br>
             Tu publicación <a href='""" + link + """'>""" + title + """</a> ha recibido una respuesta de un miembro del personal.<br>
