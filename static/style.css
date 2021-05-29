@@ -55,8 +55,9 @@ footer {
 .back {
   width: 90%;
   margin: auto;
+  height: auto;
   margin-top: 20px;
-  height: 2500px;
+  min-height: 660px;
 }
 
 .postBox, .postBox2 {
