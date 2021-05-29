@@ -120,9 +120,7 @@ def send_email(reciever_email, title, name):
     context = ssl.create_default_context()
     with smtplib.SMTP_SSL("smtp.gmail.com", 465, context=context) as server:
         server.login(sender_email, password)
-        server.sendmail(
-        sender_email, receiver_email, message.as_string()
-        )
+        server.sendmail(sender_email, receiver_email, message.as_string())
 
 @app.route('/englishlearnerforum')
 def render_english_learner_forum():
