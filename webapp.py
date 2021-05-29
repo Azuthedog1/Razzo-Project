@@ -81,10 +81,9 @@ def authorized():
     session['username'] = 'admin'
     return render_template('login.html', message = message)
 
-def send_email():
+def send_email(reciever_email, title, name):
     smtp_server = 'smtp.gmail.com'
     sender_email = 'sbhsparentboard@gmail.com'
-    receiver_email = 'ponmorw@gmail.com'
     password = 'PBh5inLgFKvD'
     message = MIMEMultipart('alternative')
     message['Subject'] = 'SBHS Parent Board Notification'
@@ -101,11 +100,11 @@ def send_email():
     html = """\
     <html>
         <body>
-            <p><b>Hi, name.</b><br>
+            <p><b>Hi, """ + name + """\.</b><br>
             Your post title has recieved a response from a staff member.<br>
             <a href="http://www.realpython.com">Link to Post</a><br>
             --------------------------------------------------------------------------------------------------------<br>
-            <b>Hola, name.</b><br>
+            <b>Hola, """ + name + """\. </b><br>
             Tu publicación title ha recibido una respuesta de un miembro del personal.<br>
             <a href="http://www.realpython.com">Enlace a la publicación</a><br>
             --------------------------------------------------------------------------------------------------------<br>
@@ -482,6 +481,8 @@ def submit_comment():
             name = sanitize(request.form['adminName'])
             action = name + '<span class="createColor"> commented </span>on <b><a href="https://razzoforumproject.herokuapp.com/viewSEU?thread=' + objectIDPost + '">' + post.get('postTitle') + '</a></b> in special education forum'
             add_admin_log(datetime.now(), action, 'none')
+            if post.get('parentEmail') != 'Email not provided':
+                send_email(post.get('parentEmail'), post.get('postTitle'), post.get('parentName'))
         else:
             name = sanitize(request.form['userName'])
             action = name + '<span class="createColor"> commented </span>on <b><a href="https://razzoforumproject.herokuapp.com/viewSEU?thread=' + objectIDPost + '">' + post.get('postTitle') + '</a></b> in special education forum'
@@ -502,6 +503,8 @@ def submit_comment():
             name = sanitize(request.form['adminName'])
             action = name + '<span class="createColor"> commented </span>on <b><a href="https://razzoforumproject.herokuapp.com/viewELLU?thread=' + objectIDPost + '">' + post.get('postTitle') + '</a></b> in english language learner forum'
             add_admin_log(datetime.now(), action, 'none')
+            if post.get('parentEmail') != 'Email not provided':
+                send_email(post.get('parentEmail'), post.get('postTitle'), post.get('parentName'))
         else:
             name = sanitize(request.form['userName'])
             action = name + '<span class="createColor"> commented </span>on <b><a href="https://razzoforumproject.herokuapp.com/viewELLU?thread=' + objectIDPost + '">' + post.get('postTitle') + '</a></b> in english language learner forum'
@@ -1152,7 +1155,6 @@ def unvet_SE():
 
 @app.route('/bumpPost', methods=['GET', 'POST'])
 def bump_post():
-    send_email()
     if request.method == 'POST':
         objectIDPost = request.form['bump']
         connection_string = os.environ['MONGO_CONNECTION_STRING']
