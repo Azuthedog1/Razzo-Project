@@ -113,6 +113,9 @@ footer {
 
 tr {
   border-bottom: 1px solid #999999;
+}
+
+td {
   min-height: 60px;
 }
 
