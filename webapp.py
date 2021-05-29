@@ -2,7 +2,7 @@ from flask import Flask, redirect, Markup, url_for, session, request, jsonify
 from flask_oauthlib.client import OAuth
 from flask import render_template
 from bson.objectid import ObjectId
-from mongosanitizer.sanitizer import sanitize
+from mongosanitizer.sanitizer import sanitize #not used since all quieries do not contain user input, only ObjectId.
 
 import pprint
 import os
@@ -344,7 +344,7 @@ def user_submit_post_ELL():
         generate = ObjectId()
         post = {'_id': generate, 'postTitle': request.form['userTitle'], 'parentName': request.form['userName'], 'studentNameGrade': request.form['userStudent'], 'parentEmail': email, 'anonymous': request.form['anon'], 'dateTime': datetime.now(), 'postContent': content, 'approved': 'false', 'amount': 0}
         collection.insert_one(post)
-        action = name + '<span class="createColor"> posted </span><b><a href="https://razzoforumproject.herokuapp.com/viewELLU?thread=' + str(generate) + '">' + request.form['userTitle'] + '</a></b> in english language learner forum'
+        action = request.form['userName'] + '<span class="createColor"> posted </span><b><a href="https://razzoforumproject.herokuapp.com/viewELLU?thread=' + str(generate) + '">' + request.form['userTitle'] + '</a></b> in english language learner forum'
         add_admin_log(datetime.now(), action, 'none')
     return render_english_learner_forum()
 
@@ -362,7 +362,7 @@ def admin_submit_post_ELL():
         generate = ObjectId()
         post = {'_id': generate, 'postTitle': request.form['adminTitle'], 'adminName': request.form['adminName'], 'dateTime': datetime.now(), 'postContent': content, 'amount': 0}
         collection.insert_one(post)
-        action = name + '<span class="createColor"> posted </span><b><a href="https://razzoforumproject.herokuapp.com/viewELLA?thread=' + str(generate) + '">' + request.form['adminTitle'] + '</a></b> in english language learner forum'
+        action = request.form['adminName'] + '<span class="createColor"> posted </span><b><a href="https://razzoforumproject.herokuapp.com/viewELLA?thread=' + str(generate) + '">' + request.form['adminTitle'] + '</a></b> in english language learner forum'
         add_admin_log(datetime.now(), action, 'none')
     return render_english_learner_forum() #this will also copy the code from def render_english_learner_forum from above.
     
@@ -384,7 +384,7 @@ def user_submit_post_SE():
         generate = ObjectId()
         post = {'_id': generate, 'postTitle': request.form['userTitle'], 'parentName': request.form['userName'], 'studentNameGrade': request.form['userStudent'], 'parentEmail': email, 'anonymous': request.form['anon'], 'dateTime': datetime.now(), 'postContent': content, 'approved': 'false', 'amount': 0}
         post = collection.insert_one(post)
-        action = name + '<span class="createColor"> posted </span><b><a href="https://razzoforumproject.herokuapp.com/viewSEU?thread=' + str(generate) + '">' + request.form['userTitle'] + '</a></b> in special education forum'
+        action = request.form['userName'] + '<span class="createColor"> posted </span><b><a href="https://razzoforumproject.herokuapp.com/viewSEU?thread=' + str(generate) + '">' + request.form['userTitle'] + '</a></b> in special education forum'
         add_admin_log(datetime.now(), action, 'none')
     return render_special_education_forum()
 
@@ -402,7 +402,7 @@ def admin_submit_post_SE():
         generate = ObjectId()
         post = {'_id': generate, 'postTitle': request.form['adminTitle'], 'adminName': request.form['adminName'], 'dateTime': datetime.now(), 'postContent': content, 'amount': 0}
         post = collection.insert_one(post)
-        action = name + '<span class="createColor"> posted </span><b><a href="https://razzoforumproject.herokuapp.com/viewSEA?thread=' + str(generate) + '">' + request.form['adminTitle'] + '</a></b> in special education forum'
+        action = request.form['adminName'] + '<span class="createColor"> posted </span><b><a href="https://razzoforumproject.herokuapp.com/viewSEA?thread=' + str(generate) + '">' + request.form['adminTitle'] + '</a></b> in special education forum'
         add_admin_log(datetime.now(), action, 'none')
     return render_special_education_forum()
 
