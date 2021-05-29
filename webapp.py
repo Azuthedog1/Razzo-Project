@@ -82,7 +82,6 @@ def authorized():
     return render_template('login.html', message = message)
 
 def send_email():
-    port = 465
     smtp_server = 'smtp.gmail.com'
     sender_email = 'sbhsparentboard@gmail.com'
     receiver_email = 'ponmorw@gmail.com'
@@ -92,34 +91,36 @@ def send_email():
     message['From'] = sender_email
     message['To'] = receiver_email
     text = """\
-    Hello <name>,
-    Your post <title> has recieved a response from a staff member.
+    Hello name,
+    Your post title has recieved a response from a staff member.
     <link>
     
-    Hola <name>,
-    Tu publicación <title> ha recibido una respuesta de un miembro del personal.
+    Hola name,
+    Tu publicación title ha recibido una respuesta de un miembro del personal.
     <link>"""
     html = """\
     <html>
         <body>
-            <h2>Hi, <name></h2><br>
-            <p>Your post <title> has recieved a response from a staff member<br>
+            <h2>Hi, name</h2><br>
+            <p>Your post title has recieved a response from a staff member<br>
             <a href="http://www.realpython.com">Link to Post</a></p><br><br>
-            <h2>Hola, <name></h2><br>
-            <p>Tu publicación <title> ha recibido una respuesta de un miembro del personal.<br>
+            <h2>Hola, name</h2><br>
+            <p>Tu publicación title ha recibido una respuesta de un miembro del personal.<br>
             <a href="http://www.realpython.com">Enlace a la publicación</a><br>
             </p>
         </body>
     </html>
     """
-    part1 = MIMEText(text, "plain")
-    part2 = MIMEText(html, "html")
+    part1 = MIMEText(text, 'plain')
+    part2 = MIMEText(html, 'html')
     message.attach(part1)
     message.attach(part2)
     context = ssl.create_default_context()
-    with smtplib.SMTP_SSL(smtp_server, port, context=context) as server:
+    with smtplib.SMTP_SSL("smtp.gmail.com", 465, context=context) as server:
         server.login(sender_email, password)
-        server.sendmail(sender_email, receiver_email, message)
+        server.sendmail(
+        sender_email, receiver_email, message.as_string()
+        )
 
 @app.route('/englishlearnerforum')
 def render_english_learner_forum():
