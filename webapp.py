@@ -1133,6 +1133,7 @@ def bump_post():
             return render_special_education_forum()
         if collection == db['ELLA'] or collection == db['ELLU']:
             action = session['user_data']['login'] + '<span class="vettingColor"> bumped </span><b><a href="https://razzoforumproject.herokuapp.com/viewSEU?thread=' + objectIDPost + '">' + post.get('postTitle') + '</a></b> in english language learner forum'
+            add_admin_log(datetime.now(), action, 'none')
             return render_english_learner_forum()
     return render_template('information.html')
 
