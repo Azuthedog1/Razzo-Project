@@ -213,6 +213,10 @@ tr {
   border-left: 1px solid Grey;
 }
 
+.big {
+  font-size: 13px;
+}
+
 .navbar-default {
   background-color: #ffffff;
   border: none;
