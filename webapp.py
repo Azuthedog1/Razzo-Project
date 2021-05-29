@@ -101,12 +101,13 @@ def send_email():
     html = """\
     <html>
         <body>
-            <p><b>Hi, name</b><br>
-            Your post title has recieved a response from a staff member<br>
+            <p><b>Hi, name.</b><br>
+            Your post title has recieved a response from a staff member.<br>
             <a href="http://www.realpython.com">Link to Post</a></p><br><br>
-            <b>Hola, name</b><br>
-            <p>Tu publicación title ha recibido una respuesta de un miembro del personal.<br>
+            <b>Hola, name.</b><br>
+            Tu publicación title ha recibido una respuesta de un miembro del personal.<br>
             <a href="http://www.realpython.com">Enlace a la publicación</a><br>
+            <small>*Please do not response to this email / Por favor, no responda a este correo electrónico.</small>
             </p>
         </body>
     </html>
