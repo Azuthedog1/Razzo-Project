@@ -430,7 +430,7 @@ def submit_comment():
             content = Markup(content[1:len(content)-1])
             sanitize(content)
             post['comment' + lastNumber] = {'adminName': request.form['adminName'], 'dateTime': datetime.now(), 'postContent': content}
-            post['amount'] = post.get('amount') - 1
+            post['amount'] = post.get('amount') + 1
             collection.replace_one({'_id': ObjectId(objectIDPost)}, post)
         else:
             content = request.form['userMessage']
