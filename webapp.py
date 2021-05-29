@@ -430,6 +430,7 @@ def submit_comment():
             content = Markup(content[1:len(content)-1])
             sanitize(content)
             post['comment' + lastNumber] = {'adminName': request.form['adminName'], 'dateTime': datetime.now(), 'postContent': content}
+            post['amount'] = post.get('amount') - 1
             collection.replace_one({'_id': ObjectId(objectIDPost)}, post)
         else:
             content = request.form['userMessage']
@@ -497,11 +498,13 @@ def delete_comment():
                 action = session['user_data']['login'] + '<span class="deleteColor"> deleted </span>a comment by ' + post.get(comment, {}).get('adminName') + ' in the post <b><a href="https://razzoforumproject.herokuapp.com/viewSEA?thread=' + objectIDPost + '">' + post.get('postTitle') + '</a></b> in special education forum'
                 add_admin_log(datetime.now(), action, post.get(comment, {}).get('postContent'))
                 post.pop(comment, None)
+                post['amount'] = post.get('amount') - 1
                 collection.replace_one({'_id': ObjectId(objectIDPost)}, post)
             else:
                 action = session['user_data']['login'] + '<span class="deleteColor"> deleted </span>a comment by ' + post.get(comment, {}).get('parentName') + ' / ' + post.get(comment, {}).get('studentNameGrade') + ' in the post <b><a href="https://razzoforumproject.herokuapp.com/viewSEA?thread=' + objectIDPost + '">' + post.get('postTitle') + '</a></b> in special education forum'
                 add_admin_log(datetime.now(), action, post.get(comment, {}).get('postContent'))
                 post.pop(comment, None)
+                post['amount'] = post.get('amount') - 1
                 collection.replace_one({'_id': ObjectId(objectIDPost)}, post)
             return view_SEA(objectIDPost)
         elif collection == db['SEU']:
@@ -509,11 +512,13 @@ def delete_comment():
                 action = session['user_data']['login'] + '<span class="deleteColor"> deleted </span>a comment by ' + post.get(comment, {}).get('adminName') + ' in the post <b><a href="https://razzoforumproject.herokuapp.com/viewSEU?thread=' + objectIDPost + '">' + post.get('postTitle') + '</a></b> in special education forum'
                 add_admin_log(datetime.now(), action, post.get(comment, {}).get('postContent'))
                 post.pop(comment, None)
+                post['amount'] = post.get('amount') - 1
                 collection.replace_one({'_id': ObjectId(objectIDPost)}, post)
             else:
                 action = session['user_data']['login'] + '<span class="deleteColor"> deleted </span>a comment by ' + post.get(comment, {}).get('parentName') + ' / ' + post.get(comment, {}).get('studentNameGrade') + ' in the post <b><a href="https://razzoforumproject.herokuapp.com/viewSEU?thread=' + objectIDPost + '">' + post.get('postTitle') + '</a></b> in special education forum'
                 add_admin_log(datetime.now(), action, post.get(comment, {}).get('postContent'))
                 post.pop(comment, None)
+                post['amount'] = post.get('amount') - 1
                 collection.replace_one({'_id': ObjectId(objectIDPost)}, post)
             return view_SEU(objectIDPost)
         elif collection == db['ELLA']:
@@ -521,11 +526,13 @@ def delete_comment():
                 action = session['user_data']['login'] + '<span class="deleteColor"> deleted </span>a comment by ' + post.get(comment, {}).get('adminName') + ' in the post <b><a href="https://razzoforumproject.herokuapp.com/viewELLA?thread=' + objectIDPost + '">' + post.get('postTitle') + '</a></b> in english language learner forum'
                 add_admin_log(datetime.now(), action, post.get(comment, {}).get('postContent'))
                 post.pop(comment, None)
+                post['amount'] = post.get('amount') - 1
                 collection.replace_one({'_id': ObjectId(objectIDPost)}, post)
             else:
                 action = session['user_data']['login'] + '<span class="deleteColor"> deleted </span>a comment by ' + post.get(comment, {}).get('parentName') + ' / ' + post.get(comment, {}).get('studentNameGrade') + ' in the post <b><a href="https://razzoforumproject.herokuapp.com/viewELLA?thread=' + objectIDPost + '">' + post.get('postTitle') + '</a></b> in english language learner forum'
                 add_admin_log(datetime.now(), action, post.get(comment, {}).get('postContent'))
                 post.pop(comment, None)
+                post['amount'] = post.get('amount') - 1
                 collection.replace_one({'_id': ObjectId(objectIDPost)}, post)
             return view_ELLA(objectIDPost)
         elif collection == db['ELLU']:
@@ -533,11 +540,13 @@ def delete_comment():
                 action = session['user_data']['login'] + '<span class="deleteColor"> deleted </span>a comment by ' + post.get(comment, {}).get('adminName') + ' in the post <b><a href="https://razzoforumproject.herokuapp.com/viewELLU?thread=' + objectIDPost + '">' + post.get('postTitle') + '</a></b> in english language learner forum'
                 add_admin_log(datetime.now(), action, post.get(comment, {}).get('postContent'))
                 post.pop(comment, None)
+                post['amount'] = post.get('amount') - 1
                 collection.replace_one({'_id': ObjectId(objectIDPost)}, post)
             else:
                 action = session['user_data']['login'] + '<span class="deleteColor"> deleted </span>a comment by ' + post.get(comment, {}).get('parentName') + ' / ' + post.get(comment, {}).get('studentNameGrade') + ' in the post <b><a href="https://razzoforumproject.herokuapp.com/viewELLU?thread=' + objectIDPost + '">' + post.get('postTitle') + '</a></b> in english language learner forum'
                 add_admin_log(datetime.now(), action, post.get(comment, {}).get('postContent'))
                 post.pop(comment, None)
+                post['amount'] = post.get('amount') - 1
                 collection.replace_one({'_id': ObjectId(objectIDPost)}, post)
             return view_ELLU(objectIDPost)
     return render_template('information.html')
