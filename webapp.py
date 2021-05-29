@@ -111,7 +111,7 @@ def render_english_learner_forum():
     client = pymongo.MongoClient(connection_string)
     db = client[db_name]
     collection = db['ELLU']
-    cursor = collection.find({}).sort('_id', -1)
+    cursor = collection.find({}).sort('_id', -1).limit(500)
     bigString1 = ''
     bigString2 = ''
     if 'github_token' in session:
@@ -156,7 +156,7 @@ def render_english_learner_forum():
                     loc_dt = loc_dt.strftime('%m/%d/%Y, ' + hour + ':%M AM PT')
                 bigString1 += '<td class="col4"><i>' + loc_dt + '</i></td></tr>'
     collection = db['ELLA']
-    cursor = collection.find({}).sort('_id', -1)
+    cursor = collection.find({}).sort('_id', -1).limit(1000)
     if 'github_token' in session: 
         for post in cursor:
             utc_dt = datetime(int(post.get('dateTime').strftime('%Y')), int(post.get('dateTime').strftime('%m')), int(post.get('dateTime').strftime('%d')), int(post.get('dateTime').strftime('%H')), int(post.get('dateTime').strftime('%M')), 0, tzinfo=pytz.utc)
@@ -198,7 +198,7 @@ def render_special_education_forum():
     client = pymongo.MongoClient(connection_string)
     db = client[db_name]
     collection = db['SEU']
-    cursor = collection.find({}).sort('_id', -1)
+    cursor = collection.find({}).sort('_id', -1).limit(1000)
     bigString1 = ''
     bigString2 = ''
     if 'github_token' in session:
@@ -243,7 +243,7 @@ def render_special_education_forum():
                     loc_dt = loc_dt.strftime('%m/%d/%Y, ' + hour + ':%M AM PT')
                 bigString1 += '<td class="col4"><i>' + loc_dt + '</i></td></tr>'
     collection = db['SEA']
-    cursor = collection.find({}).sort('_id', -1)
+    cursor = collection.find({}).sort('_id', -1).limit(1000)
     if 'github_token' in session: 
         for post in cursor:
             utc_dt = datetime(int(post.get('dateTime').strftime('%Y')), int(post.get('dateTime').strftime('%m')), int(post.get('dateTime').strftime('%d')), int(post.get('dateTime').strftime('%H')), int(post.get('dateTime').strftime('%M')), 0, tzinfo=pytz.utc)
