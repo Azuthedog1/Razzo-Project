@@ -203,16 +203,9 @@ tr {
   color: #d4af37;
 }
 
-.container {
-  width: 100%;
-  height: 300px;
-}
-
 .image {
   width: 100%;
-  overflow: hidden;
 }
-
 
 .indent {
   margin-left: 5px;
