@@ -1142,8 +1142,10 @@ def bump_post():
             post = collection.find_one({'_id': ObjectId(objectIDPost)})
         if post == None:
             collection = db['ELLU']
-        collection.find_one_and_update({'_id': ObjectId(objectIDPost)},
-                                       {'$set': {'_id': ObjectId()}})
+            post = collection.find_one({'_id': ObjectId(objectIDPost)})
+        collection.delete_one({'_id': ObjectId(objectIDPost)})
+        post.pop('_id', None)
+        collection.insert_one(post)
         if collection == db['SEU']:
             action = session['user_data']['login'] + '<span class="vettingColor"> bumped </span><b><a href="https://razzoforumproject.herokuapp.com/viewSEU?thread=' + objectIDPost + '">' + post.get('postTitle') + '</a></b> in special education forum'
             add_admin_log(datetime.now(), action, 'none')
