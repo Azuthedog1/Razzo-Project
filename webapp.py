@@ -342,7 +342,7 @@ def user_submit_post_ELL():
         else:
             email = request.form['userEmail']
         generate = ObjectId()
-        post = {'_id': generate, 'postTitle': request.form['userTitle'], 'parentName': request.form['userName']), 'studentNameGrade': request.form['userStudent'], 'parentEmail': email, 'anonymous': request.form['anon'], 'dateTime': datetime.now(), 'postContent': content, 'approved': 'false', 'amount': 0}
+        post = {'_id': generate, 'postTitle': request.form['userTitle'], 'parentName': request.form['userName'], 'studentNameGrade': request.form['userStudent'], 'parentEmail': email, 'anonymous': request.form['anon'], 'dateTime': datetime.now(), 'postContent': content, 'approved': 'false', 'amount': 0}
         collection.insert_one(post)
         action = name + '<span class="createColor"> posted </span><b><a href="https://razzoforumproject.herokuapp.com/viewELLU?thread=' + str(generate) + '">' + request.form['userTitle'] + '</a></b> in english language learner forum'
         add_admin_log(datetime.now(), action, 'none')
