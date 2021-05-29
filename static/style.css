@@ -204,7 +204,8 @@ tr {
 }
 
 .container {
-  height: 300px
+  width: 100%;
+  height: 300px;
 }
 
 .image {
@@ -212,16 +213,6 @@ tr {
   overflow: hidden;
 }
 
-.centered {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  border: 5px solid White;
-  color: white;
-  text-align: center;
-  font-size: 40px;
-}
 
 .indent {
   margin-left: 5px;
