@@ -113,6 +113,7 @@ footer {
 
 tr {
   border-bottom: 1px solid #999999;
+  min-height: 60px;
 }
 
 .toprow {
