@@ -11,7 +11,7 @@ import pymongo
 from datetime import datetime, timedelta
 from pytz import timezone
 import pytz
-import smtplib
+import smtplib, ssl
 
 app = Flask(__name__)
 
@@ -80,28 +80,19 @@ def authorized():
     return render_template('login.html', message = message)
 
 def send_email():
-    gmail_user = 'sbhsparentboard@gmail.com'
-    gmail_password = 'PBh5inLgFKvD'
-    sent_from = gmail_user
-    to = ['ponmorw@gmail.com']
-    subject = 'SBHS Parent Board Notification'
-    body = 'Hello ' + 'name' + '. A staff member at Santa Barbara High School has commented on your post ' + 'title' + '. ' + 'link'
-    email_text = """\
-    From: %s
-    To: %s
-    Subject: %s
-    %s
-    """ % (sent_from, ", ".join(to), subject, body)
-    try:
-        server_ssl = smtplib.SMTP_SSL('localhost', 465)
-        server_ssl.ehlo()
-        server.login(gmail_user, gmail_password)
-        server.sendmail(sent_from, to, email_text)
-        server.close()
-    except:
-        return None
-    return None
-    #not working so maybe we won't have time to implement this.
+    port = 465
+    smtp_server = 'smtp.gmail.com'
+    sender_email = 'sbhsparentboard@gmail.com'
+    receiver_email = 'ponmorw@gmail.com'
+    password = 'PBh5inLgFKvD'
+    message = """\
+    Subject: Hi there
+
+    This message is sent from Python."""
+    context = ssl.create_default_context()
+    with smtplib.SMTP_SSL(smtp_server, port, context=context) as server:
+        server.login(sender_email, password)
+        server.sendmail(sender_email, receiver_email, message)
 
 @app.route('/englishlearnerforum')
 def render_english_learner_forum():
