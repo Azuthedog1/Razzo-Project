@@ -137,25 +137,26 @@ tr {
 
 .col1 {
   /*width: 7.5%;*/
-  width: 35%;
+  width: 30%;
   padding: 5px;
+  padding-left: 10px;
 }
 
 .col2 {
   /*width: 10%;*/
-  width: 25%;
+  width: 30%;
   padding: 5px;
 }
 
 .col3 {
   /*width: 10%;*/
-  width: 7.5%;
+  width: 5%;
   padding: 5px;
 }
 
 .col4 {
   text-align: right;
-  width: 32.5%;
+  width: 35%;
   /*width: 22.5%;*/
   padding: 5px;
 }
