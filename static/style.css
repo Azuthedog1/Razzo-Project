@@ -146,6 +146,7 @@ tr {
 
 .col2 {
   /*width: 10%;*/
+  text-align: right;
   width: 15%;
   padding: 5px;
 }
