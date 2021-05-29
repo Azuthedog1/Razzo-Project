@@ -137,19 +137,19 @@ tr {
 
 .col1 {
   /*width: 7.5%;*/
-  width: 7.5%;
+  width: 35%;
   padding: 5px;
 }
 
 .col2 {
   /*width: 10%;*/
-  width: 35%;
+  width: 25%;
   padding: 5px;
 }
 
 .col3 {
   /*width: 10%;*/
-  width: 25%;
+  width: 7.5%;
   padding: 5px;
 }
 
