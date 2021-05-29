@@ -1127,14 +1127,22 @@ def bump_post():
         collection.delete_one({'_id': ObjectId(objectIDPost)})
         post.pop('_id', None)
         collection.insert_one(post)
-        if collection == db['SEU'] or collection == db['SEA']:
+        if collection == db['SEU']:
             action = session['user_data']['login'] + '<span class="vettingColor"> bumped </span><b><a href="https://razzoforumproject.herokuapp.com/viewSEU?thread=' + objectIDPost + '">' + post.get('postTitle') + '</a></b> in special education forum'
             add_admin_log(datetime.now(), action, 'none')
             return render_special_education_forum()
-        if collection == db['ELLA'] or collection == db['ELLU']:
-            action = session['user_data']['login'] + '<span class="vettingColor"> bumped </span><b><a href="https://razzoforumproject.herokuapp.com/viewSEU?thread=' + objectIDPost + '">' + post.get('postTitle') + '</a></b> in english language learner forum'
+        if collection == db['SEA']:
+            action = session['user_data']['login'] + '<span class="vettingColor"> bumped </span><b><a href="https://razzoforumproject.herokuapp.com/viewSEA?thread=' + objectIDPost + '">' + post.get('postTitle') + '</a></b> in special education forum'
             add_admin_log(datetime.now(), action, 'none')
-            return render_english_learner_forum()
+            return render_special_education_forum()
+        if collection == db['ELLA']:
+            action = session['user_data']['login'] + '<span class="vettingColor"> bumped </span><b><a href="https://razzoforumproject.herokuapp.com/viewELLA?thread=' + objectIDPost + '">' + post.get('postTitle') + '</a></b> in english language learner forum'
+            add_admin_log(datetime.now(), action, 'none')
+            return render_english_learner_forum():
+        if collection == db['ELLU']:
+            action = session['user_data']['login'] + '<span class="vettingColor"> bumped </span><b><a href="https://razzoforumproject.herokuapp.com/viewELLU?thread=' + objectIDPost + '">' + post.get('postTitle') + '</a></b> in special education forum'
+            add_admin_log(datetime.now(), action, 'none')
+            return render_english_learner_forum():
     return render_template('information.html')
 
 #make sure the jinja variables use Markup 
