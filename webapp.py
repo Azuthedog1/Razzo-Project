@@ -81,7 +81,7 @@ def authorized():
     session['username'] = 'admin'
     return render_template('login.html', message = message)
 
-def send_email(receiver_email, title, name):
+def send_email(receiver_email, title, name, link):
     smtp_server = 'smtp.gmail.com'
     sender_email = 'sbhsparentboard@gmail.com'
     password = 'PBh5inLgFKvD'
@@ -100,13 +100,13 @@ def send_email(receiver_email, title, name):
     html = """\
     <html>
         <body>
-            <p><b>Hi, """ + name + """\.</b><br>
-            Your post title has recieved a response from a staff member.<br>
-            <a href="http://www.realpython.com">Link to Post</a><br>
+            <p><b>Hi, """ + name + """.</b><br>
+            Your post """ + title + """ has recieved a response from a staff member.<br>
+            <a href='""" + link + """'>Link to Post</a><br>
             --------------------------------------------------------------------------------------------------------<br>
-            <b>Hola, """ + name + """\. </b><br>
-            Tu publicación title ha recibido una respuesta de un miembro del personal.<br>
-            <a href="http://www.realpython.com">Enlace a la publicación</a><br>
+            <b>Hola, """ + name + """. </b><br>
+            Tu publicación """ + title + """ ha recibido una respuesta de un miembro del personal.<br>
+            <a href='""" + link + """'>Enlace a la publicación</a><br>
             --------------------------------------------------------------------------------------------------------<br>
             <small>*Please do not response to this email / Por favor, no responda a este correo electrónico.</small>
             </p>
@@ -458,7 +458,8 @@ def submit_comment():
             action = request.form['adminName'] + '<span class="createColor"> commented </span>on <b><a href="https://razzoforumproject.herokuapp.com/viewSEU?thread=' + objectIDPost + '">' + post.get('postTitle') + '</a></b> in special education forum'
             add_admin_log(datetime.now(), action, 'none')
             if post.get('parentEmail') != 'Email not provided':
-                send_email(post.get('parentEmail'), post.get('postTitle'), post.get('parentName'))
+                link = 'https://razzoforumproject.herokuapp.com/viewSEU?thread=' + objectIDPost 
+                send_email(post.get('parentEmail'), post.get('postTitle'), post.get('parentName'), link)
         else:
             action = request.form['userName'] + '<span class="createColor"> commented </span>on <b><a href="https://razzoforumproject.herokuapp.com/viewSEU?thread=' + objectIDPost + '">' + post.get('postTitle') + '</a></b> in special education forum'
             add_admin_log(datetime.now(), action, 'none')
@@ -476,7 +477,8 @@ def submit_comment():
             action = request.form['adminName'] + '<span class="createColor"> commented </span>on <b><a href="https://razzoforumproject.herokuapp.com/viewELLU?thread=' + objectIDPost + '">' + post.get('postTitle') + '</a></b> in english language learner forum'
             add_admin_log(datetime.now(), action, 'none')
             if post.get('parentEmail') != 'Email not provided':
-                send_email(post.get('parentEmail'), post.get('postTitle'), post.get('parentName'))
+                link = 'https://razzoforumproject.herokuapp.com/viewSEU?thread=' + objectIDPost 
+                send_email(post.get('parentEmail'), post.get('postTitle'), post.get('parentName'), link)
         else:
             action = request.form['userName'] + '<span class="createColor"> commented </span>on <b><a href="https://razzoforumproject.herokuapp.com/viewELLU?thread=' + objectIDPost + '">' + post.get('postTitle') + '</a></b> in english language learner forum'
             add_admin_log(datetime.now(), action, 'none')
