@@ -330,7 +330,7 @@ def user_submit_post_ELL():
             email = 'Email not provided'
         else:
             email = request.form['userEmail']
-        post = {'postTitle': request.form['userTitle'], 'parentName': request.form['userName'], 'studentNameGrade': request.form['userStudent'], 'parentEmail': email, 'anonymous': request.form['anon'], 'dateTime': datetime.now(), 'postContent': content, 'approved': 'false'}
+        post = {'postTitle': request.form['userTitle'], 'parentName': request.form['userName'], 'studentNameGrade': request.form['userStudent'], 'parentEmail': email, 'anonymous': request.form['anon'], 'dateTime': datetime.now(), 'postContent': content, 'approved': 'false', 'comments': 0}
         collection.insert_one(post)
         post = collection.find_one({'postTitle': request.form['userTitle'], 'parentName': request.form['userName'], 'studentNameGrade': request.form['userStudent'], 'parentEmail': email, 'anonymous': request.form['anon'], 'postContent': content})
         action = request.form['userName'] + '<span class="createColor"> posted </span><b><a href="https://razzoforumproject.herokuapp.com/viewELLU?thread=' + str(post.get('_id')) + '">' + request.form['userTitle'] + '</a></b> in english language learner forum'
@@ -349,7 +349,7 @@ def admin_submit_post_ELL():
         content = content.replace('\\"', '')
         content = Markup(content[1:len(content)-1])
         sanitize(content)
-        post = {'postTitle': request.form['adminTitle'], 'adminName': request.form['adminName'], 'dateTime': datetime.now(), 'postContent': content}#put all info here using variables
+        post = {'postTitle': request.form['adminTitle'], 'adminName': request.form['adminName'], 'dateTime': datetime.now(), 'postContent': content, 'comments': 0}
         collection.insert_one(post)
         post = collection.find_one({'postTitle': request.form['adminTitle'], 'adminName': request.form['adminName'], 'postContent': content})
         action = request.form['adminName'] + '<span class="createColor"> posted </span><b><a href="https://razzoforumproject.herokuapp.com/viewELLA?thread=' + str(post.get('_id')) + '">' + request.form['adminTitle'] + '</a></b> in english language learner forum'
@@ -372,7 +372,7 @@ def user_submit_post_SE():
             email = 'Email not provided'
         else:
             email = request.form['userEmail']
-        post = {'postTitle': request.form['userTitle'], 'parentName': request.form['userName'], 'studentNameGrade': request.form['userStudent'], 'parentEmail': email, 'anonymous': request.form['anon'], 'dateTime': datetime.now(), 'postContent': content, 'approved': 'false'}
+        post = {'postTitle': request.form['userTitle'], 'parentName': request.form['userName'], 'studentNameGrade': request.form['userStudent'], 'parentEmail': email, 'anonymous': request.form['anon'], 'dateTime': datetime.now(), 'postContent': content, 'approved': 'false', 'comments': 0}
         post = collection.insert_one(post)
         post = collection.find_one({'postTitle': request.form['userTitle'], 'parentName': request.form['userName'], 'studentNameGrade': request.form['userStudent'], 'parentEmail': email, 'anonymous': request.form['anon'], 'postContent': content})
         action = request.form['userName'] + '<span class="createColor"> posted </span><b><a href="https://razzoforumproject.herokuapp.com/viewSEU?thread=' + str(post.get('_id')) + '">' + request.form['userTitle'] + '</a></b> in special education forum'
@@ -391,7 +391,7 @@ def admin_submit_post_SE():
         content = content.replace('\\"', '')
         content = Markup(content[1:len(content)-1])
         sanitize(content)
-        post = {'postTitle': request.form['adminTitle'], 'adminName': request.form['adminName'], 'dateTime': datetime.now(), 'postContent': content}#put all info here using variables
+        post = {'postTitle': request.form['adminTitle'], 'adminName': request.form['adminName'], 'dateTime': datetime.now(), 'postContent': content, 'comments': 0}
         post = collection.insert_one(post)
         post = collection.find_one({'postTitle': request.form['adminTitle'], 'adminName': request.form['adminName'], 'postContent': content})
         action = request.form['adminName'] + '<span class="createColor"> posted </span><b><a href="https://razzoforumproject.herokuapp.com/viewSEA?thread=' + str(post.get('_id')) + '">' + request.form['adminTitle'] + '</a></b> in special education forum'
@@ -562,6 +562,7 @@ def vet_comment():
             collection = db['ELLU']
             post = collection.find_one({'_id': ObjectId(objectIDPost)})
         post[request.form['comment']]['approved'] = 'true'
+        post['comments'] = post.get('comments') + 1
         collection.replace_one({'_id': ObjectId(objectIDPost)}, post)
         if collection == db['SEA']:
             action = session['user_data']['login'] + '<span class="vettingColor"> vetted </span>a comment by ' + post.get(request.form['comment'], {}).get('parentName') + ' in the post <b><a href="https://razzoforumproject.herokuapp.com/viewSEA?thread=' + objectIDPost + '">' + post.get('postTitle') + '</a></b> in special education forum'
@@ -602,6 +603,7 @@ def unvet_comment():
             collection = db['ELLU']
             post = collection.find_one({'_id': ObjectId(objectIDPost)})
         post[request.form['comment']]['approved'] = 'false'
+        post['comments'] = post.get('comments') - 1
         collection.replace_one({'_id': ObjectId(objectIDPost)}, post)
         if collection == db['SEA']:
             action = session['user_data']['login'] + '<span class="vettingColor"> unvetted </span>a comment by ' + post.get(request.form['comment'], {}).get('parentName') + ' in the post <b><a href="https://razzoforumproject.herokuapp.com/viewSEA?thread=' + objectIDPost + '">' + post.get('postTitle') + '</a></b> in special education forum'
