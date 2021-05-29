@@ -19,6 +19,7 @@ footer {
 }
 .footerBox {
   margin: auto;
+  border-bottom: 0px;
   width: 70%;
   margin-top: 25px;
 }
