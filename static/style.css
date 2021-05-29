@@ -10,8 +10,14 @@ footer {
   height: 150px;
   margin-top: 20px;
   bottom: 0;
-  background-color: #e0e0e0;
-  border-top: 1px solid #999999;
+  background-color: #2f2c42;
+  border-top: 1px solid Grey;
+}
+
+.footerBox {
+  margin: auto;
+  width: 70%;
+  top: 10%;
 }
 
 .top {
