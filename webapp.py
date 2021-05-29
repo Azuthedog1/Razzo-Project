@@ -118,7 +118,7 @@ def render_english_learner_forum():
         for post in cursor:
             bigString1 += ('<tr><td class="col1"><form action="/viewELLU"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton"><b>' + post.get('postTitle') + '</b></button></form></td>' +
                            '<td class="col2">' + post.get('parentName') + ' / ' + post.get('studentNameGrade') + ' / ' + post.get('parentEmail') + '</td>' +
-                           '<td class="col3"><span class="glyphicon glyphicon-comment"></span> ' + str(post.get('comments')) + '</td>')
+                           '<td class="col3"><span class="glyphicon glyphicon-comment"></span> ' + str(post.get('commentNumber')) + '</td>')
             if(post.get('approved') == 'false'):
                 bigString1 += '<td class="col4"><form action="/vetELL" method="post" class="inLine"><button type="submit" class="btn btn-warning btn-sm" name="vet" value="' + str(post.get('_id'))+ '">' + '<span class="glyphicon glyphicon-plus"></span> Vet</button></form> '
             else:
@@ -143,7 +143,7 @@ def render_english_learner_forum():
                     bigString1 += '<td class="col2">Anonymous Post</td>'
                 else:
                     bigString1 += '<td class="col2">' + post.get('parentName') + '</td>'
-                bigString += '<td class="col3"><span class="glyphicon glyphicon-comment"></span> ' + str(post.get('comments')) + '</td>'
+                bigString += '<td class="col3"><span class="glyphicon glyphicon-comment"></span> ' + str(post.get('commentNumber')) + '</td>'
                 utc_dt = datetime(int(post.get('dateTime').strftime('%Y')), int(post.get('dateTime').strftime('%m')), int(post.get('dateTime').strftime('%d')), int(post.get('dateTime').strftime('%H')), int(post.get('dateTime').strftime('%M')), 0, tzinfo=pytz.utc)
                 loc_dt = utc_dt.astimezone(timezone('America/Los_Angeles'))
                 if int(loc_dt.strftime('%H')) > 12:
@@ -171,7 +171,7 @@ def render_english_learner_forum():
                 loc_dt = loc_dt.strftime('%m/%d/%Y, ' + hour + ':%M AM PT')
             bigString2 += ('<tr><td class="col1"><form action="/viewELLA"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton"><b>' + post.get('postTitle') + '</b></button></form></td>' +
                            '<td class="col2">' + post.get('adminName') + '</td>' +
-                           '<td class="col3"><span class="glyphicon glyphicon-comment"></span> ' + str(post.get('comments')) + '</td>' +
+                           '<td class="col3"><span class="glyphicon glyphicon-comment"></span> ' + str(post.get('commentNumber')) + '</td>' +
                            '<td class="col4"><form action="/bumpPost" method="post" class="inLine"><button type="submit" class="btn btn-info btn-sm" name="bump" value="' + str(post.get('_id'))+ '">' + '<span class="glyphicon glyphicon-arrow-up"></span> Bump</button></form> <button type="button" class="btn btn-danger btn-sm delete"><span class="glyphicon glyphicon-trash"></span> Delete</button><button type="button" class="btn btn-danger btn-sm cancel inLine">Cancel</button> <form action="/deleteELL" method="post" class="inLine confirm"><button type="submit" class="btn btn-danger btn-sm" name="delete" value="' + str(post.get('_id')) + '"><span class="glyphicon glyphicon-trash"></span>Confirm Delete</button></form><br><i>' + loc_dt + '</i></td></tr>')
     else:
         for post in cursor:
@@ -187,7 +187,7 @@ def render_english_learner_forum():
                 loc_dt = loc_dt.strftime('%m/%d/%Y, ' + hour + ':%M AM PT')
             bigString2 += ('<tr><td class="col1"><form action="/viewELLA"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton"><b>' + post.get('postTitle') + '</b></button></form></td>' +
                            '<td class="col2">' + post.get('adminName') + '</td>' +
-                           '<td class="col3"><span class="glyphicon glyphicon-comment"></span> ' + str(post.get('comments')) + '</td>' +
+                           '<td class="col3"><span class="glyphicon glyphicon-comment"></span> ' + str(post.get('commentNumber')) + '</td>' +
                            '<td class="col4"><i>' + loc_dt + '</i></td></tr>')
     return render_template('englishlearnerforum.html', ELLUPosts = Markup(bigString1), ELLAPosts = Markup(bigString2))
 
@@ -205,7 +205,7 @@ def render_special_education_forum():
         for post in cursor:
             bigString1 += ('<tr><td class="col1"><form action="/viewSEU"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton"><b>' + post.get('postTitle') + '</b></button></form></td>' +
                            '<td class="col2">' + post.get('parentName') + ' / ' + post.get('studentNameGrade') + ' / ' + post.get('parentEmail') + '</td>' +
-                           '<td class="col3"><span class="glyphicon glyphicon-comment"></span> ' + str(post.get('comments')) + '</td>')
+                           '<td class="col3"><span class="glyphicon glyphicon-comment"></span> ' + str(post.get('commentNumber')) + '</td>')
             if(post.get('approved') == 'false'):
                 bigString1 += '<td class="col4"><form action="/vetSE" method="post" class="inLine"><button type="submit" class="btn btn-warning btn-sm" name="vet" value="' + str(post.get('_id'))+ '">' + '<span class="glyphicon glyphicon-plus"></span> Vet</button></form> '
             else:
@@ -230,7 +230,7 @@ def render_special_education_forum():
                     bigString1 += '<td class="col2">Anonymous Post</td>'
                 else:
                     bigString1 += '<td class="col2">' + post.get('parentName') + '</td>'
-                bigString += '<td class="col3"><span class="glyphicon glyphicon-comment"></span> ' + str(post.get('comments')) + '</td>'
+                bigString += '<td class="col3"><span class="glyphicon glyphicon-comment"></span> ' + str(post.get('commentNumber')) + '</td>'
                 utc_dt = datetime(int(post.get('dateTime').strftime('%Y')), int(post.get('dateTime').strftime('%m')), int(post.get('dateTime').strftime('%d')), int(post.get('dateTime').strftime('%H')), int(post.get('dateTime').strftime('%M')), 0, tzinfo=pytz.utc)
                 loc_dt = utc_dt.astimezone(timezone('America/Los_Angeles'))
                 if int(loc_dt.strftime('%H')) > 12:
@@ -258,7 +258,7 @@ def render_special_education_forum():
                 loc_dt = loc_dt.strftime('%m/%d/%Y, ' + hour + ':%M AM PT')
             bigString2 += ('<tr><td class="col1"><form action="/viewSEA"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton"><b>' + post.get('postTitle') + '</b></button></form></td>' +
                            '<td class="col2">' + post.get('adminName') + '</td>' +
-                           '<td class="col3"><span class="glyphicon glyphicon-comment"></span> ' + str(post.get('comments')) + '</td>' +
+                           '<td class="col3"><span class="glyphicon glyphicon-comment"></span> ' + str(post.get('commentNumber')) + '</td>' +
                            '<td class="col4"><form action="/bumpPost" method="post" class="inLine"><button type="submit" class="btn btn-info btn-sm" name="bump" value="' + str(post.get('_id'))+ '">' + '<span class="glyphicon glyphicon-arrow-up"></span> Bump</button></form> <button type="button" class="btn btn-danger btn-sm delete"><span class="glyphicon glyphicon-trash"></span> Delete</button><button type="button" class="btn btn-danger btn-sm cancel inLine">Cancel</button> <form action="/deleteSE" method="post" class="inLine confirm"><button type="submit" class="btn btn-danger btn-sm" name="delete" value="' + str(post.get('_id')) + '"><span class="glyphicon glyphicon-trash"></span> Confirm Delete</button></form><br><i>' + loc_dt + '</i></td></tr>')
     else:
         for post in cursor:
@@ -274,7 +274,7 @@ def render_special_education_forum():
                 loc_dt = loc_dt.strftime('%m/%d/%Y, ' + hour + ':%M AM PT')
             bigString2 += ('<tr><td class="col1"><form action="/viewSEA"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton"><b>' + post.get('postTitle') + '</b></button></form></td>' +
                            '<td class="col2">' + post.get('adminName') + '</td>' +
-                           '<td class="col3"><span class="glyphicon glyphicon-comment"></span> ' + str(post.get('comments')) + '</td>' +
+                           '<td class="col3"><span class="glyphicon glyphicon-comment"></span> ' + str(post.get('commentNumber')) + '</td>' +
                            '<td class="col4"><i>' + loc_dt + '</i></td></tr>')
     return render_template('specialeducationforum.html', SEUPosts = Markup(bigString1), SEAPosts = Markup(bigString2))
 
@@ -330,7 +330,7 @@ def user_submit_post_ELL():
             email = 'Email not provided'
         else:
             email = request.form['userEmail']
-        post = {'postTitle': request.form['userTitle'], 'parentName': request.form['userName'], 'studentNameGrade': request.form['userStudent'], 'parentEmail': email, 'anonymous': request.form['anon'], 'dateTime': datetime.now(), 'postContent': content, 'approved': 'false', 'comments': 0}
+        post = {'postTitle': request.form['userTitle'], 'parentName': request.form['userName'], 'studentNameGrade': request.form['userStudent'], 'parentEmail': email, 'anonymous': request.form['anon'], 'dateTime': datetime.now(), 'postContent': content, 'approved': 'false', 'commentNumber': 0}
         collection.insert_one(post)
         post = collection.find_one({'postTitle': request.form['userTitle'], 'parentName': request.form['userName'], 'studentNameGrade': request.form['userStudent'], 'parentEmail': email, 'anonymous': request.form['anon'], 'postContent': content})
         action = request.form['userName'] + '<span class="createColor"> posted </span><b><a href="https://razzoforumproject.herokuapp.com/viewELLU?thread=' + str(post.get('_id')) + '">' + request.form['userTitle'] + '</a></b> in english language learner forum'
@@ -349,7 +349,7 @@ def admin_submit_post_ELL():
         content = content.replace('\\"', '')
         content = Markup(content[1:len(content)-1])
         sanitize(content)
-        post = {'postTitle': request.form['adminTitle'], 'adminName': request.form['adminName'], 'dateTime': datetime.now(), 'postContent': content, 'comments': 0}
+        post = {'postTitle': request.form['adminTitle'], 'adminName': request.form['adminName'], 'dateTime': datetime.now(), 'postContent': content, 'commentNumber': 0}
         collection.insert_one(post)
         post = collection.find_one({'postTitle': request.form['adminTitle'], 'adminName': request.form['adminName'], 'postContent': content})
         action = request.form['adminName'] + '<span class="createColor"> posted </span><b><a href="https://razzoforumproject.herokuapp.com/viewELLA?thread=' + str(post.get('_id')) + '">' + request.form['adminTitle'] + '</a></b> in english language learner forum'
@@ -372,7 +372,7 @@ def user_submit_post_SE():
             email = 'Email not provided'
         else:
             email = request.form['userEmail']
-        post = {'postTitle': request.form['userTitle'], 'parentName': request.form['userName'], 'studentNameGrade': request.form['userStudent'], 'parentEmail': email, 'anonymous': request.form['anon'], 'dateTime': datetime.now(), 'postContent': content, 'approved': 'false', 'comments': 0}
+        post = {'postTitle': request.form['userTitle'], 'parentName': request.form['userName'], 'studentNameGrade': request.form['userStudent'], 'parentEmail': email, 'anonymous': request.form['anon'], 'dateTime': datetime.now(), 'postContent': content, 'approved': 'false', 'commentNumber': 0}
         post = collection.insert_one(post)
         post = collection.find_one({'postTitle': request.form['userTitle'], 'parentName': request.form['userName'], 'studentNameGrade': request.form['userStudent'], 'parentEmail': email, 'anonymous': request.form['anon'], 'postContent': content})
         action = request.form['userName'] + '<span class="createColor"> posted </span><b><a href="https://razzoforumproject.herokuapp.com/viewSEU?thread=' + str(post.get('_id')) + '">' + request.form['userTitle'] + '</a></b> in special education forum'
@@ -391,7 +391,7 @@ def admin_submit_post_SE():
         content = content.replace('\\"', '')
         content = Markup(content[1:len(content)-1])
         sanitize(content)
-        post = {'postTitle': request.form['adminTitle'], 'adminName': request.form['adminName'], 'dateTime': datetime.now(), 'postContent': content, 'comments': 0}
+        post = {'postTitle': request.form['adminTitle'], 'adminName': request.form['adminName'], 'dateTime': datetime.now(), 'postContent': content, 'commentNumber': 0}
         post = collection.insert_one(post)
         post = collection.find_one({'postTitle': request.form['adminTitle'], 'adminName': request.form['adminName'], 'postContent': content})
         action = request.form['adminName'] + '<span class="createColor"> posted </span><b><a href="https://razzoforumproject.herokuapp.com/viewSEA?thread=' + str(post.get('_id')) + '">' + request.form['adminTitle'] + '</a></b> in special education forum'
@@ -562,7 +562,7 @@ def vet_comment():
             collection = db['ELLU']
             post = collection.find_one({'_id': ObjectId(objectIDPost)})
         post[request.form['comment']]['approved'] = 'true'
-        post['comments'] = post.get('comments') + 1
+        post['commentNumber'] = post.get('commentNumber') + 1
         collection.replace_one({'_id': ObjectId(objectIDPost)}, post)
         if collection == db['SEA']:
             action = session['user_data']['login'] + '<span class="vettingColor"> vetted </span>a comment by ' + post.get(request.form['comment'], {}).get('parentName') + ' in the post <b><a href="https://razzoforumproject.herokuapp.com/viewSEA?thread=' + objectIDPost + '">' + post.get('postTitle') + '</a></b> in special education forum'
@@ -603,7 +603,7 @@ def unvet_comment():
             collection = db['ELLU']
             post = collection.find_one({'_id': ObjectId(objectIDPost)})
         post[request.form['comment']]['approved'] = 'false'
-        post['comments'] = post.get('comments') - 1
+        post['commentNumber'] = post.get('commentNumber') - 1
         collection.replace_one({'_id': ObjectId(objectIDPost)}, post)
         if collection == db['SEA']:
             action = session['user_data']['login'] + '<span class="vettingColor"> unvetted </span>a comment by ' + post.get(request.form['comment'], {}).get('parentName') + ' in the post <b><a href="https://razzoforumproject.herokuapp.com/viewSEA?thread=' + objectIDPost + '">' + post.get('postTitle') + '</a></b> in special education forum'
