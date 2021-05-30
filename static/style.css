@@ -243,13 +243,12 @@ tr {
 }
 
 .centered {
-  font-size: 15px;
   position: absolute;
   top: 40%;
-  font-size: calc((6vw - 0.5rem) / 2);
+  font-size: calc(8px + 1.5vw);
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 90%;
+  width: 80%;
 }
 
 .indent {
