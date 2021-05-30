@@ -21,6 +21,16 @@ app.secret_key = os.environ['SECRET_KEY'] #used to sign session cookies
 oauth = OAuth(app)
 oauth.init_app(app) #initialize the app to be able to make requests for user information
 
+connection_string = os.environ['MONGO_CONNECTION_STRING']
+db_name = os.environ['MONGO_DBNAME']
+client = pymongo.MongoClient(connection_string)
+db = client[db_name]
+collection = db['ADMIN']
+adminDocuments = collection.find({})
+adminList = []
+for admin in adminDocuments:
+    adminlist.append(admin.get('username'))
+
 admin1='Azuthedog1'
 admin2='DanaLearnsToCode'
 admin3='MyDSWAccount'
@@ -69,7 +79,7 @@ def authorized():
         try:
             session['github_token'] = (resp['access_token'], '') #save the token to prove that the user logged in
             session['user_data']=github.get('user').data
-            if session['user_data']['login'] == admin1 or session['user_data']['login'] == admin2 or session['user_data']['login'] == admin3 or session['user_data']['login'] == admin4 or session['user_data']['login'] == admin5 or session['user_data']['login'] == admin6 or session['user_data']['login'] == admin7:
+            if session['user_data']['login'] in adminList:
                 message='You were successfully logged in as ' + session['user_data']['login'] + '. Don\'t forget to log out before exiting this website.'
             else:
                 session.clear()
