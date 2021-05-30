@@ -21,6 +21,9 @@ a.footerLinks {
 a.footerLinks:hover{
   color: #5f7cad;
 }
+.links {
+  margin-top: 8px;
+}
 .footerIm {
   width: 100px; 
 }
