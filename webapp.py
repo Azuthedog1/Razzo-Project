@@ -2,7 +2,7 @@ from flask import Flask, redirect, Markup, url_for, session, request, jsonify
 from flask_oauthlib.client import OAuth
 from flask import render_template
 from bson.objectid import ObjectId
-from mongosanitizer.sanitizer import sanitize #not used since all quieries do not contain user input, only ObjectId.
+from mongosanitizer.sanitizer import sanitize #documentation says used to sanitize user input quieries, but no quieries here are performed with user input.
 
 import pprint
 import os
@@ -143,8 +143,40 @@ def send_email(receiver_email, title, name, link):
 def add_admin():
     if request.method == 'POST':
         collection = db['ADMIN']
+        collection.insert_one({'username': request.form['username'], 'opt': False})
+    return render_admin_log()
         
+@app.route('/removeAdmin', methods=['GET', 'POST'])
+def remove_admin():
+    if request.method == 'POST':
+        collection = db['ADMIN']
+        collection.delete_one({'_id': ObjectId(request.form['delete'])})
+    return render_admin_log()
+        
+@app.route('/optOut', methods=['GET', 'POST'])
+def opt_out():
+    if request.method == 'POST':
+        collection = db['ADMIN']
+        collection.find_one_and_update({'_id': ObjectId(request.form['optIn'])},
+                                       {'$set': {'opt': False}})
+    return render_admin_log()
 
+@app.route('/optIn', methods=['GET', 'POST'])
+def opt_in():
+    if request.method == 'POST':
+        collection = db['ADMIN']
+        collection.find_one_and_update({'_id': ObjectId(request.form['optOut'])},
+                                       {'$set': {'opt': True}})
+    return render_admin_log()
+
+@app.route('/add_email', methods=['GET', 'POST'])
+def add_email():
+    if request.method == 'POST':
+        collection = db['ADMIN']
+        collection.find_one_and_update({'_id': ObjectId(request.form['id'])},
+                                       {'$set': {'email': request.form['email']}})
+    return render_admin_log()
+        
 @app.route('/englishlearnerforum')
 def render_english_learner_forum():
     collection = db['ELLU']
