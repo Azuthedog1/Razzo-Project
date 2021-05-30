@@ -169,7 +169,7 @@ def opt_in():
                                        {'$set': {'opt': True}})
     return render_admin_log()
 
-@app.route('/add_email', methods=['GET', 'POST'])
+@app.route('/addEmail', methods=['GET', 'POST'])
 def add_email():
     if request.method == 'POST':
         collection = db['ADMIN']
@@ -362,21 +362,23 @@ def render_admin_log():
     
     collection = db['ADMIN']
     item = collection.find_one({'username': session['user_data']['login']})
+    receive = ''
+    change = '<form action="/addEmail" method="POST" class="inLine"><textarea class="form-control" rows="1" name="email" required></textarea><button type="submit" class="btn btn-primary" name="id" value="' + str(item.get('_id')) + '">Submit</button></form>'
     username = item.get('username')
-    email = ''
-    opt = ''
-    if item.get('opt') == False:
-        opt = 'No'
-    else:
+    email = 'Not provided'
+    opt = 'No'
+    if item.get('opt') == True:
         opt = 'Yes'
+        receive = '<form action="/optOut" method="POST" class="inLine"><button type="submit" class="btn btn-warning btn-sm" name="optOut" value="' + str(item.get('_id'))+ '">' + 'Opt Out' + '</button></form>'
+    else:
+        receive = '<form action="/optIn" method="POST" class="inLine"><button type="submit" class="btn btn-warning btn-sm" name="optIn" value="' + str(item.get('_id'))+ '">' + 'Opt In' + '</button></form>'
     if 'email' in item:
         email = item.get('email')
-  
     #cursor = collection.find({})
     #for item in cursor:
     #    session['user_data']['login']
     
-    return render_template('adminlog.html', log = Markup(bigString), email = email, opt = opt, username = username)
+    return render_template('adminlog.html', log = Markup(bigString), email = email, opt = opt, username = username, change = change, receive = receive)
 
 def add_admin_log(dateTime, action, content):
     collection = db['LOG']
