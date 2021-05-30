@@ -1206,23 +1206,27 @@ def edit_post():
             post = collection.find_one({'_id': ObjectId(objectIDPost)})
         if post == None:
             collection = db['ELLU']
-            post = collection.find_one({'_id': ObjectId(objectIDPost)})
+        content = request.form['newMessage']
+        content = content.replace('\\"', '')
+        content = content.replace('\\t', '&nbsp;&nbsp;&nbsp;&nbsp;')
+        content = content.replace(' ', '&nbsp;')
+        content = Markup(content[1:len(content)-1])
         collection.find_one_and_update({'_id': ObjectId(objectIDPost)},
-                                       {'$set': {'postTitle': request.form['newTitle'], 'postContent': request.form['newMessage']}})
+                                       {'$set': {'postTitle': request.form['newTitle'], 'postContent': content}})
         if collection == db['SEU']:
-            action = session['user_data']['login'] + '<span class="vettingColor"> edited </span><b><a href="https://razzoforumproject.herokuapp.com/viewSEU?thread=' + objectIDPost + '">' + request.form('newTitle') + '</a></b> in special education forum'
+            action = session['user_data']['login'] + '<span class="vettingColor"> edited </span><b><a href="https://razzoforumproject.herokuapp.com/viewSEU?thread=' + objectIDPost + '">' + request.form['newTitle'] + '</a></b> in special education forum'
             add_admin_log(datetime.now(), action, 'none')
             return view_SEU(objectIDPost)
         if collection == db['SEA']:
-            action = session['user_data']['login'] + '<span class="vettingColor"> edited </span><b><a href="https://razzoforumproject.herokuapp.com/viewSEA?thread=' + objectIDPost + '">' + request.form('newTitle') + '</a></b> in special education forum'
+            action = session['user_data']['login'] + '<span class="vettingColor"> edited </span><b><a href="https://razzoforumproject.herokuapp.com/viewSEA?thread=' + objectIDPost + '">' + request.form['newTitle'] + '</a></b> in special education forum'
             add_admin_log(datetime.now(), action, 'none')
             return view_SEA(objectIDPost)
         if collection == db['ELLA']:
-            action = session['user_data']['login'] + '<span class="vettingColor"> edited </span><b><a href="https://razzoforumproject.herokuapp.com/viewELLA?thread=' + objectIDPost + '">' + request.form('newTitle') + '</a></b> in english language learner forum'
+            action = session['user_data']['login'] + '<span class="vettingColor"> edited </span><b><a href="https://razzoforumproject.herokuapp.com/viewELLA?thread=' + objectIDPost + '">' + request.form['newTitle'] + '</a></b> in english language learner forum'
             add_admin_log(datetime.now(), action, 'none')
             return view_ELLA(objectIDPost)
         if collection == db['ELLU']:
-            action = session['user_data']['login'] + '<span class="vettingColor"> edited </span><b><a href="https://razzoforumproject.herokuapp.com/viewELLU?thread=' + objectIDPost + '">' + request.form('newTitle') + '</a></b> in english language learner forum'
+            action = session['user_data']['login'] + '<span class="vettingColor"> edited </span><b><a href="https://razzoforumproject.herokuapp.com/viewELLU?thread=' + objectIDPost + '">' + request.form['newTitle'] + '</a></b> in english language learner forum'
             add_admin_log(datetime.now(), action, 'none')
             return view_ELLU(objectIDPost)
     return render_template('information.html')
