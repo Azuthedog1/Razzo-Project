@@ -27,4 +27,9 @@ $(document).ready(function(){
       quill2.deleteText(limit, quill2.getLength());
     }
   });
+  var form3 = document.querySelector('#editform'); 
+  form3.onsubmit = function() { 
+    var about3 = document.querySelector('input[name=newMessage]'); 
+    about3.value = JSON.stringify(quill3.root.innerHTML);
+  }; 
 });
