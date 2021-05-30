@@ -244,9 +244,9 @@ tr {
 
 .centered {
   font-size: 20px;
-  font-size: 1vw;
+  font-size: 3vw;
   position: absolute;
-  top: 30%;
+  top: 40%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
