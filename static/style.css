@@ -14,11 +14,9 @@ footer {
   border-top: 1px solid Grey;
 }
 
-.links {
+.footerLinks {
   color: white;
-}
-p, h1, h2, h3 {
-  white-space: pre;
+  text-decoration: underline;
 }
 
 .footerIm {
