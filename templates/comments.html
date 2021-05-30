@@ -47,7 +47,7 @@
               var quill = new Quill('#editor', {
               theme: 'snow'
               });
-              quill.clipboard.dangerouslyPasteHTML(0, 'hello');
+              quill.clipboard.dangerouslyPasteHTML(0, '<p><b>hello</b></p> &nbsp;<br> <h1>Hello</h1>');
             </script>
           </div>
           <input name="ID" type="hidden" value="{{ _id }}">
