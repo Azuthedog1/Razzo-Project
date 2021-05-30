@@ -43,6 +43,7 @@ a.footerLinks:hover{
 .noBorder {
   border-bottom: 0px;
 }
+
 .top {
   background-color: #0a5c0d;
   padding: 10px;
@@ -234,6 +235,18 @@ tr {
 
 .image {
   width: 100%;
+}
+
+.triangle {
+  position: relative;
+  text-align: center;
+}
+
+.centered {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .indent {
