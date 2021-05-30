@@ -14,7 +14,7 @@ footer {
   border-top: 1px solid Grey;
 }
 
-p, h1, h2, h3, li {
+p, h1, h2, h3 {
   white-space: pre;
 }
 
