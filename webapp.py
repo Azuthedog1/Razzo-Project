@@ -858,7 +858,7 @@ def view_SEU(objectIDPost):
                             bigString += '<tr><td class="comments"><b>' + post.get('comment' + str(i), {}).get('parentName') + '</b><br><i>' + loc_dt + '</i><br><br>' + post.get('comment' + str(i), {}).get('postContent') + '</td></tr>'
                 counter += 1
             i += 1
-    return render_template('comments.html', title = postTitle, name = parentName, information = info, time = loc_dt, content = Markup(postContent), _id = objectIDPost, comments = Markup(bigString))
+    return render_template('comments.html', title = postTitle, name = parentName, information = info, time = loc_dt, content = Markup(postContent), _id = objectIDPost, comments = Markup(bigString), oldContent = Markup(postContent), oldTitle = postTitle)
 
 def view_ELLA(objectIDPost):
     connection_string = os.environ['MONGO_CONNECTION_STRING']
@@ -945,7 +945,7 @@ def view_ELLA(objectIDPost):
                             bigString += '<tr><td class="comments"><b>' + post.get('comment' + str(i), {}).get('parentName') + '</b><br><i>' + loc_dt + '</i><br><br>' + post.get('comment' + str(i), {}).get('postContent') + '</td></tr>'
                 counter += 1
             i += 1
-    return render_template('comments.html', title = postTitle, name = displayName, information = '', time = loc_dt, content = Markup(postContent), _id = objectIDPost, comments = Markup(bigString))
+    return render_template('comments.html', title = postTitle, name = displayName, information = '', time = loc_dt, content = Markup(postContent), _id = objectIDPost, comments = Markup(bigString), oldContent = Markup(postContent), oldTitle = postTitle)
 
 def view_ELLU(objectIDPost):
     connection_string = os.environ['MONGO_CONNECTION_STRING']
@@ -1039,7 +1039,7 @@ def view_ELLU(objectIDPost):
                             bigString += '<tr><td class="comments"><b>' + post.get('comment' + str(i), {}).get('parentName') + '</b><br><i>' + loc_dt + '</i><br><br>' + post.get('comment' + str(i), {}).get('postContent') + '</td></tr>'
                 counter += 1
             i += 1
-    return render_template('comments.html', title = postTitle, name = parentName, information = info, time = loc_dt, content = Markup(postContent), _id = objectIDPost, comments = Markup(bigString))
+    return render_template('comments.html', title = postTitle, name = parentName, information = info, time = loc_dt, content = Markup(postContent), _id = objectIDPost, comments = Markup(bigString), oldContent = Markup(postContent), oldTitle = postTitle)
 
 @app.route('/deleteSE', methods=['GET', 'POST'])
 def delete_SE():
