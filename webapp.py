@@ -25,14 +25,6 @@ connection_string = os.environ['MONGO_CONNECTION_STRING']
 db_name = os.environ['MONGO_DBNAME']
 client = pymongo.MongoClient(connection_string)
 db = client[db_name]
-collection = db['ADMIN']
-adminDocuments = collection.find({})
-adminList = []
-notificationList = []
-for admin in adminDocuments:
-    adminList.append(admin.get('username'))
-    if admin.get('email') != None and admin.get('opt') == True:
-        notificationList.append(admin.get('email'))
 
 #Set up GitHub as OAuth provider
 github = oauth.remote_app(
@@ -74,6 +66,11 @@ def authorized():
         try:
             session['github_token'] = (resp['access_token'], '') #save the token to prove that the user logged in
             session['user_data']=github.get('user').data
+            collection = db['ADMIN']
+            adminDocuments = collection.find({})
+            adminList = []
+            for admin in adminDocuments:
+                adminList.append(admin.get('username'))
             if session['user_data']['login'] in adminList:
                 message='You were successfully logged in as ' + session['user_data']['login'] + '. Don\'t forget to log out before exiting this website.'
             else:
@@ -423,6 +420,12 @@ def user_submit_post_ELL():
         collection.insert_one(post)
         action = request.form['userName'] + '<span class="createColor"> posted </span><form action="/viewELLU" class="inLine"><select class="selection" name="thread"><option value="' + str(generate) + '"></option></select><button type="submit" class="customButton commentButton"><b>' + request.form['userTitle'] + '</b></button></form> in english language learner forum'
         add_admin_log(datetime.now(), action, 'none')
+        collection = db['ADMIN']
+        adminDocuments = collection.find({})
+        notificationList = []
+        for admin in adminDocuments:
+            if admin.get('email') != None and admin.get('opt') == True:
+                notificationList.append(admin.get('email'))
         link = 'https://razzoforumproject.herokuapp.com/viewELLU?thread=' + str(generate)
         for email in notificationList:
             send_email(email, request.form['userTitle'], request.form['userName'], link, True)
@@ -464,6 +467,12 @@ def user_submit_post_SE():
         action = request.form['userName'] + '<span class="createColor"> posted </span><form action="/viewSEU" class="inLine"><select class="selection" name="thread"><option value="' + str(generate) + '"></option></select><button type="submit" class="customButton commentButton"><b>' + request.form['userTitle'] + '</b></button></form> in special education forum'
         add_admin_log(datetime.now(), action, 'none')
         collection = db['ADMIN']
+        collection = db['ADMIN']
+        adminDocuments = collection.find({})
+        notificationList = []
+        for admin in adminDocuments:
+            if admin.get('email') != None and admin.get('opt') == True:
+                notificationList.append(admin.get('email'))
         link = 'https://razzoforumproject.herokuapp.com/viewSEU?thread=' + str(generate)
         for email in notificationList:
             send_email(email, request.form['userTitle'], request.form['userName'], link, True)
