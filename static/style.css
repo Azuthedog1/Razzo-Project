@@ -240,6 +240,7 @@ tr {
 .triangle {
   position: relative;
   text-align: center;
+  border-top: 2px solid Black;
 }
 
 .centered {
