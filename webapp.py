@@ -369,7 +369,7 @@ def render_admin_log():
         opt = 'No'
     else:
         opt = 'Yes'
-    if item.has_key('email'):
+    if 'email' in item:
         email = item.get('email')
   
     #cursor = collection.find({})
