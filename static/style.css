@@ -243,6 +243,7 @@ tr {
 }
 
 .centered {
+  font-size: 20px;
   position: absolute;
   top: 30%;
   left: 50%;
