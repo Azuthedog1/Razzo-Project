@@ -361,7 +361,7 @@ def render_admin_log():
         bigString += '<br></td></tr>'
     
     collection = db['ADMIN']
-    item = collection.find_one(session['user_data']['login'])
+    item = collection.find_one({'username': session['user_data']['login']})
     username = item.get('username')
     email = ''
     opt = ''
