@@ -28,8 +28,11 @@ db = client[db_name]
 collection = db['ADMIN']
 adminDocuments = collection.find({})
 adminList = []
+notificationList = []
 for admin in adminDocuments:
     adminList.append(admin.get('username'))
+    if admin.get('email') != None and admin.get('opt') == True:
+        notificationList.append(admin.get('email'))
 
 admin1='Azuthedog1'
 admin2='DanaLearnsToCode'
@@ -92,10 +95,6 @@ def authorized():
     return render_template('login.html', message = message)
 
 def send_email(receiver_email, title, name, link):
-    connection_string = os.environ['MONGO_CONNECTION_STRING']
-    db_name = os.environ['MONGO_DBNAME']
-    client = pymongo.MongoClient(connection_string)
-    db = client[db_name]
     collection = db['EMAIL']
     try:
         information = collection.find_one({'_id': ObjectId('60b2d66ba55f630f74e0a554')})
@@ -140,12 +139,14 @@ def send_email(receiver_email, title, name, link):
         return
     return
 
+@app.route('/addAdmin', methods=['GET', 'POST'])
+def add_admin():
+    if request.method == 'POST':
+        collection = db['ADMIN']
+        
+
 @app.route('/englishlearnerforum')
 def render_english_learner_forum():
-    connection_string = os.environ['MONGO_CONNECTION_STRING']
-    db_name = os.environ['MONGO_DBNAME']
-    client = pymongo.MongoClient(connection_string)
-    db = client[db_name]
     collection = db['ELLU']
     cursor = collection.find({}).sort('_id', -1).limit(500)
     bigString1 = ''
@@ -226,10 +227,6 @@ def render_english_learner_forum():
 
 @app.route('/specialeducationforum')
 def render_special_education_forum():
-    connection_string = os.environ['MONGO_CONNECTION_STRING']
-    db_name = os.environ['MONGO_DBNAME']
-    client = pymongo.MongoClient(connection_string)
-    db = client[db_name]
     collection = db['SEU']
     cursor = collection.find({}).sort('_id', -1).limit(1000)
     bigString1 = ''
@@ -310,10 +307,6 @@ def render_special_education_forum():
 
 @app.route('/adminLog')
 def render_admin_log():
-    connection_string = os.environ['MONGO_CONNECTION_STRING']
-    db_name = os.environ['MONGO_DBNAME']
-    client = pymongo.MongoClient(connection_string)
-    db = client[db_name]
     collection = db['LOG']
     cursor = collection.find({}).sort('_id', -1).limit(1000)
     bigString = ''
@@ -337,20 +330,12 @@ def render_admin_log():
     return render_template('adminlog.html', log = Markup(bigString))
 
 def add_admin_log(dateTime, action, content):
-    connection_string = os.environ['MONGO_CONNECTION_STRING']
-    db_name = os.environ['MONGO_DBNAME']
-    client = pymongo.MongoClient(connection_string)
-    db = client[db_name]
     collection = db['LOG']
     collection.insert_one({'dateTime': dateTime, 'action': action, 'content': content})
 
 @app.route('/userSubmitPostELL', methods=['GET','POST'])
 def user_submit_post_ELL():
     if request.method == 'POST':
-        connection_string = os.environ['MONGO_CONNECTION_STRING']
-        db_name = os.environ['MONGO_DBNAME']
-        client = pymongo.MongoClient(connection_string)
-        db = client[db_name]
         collection = db['ELLU']
         content = request.form['userMessage']
         content = content.replace('\\"', '')
@@ -371,10 +356,6 @@ def user_submit_post_ELL():
 @app.route('/adminSubmitPostELL', methods=['GET', 'POST']) #Same as above, except no name, student name and grade, no anonymous, etc.
 def admin_submit_post_ELL():
     if request.method == 'POST':
-        connection_string = os.environ['MONGO_CONNECTION_STRING']
-        db_name = os.environ['MONGO_DBNAME']
-        client = pymongo.MongoClient(connection_string)
-        db = client[db_name]
         collection = db['ELLA']
         content = request.form['adminMessage']
         content = content.replace('\\"', '')
@@ -392,10 +373,6 @@ def admin_submit_post_ELL():
 @app.route('/userSubmitPostSE', methods=['GET', 'POST'])
 def user_submit_post_SE():
     if request.method == 'POST':
-        connection_string = os.environ['MONGO_CONNECTION_STRING']
-        db_name = os.environ['MONGO_DBNAME']
-        client = pymongo.MongoClient(connection_string)
-        db = client[db_name]
         collection = db['SEU']
         content = request.form['userMessage']
         content = content.replace('\\"', '')
@@ -416,10 +393,6 @@ def user_submit_post_SE():
 @app.route('/adminSubmitPostSE', methods=['GET', 'POST'])
 def admin_submit_post_SE():
     if request.method == 'POST':
-        connection_string = os.environ['MONGO_CONNECTION_STRING']
-        db_name = os.environ['MONGO_DBNAME']
-        client = pymongo.MongoClient(connection_string)
-        db = client[db_name]
         collection = db['SEA']
         content = request.form['adminMessage']
         content = content.replace('\\"', '')
@@ -437,10 +410,6 @@ def admin_submit_post_SE():
 def submit_comment():
     if request.method == 'POST':
         objectIDPost = request.form['ID']
-        connection_string = os.environ['MONGO_CONNECTION_STRING']
-        db_name = os.environ['MONGO_DBNAME']
-        client = pymongo.MongoClient(connection_string)
-        db = client[db_name]
         collection = db['SEA']
         post = collection.find_one({'_id': ObjectId(objectIDPost)})
         if post == None:
@@ -520,11 +489,7 @@ def submit_comment():
 def delete_comment():
     if request.method == 'POST':
         objectIDPost = request.form['delete']
-        comment = request.form['comment']
-        connection_string = os.environ['MONGO_CONNECTION_STRING']
-        db_name = os.environ['MONGO_DBNAME']
-        client = pymongo.MongoClient(connection_string)
-        db = client[db_name]       
+        comment = request.form['comment']    
         collection = db['SEU']
         post = collection.find_one({'_id': ObjectId(objectIDPost)})
         if post == None:
@@ -598,10 +563,6 @@ def delete_comment():
 def vet_comment():
     if request.method == 'POST':
         objectIDPost = request.form['vet']
-        connection_string = os.environ['MONGO_CONNECTION_STRING']
-        db_name = os.environ['MONGO_DBNAME']
-        client = pymongo.MongoClient(connection_string)
-        db = client[db_name]
         collection = db['SEU']
         post = collection.find_one({'_id': ObjectId(objectIDPost)})
         if post == None:
@@ -639,10 +600,6 @@ def vet_comment():
 def unvet_comment():
     if request.method == 'POST':
         objectIDPost = request.form['vet']
-        connection_string = os.environ['MONGO_CONNECTION_STRING']
-        db_name = os.environ['MONGO_DBNAME']
-        client = pymongo.MongoClient(connection_string)
-        db = client[db_name]
         collection = db['SEU']
         post = collection.find_one({'_id': ObjectId(objectIDPost)})
         if post == None:
@@ -696,10 +653,6 @@ def reroute_view_ELLU():
     return view_ELLU(objectIDPost)
 
 def view_SEA(objectIDPost):
-    connection_string = os.environ['MONGO_CONNECTION_STRING']
-    db_name = os.environ['MONGO_DBNAME']
-    client = pymongo.MongoClient(connection_string)
-    db = client[db_name]
     collection = db['SEA']
     post = collection.find_one({'_id': ObjectId(objectIDPost)})
     postTitle = post.get('postTitle')
@@ -777,10 +730,6 @@ def view_SEA(objectIDPost):
     return render_template('comments.html', title = postTitle, name = displayName, information = '', time = loc_dt, content = Markup(postContent), _id = objectIDPost, comments = Markup(bigString), oldContent = Markup(postContent), oldTitle = postTitle)
 
 def view_SEU(objectIDPost):
-    connection_string = os.environ['MONGO_CONNECTION_STRING']
-    db_name = os.environ['MONGO_DBNAME']
-    client = pymongo.MongoClient(connection_string)
-    db = client[db_name]
     collection = db['SEU']
     post = collection.find_one({'_id': ObjectId(objectIDPost)})
     postTitle = post.get('postTitle')
@@ -871,10 +820,6 @@ def view_SEU(objectIDPost):
     return render_template('comments.html', title = postTitle, name = parentName, information = info, time = loc_dt, content = Markup(postContent), _id = objectIDPost, comments = Markup(bigString), oldContent = Markup(postContent), oldTitle = postTitle)
 
 def view_ELLA(objectIDPost):
-    connection_string = os.environ['MONGO_CONNECTION_STRING']
-    db_name = os.environ['MONGO_DBNAME']
-    client = pymongo.MongoClient(connection_string)
-    db = client[db_name]
     collection = db['ELLA']
     post = collection.find_one({'_id': ObjectId(objectIDPost)})
     postTitle = post.get('postTitle')
@@ -958,10 +903,6 @@ def view_ELLA(objectIDPost):
     return render_template('comments.html', title = postTitle, name = displayName, information = '', time = loc_dt, content = Markup(postContent), _id = objectIDPost, comments = Markup(bigString), oldContent = Markup(postContent), oldTitle = postTitle)
 
 def view_ELLU(objectIDPost):
-    connection_string = os.environ['MONGO_CONNECTION_STRING']
-    db_name = os.environ['MONGO_DBNAME']
-    client = pymongo.MongoClient(connection_string)
-    db = client[db_name]
     collection = db['ELLU']
     post = collection.find_one({'_id': ObjectId(objectIDPost)})
     postTitle = post.get('postTitle')
@@ -1055,10 +996,6 @@ def view_ELLU(objectIDPost):
 def delete_SE():
     if request.method == 'POST':
         objectIDPost = request.form['delete'] #delete post
-        connection_string = os.environ['MONGO_CONNECTION_STRING']
-        db_name = os.environ['MONGO_DBNAME']
-        client = pymongo.MongoClient(connection_string)
-        db = client[db_name]
         collection = db['SEA']
         post = collection.find_one({'_id': ObjectId(objectIDPost)})
         if post == None:
@@ -1076,10 +1013,6 @@ def delete_SE():
 def delete_ELL():
     if request.method == 'POST':
         objectIDPost = request.form['delete'] #delete post
-        connection_string = os.environ['MONGO_CONNECTION_STRING']
-        db_name = os.environ['MONGO_DBNAME']
-        client = pymongo.MongoClient(connection_string)
-        db = client[db_name]
         collection = db['ELLA']
         post = collection.find_one({'_id': ObjectId(objectIDPost)})
         if post == None:
@@ -1097,10 +1030,6 @@ def delete_ELL():
 def vet_ELL():
     if request.method == 'POST':
         objectIDPost = request.form['vet'] #vet and unvet posts
-        connection_string = os.environ['MONGO_CONNECTION_STRING']
-        db_name = os.environ['MONGO_DBNAME']
-        client = pymongo.MongoClient(connection_string)
-        db = client[db_name]
         collection = db['ELLU']
         collection.find_one_and_update({'_id': ObjectId(objectIDPost)},
                                        {'$set': {'approved': 'true'}})
@@ -1113,10 +1042,6 @@ def vet_ELL():
 def unvet_ELL():
     if request.method == 'POST':
         objectIDPost = request.form['vet'] #vet and unvet posts
-        connection_string = os.environ['MONGO_CONNECTION_STRING']
-        db_name = os.environ['MONGO_DBNAME']
-        client = pymongo.MongoClient(connection_string)
-        db = client[db_name]
         collection = db['ELLU']
         collection.find_one_and_update({'_id': ObjectId(objectIDPost)},
                                        {'$set': {'approved': 'false'}})
@@ -1145,10 +1070,6 @@ def vet_SE():
 def unvet_SE():
     if request.method == 'POST':
         objectIDPost = request.form['vet'] #vet and unvet posts
-        connection_string = os.environ['MONGO_CONNECTION_STRING']
-        db_name = os.environ['MONGO_DBNAME']
-        client = pymongo.MongoClient(connection_string)
-        db = client[db_name]
         collection = db['SEU']
         collection.find_one_and_update({'_id': ObjectId(objectIDPost)},
                                        {'$set': {'approved': 'false'}})
@@ -1161,10 +1082,6 @@ def unvet_SE():
 def bump_post():
     if request.method == 'POST':
         objectIDPost = request.form['bump']
-        connection_string = os.environ['MONGO_CONNECTION_STRING']
-        db_name = os.environ['MONGO_DBNAME']
-        client = pymongo.MongoClient(connection_string)
-        db = client[db_name]
         collection = db['SEU']
         post = collection.find_one({'_id': ObjectId(objectIDPost)})
         if post == None:
@@ -1202,10 +1119,6 @@ def bump_post():
 def edit_post():
     if request.method == 'POST':
         objectIDPost = request.form['ID'] #vet and unvet posts
-        connection_string = os.environ['MONGO_CONNECTION_STRING']
-        db_name = os.environ['MONGO_DBNAME']
-        client = pymongo.MongoClient(connection_string)
-        db = client[db_name]
         collection = db['SEU']
         post = collection.find_one({'_id': ObjectId(objectIDPost)})
         if post == None:
