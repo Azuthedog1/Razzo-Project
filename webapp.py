@@ -764,7 +764,7 @@ def view_SEA(objectIDPost):
                             bigString += '<tr><td class="comments"><b>' + post.get('comment' + str(i), {}).get('parentName') + '</b><br><i>' + loc_dt + '</i><br><br>' + post.get('comment' + str(i), {}).get('postContent') + '</td></tr>'
                 counter += 1
             i += 1
-    return render_template('comments.html', title = postTitle, name = displayName, information = '', time = loc_dt, content = Markup(postContent), _id = objectIDPost, comments = Markup(bigString))
+    return render_template('comments.html', title = postTitle, name = displayName, information = '', time = loc_dt, content = Markup(postContent), _id = objectIDPost, comments = Markup(bigString), oldContent = Markup(postContent), oldTitle = postTitle)
 
 def view_SEU(objectIDPost):
     connection_string = os.environ['MONGO_CONNECTION_STRING']
@@ -1183,10 +1183,51 @@ def bump_post():
             add_admin_log(datetime.now(), action, 'none')
             return render_english_learner_forum()
         if collection == db['ELLU']:
-            action = session['user_data']['login'] + '<span class="vettingColor"> bumped </span><b><a href="https://razzoforumproject.herokuapp.com/viewELLU?thread=' + str(generate) + '">' + post.get('postTitle') + '</a></b> in special education forum'
+            action = session['user_data']['login'] + '<span class="vettingColor"> bumped </span><b><a href="https://razzoforumproject.herokuapp.com/viewELLU?thread=' + str(generate) + '">' + post.get('postTitle') + '</a></b> in english language learner forum'
             add_admin_log(datetime.now(), action, 'none')
             return render_english_learner_forum()
     return render_template('information.html')
+
+@app.route('/editPost', methods=['GET', 'POST'])
+def edit_post():
+    if request.method == 'POST':
+        objectIDPost = request.form['ID'] #vet and unvet posts
+        connection_string = os.environ['MONGO_CONNECTION_STRING']
+        db_name = os.environ['MONGO_DBNAME']
+        client = pymongo.MongoClient(connection_string)
+        db = client[db_name]
+        collection = db['SEU']
+        post = collection.find_one({'_id': ObjectId(objectIDPost)})
+        if post == None:
+            collection = db['SEA']
+            post = collection.find_one({'_id': ObjectId(objectIDPost)})
+        if post == None:
+            collection = db['ELLA']
+            post = collection.find_one({'_id': ObjectId(objectIDPost)})
+        if post == None:
+            collection = db['ELLU']
+            post = collection.find_one({'_id': ObjectId(objectIDPost)})
+        collection.find_one_and_update({'_id': ObjectId(objectIDPost)},
+                                       {'$set': {'postTitle': request.form('newTitle')}},
+                                       {'$set': {'postContent': request.form('newMessage')}})
+        if collection == db['SEU']:
+            action = session['user_data']['login'] + '<span class="vettingColor"> edited </span><b><a href="https://razzoforumproject.herokuapp.com/viewSEU?thread=' + objectIDPost + '">' + request.form('newTitle') + '</a></b> in special education forum'
+            add_admin_log(datetime.now(), action, 'none')
+            return view_SEU(objectIDPost)
+        if collection == db['SEA']:
+            action = session['user_data']['login'] + '<span class="vettingColor"> edited </span><b><a href="https://razzoforumproject.herokuapp.com/viewSEA?thread=' + objectIDPost + '">' + request.form('newTitle') + '</a></b> in special education forum'
+            add_admin_log(datetime.now(), action, 'none')
+            return view_SEA(objectIDPost)
+        if collection == db['ELLA']:
+            action = session['user_data']['login'] + '<span class="vettingColor"> edited </span><b><a href="https://razzoforumproject.herokuapp.com/viewELLA?thread=' + objectIDPost + '">' + request.form('newTitle') + '</a></b> in english language learner forum'
+            add_admin_log(datetime.now(), action, 'none')
+            return view_ELLA(objectIDPost)
+        if collection == db['ELLU']:
+            action = session['user_data']['login'] + '<span class="vettingColor"> edited </span><b><a href="https://razzoforumproject.herokuapp.com/viewELLU?thread=' + objectIDPost + '">' + request.form('newTitle') + '</a></b> in english language learner forum'
+            add_admin_log(datetime.now(), action, 'none')
+            return view_ELLU(objectIDPost)
+    return render_template('information.html')
+        
 
 #make sure the jinja variables use Markup 
 @github.tokengetter
