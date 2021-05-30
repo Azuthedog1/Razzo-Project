@@ -18,7 +18,9 @@ footer {
   color: white;
   text-decoration: underline;
 }
-
+.footerLinks a:hover{
+    color: #deeaff;
+}
 .footerIm {
   width: 100px; 
 }
