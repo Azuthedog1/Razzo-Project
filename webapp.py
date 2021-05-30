@@ -101,7 +101,7 @@ def send_email(receiver_email, title, name, link, logged):
         """
         html = """\
         """
-        if logged = False:
+        if logged == False:
             text = """\
             Hello name,
             Your post title has recieved a response from a staff member.
