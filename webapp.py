@@ -86,7 +86,7 @@ def authorized():
     session['username'] = 'admin'
     return render_template('login.html', message = message)
 
-def send_email(receiver_email, title, name, link, admin):
+def send_email(receiver_email, title, name, link, logged):
     collection = db['EMAIL']
     try:
         information = collection.find_one({'_id': ObjectId('60b2d66ba55f630f74e0a554')})
@@ -101,7 +101,7 @@ def send_email(receiver_email, title, name, link, admin):
         """
         html = """\
         """
-        if admin = False:
+        if logged = False:
             text = """\
             Hello name,
             Your post title has recieved a response from a staff member.
@@ -141,7 +141,6 @@ def send_email(receiver_email, title, name, link, admin):
                     --------------------------------------------------------------------------------------------------------<br>
                     <b>Hola, """ + name + """. </b><br>
                     Un usuario ha publicado <a href='""" + link + """'>""" + title + """</a> en el foro del tablero principal.<br>
-                    --------------------------------------------------------------------------------------------------------<br>
                     <small>*Please do not response to this email / Por favor, no responda a este correo electrónico.</small>
                     </p>
                 </body>
@@ -424,7 +423,7 @@ def user_submit_post_ELL():
         collection.insert_one(post)
         action = request.form['userName'] + '<span class="createColor"> posted </span><form action="/viewELLU" class="inLine"><select class="selection" name="thread"><option value="' + str(generate) + '"></option></select><button type="submit" class="customButton commentButton"><b>' + request.form['userTitle'] + '</b></button></form> in english language learner forum'
         add_admin_log(datetime.now(), action, 'none')
-        link = 'https://razzoforumproject.herokuapp.com/viewSEU?thread=' + generate
+        link = 'https://razzoforumproject.herokuapp.com/viewELLU?thread=' + str(generate)
         for email in notificationList:
             send_email(email, request.form['userTitle'], request.form['userName'], link, True)
     return render_english_learner_forum()
@@ -465,7 +464,7 @@ def user_submit_post_SE():
         action = request.form['userName'] + '<span class="createColor"> posted </span><form action="/viewSEU" class="inLine"><select class="selection" name="thread"><option value="' + str(generate) + '"></option></select><button type="submit" class="customButton commentButton"><b>' + request.form['userTitle'] + '</b></button></form> in special education forum'
         add_admin_log(datetime.now(), action, 'none')
         collection = db['ADMIN']
-        link = 'https://razzoforumproject.herokuapp.com/viewSEU?thread=' + generate
+        link = 'https://razzoforumproject.herokuapp.com/viewSEU?thread=' + str(generate)
         for email in notificationList:
             send_email(email, request.form['userTitle'], request.form['userName'], link, True)
     return render_special_education_forum()
