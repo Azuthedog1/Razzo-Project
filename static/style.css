@@ -15,11 +15,11 @@ footer {
 }
 
 a.footerLinks {
-  color: #718dbf;
+  color: #bfd7e3;
   text-decoration: underline;
 }
 a.footerLinks:hover{
-  color: #5f7cad;
+  color:#a1b7c2;
 }
 .links {
   margin-top: 8px;
