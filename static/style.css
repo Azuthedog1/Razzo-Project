@@ -15,11 +15,11 @@ footer {
 }
 
 .footerLinks {
-  color: white;
+  color: #deeaff;
   text-decoration: underline;
 }
 .footerLinks a:hover{
-    color: #deeaff;
+    color: #b5d0ff;
 }
 .footerIm {
   width: 100px; 
