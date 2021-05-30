@@ -47,7 +47,6 @@
               var quill = new Quill('#editor', {
               theme: 'snow'
               });
-              quill.clipboard.dangerouslyPasteHTML(0, '<p><b>hello</b></p> &nbsp;<br> <h1>Hello</h1>');
             </script>
           </div>
           <input name="ID" type="hidden" value="{{ _id }}">
@@ -130,7 +129,7 @@
         <form action="/editPost" method="POST" id="editform"> <!-- Replace most of this form with a jinja variable. An admin posting a comment or post on the user forum should not have to answer certain questions. -->
           <div class="form-group">
             <label for="newTitle">New Title:</label>
-            <input type="text" class="form-control" name="newTitle" maxlength="70" value="oldtitle" required>
+            <input type="text" class="form-control" name="newTitle" maxlength="70" value="{{ oldTitle }}" required>
           </div>
           <div class="form-group">
             <label for="newMessage">New Message:</label>
@@ -142,7 +141,7 @@
               var quill3 = new Quill('#editor3', {
               theme: 'snow'
               });
-              quill3.clipboard.dangerouslyPasteHTML(0, 'oldmessage');
+              quill3.clipboard.dangerouslyPasteHTML(0, '{{ oldContent }}');
             </script>
             <small id="characterLimit" class="form-text text-muted">
               12,000 character limit
