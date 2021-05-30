@@ -19,7 +19,7 @@ a.footerLinks {
   text-decoration: underline;
 }
 a.footerLinks:hover{
-    color: #5f7cad;
+  color: #5f7cad;
 }
 .footerIm {
   width: 100px; 
