@@ -29,7 +29,7 @@ collection = db['ADMIN']
 adminDocuments = collection.find({})
 adminList = []
 for admin in adminDocuments:
-    adminlist.append(admin.get('username'))
+    adminList.append(admin.get('username'))
 
 admin1='Azuthedog1'
 admin2='DanaLearnsToCode'
