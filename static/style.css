@@ -249,6 +249,12 @@ tr {
   border-top: 2px solid Black;
 }
 
+.centered2 {
+  margin: auto;
+  top: 8px;
+  font-size: calc(6px + 1.5vw);
+  text-align: center;
+}
 .centered {
   position: absolute;
   top: 45%;
