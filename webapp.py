@@ -1214,19 +1214,19 @@ def edit_post():
         collection.find_one_and_update({'_id': ObjectId(objectIDPost)},
                                        {'$set': {'postTitle': request.form['newTitle'], 'postContent': content}})
         if collection == db['SEU']:
-            action = session['user_data']['login'] + '<span class="vettingColor"> edited <form action="/viewSEU" class="inLine"><select class="selection" name="thread"><option value="' + objectIdPost + '"></option></select><button type="submit" class="customButton commentButton"><b>' + request.form['newTitle'] + '</b></button></form> in special education forum'
+            action = session['user_data']['login'] + '<span class="vettingColor"> edited <form action="/viewSEU" class="inLine"><select class="selection" name="thread"><option value="' + objectIDPost + '"></option></select><button type="submit" class="customButton commentButton"><b>' + request.form['newTitle'] + '</b></button></form> in special education forum'
             add_admin_log(datetime.now(), action, 'none')
             return view_SEU(objectIDPost)
         if collection == db['SEA']:
-            action = session['user_data']['login'] + '<span class="vettingColor"> edited <form action="/viewSEA" class="inLine"><select class="selection" name="thread"><option value="' + objectIdPost + '"></option></select><button type="submit" class="customButton commentButton"><b>' + request.form['newTitle'] + '</b></button></form> in special education forum'
+            action = session['user_data']['login'] + '<span class="vettingColor"> edited <form action="/viewSEA" class="inLine"><select class="selection" name="thread"><option value="' + objectIDPost + '"></option></select><button type="submit" class="customButton commentButton"><b>' + request.form['newTitle'] + '</b></button></form> in special education forum'
             add_admin_log(datetime.now(), action, 'none')
             return view_SEA(objectIDPost)
         if collection == db['ELLA']:
-            action = session['user_data']['login'] + '<span class="vettingColor"> edited <form action="/viewELLA" class="inLine"><select class="selection" name="thread"><option value="' + objectIdPost + '"></option></select><button type="submit" class="customButton commentButton"><b>' + request.form['newTitle'] + '</b></button></form> in english language learner forum'
+            action = session['user_data']['login'] + '<span class="vettingColor"> edited <form action="/viewELLA" class="inLine"><select class="selection" name="thread"><option value="' + objectIDPost + '"></option></select><button type="submit" class="customButton commentButton"><b>' + request.form['newTitle'] + '</b></button></form> in english language learner forum'
             add_admin_log(datetime.now(), action, 'none')
             return view_ELLA(objectIDPost)
         if collection == db['ELLU']:
-            action = session['user_data']['login'] + '<span class="vettingColor"> edited <form action="/viewELLU" class="inLine"><select class="selection" name="thread"><option value="' + objectIdPost + '"></option></select><button type="submit" class="customButton commentButton"><b>' + request.form['newTitle'] + '</b></button></form> in english language learner forum'
+            action = session['user_data']['login'] + '<span class="vettingColor"> edited <form action="/viewELLU" class="inLine"><select class="selection" name="thread"><option value="' + objectIDPost + '"></option></select><button type="submit" class="customButton commentButton"><b>' + request.form['newTitle'] + '</b></button></form> in english language learner forum'
             add_admin_log(datetime.now(), action, 'none')
             return view_ELLU(objectIDPost)
     return render_template('information.html')
