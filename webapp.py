@@ -472,7 +472,7 @@ def submit_comment():
         if 'github_token' in session:
             action = request.form['adminName'] + '<span class="createColor"> commented </span>on <b><a href="https://razzoforumproject.herokuapp.com/viewSEU?thread=' + objectIDPost + '">' + post.get('postTitle') + '</a></b> in special education forum'
             add_admin_log(datetime.now(), action, 'none')
-            if post.get('parentEmail') != 'Email not provided':
+            if post.get('parentEmail') != 'Email not provided' and post.get('approved') == 'true':
                 link = 'https://razzoforumproject.herokuapp.com/viewSEU?thread=' + objectIDPost 
                 send_email(post.get('parentEmail'), post.get('postTitle'), post.get('parentName'), link)
         else:
@@ -491,7 +491,7 @@ def submit_comment():
         if 'github_token' in session:
             action = request.form['adminName'] + '<span class="createColor"> commented </span>on <b><a href="https://razzoforumproject.herokuapp.com/viewELLU?thread=' + objectIDPost + '">' + post.get('postTitle') + '</a></b> in english language learner forum'
             add_admin_log(datetime.now(), action, 'none')
-            if post.get('parentEmail') != 'Email not provided':
+            if post.get('parentEmail') != 'Email not provided' and post.get('approved') == 'true':
                 link = 'https://razzoforumproject.herokuapp.com/viewSEU?thread=' + objectIDPost 
                 send_email(post.get('parentEmail'), post.get('postTitle'), post.get('parentName'), link)
         else:
