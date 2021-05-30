@@ -378,7 +378,7 @@ def render_admin_log():
     #for item in cursor:
     #    session['user_data']['login']
     
-    return render_template('adminlog.html', log = Markup(bigString), email = email, opt = opt, username = username, change = change, receive = receive)
+    return render_template('adminlog.html', log = Markup(bigString), email = email, opt = opt, username = username, change = Markup(change), receive = Markup(receive))
 
 def add_admin_log(dateTime, action, content):
     collection = db['LOG']
