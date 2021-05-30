@@ -249,6 +249,21 @@ tr {
   border-top: 2px solid Black;
 }
 
+.boxes {
+  width: 100%;
+}
+.ELAC {
+  min-width: 80px;
+  width: 25%;
+  left: 33%;
+  border: 2px solid Black;
+}
+.SSEPAC {
+  min-width: 80px;
+  width: 25%;
+  left: 66%;
+  border: 2px solid Black;
+}
 .centered2 {
   margin: auto;
   top: 8px;
@@ -328,15 +343,6 @@ tr {
 .navbar-default .navbar-link:hover {
   color: #9c9000;
 }
-#ELAC_Section
-{
-  border: 2px solid #000000;
-}
-#SSEPAC_Section
-{
-  border: 2px solid #000000;
-}
-
 
 
 /*@media (max-width: 767px) {
