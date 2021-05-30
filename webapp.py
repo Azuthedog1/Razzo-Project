@@ -157,7 +157,7 @@ def remove_admin():
 def opt_out():
     if request.method == 'POST':
         collection = db['ADMIN']
-        collection.find_one_and_update({'_id': ObjectId(request.form['optIn'])},
+        collection.find_one_and_update({'_id': ObjectId(request.form['optOut'])},
                                        {'$set': {'opt': False}})
     return render_admin_log()
 
@@ -165,7 +165,7 @@ def opt_out():
 def opt_in():
     if request.method == 'POST':
         collection = db['ADMIN']
-        collection.find_one_and_update({'_id': ObjectId(request.form['optOut'])},
+        collection.find_one_and_update({'_id': ObjectId(request.form['optIn'])},
                                        {'$set': {'opt': True}})
     return render_admin_log()
 
@@ -363,15 +363,15 @@ def render_admin_log():
     collection = db['ADMIN']
     item = collection.find_one({'username': session['user_data']['login']})
     receive = ''
-    change = '<form action="/addEmail" method="POST" class="inLine"><textarea class="form-control" rows="1" name="email" required></textarea><button type="submit" class="btn btn-primary" name="id" value="' + str(item.get('_id')) + '">Submit</button></form>'
+    change = '<form action="/addEmail" method="POST" class="inLine"><input type="email" class="form-control" name="email" maxlength="254"><button type="submit" class="btn btn-primary" name="id" value="' + str(item.get('_id')) + '">Submit</button></form>'
     username = item.get('username')
     email = 'Not provided'
     opt = 'No'
     if item.get('opt') == True:
         opt = 'Yes'
-        receive = '<form action="/optOut" method="POST" class="inLine"><button type="submit" class="btn btn-warning btn-sm" name="optOut" value="' + str(item.get('_id'))+ '">' + 'Opt Out' + '</button></form>'
+        receive = '<form action="/optOut" method="POST"><button type="submit" class="btn btn-warning btn-sm" name="optOut" value="' + str(item.get('_id'))+ '">Opt Out</button></form>'
     else:
-        receive = '<form action="/optIn" method="POST" class="inLine"><button type="submit" class="btn btn-warning btn-sm" name="optIn" value="' + str(item.get('_id'))+ '">' + 'Opt In' + '</button></form>'
+        receive = '<form action="/optIn" method="POST"><button type="submit" class="btn btn-warning btn-sm" name="optIn" value="' + str(item.get('_id'))+ '">Opt In</button></form>'
     if 'email' in item:
         email = item.get('email')
     #cursor = collection.find({})
