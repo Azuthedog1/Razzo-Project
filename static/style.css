@@ -14,12 +14,12 @@ footer {
   border-top: 1px solid Grey;
 }
 
-.footerLinks {
-  color: #deeaff;
+a.footerLinks {
+  color: #718dbf;
   text-decoration: underline;
 }
-.footerLinks a:hover{
-    color: #b5d0ff;
+a.footerLinks:hover{
+    color: #5f7cad;
 }
 .footerIm {
   width: 100px; 
