@@ -113,7 +113,7 @@ def send_email(receiver_email, title, name, link, logged):
                     <p><b>Hi, """ + name + """.</b><br>
                     Your post <a href='""" + link + """'>""" + title + """</a> has recieved a response from a staff member.<br>
                     --------------------------------------------------------------------------------------------------------<br>
-                    <b>Hola, """ + name + """. </b><br>
+                    <b>Hola, """ + name + """.</b><br>
                     Tu publicación <a href='""" + link + """'>""" + title + """</a> ha recibido una respuesta de un miembro del personal.<br>
                     --------------------------------------------------------------------------------------------------------<br>
                     <small>*Please do not response to this email / Por favor, no responda a este correo electrónico.</small>
@@ -123,21 +123,21 @@ def send_email(receiver_email, title, name, link, logged):
             """
         else:
             text = """\
-            Hello name,
+            Hello.
             A user has commented on the parent board forum.
             <link>
             
-            Hola name,
+            Hola.
             Un usuario ha comentado en el foro del tablero principal.
             <link>"""
             html = """\
             <html>
                 <body>
-                    <p><b>Hi, """ + name + """.</b><br>
-                    A user has posted <a href='""" + link + """'>""" + title + """</a> on the parent board forum<br>
+                    <p><b>Hi.</b><br>
+                    """ + name + """ has posted <a href='""" + link + """'>""" + title + """</a> on the parent board forum<br>
                     --------------------------------------------------------------------------------------------------------<br>
-                    <b>Hola, """ + name + """. </b><br>
-                    Un usuario ha publicado <a href='""" + link + """'>""" + title + """</a> en el foro del tablero principal.<br>
+                    <b>Hola.</b><br>
+                    """ + name + """ ha publicado <a href='""" + link + """'>""" + title + """</a> en el foro del tablero principal.<br>
                     <small>*Please do not response to this email / Por favor, no responda a este correo electrónico.</small>
                     </p>
                 </body>
