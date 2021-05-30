@@ -34,14 +34,6 @@ for admin in adminDocuments:
     if admin.get('email') != None and admin.get('opt') == True:
         notificationList.append(admin.get('email'))
 
-admin1='Azuthedog1'
-admin2='DanaLearnsToCode'
-admin3='MyDSWAccount'
-admin4='Korkz'
-admin5='Ponmo'
-admin6='piemusician'
-admin7='Ramon-W'
-
 #Set up GitHub as OAuth provider
 github = oauth.remote_app(
     'github',
@@ -374,13 +366,13 @@ def render_admin_log():
         receive = '<form action="/optIn" method="POST"><button type="submit" class="btn btn-warning btn-sm" name="optIn" value="' + str(item.get('_id'))+ '">Opt In</button></form>'
     if 'email' in item:
         email = item.get('email')
-    
+    add = '<form action="/addAdmin" method="POST"><input type="text" class="form-control" name="username"><button type="submit" class="btn btn-primary">Add</button></form>'
     admins = ''
     cursor = collection.find({})
     for admin in cursor:
-        admins += admin.get('username') + '<form action="/removeAdmin" method="POST"><button type="submit" class="btn btn-warning btn-sm" name="delete" value="' + str(admin.get('_id'))+ '">Remove</button></form><br>'
+        admins += admin.get('username') + '<form action="/removeAdmin" method="POST"><button type="submit" class="btn btn-danger btn-sm" name="delete" value="' + str(admin.get('_id'))+ '">Remove</button></form><br>'
     
-    return render_template('adminlog.html', log = Markup(bigString), email = email, opt = opt, username = username, change = Markup(change), receive = Markup(receive), admins = Markup(admins))
+    return render_template('adminlog.html', log = Markup(bigString), email = email, opt = opt, username = username, change = Markup(change), receive = Markup(receive), admins = Markup(admins), add = Markup(add))
 
 def add_admin_log(dateTime, action, content):
     collection = db['LOG']
