@@ -86,7 +86,7 @@ def authorized():
     session['username'] = 'admin'
     return render_template('login.html', message = message)
 
-def send_email(receiver_email, title, name, link):
+def send_email(receiver_email, title, name, link, admin):
     collection = db['EMAIL']
     try:
         information = collection.find_one({'_id': ObjectId('60b2d66ba55f630f74e0a554')})
@@ -98,27 +98,55 @@ def send_email(receiver_email, title, name, link):
         message['From'] = sender_email
         message['To'] = receiver_email
         text = """\
-        Hello name,
-        Your post title has recieved a response from a staff member.
-        <link>
-        
-        Hola name,
-        Tu publicación title ha recibido una respuesta de un miembro del personal.
-        <link>"""
-        html = """\
-        <html>
-            <body>
-                <p><b>Hi, """ + name + """.</b><br>
-                Your post <a href='""" + link + """'>""" + title + """</a> has recieved a response from a staff member.<br>
-                --------------------------------------------------------------------------------------------------------<br>
-                <b>Hola, """ + name + """. </b><br>
-                Tu publicación <a href='""" + link + """'>""" + title + """</a> ha recibido una respuesta de un miembro del personal.<br>
-                --------------------------------------------------------------------------------------------------------<br>
-                <small>*Please do not response to this email / Por favor, no responda a este correo electrónico.</small>
-                </p>
-            </body>
-        </html>
         """
+        html = """\
+        """
+        if admin = False:
+            text = """\
+            Hello name,
+            Your post title has recieved a response from a staff member.
+            <link>
+            
+            Hola name,
+            Tu publicación title ha recibido una respuesta de un miembro del personal.
+            <link>"""
+            html = """\
+            <html>
+                <body>
+                    <p><b>Hi, """ + name + """.</b><br>
+                    Your post <a href='""" + link + """'>""" + title + """</a> has recieved a response from a staff member.<br>
+                    --------------------------------------------------------------------------------------------------------<br>
+                    <b>Hola, """ + name + """. </b><br>
+                    Tu publicación <a href='""" + link + """'>""" + title + """</a> ha recibido una respuesta de un miembro del personal.<br>
+                    --------------------------------------------------------------------------------------------------------<br>
+                    <small>*Please do not response to this email / Por favor, no responda a este correo electrónico.</small>
+                    </p>
+                </body>
+            </html>
+            """
+        else:
+            text = """\
+            Hello name,
+            A user has commented on the parent board forum.
+            <link>
+            
+            Hola name,
+            Un usuario ha comentado en el foro del tablero principal.
+            <link>"""
+            html = """\
+            <html>
+                <body>
+                    <p><b>Hi, """ + name + """.</b><br>
+                    A user has posted <a href='""" + link + """'>""" + title + """</a> on the parent board forum<br>
+                    --------------------------------------------------------------------------------------------------------<br>
+                    <b>Hola, """ + name + """. </b><br>
+                    Un usuario ha publicado <a href='""" + link + """'>""" + title + """</a> en el foro del tablero principal.<br>
+                    --------------------------------------------------------------------------------------------------------<br>
+                    <small>*Please do not response to this email / Por favor, no responda a este correo electrónico.</small>
+                    </p>
+                </body>
+            </html>
+            """
         part1 = MIMEText(text, 'plain')
         part2 = MIMEText(html, 'html')
         message.attach(part1)
@@ -396,6 +424,9 @@ def user_submit_post_ELL():
         collection.insert_one(post)
         action = request.form['userName'] + '<span class="createColor"> posted </span><form action="/viewELLU" class="inLine"><select class="selection" name="thread"><option value="' + str(generate) + '"></option></select><button type="submit" class="customButton commentButton"><b>' + request.form['userTitle'] + '</b></button></form> in english language learner forum'
         add_admin_log(datetime.now(), action, 'none')
+        link = 'https://razzoforumproject.herokuapp.com/viewSEU?thread=' + generate
+        for email in notificationList:
+            send_email(email, request.form['userTitle'], request.form['userName'], link, True)
     return render_english_learner_forum()
 
 @app.route('/adminSubmitPostELL', methods=['GET', 'POST']) #Same as above, except no name, student name and grade, no anonymous, etc.
@@ -433,6 +464,10 @@ def user_submit_post_SE():
         post = collection.insert_one(post)
         action = request.form['userName'] + '<span class="createColor"> posted </span><form action="/viewSEU" class="inLine"><select class="selection" name="thread"><option value="' + str(generate) + '"></option></select><button type="submit" class="customButton commentButton"><b>' + request.form['userTitle'] + '</b></button></form> in special education forum'
         add_admin_log(datetime.now(), action, 'none')
+        collection = db['ADMIN']
+        link = 'https://razzoforumproject.herokuapp.com/viewSEU?thread=' + generate
+        for email in notificationList:
+            send_email(email, request.form['userTitle'], request.form['userName'], link, True)
     return render_special_education_forum()
 
 @app.route('/adminSubmitPostSE', methods=['GET', 'POST'])
@@ -504,7 +539,7 @@ def submit_comment():
             add_admin_log(datetime.now(), action, 'none')
             if post.get('parentEmail') != 'Email not provided' and post.get('approved') == 'true':
                 link = 'https://razzoforumproject.herokuapp.com/viewSEU?thread=' + objectIDPost 
-                send_email(post.get('parentEmail'), post.get('postTitle'), post.get('parentName'), link)
+                send_email(post.get('parentEmail'), post.get('postTitle'), post.get('parentName'), link, False)
         else:
             action = request.form['userName'] + '<span class="createColor"> commented </span>on <form action="/viewSEU" class="inLine"><select class="selection" name="thread"><option value="' + objectIDPost + '"></option></select><button type="submit" class="customButton commentButton"><b>' + post.get('postTitle') + '</b></button></form> in special education forum'
             add_admin_log(datetime.now(), action, 'none')
@@ -523,7 +558,7 @@ def submit_comment():
             add_admin_log(datetime.now(), action, 'none')
             if post.get('parentEmail') != 'Email not provided' and post.get('approved') == 'true':
                 link = 'https://razzoforumproject.herokuapp.com/viewSEU?thread=' + objectIDPost 
-                send_email(post.get('parentEmail'), post.get('postTitle'), post.get('parentName'), link)
+                send_email(post.get('parentEmail'), post.get('postTitle'), post.get('parentName'), link, False)
         else:
             action = request.form['userName'] + '<span class="createColor"> commented </span>on <form action="/viewELLU" class="inLine"><select class="selection" name="thread"><option value="' + objectIDPost + '"></option></select><button type="submit" class="customButton commentButton"><b>' + post.get('postTitle') + '</b></button></form> in english language learner forum'
             add_admin_log(datetime.now(), action, 'none')
