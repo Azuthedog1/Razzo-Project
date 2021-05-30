@@ -1208,8 +1208,7 @@ def edit_post():
             collection = db['ELLU']
             post = collection.find_one({'_id': ObjectId(objectIDPost)})
         collection.find_one_and_update({'_id': ObjectId(objectIDPost)},
-                                       {'$set': {'postTitle': request.form('newTitle')}},
-                                       {'$set': {'postContent': request.form('newMessage')}})
+                                       {'$set': {'postTitle': request.form('newTitle'), 'postContent': request.form('newMessage')}})
         if collection == db['SEU']:
             action = session['user_data']['login'] + '<span class="vettingColor"> edited </span><b><a href="https://razzoforumproject.herokuapp.com/viewSEU?thread=' + objectIDPost + '">' + request.form('newTitle') + '</a></b> in special education forum'
             add_admin_log(datetime.now(), action, 'none')
