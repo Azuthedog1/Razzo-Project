@@ -344,7 +344,7 @@ def user_submit_post_ELL():
         collection = db['ELLU']
         content = request.form['userMessage']
         content = content.replace('\\"', '')
-        content = content.replace('\\t', '&#9;')
+        content = content.replace('\\t', '&nbsp;&nbsp;&nbsp;&nbsp;')
         content = content.replace(' ', '&nbsp;')
         content = Markup(content[1:len(content)-1])
         if request.form['userEmail'] == '':
@@ -368,7 +368,7 @@ def admin_submit_post_ELL():
         collection = db['ELLA']
         content = request.form['adminMessage']
         content = content.replace('\\"', '')
-        content = content.replace('\\t', '&#9;')
+        content = content.replace('\\t', '&nbsp;&nbsp;&nbsp;&nbsp;')
         content = content.replace(' ', '&nbsp;')
         content = Markup(content[1:len(content)-1])
         
@@ -389,7 +389,7 @@ def user_submit_post_SE():
         collection = db['SEU']
         content = request.form['userMessage']
         content = content.replace('\\"', '')
-        content = content.replace('\\t', '&#9;')
+        content = content.replace('\\t', '&nbsp;&nbsp;&nbsp;&nbsp;')
         content = content.replace(' ', '&nbsp;')
         content = Markup(content[1:len(content)-1])
         if request.form['userEmail'] == '':
@@ -413,7 +413,7 @@ def admin_submit_post_SE():
         collection = db['SEA']
         content = request.form['adminMessage']
         content = content.replace('\\"', '')
-        content = content.replace('\\t', '&#9;')
+        content = content.replace('\\t', '&nbsp;&nbsp;&nbsp;&nbsp;')
         content = content.replace(' ', '&nbsp;')
         content = Markup(content[1:len(content)-1])
         generate = ObjectId()
@@ -452,7 +452,7 @@ def submit_comment():
         if 'github_token' in session:
             content = request.form['adminMessage']
             content = content.replace('\\"', '')
-            content = content.replace('\\t', '&#9;')
+            content = content.replace('\\t', '&nbsp;&nbsp;&nbsp;&nbsp;')
             content = content.replace(' ', '&nbsp;')
             content = Markup(content[1:len(content)-1])
             post['comment' + lastNumber] = {'adminName': request.form['adminName'], 'dateTime': datetime.now(), 'postContent': content}
@@ -461,7 +461,7 @@ def submit_comment():
         else:
             content = request.form['userMessage']
             content = content.replace('\\"', '')
-            content = content.replace('\\t', '&#9;')
+            content = content.replace('\\t', '&nbsp;&nbsp;&nbsp;&nbsp;')
             content = content.replace(' ', '&nbsp;')
             content = Markup(content[1:len(content)-1])
             post['comment' + lastNumber] = {'parentName': request.form['userName'], 'studentNameGrade': request.form['userStudent'], 'anonymous': request.form['anon'], 'dateTime': datetime.now(), 'postContent': content, 'approved': 'false'}
