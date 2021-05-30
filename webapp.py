@@ -363,7 +363,7 @@ def render_admin_log():
     collection = db['ADMIN']
     item = collection.find_one({'username': session['user_data']['login']})
     receive = ''
-    change = '<form action="/addEmail" method="POST" class="inLine"><input type="email" class="form-control" name="email" maxlength="254"><button type="submit" class="btn btn-primary" name="id" value="' + str(item.get('_id')) + '">Submit</button></form>'
+    change = '<form action="/addEmail" method="POST"><input type="email" class="form-control" name="email" maxlength="254"><button type="submit" class="btn btn-primary" name="id" value="' + str(item.get('_id')) + '">Submit</button></form>'
     username = item.get('username')
     email = 'Not provided'
     opt = 'No'
@@ -374,11 +374,13 @@ def render_admin_log():
         receive = '<form action="/optIn" method="POST"><button type="submit" class="btn btn-warning btn-sm" name="optIn" value="' + str(item.get('_id'))+ '">Opt In</button></form>'
     if 'email' in item:
         email = item.get('email')
-    #cursor = collection.find({})
-    #for item in cursor:
-    #    session['user_data']['login']
     
-    return render_template('adminlog.html', log = Markup(bigString), email = email, opt = opt, username = username, change = Markup(change), receive = Markup(receive))
+    admins = ''
+    cursor = collection.find({})
+    for admin in cursor:
+        admins += admin.get('username') + '<form action="/removeAdmin" method="POST"><button type="submit" class="btn btn-warning btn-sm" name="delete" value="' + str(admin.get('_id'))+ '">Remove</button></form><br>'
+    
+    return render_template('adminlog.html', log = Markup(bigString), email = email, opt = opt, username = username, change = Markup(change), receive = Markup(receive), admins = Markup(admins))
 
 def add_admin_log(dateTime, action, content):
     collection = db['LOG']
