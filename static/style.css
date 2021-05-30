@@ -35,6 +35,12 @@ a.footerLinks:hover{
   margin-top: 25px;
 }
 
+.adminInfoBox {
+  margin-top: 25px;
+  padding: 5px;
+  border: 2px solid Black
+}
+
 .footerText {
   padding-left: 20px;
   color: #ffffff;
