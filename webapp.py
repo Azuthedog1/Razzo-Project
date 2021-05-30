@@ -359,7 +359,24 @@ def render_admin_log():
             counter += 1
             bigString += ' <button class="btn btn-default btn-sm" type="button" data-toggle="collapse" data-target="#collapse' + str(counter) + '" aria-expanded="false" aria-controls="collapseExample">View <span class="glyphicon glyphicon-triangle-bottom"></span></button><div class="collapse" id="collapse' + str(counter) + '">' + item.get('content') + '</div>'
         bigString += '<br></td></tr>'
-    return render_template('adminlog.html', log = Markup(bigString))
+    
+    collection = db['ADMIN']
+    item = collection.find_one(session['user_data']['login'])
+    username = item.get('username')
+    email = ''
+    opt = ''
+    if item.get('opt') == False:
+        opt = 'No'
+    else:
+        opt = 'Yes'
+    if item.has_key('email'):
+        email = item.get('email')
+  
+    #cursor = collection.find({})
+    #for item in cursor:
+    #    session['user_data']['login']
+    
+    return render_template('adminlog.html', log = Markup(bigString), email = email, opt = opt, username = username)
 
 def add_admin_log(dateTime, action, content):
     collection = db['LOG']
