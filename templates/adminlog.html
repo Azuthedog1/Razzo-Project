@@ -7,26 +7,26 @@
 {% block content %}
 <div class="back">
   <div class="logBox">
-    <table class="toprow">
+    <table class="toprow"> <!-- The "heading" of the admin logs -->
       <tr>
-        <td class="headCol1"><b>Admin Logs<br></b><i>*Renders last 1000 actions</i></td>
+        <td class="headCol1"><b>Admin Logs<br></b><i>*Renders last 1000 actions</i></td> 
         <td class="headCol2"><input type="text" id="myInputLogs" onkeyup="myFunction()" placeholder="Search"></td>
       </tr>
     </table>
     <div class="logScroll">
-      <table class="logContent" id="targetSearchLogs">
+      <table class="logContent" id="targetSearchLogs"> <!-- The content of the admin logs -->
         {{ log }}
       </table>
     </div>
   </div>
-  <div class="adminInfoBox">
+  <div class="adminInfoBox"> <!-- Inserts information about admins, accounts, etc. -->
     <p><b>Your Account:</b><br>Username: {{ username }}<br>Email: {{ email }}<br>Receive emails when users post: {{ opt }}<br>Receive emails when users comment: {{ optComment }}<br><br>
       <b>Change Account:</b><br>Receive emails when users post: {{ receive }}<br>Receive emails when users comment: {{ receiveComment }}<br>Change email: {{ change }}<br><br>
       <b>Admin List:</b><br><br>{{ admins }}<br><b>Add Admin (type Github username):</b> {{ add }}
     </p>
   </div>
 </div>
-<script>
+<script> <!-- Search bar -->
 function myFunction() {
   var input, filter, table, tr, td, i, txtValue;
   input = document.getElementById("myInputLogs");
