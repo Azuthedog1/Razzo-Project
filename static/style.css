@@ -253,16 +253,19 @@ tr {
   width: 100%;
 }
 .ELAC {
-  width: 50%;
+  width: 40%;
   margin: auto;
   padding: 20px;
   background-color: #5bc0de;
 }
 .SSEPAC {
-  width: 50%;
+  width: 40%;
   margin: auto;
   padding: 20px;
   background-color: #d9534f;
+}
+.emptySpace {
+  width: 20px;
 }
 a.textStyle {
   color: white;
