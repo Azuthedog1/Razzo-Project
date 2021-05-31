@@ -186,7 +186,7 @@ def opt_in():
     return render_admin_log()
 
 @app.route('/optInComment', methods=['GET', 'POST'])
-def opt_in():
+def opt_in_comment():
     if request.method == 'POST':
         collection = db['ADMIN']
         collection.find_one_and_update({'_id': ObjectId(request.form['optInComment'])},
@@ -194,7 +194,7 @@ def opt_in():
     return render_admin_log()
 
 @app.route('/optOutComment', methods=['GET', 'POST'])
-def opt_in():
+def opt_out_comment():
     if request.method == 'POST':
         collection = db['ADMIN']
         collection.find_one_and_update({'_id': ObjectId(request.form['optOutComment'])},
