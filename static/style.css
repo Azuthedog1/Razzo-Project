@@ -264,6 +264,7 @@ tr {
   margin: auto;
   top: 8px;
   font-size: calc(8px + 1vw);
+  width: 80%;
   text-align: center;
 }
 .centered {
