@@ -253,14 +253,14 @@ tr {
   width: 100%;
 }
 .ELAC {
-  min-width: 80px;
-  width: 25%;
+  min-width: 120px;
+  width: 30%;
   left: 33%;
   border: 2px solid Black;
 }
 .SSEPAC {
-  min-width: 80px;
-  width: 25%;
+  min-width: 120px;
+  width: 30%;
   left: 66%;
   border: 2px solid Black;
 }
