@@ -96,6 +96,12 @@ a.footerLinks:hover{
   min-height: 660px;
 }
 
+.infoBack {
+  width: 90%;
+  margin: auto;
+  height: auto;
+  margin-top: 20px;
+}
 .postBox, .postBox2 {
   background-color: #ffffff;
   margin-bottom: 20px;
