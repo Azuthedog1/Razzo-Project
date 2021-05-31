@@ -255,13 +255,13 @@ tr {
 .ELAC {
   width: 50%;
   margin: auto;
-  padding: -10px;
+  padding: 20px;
   background-color: #5bc0de;
 }
 .SSEPAC {
   width: 50%;
   margin: auto;
-  padding: -10px;
+  padding: 20px;
   background-color: #d9534f;
 }
 a.textStyle {
