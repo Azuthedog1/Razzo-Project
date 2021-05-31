@@ -98,7 +98,7 @@ def send_email(receiver_email, title, name, link, logged, comment):
         """
         html = """\
         """
-        if logged == False:
+        if logged == False and comment == True:
             text = """\
             Hello name,
             Your post title has recieved a response from a staff member.
@@ -122,7 +122,7 @@ def send_email(receiver_email, title, name, link, logged, comment):
             </html>
             """
             return render_template('login.html', message='1')
-        elif comment == False:
+        if logged == True and comment == False:
             text = """\
             Hello.
             A user has posted on the parent board forum.
@@ -146,7 +146,8 @@ def send_email(receiver_email, title, name, link, logged, comment):
             </html>
             """
             return render_template('login.html', message='2')
-        else:
+        if logged == True and comment == True:
+            return render_template('login.html', message='3')
             text = """\
             Hello.
             A user has posted on the parent board forum.
@@ -169,7 +170,6 @@ def send_email(receiver_email, title, name, link, logged, comment):
                 </body>
             </html>
             """
-            return render_template('login.html', message='3')
         part1 = MIMEText(text, 'plain')
         part2 = MIMEText(html, 'html')
         message.attach(part1)
