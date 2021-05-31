@@ -1,5 +1,5 @@
 $(document).ready(function(){ 
-  $('.cancel').hide();
+  $('.cancel').hide(); /*hides cancel and confirm buttons, creates input to show them, etc.*/
   $('.confirm').hide();
   $('.delete').click(function(){
     $(this).siblings('.cancel').show();
