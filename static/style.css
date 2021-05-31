@@ -256,16 +256,14 @@ tr {
   width: 50%;
 }
 .ELAC {
-  min-width: 120px;
   width: 30%;
-  left: 33%;
-  border: 2px solid Black;
+  margin: auto;
+  background-color: blue;
 }
 .SSEPAC {
-  min-width: 120px;
   width: 30%;
-  left: 66%;
-  border: 2px solid Black;
+  margin: auto;
+  background-color: blue;
 }
 .centered2 {
   margin: auto;
