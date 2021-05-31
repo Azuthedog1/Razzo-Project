@@ -595,7 +595,6 @@ def submit_comment():
                 if admin.get('email') != None and admin.get('optComment') == True:
                     notificationList.append(admin.get('email'))
             for email in notificationList:
-                return render_template('login.html', message=email)
                 return send_email(email, title, name, link, True, True)
     if collection == db['SEA']:
         if 'github_token' in session:
