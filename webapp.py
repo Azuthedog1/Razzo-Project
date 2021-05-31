@@ -582,7 +582,6 @@ def submit_comment():
             content = Markup(content[1:len(content)-1])
             post['comment' + lastNumber] = {'parentName': request.form['userName'], 'studentNameGrade': request.form['userStudent'], 'anonymous': request.form['anon'], 'dateTime': datetime.now(), 'postContent': content, 'approved': 'false'}
             collection.replace_one({'_id': ObjectId(objectIDPost)}, post)
-            post = collection.find_one({'_id': ObjectId(objectIDPost)})
             title = post.get('userTitle')
             if title == None:
                 title = post.get('adminTitle')
@@ -596,6 +595,7 @@ def submit_comment():
                 if admin.get('email') != None and admin.get('optComment') == True:
                     notificationList.append(admin.get('email'))
             for email in notificationList:
+                return render_template('information.html')
                 send_email(email, title, name, link, True, True)
     if collection == db['SEA']:
         if 'github_token' in session:
