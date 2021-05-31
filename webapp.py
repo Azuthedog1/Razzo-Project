@@ -870,7 +870,7 @@ def view_SEA(objectIDPost): #render the contents and comments of the special edu
                             bigString += '<tr><td class="comments"><b>' + post.get('comment' + str(i), {}).get('parentName') + '</b><br><i>' + loc_dt + '</i><br><br>' + post.get('comment' + str(i), {}).get('postContent') + '</td></tr>'
                 counter += 1
             i += 1
-    return render_template('comments.html', title = postTitle, name = displayName, information = '', time = loc_dt, content = Markup(postContent), _id = objectIDPost, comments = Markup(bigString), oldContent = Markup(postContent), oldTitle = postTitle)
+    return render_template('comments.html', title = postTitle, name = displayName, information = '', time = loc_dt, content = Markup(postContent), _id = objectIDPost, comments = Markup(bigString), oldContent = Markup(postContent), oldTitle = postTitle, page = 'specialeducationforum')
 
 def view_SEU(objectIDPost): #go to view_SEA for comments since these functions work the same way.
     collection = db['SEU']
@@ -960,7 +960,7 @@ def view_SEU(objectIDPost): #go to view_SEA for comments since these functions w
                             bigString += '<tr><td class="comments"><b>' + post.get('comment' + str(i), {}).get('parentName') + '</b><br><i>' + loc_dt + '</i><br><br>' + post.get('comment' + str(i), {}).get('postContent') + '</td></tr>'
                 counter += 1
             i += 1
-    return render_template('comments.html', title = postTitle, name = parentName, information = info, time = loc_dt, content = Markup(postContent), _id = objectIDPost, comments = Markup(bigString), oldContent = Markup(postContent), oldTitle = postTitle)
+    return render_template('comments.html', title = postTitle, name = parentName, information = info, time = loc_dt, content = Markup(postContent), _id = objectIDPost, comments = Markup(bigString), oldContent = Markup(postContent), oldTitle = postTitle, page = 'specialeducationforum')
 
 def view_ELLA(objectIDPost): #go to view_SEA for comments since these functions work the same way.
     collection = db['ELLA']
@@ -1043,7 +1043,7 @@ def view_ELLA(objectIDPost): #go to view_SEA for comments since these functions 
                             bigString += '<tr><td class="comments"><b>' + post.get('comment' + str(i), {}).get('parentName') + '</b><br><i>' + loc_dt + '</i><br><br>' + post.get('comment' + str(i), {}).get('postContent') + '</td></tr>'
                 counter += 1
             i += 1
-    return render_template('comments.html', title = postTitle, name = displayName, information = '', time = loc_dt, content = Markup(postContent), _id = objectIDPost, comments = Markup(bigString), oldContent = Markup(postContent), oldTitle = postTitle)
+    return render_template('comments.html', title = postTitle, name = displayName, information = '', time = loc_dt, content = Markup(postContent), _id = objectIDPost, comments = Markup(bigString), oldContent = Markup(postContent), oldTitle = postTitle, page = 'englishlearnerforum')
 
 def view_ELLU(objectIDPost): #go to view_SEA for comments since these functions work the same way.
     collection = db['ELLU']
@@ -1133,7 +1133,7 @@ def view_ELLU(objectIDPost): #go to view_SEA for comments since these functions 
                             bigString += '<tr><td class="comments"><b>' + post.get('comment' + str(i), {}).get('parentName') + '</b><br><i>' + loc_dt + '</i><br><br>' + post.get('comment' + str(i), {}).get('postContent') + '</td></tr>'
                 counter += 1
             i += 1
-    return render_template('comments.html', title = postTitle, name = parentName, information = info, time = loc_dt, content = Markup(postContent), _id = objectIDPost, comments = Markup(bigString), oldContent = Markup(postContent), oldTitle = postTitle)
+    return render_template('comments.html', title = postTitle, name = parentName, information = info, time = loc_dt, content = Markup(postContent), _id = objectIDPost, comments = Markup(bigString), oldContent = Markup(postContent), oldTitle = postTitle, page = 'englishlearnerforum')
 
 @app.route('/deleteSE', methods=['GET', 'POST']) #deletes a user or admin post in the special education forum
 def delete_SE():
