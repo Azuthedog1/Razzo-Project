@@ -149,20 +149,20 @@ def send_email(receiver_email, title, name, link, logged, comment):
         else:
             text = """\
             Hello.
-            A user has commented on the parent board forum.
+            A user has posted on the parent board forum.
             <link>
             
             Hola.
-            Un usuario ha comentado en el foro del tablero principal.
+            Un usuario ha publicado en el foro del tablero principal.
             <link>"""
             html = """\
             <html>
                 <body>
                     <p><b>Hi.</b><br>
-                    """ + name + """ has commented on <a href='""" + link + """'>""" + title + """</a> on the parent board forum<br>
+                    """ + name + """ has posted <a href='""" + link + """'>""" + title + """</a> on the parent board forum<br>
                     --------------------------------------------------------------------------------------------------------<br>
                     <b>Hola.</b><br>
-                    """ + name + """ ha comentado en <a href='""" + link + """'>""" + title + """</a> en el foro del tablero principal.<br>
+                    """ + name + """ ha publicado <a href='""" + link + """'>""" + title + """</a> en el foro del tablero principal.<br>
                     --------------------------------------------------------------------------------------------------------<br>
                     <small>*Please do not response to this email / Por favor, no responda a este correo electrónico.</small>
                     </p>
