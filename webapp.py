@@ -418,28 +418,28 @@ def render_admin_log():
     collection = db['ADMIN'] #now, we generate code for admin information: view account, edit account, view other admins, and add/delete admins
     item = collection.find_one({'username': session['user_data']['login']}) #the viewer's information
     receive = ''
-    change = '<form action="/addEmail" method="POST"><input type="email" class="form-control" name="email" maxlength="254"><button type="submit" class="btn btn-primary" name="id" value="' + str(item.get('_id')) + '">Submit</button></form>'
+    change = '<form action="/addEmail" method="POST" class="inLine"><input type="email" class="form-control" name="email" maxlength="254"><button type="submit" class="btn btn-primary" name="id" value="' + str(item.get('_id')) + '">Submit</button></form>'
     username = item.get('username')
     email = 'Not provided'
     opt = 'No'
     optComment = 'No'
     if item.get('opt') == True: #if the admin has opted in to getting emails for user posts, opt out button. Else, opt in button.
         opt = 'Yes'
-        receive = '<form action="/optOut" method="POST"><button type="submit" class="btn btn-warning btn-sm" name="optOut" value="' + str(item.get('_id'))+ '">Opt Out</button></form>'
+        receive = '<form action="/optOut" method="POST" class="inLine"><button type="submit" class="btn btn-warning btn-sm" name="optOut" value="' + str(item.get('_id'))+ '">Opt Out</button></form>'
     else:
-        receive = '<form action="/optIn" method="POST"><button type="submit" class="btn btn-warning btn-sm" name="optIn" value="' + str(item.get('_id'))+ '">Opt In</button></form>'
+        receive = '<form action="/optIn" method="POST" class="inLine"><button type="submit" class="btn btn-warning btn-sm" name="optIn" value="' + str(item.get('_id'))+ '">Opt In</button></form>'
     if item.get('optComment') == True: #if the admin has opted in to getting emails for user comments, opt out button. Else, opt in button.
         optComment = 'Yes'
-        receiveComment = '<form action="/optOutComment" method="POST"><button type="submit" class="btn btn-warning btn-sm" name="optOutComment" value="' + str(item.get('_id'))+ '">Opt Out</button></form>'
+        receiveComment = '<form action="/optOutComment" method="POST" class="inLine"><button type="submit" class="btn btn-warning btn-sm" name="optOutComment" value="' + str(item.get('_id'))+ '">Opt Out</button></form>'
     else:
-        receiveComment = '<form action="/optInComment" method="POST"><button type="submit" class="btn btn-warning btn-sm" name="optInComment" value="' + str(item.get('_id'))+ '">Opt In</button></form>'
+        receiveComment = '<form action="/optInComment" method="POST" class="inLine"><button type="submit" class="btn btn-warning btn-sm" name="optInComment" value="' + str(item.get('_id'))+ '">Opt In</button></form>'
     if 'email' in item: #if the admin has an email
         email = item.get('email')
-    add = '<form action="/addAdmin" method="POST"><input type="text" class="form-control" name="username"><button type="submit" class="btn btn-primary">Add</button></form>'
+    add = '<form action="/addAdmin" method="POST" class="inLine"><input type="text" class="form-control" name="username"><button type="submit" class="btn btn-primary">Add</button></form>'
     admins = ''
     cursor = collection.find({})
     for admin in cursor: #generates a list of all admins as well as remove buttons attached to their id.
-        admins += admin.get('username') + '<form action="/removeAdmin" method="POST"><button type="submit" class="btn btn-danger btn-sm" name="delete" value="' + str(admin.get('_id'))+ '">Remove</button></form><br>'
+        admins += admin.get('username') + '<form action="/removeAdmin" method="POST"class="inLine"><button type="submit" class="btn btn-danger btn-sm" name="delete" value="' + str(admin.get('_id'))+ '">Remove</button></form><br>'
     return render_template('adminlog.html', log = Markup(bigString), email = email, opt = opt, username = username, change = Markup(change), receive = Markup(receive), admins = Markup(admins), add = Markup(add), optComment = optComment, receiveComment = Markup(receiveComment))
 
 def add_admin_log(dateTime, action, content): #adds an action to the admin log database
