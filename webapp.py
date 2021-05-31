@@ -167,6 +167,7 @@ def send_email(receiver_email, title, name, link, logged, comment):
                 </body>
             </html>
             """
+        return render_template('login.html', message='Email is through')
         part1 = MIMEText(text, 'plain')
         part2 = MIMEText(html, 'html')
         message.attach(part1)
@@ -595,7 +596,7 @@ def submit_comment():
                     notificationList.append(admin.get('email'))
             for email in notificationList:
                 return render_template('login.html', message=email)
-                send_email(email, title, name, link, True, True)
+                return send_email(email, title, name, link, True, True)
     if collection == db['SEA']:
         if 'github_token' in session:
             action = request.form['adminName'] + '<span class="createColor"> commented </span>on <form action="/viewSEA" class="inLine"><select class="selection" name="thread"><option value="' + objectIDPost + '"></option></select><button type="submit" class="customButton commentButton"><b>' + post.get('postTitle') + '</b></button></form> in special education forum'
