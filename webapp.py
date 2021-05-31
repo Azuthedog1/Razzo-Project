@@ -144,7 +144,7 @@ def send_email(receiver_email, title, name, link, logged, comment):
                 </body>
             </html>
             """
-        else: 
+        if comment == True and logged == True:
             text = """\
             Hello.
             A user has commented on the parent board forum.
@@ -595,7 +595,6 @@ def submit_comment():
                 if admin.get('email') != None and admin.get('optComment') == True:
                     notificationList.append(admin.get('email'))
             for email in notificationList:
-                return render_template('information.html')
                 send_email(email, title, name, link, True, True)
     if collection == db['SEA']:
         if 'github_token' in session:
