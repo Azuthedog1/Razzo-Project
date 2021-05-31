@@ -275,7 +275,9 @@ tr {
   transform: translate(-50%, -50%);
   width: 80%;
 }
-
+.firstBox {
+  width: 50%;
+}
 .indent {
   margin-left: 5px;
   border-left: 1px solid Grey;
