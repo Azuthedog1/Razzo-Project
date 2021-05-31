@@ -98,7 +98,7 @@ def send_email(receiver_email, title, name, link, logged, comment):
         """
         html = """\
         """
-        if logged == False and comment == True:
+        if logged == False:
             text = """\
             Hello name,
             Your post title has recieved a response from a staff member.
@@ -121,8 +121,7 @@ def send_email(receiver_email, title, name, link, logged, comment):
                 </body>
             </html>
             """
-            return render_template('login.html', message='1')
-        if logged == True and comment == False:
+        elif comment == False:
             text = """\
             Hello.
             A user has posted on the parent board forum.
@@ -143,31 +142,31 @@ def send_email(receiver_email, title, name, link, logged, comment):
                     <small>*Please do not response to this email / Por favor, no responda a este correo electrónico.</small>
                     </p>
                 </body>
-            </html>"""
-            return render_template('login.html', message='2')
-        if logged == True and comment == True:
+            </html>
+            """
+        else:
             text = """\
             Hello.
-            A user has posted on the parent board forum.
+            A user has commented on the parent board forum.
             <link>
             
             Hola.
-            Un usuario ha publicado en el foro del tablero principal.
+            Un usuario ha comentado en el foro del tablero principal.
             <link>"""
-            return render_template('login.html', message=name)
             html = """\
             <html>
                 <body>
                     <p><b>Hi.</b><br>
-                    """ + name + """ has posted <a href='""" + link + """'>""" + title + """</a> on the parent board forum<br>
+                    """ + name + """ has commented on <a href='""" + link + """'>""" + title + """</a> on the parent board forum<br>
                     --------------------------------------------------------------------------------------------------------<br>
                     <b>Hola.</b><br>
-                    """ + name + """ ha publicado <a href='""" + link + """'>""" + title + """</a> en el foro del tablero principal.<br>
+                    """ + name + """ ha comentado en <a href='""" + link + """'>""" + title + """</a> en el foro del tablero principal.<br>
                     --------------------------------------------------------------------------------------------------------<br>
                     <small>*Please do not response to this email / Por favor, no responda a este correo electrónico.</small>
                     </p>
                 </body>
-            </html>"""
+            </html>
+            """
         part1 = MIMEText(text, 'plain')
         part2 = MIMEText(html, 'html')
         message.attach(part1)
@@ -582,10 +581,7 @@ def submit_comment():
             content = Markup(content[1:len(content)-1])
             post['comment' + lastNumber] = {'parentName': request.form['userName'], 'studentNameGrade': request.form['userStudent'], 'anonymous': request.form['anon'], 'dateTime': datetime.now(), 'postContent': content, 'approved': 'false'}
             collection.replace_one({'_id': ObjectId(objectIDPost)}, post)
-            title = post.get('userTitle')
-            if title == None:
-                title = post.get('adminTitle')
-            name = post.get('userName')
+            name = post.get('parentName')
             if name == None:
                 name = post.get('adminName')
             collectionTwo = db['ADMIN']
@@ -595,7 +591,7 @@ def submit_comment():
                 if admin.get('email') != None and admin.get('optComment') == True:
                     notificationList.append(admin.get('email'))
             for email in notificationList:
-                return send_email(email, title, name, link, True, True)
+                return send_email(email, post.get('postTitle'), name, link, True, True)
     if collection == db['SEA']:
         if 'github_token' in session:
             action = request.form['adminName'] + '<span class="createColor"> commented </span>on <form action="/viewSEA" class="inLine"><select class="selection" name="thread"><option value="' + objectIDPost + '"></option></select><button type="submit" class="customButton commentButton"><b>' + post.get('postTitle') + '</b></button></form> in special education forum'
