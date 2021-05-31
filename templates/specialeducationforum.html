@@ -7,19 +7,19 @@
 {% block content %}
 <div class="back">
   <div class="postBox">
-    <table class="toprow">
+    <table class="toprow"> <!-- The "heading" of the resources and announcements box -->
       <tr>
         <td class="headCol1"><b>Resources and Announcements</b></td>
         <td class="headCol2"><input type="text" id="myInputAdmin" onkeyup="myFunction2()" placeholder="Search">   {% if logged_in %}<button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#adminModal">Post</button>{% endif %}</td>
       </tr>
     </table>
     <div class="scroll">
-      <table class="adminPosts" id="targetSearchAdmin">
+      <table class="adminPosts" id="targetSearchAdmin"> <!-- The content of the resources and announcements box -->
         {{ SEAPosts }}
       </table>
     </div>
   </div>
-  <div class="postBox2">
+  <div class="postBox2"> <!-- The "heading" of the user forum box -->
     <div class="boxHeading">
       <table class="toprow">
         <tr>
@@ -29,14 +29,14 @@
       </table>
     </div>
     <div class="scroll">
-      <table class="userPosts" id="targetSearchUser">
+      <table class="userPosts" id="targetSearchUser"> <!-- The content of the user forum box -->
         {{ SEUPosts }}
       </table>
     </div>
   </div>
 </div>
 
-<script>
+<script> <!-- Search bar for user forum box -->
 function myFunction() {
   var input, filter, table, tr, td, i, txtValue;
   input = document.getElementById("myInputUser");
@@ -55,7 +55,7 @@ function myFunction() {
     }
   }
 }
-function myFunction2() {
+function myFunction2() { <!-- Search bar of the resources and announcements box -->
   var input, filter, table, tr, td, i, txtValue;
   input = document.getElementById("myInputAdmin");
   filter = input.value.toUpperCase();
@@ -73,7 +73,7 @@ function myFunction2() {
     }
   }
 }
-</script>
+</script> <!-- form for submitting new posts in resources and announcements -->
 <div id="adminModal" class="modal fade" role="dialog">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
@@ -120,7 +120,7 @@ function myFunction2() {
   </div>
 </div> 
 
-<div id="userModal" class="modal fade" role="dialog">
+<div id="userModal" class="modal fade" role="dialog"> <!-- form for submitting new posts in user forum -->
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
