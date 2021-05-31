@@ -167,7 +167,7 @@ def send_email(receiver_email, title, name, link, logged, comment):
                 </body>
             </html>
             """
-        return render_template('login.html', message='Email is through')
+        return render_template('login.html', message=html)
         part1 = MIMEText(text, 'plain')
         part2 = MIMEText(html, 'html')
         message.attach(part1)
