@@ -253,7 +253,7 @@ tr {
   width: 100%;
 }
 .ELAC {
-  width: 90%;
+  width: 50%;
   margin: auto;
   text-decoration: none;
   color: white;
@@ -261,7 +261,7 @@ tr {
   background-color: #5bc0de;
 }
 .SSEPAC {
-  width: 90%;
+  width: 50%;
   margin: auto;
   text-decoration: none;
   color: white;
@@ -282,9 +282,6 @@ tr {
   left: 50%;
   transform: translate(-50%, -50%);
   width: 80%;
-}
-.firstBox {
-  width: 50%;
 }
 .indent {
   margin-left: 5px;
