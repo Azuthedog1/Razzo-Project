@@ -255,22 +255,30 @@ tr {
 .ELAC {
   width: 90%;
   margin: auto;
+  text-decoration: none;
+  color: black;
+  padding: 20px;
+  background-color: #5bc0de;
 }
 .SSEPAC {
   width: 90%;
   margin: auto;
+  text-decoration: none;
+  color: black;
+  padding: 20px;
+  background-color: #d9534f;
 }
 .centered2 {
   margin: auto;
   top: 8px;
-  font-size: calc(8px + 1vw);
+  font-size: calc(9px + 1vw);
   width: 80%;
   text-align: center;
 }
 .centered {
   position: absolute;
   top: 45%;
-  font-size: calc(8px + 1.5vw);
+  font-size: calc(9px + 1.5vw);
   left: 50%;
   transform: translate(-50%, -50%);
   width: 80%;
