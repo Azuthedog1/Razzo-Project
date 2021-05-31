@@ -83,7 +83,7 @@ def authorized():
     session['username'] = 'admin'
     return render_template('login.html', message = message)
 
-def send_email(receiver_email, title, name, link, logged):
+def send_email(receiver_email, title, name, link, logged, comment):
     collection = db['EMAIL']
     try:
         information = collection.find_one({'_id': ObjectId('60b2d66ba55f630f74e0a554')})
@@ -121,7 +121,30 @@ def send_email(receiver_email, title, name, link, logged):
                 </body>
             </html>
             """
-        else:
+        elif comment == False
+            text = """\
+            Hello.
+            A user has posted on the parent board forum.
+            <link>
+            
+            Hola.
+            Un usuario ha publicado en el foro del tablero principal.
+            <link>"""
+            html = """\
+            <html>
+                <body>
+                    <p><b>Hi.</b><br>
+                    """ + name + """ has posted <a href='""" + link + """'>""" + title + """</a> on the parent board forum<br>
+                    --------------------------------------------------------------------------------------------------------<br>
+                    <b>Hola.</b><br>
+                    """ + name + """ ha publicado <a href='""" + link + """'>""" + title + """</a> en el foro del tablero principal.<br>
+                    --------------------------------------------------------------------------------------------------------<br>
+                    <small>*Please do not response to this email / Por favor, no responda a este correo electrónico.</small>
+                    </p>
+                </body>
+            </html>
+            """
+        else: 
             text = """\
             Hello.
             A user has commented on the parent board forum.
@@ -134,10 +157,11 @@ def send_email(receiver_email, title, name, link, logged):
             <html>
                 <body>
                     <p><b>Hi.</b><br>
-                    """ + name + """ has posted <a href='""" + link + """'>""" + title + """</a> on the parent board forum<br>
+                    """ + name + """ has commented on <a href='""" + link + """'>""" + title + """</a> on the parent board forum<br>
                     --------------------------------------------------------------------------------------------------------<br>
                     <b>Hola.</b><br>
-                    """ + name + """ ha publicado <a href='""" + link + """'>""" + title + """</a> en el foro del tablero principal.<br>
+                    """ + name + """ ha comentado en <a href='""" + link + """'>""" + title + """</a> en el foro del tablero principal.<br>
+                    --------------------------------------------------------------------------------------------------------<br>
                     <small>*Please do not response to this email / Por favor, no responda a este correo electrónico.</small>
                     </p>
                 </body>
@@ -449,7 +473,7 @@ def user_submit_post_ELL():
                 notificationList.append(admin.get('email'))
         link = 'https://razzoforumproject.herokuapp.com/viewELLU?thread=' + str(generate)
         for email in notificationList:
-            send_email(email, request.form['userTitle'], request.form['userName'], link, True)
+            send_email(email, request.form['userTitle'], request.form['userName'], link, True, False)
     return render_english_learner_forum()
 
 @app.route('/adminSubmitPostELL', methods=['GET', 'POST']) #Same as above, except no name, student name and grade, no anonymous, etc.
@@ -496,7 +520,7 @@ def user_submit_post_SE():
                 notificationList.append(admin.get('email'))
         link = 'https://razzoforumproject.herokuapp.com/viewSEU?thread=' + str(generate)
         for email in notificationList:
-            send_email(email, request.form['userTitle'], request.form['userName'], link, True)
+            send_email(email, request.form['userTitle'], request.form['userName'], link, True, False)
     return render_special_education_forum()
 
 @app.route('/adminSubmitPostSE', methods=['GET', 'POST'])
@@ -521,15 +545,19 @@ def submit_comment():
         objectIDPost = request.form['ID']
         collection = db['SEA']
         post = collection.find_one({'_id': ObjectId(objectIDPost)})
+        link = 'https://razzoforumproject.herokuapp.com/viewSEA?thread=' + objectIDPost
         if post == None:
             collection = db['SEU']
             post = collection.find_one({'_id': ObjectId(objectIDPost)})
+            link = 'https://razzoforumproject.herokuapp.com/viewSEU?thread=' + objectIDPost
         if post == None:
             collection = db['ELLA']
             post = collection.find_one({'_id': ObjectId(objectIDPost)})
+            link = 'https://razzoforumproject.herokuapp.com/viewELLA?thread=' + objectIDPost
         if post == None:
             collection = db['ELLU']
             post = collection.find_one({'_id': ObjectId(objectIDPost)})
+            link = 'https://razzoforumproject.herokuapp.com/viewELLU?thread=' + objectIDPost
         keyList = list(post.keys())
         if 'comment' in keyList[-1]:
             lastNumber = keyList[-1]
@@ -554,6 +582,21 @@ def submit_comment():
             content = Markup(content[1:len(content)-1])
             post['comment' + lastNumber] = {'parentName': request.form['userName'], 'studentNameGrade': request.form['userStudent'], 'anonymous': request.form['anon'], 'dateTime': datetime.now(), 'postContent': content, 'approved': 'false'}
             collection.replace_one({'_id': ObjectId(objectIDPost)}, post)
+            post = collection.find_one({'_id': ObjectId(objectIDPost)})
+            title = post.get('userTitle')
+            if title == None:
+                title = post.get('adminTitle')
+            name = post.get('userName')
+            if name == None:
+                name = post.get('adminName')
+            collectionTwo = db['ADMIN']
+            adminDocuments = collectionTwo.find({})
+            notificationList = []
+            for admin in adminDocuments:
+                if admin.get('email') != None and admin.get('optComment') == True:
+                    notificationList.append(admin.get('email'))
+            for email in notificationList:
+                send_email(email, title, name, link, True, True)
     if collection == db['SEA']:
         if 'github_token' in session:
             action = request.form['adminName'] + '<span class="createColor"> commented </span>on <form action="/viewSEA" class="inLine"><select class="selection" name="thread"><option value="' + objectIDPost + '"></option></select><button type="submit" class="customButton commentButton"><b>' + post.get('postTitle') + '</b></button></form> in special education forum'
@@ -568,7 +611,7 @@ def submit_comment():
             add_admin_log(datetime.now(), action, 'none')
             if post.get('parentEmail') != 'Email not provided' and post.get('approved') == 'true':
                 link = 'https://razzoforumproject.herokuapp.com/viewSEU?thread=' + objectIDPost 
-                send_email(post.get('parentEmail'), post.get('postTitle'), post.get('parentName'), link, False)
+                send_email(post.get('parentEmail'), post.get('postTitle'), post.get('parentName'), link, False, False)
         else:
             action = request.form['userName'] + '<span class="createColor"> commented </span>on <form action="/viewSEU" class="inLine"><select class="selection" name="thread"><option value="' + objectIDPost + '"></option></select><button type="submit" class="customButton commentButton"><b>' + post.get('postTitle') + '</b></button></form> in special education forum'
             add_admin_log(datetime.now(), action, 'none')
@@ -587,7 +630,7 @@ def submit_comment():
             add_admin_log(datetime.now(), action, 'none')
             if post.get('parentEmail') != 'Email not provided' and post.get('approved') == 'true':
                 link = 'https://razzoforumproject.herokuapp.com/viewSEU?thread=' + objectIDPost 
-                send_email(post.get('parentEmail'), post.get('postTitle'), post.get('parentName'), link, False)
+                send_email(post.get('parentEmail'), post.get('postTitle'), post.get('parentName'), link, False, False)
         else:
             action = request.form['userName'] + '<span class="createColor"> commented </span>on <form action="/viewELLU" class="inLine"><select class="selection" name="thread"><option value="' + objectIDPost + '"></option></select><button type="submit" class="customButton commentButton"><b>' + post.get('postTitle') + '</b></button></form> in english language learner forum'
             add_admin_log(datetime.now(), action, 'none')
