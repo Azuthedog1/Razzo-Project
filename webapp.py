@@ -591,7 +591,7 @@ def submit_comment():
                 if admin.get('email') != None and admin.get('optComment') == True:
                     notificationList.append(admin.get('email'))
             for email in notificationList:
-                return send_email(email, post.get('postTitle'), name, link, True, True)
+                send_email(email, post.get('postTitle'), name, link, True, True)
     if collection == db['SEA']:
         if 'github_token' in session:
             action = request.form['adminName'] + '<span class="createColor"> commented </span>on <form action="/viewSEA" class="inLine"><select class="selection" name="thread"><option value="' + objectIDPost + '"></option></select><button type="submit" class="customButton commentButton"><b>' + post.get('postTitle') + '</b></button></form> in special education forum'
