@@ -255,18 +255,22 @@ tr {
 .ELAC {
   width: 50%;
   margin: auto;
-  text-decoration: none;
-  color: white;
   padding: 20px;
   background-color: #5bc0de;
 }
 .SSEPAC {
   width: 50%;
   margin: auto;
-  text-decoration: none;
-  color: white;
   padding: 20px;
   background-color: #d9534f;
+}
+a.textStyle {
+  color: white;
+  text-decoration: none;
+}
+a.textStyle.hover {
+  color: white;
+  text-decoration: none;
 }
 .centered2 {
   margin: auto;
