@@ -154,6 +154,7 @@ def send_email(receiver_email, title, name, link, logged, comment):
             Hola.
             Un usuario ha publicado en el foro del tablero principal.
             <link>"""
+            return render_template('login.html', message=name)
             html = """\
             <html>
                 <body>
@@ -167,7 +168,6 @@ def send_email(receiver_email, title, name, link, logged, comment):
                     </p>
                 </body>
             </html>"""
-            return render_template('login.html', message='3')
         part1 = MIMEText(text, 'plain')
         part2 = MIMEText(html, 'html')
         message.attach(part1)
