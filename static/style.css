@@ -246,7 +246,7 @@ tr {
 .triangle {
   position: relative;
   text-align: center;
-  border-top: 2px solid Black;
+  border-top: 1px solid Black;
 }
 
 .boxes {
@@ -264,6 +264,15 @@ tr {
   padding: 20px;
   background-color: #d9534f;
 }
+
+.ELAC:hover {
+  background-color: #4ea5bf;
+}
+
+.SSEPAC:hover {
+  background-color: #b54541;
+}
+
 .emptySpace {
   width: 5%;
 }
