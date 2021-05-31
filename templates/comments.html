@@ -5,26 +5,26 @@
 {% block content %}
 <div id="commentBack">
   <div class="discussionBox">
-    <table class="toprow">
+    <table class="toprow"> <!-- The "heading" of the comments box -->
       <tr>
-        <td class="headCol1"><b>{{ title }}</b></td>
+        <td class="headCol1"><b>{{ title }}</b></td> 
         <td class="headCol2">{% if logged_in %}<button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#editModal">Edit</button> <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#adminModal">Comment</button>{% else %}<button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#userModal">Comment</button>{% endif %}</td>
-      </tr> <!-- Get this by assigning the object ID of each post document, using a submit button, and processing it in python --> <!-- we will also need to put the parent's full name, student name and grade here for only admins to see -->
+      </tr> 
     </table>
-    <table class="commentPosts">
+    <table class="commentPosts"> <!-- The content of the original post -->
       <tr>
         <td class="comments"><b>{{ name }}</b>{% if logged_in %}{{ information }}{% endif %}<br><i>{{ time }}</i><br><br>{{ content }}</td>
       </tr>
     </table>
     <div class="indent">
-      <table class="commentPosts">
+      <table class="commentPosts"> <!-- The content of the comments -->
         {{ comments }}
       </table>
     </div> 
   </div>
 </div>
 
-<div id="adminModal" class="modal fade" role="dialog">
+<div id="adminModal" class="modal fade" role="dialog"> <!-- Admin form for creating comments -->
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
@@ -60,7 +60,7 @@
   </div>
 </div> 
 
-<div id="userModal" class="modal fade" role="dialog">
+<div id="userModal" class="modal fade" role="dialog"> <!-- User form for creating comments -->
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
@@ -118,7 +118,7 @@
   </div>
 </div> 
 
-<div id="editModal" class="modal fade" role="dialog">
+<div id="editModal" class="modal fade" role="dialog"> <!-- The admin-only form for editing an original post -->
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
