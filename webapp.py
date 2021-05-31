@@ -269,8 +269,8 @@ def render_english_learner_forum():
                     hour = '12'
                 loc_dt = loc_dt.strftime('%m/%d/%Y, ' + hour + ':%M AM PT')
             bigString2 += ('<tr><td class="col1">  <form action="/viewELLA" class="inLine"><select class="selection" name="thread"><option value="' + str(post.get('_id')) + '"></option></select><button type="submit" class="customButton commentButton"><b>' + post.get('postTitle') + '</b></button></form><br><i>' + post.get('adminName') + '</i></td>' +
-                           '<td class="col3"><span class="glyphicon glyphicon-comment"></span> ' + str(post.get('amount')) + '</td>' +
-                           '<td class="col4"><i>' + loc_dt + '</i></td></tr>')
+                           '<td class="col2"><span class="glyphicon glyphicon-comment"></span> ' + str(post.get('amount')) + '</td>' +
+                           '<td class="col3"><i>' + loc_dt + '</i></td></tr>')
     return render_template('englishlearnerforum.html', ELLUPosts = Markup(bigString1), ELLAPosts = Markup(bigString2))
 
 @app.route('/specialeducationforum')
