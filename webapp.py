@@ -144,7 +144,7 @@ def send_email(receiver_email, title, name, link, logged, comment):
                 </body>
             </html>
             """
-        if comment == True and logged == True:
+        else:
             text = """\
             Hello.
             A user has commented on the parent board forum.
@@ -512,7 +512,6 @@ def user_submit_post_SE():
         action = request.form['userName'] + '<span class="createColor"> posted </span><form action="/viewSEU" class="inLine"><select class="selection" name="thread"><option value="' + str(generate) + '"></option></select><button type="submit" class="customButton commentButton"><b>' + request.form['userTitle'] + '</b></button></form> in special education forum'
         add_admin_log(datetime.now(), action, 'none')
         collection = db['ADMIN']
-        collection = db['ADMIN']
         adminDocuments = collection.find({})
         notificationList = []
         for admin in adminDocuments:
@@ -595,6 +594,7 @@ def submit_comment():
                 if admin.get('email') != None and admin.get('optComment') == True:
                     notificationList.append(admin.get('email'))
             for email in notificationList:
+                return render_template('login.html', message=email)
                 send_email(email, title, name, link, True, True)
     if collection == db['SEA']:
         if 'github_token' in session:
