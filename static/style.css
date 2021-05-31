@@ -252,6 +252,9 @@ tr {
 .boxes {
   width: 100%;
 }
+.firstBoxes {
+  width: 50%;
+}
 .ELAC {
   min-width: 120px;
   width: 30%;
