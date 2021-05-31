@@ -101,6 +101,7 @@ a.footerLinks:hover{
   margin: auto;
   height: auto;
   margin-top: 20px;
+  min-height: 40px;
 }
 .postBox, .postBox2 {
   background-color: #ffffff;
