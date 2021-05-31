@@ -147,7 +147,6 @@ def send_email(receiver_email, title, name, link, logged, comment):
             """
             return render_template('login.html', message='2')
         if logged == True and comment == True:
-            return render_template('login.html', message='3')
             text = """\
             Hello.
             A user has posted on the parent board forum.
@@ -156,6 +155,7 @@ def send_email(receiver_email, title, name, link, logged, comment):
             Hola.
             Un usuario ha publicado en el foro del tablero principal.
             <link>"""
+            return render_template('login.html', message='3')
             html = """\
             <html>
                 <body>
