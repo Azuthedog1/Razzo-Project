@@ -98,6 +98,7 @@ def send_email(receiver_email, title, name, link, logged, comment):
         """
         html = """\
         """
+        return render_template('information.html')
         if logged == False:
             text = """\
             Hello name,
