@@ -252,23 +252,18 @@ tr {
 .boxes {
   width: 100%;
 }
-.firstBoxes {
-  width: 50%;
-}
 .ELAC {
-  width: 30%;
+  width: 90%;
   margin: auto;
-  background-color: blue;
 }
 .SSEPAC {
-  width: 30%;
+  width: 90%;
   margin: auto;
-  background-color: blue;
 }
 .centered2 {
   margin: auto;
   top: 8px;
-  font-size: calc(6px + 1.5vw);
+  font-size: calc(8px + 1vw);
   text-align: center;
 }
 .centered {
