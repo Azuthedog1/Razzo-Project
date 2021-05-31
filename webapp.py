@@ -159,7 +159,7 @@ def send_email(receiver_email, title, name, link, logged):
 def add_admin():
     if request.method == 'POST':
         collection = db['ADMIN']
-        collection.insert_one({'username': request.form['username'], 'opt': False})
+        collection.insert_one({'username': request.form['username'], 'opt': False, 'optComment': False})
     return render_admin_log()
         
 @app.route('/removeAdmin', methods=['GET', 'POST'])
@@ -183,6 +183,22 @@ def opt_in():
         collection = db['ADMIN']
         collection.find_one_and_update({'_id': ObjectId(request.form['optIn'])},
                                        {'$set': {'opt': True}})
+    return render_admin_log()
+
+@app.route('/optInComment', methods=['GET', 'POST'])
+def opt_in():
+    if request.method == 'POST':
+        collection = db['ADMIN']
+        collection.find_one_and_update({'_id': ObjectId(request.form['optInComment'])},
+                                       {'$set': {'optComment': True}})
+    return render_admin_log()
+
+@app.route('/optOutComment', methods=['GET', 'POST'])
+def opt_in():
+    if request.method == 'POST':
+        collection = db['ADMIN']
+        collection.find_one_and_update({'_id': ObjectId(request.form['optOutComment'])},
+                                       {'$set': {'optComment': False}})
     return render_admin_log()
 
 @app.route('/addEmail', methods=['GET', 'POST'])
@@ -383,11 +399,17 @@ def render_admin_log():
     username = item.get('username')
     email = 'Not provided'
     opt = 'No'
+    optComment = 'No'
     if item.get('opt') == True:
         opt = 'Yes'
         receive = '<form action="/optOut" method="POST"><button type="submit" class="btn btn-warning btn-sm" name="optOut" value="' + str(item.get('_id'))+ '">Opt Out</button></form>'
     else:
         receive = '<form action="/optIn" method="POST"><button type="submit" class="btn btn-warning btn-sm" name="optIn" value="' + str(item.get('_id'))+ '">Opt In</button></form>'
+    if item.get('optComment') == True:
+        optComment = 'Yes'
+        receiveComment = '<form action="/optOutComment" method="POST"><button type="submit" class="btn btn-warning btn-sm" name="optOutComment" value="' + str(item.get('_id'))+ '">Opt Out</button></form>'
+    else:
+        receiveComment = '<form action="/optInComment" method="POST"><button type="submit" class="btn btn-warning btn-sm" name="optInComment" value="' + str(item.get('_id'))+ '">Opt In</button></form>'
     if 'email' in item:
         email = item.get('email')
     add = '<form action="/addAdmin" method="POST"><input type="text" class="form-control" name="username"><button type="submit" class="btn btn-primary">Add</button></form>'
@@ -395,8 +417,7 @@ def render_admin_log():
     cursor = collection.find({})
     for admin in cursor:
         admins += admin.get('username') + '<form action="/removeAdmin" method="POST"><button type="submit" class="btn btn-danger btn-sm" name="delete" value="' + str(admin.get('_id'))+ '">Remove</button></form><br>'
-    
-    return render_template('adminlog.html', log = Markup(bigString), email = email, opt = opt, username = username, change = Markup(change), receive = Markup(receive), admins = Markup(admins), add = Markup(add))
+    return render_template('adminlog.html', log = Markup(bigString), email = email, opt = opt, username = username, change = Markup(change), receive = Markup(receive), admins = Markup(admins), add = Markup(add), optComment = optComment, receiveComment = receiveComment)
 
 def add_admin_log(dateTime, action, content):
     collection = db['LOG']
