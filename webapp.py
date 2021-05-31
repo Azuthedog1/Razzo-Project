@@ -121,7 +121,7 @@ def send_email(receiver_email, title, name, link, logged, comment):
                 </body>
             </html>
             """
-        elif comment == False
+        elif comment == False:
             text = """\
             Hello.
             A user has posted on the parent board forum.
