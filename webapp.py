@@ -417,7 +417,7 @@ def render_admin_log():
     cursor = collection.find({})
     for admin in cursor:
         admins += admin.get('username') + '<form action="/removeAdmin" method="POST"><button type="submit" class="btn btn-danger btn-sm" name="delete" value="' + str(admin.get('_id'))+ '">Remove</button></form><br>'
-    return render_template('adminlog.html', log = Markup(bigString), email = email, opt = opt, username = username, change = Markup(change), receive = Markup(receive), admins = Markup(admins), add = Markup(add), optComment = optComment, receiveComment = receiveComment)
+    return render_template('adminlog.html', log = Markup(bigString), email = email, opt = opt, username = username, change = Markup(change), receive = Markup(receive), admins = Markup(admins), add = Markup(add), optComment = optComment, receiveComment = Markup(receiveComment))
 
 def add_admin_log(dateTime, action, content):
     collection = db['LOG']
