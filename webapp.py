@@ -1241,19 +1241,19 @@ def bump_post():
         post['_id'] = generate #gives the post the new id
         collection.insert_one(post) #inserts the post back into the database with a new id.
         if collection == db['SEU']: #returns to the page they were on, and adds the action to the log.
-            action = session['user_data']['login'] + '<span class="vettingColor"> bumped </span><form action="/viewSEU" class="inLine"><select class="selection" name="thread"><option value="' + str(generate) + '"></option></select><button type="submit" class="customButton commentButton"><b>' + post.get('postTitle') + '</b></button></form> in special education forum'
+            action = session['user_data']['login'] + '<span class="bumpColor"> bumped </span><form action="/viewSEU" class="inLine"><select class="selection" name="thread"><option value="' + str(generate) + '"></option></select><button type="submit" class="customButton commentButton"><b>' + post.get('postTitle') + '</b></button></form> in special education forum'
             add_admin_log(datetime.now(), action, 'none')
             return render_special_education_forum()
         if collection == db['SEA']:
-            action = session['user_data']['login'] + '<span class="vettingColor"> bumped </span><form action="/viewSEA" class="inLine"><select class="selection" name="thread"><option value="' + str(generate) + '"></option></select><button type="submit" class="customButton commentButton"><b>' + post.get('postTitle') + '</b></button></form> in special education forum'
+            action = session['user_data']['login'] + '<span class="bumpColor"> bumped </span><form action="/viewSEA" class="inLine"><select class="selection" name="thread"><option value="' + str(generate) + '"></option></select><button type="submit" class="customButton commentButton"><b>' + post.get('postTitle') + '</b></button></form> in special education forum'
             add_admin_log(datetime.now(), action, 'none')
             return render_special_education_forum()
         if collection == db['ELLA']:
-            action = session['user_data']['login'] + '<span class="vettingColor"> bumped </span><form action="/viewELLA" class="inLine"><select class="selection" name="thread"><option value="' + str(generate) + '"></option></select><button type="submit" class="customButton commentButton"><b>' + post.get('postTitle') + '</b></button></form> in english language learner forum'
+            action = session['user_data']['login'] + '<span class="bumpColor"> bumped </span><form action="/viewELLA" class="inLine"><select class="selection" name="thread"><option value="' + str(generate) + '"></option></select><button type="submit" class="customButton commentButton"><b>' + post.get('postTitle') + '</b></button></form> in english language learner forum'
             add_admin_log(datetime.now(), action, 'none')
             return render_english_learner_forum()
         if collection == db['ELLU']:
-            action = session['user_data']['login'] + '<span class="vettingColor"> bumped </span><form action="/viewELLU" class="inLine"><select class="selection" name="thread"><option value="' + str(generate) + '"></option></select><button type="submit" class="customButton commentButton"><b>' + post.get('postTitle') + '</b></button></form> in english language learner forum'
+            action = session['user_data']['login'] + '<span class="bumpColor"> bumped </span><form action="/viewELLU" class="inLine"><select class="selection" name="thread"><option value="' + str(generate) + '"></option></select><button type="submit" class="customButton commentButton"><b>' + post.get('postTitle') + '</b></button></form> in english language learner forum'
             add_admin_log(datetime.now(), action, 'none')
             return render_english_learner_forum()
     return render_template('information.html')
