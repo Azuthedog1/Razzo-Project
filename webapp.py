@@ -143,8 +143,7 @@ def send_email(receiver_email, title, name, link, logged, comment):
                     <small>*Please do not response to this email / Por favor, no responda a este correo electrónico.</small>
                     </p>
                 </body>
-            </html>
-            """
+            </html>"""
             return render_template('login.html', message='2')
         if logged == True and comment == True:
             text = """\
@@ -167,8 +166,7 @@ def send_email(receiver_email, title, name, link, logged, comment):
                     <small>*Please do not response to this email / Por favor, no responda a este correo electrónico.</small>
                     </p>
                 </body>
-            </html>
-            """
+            </html>"""
             return render_template('login.html', message='3')
         part1 = MIMEText(text, 'plain')
         part2 = MIMEText(html, 'html')
