@@ -398,6 +398,7 @@ def render_admin_log():
     collection = db['LOG'] #log database contains strings that represent every action: posting, commenting, deleting, vetting, editing, and bumping.
     cursor = collection.find({}).sort('_id', -1).limit(1000) #get latest 1000 actions
     bigString = '' #contains html code for all actions
+    counter = 0
     for item in cursor: #for all actions, generate html
         utc_dt = datetime(int(item.get('dateTime').strftime('%Y')), int(item.get('dateTime').strftime('%m')), int(item.get('dateTime').strftime('%d')), int(item.get('dateTime').strftime('%H')), int(item.get('dateTime').strftime('%M')), 0, tzinfo=pytz.utc)
         loc_dt = utc_dt.astimezone(timezone('America/Los_Angeles'))
@@ -411,6 +412,7 @@ def render_admin_log():
             loc_dt = loc_dt.strftime('%m/%d/%Y, ' + hour + ':%M AM PT')
         bigString += '<tr><td class="logContent"><span class="timeColor">' + loc_dt + '</span>: ' + item.get('action')
         if item.get('content') != 'none': #if the action was deleting a comment or post, generate a collapsible allowing admins to view the content that was deleted.
+            counter += 1
             bigString += ' <button class="btn btn-default btn-sm" type="button" data-toggle="collapse" data-target="#collapse' + str(counter) + '" aria-expanded="false" aria-controls="collapseExample">View <span class="glyphicon glyphicon-triangle-bottom"></span></button><div class="collapse" id="collapse' + str(counter) + '">' + item.get('content') + '</div>'
         bigString += '<br></td></tr>'
     collection = db['ADMIN'] #now, we generate code for admin information: view account, edit account, view other admins, and add/delete admins
